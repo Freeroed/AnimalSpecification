@@ -1,10 +1,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Page not found</title>
+    <title>Личный кабинет</title>
 </head>
 <body link="#008080" vlink="#008080" alink="#008080">
-	<header>		
+	<header class="site-header">		
 		<table border="0" width="100%">
 		    <tr>
 				<td><img src="img/logo.jpg" alt="логотип" width="60" height="60"></td>
@@ -28,7 +28,7 @@
 					</font></p>
 				</td>	
 				<td><p align="right"><font size="5" color="#008080" face="garamond">
-					<u><a href="account/authentication.html">Личный кабинет</a></u>
+					<u>Личный кабинет </u>
 					</font></p>
 				</td>
 			</tr>
@@ -37,13 +37,31 @@
 	</header>
 	
 	<main>
+		<form action="account.html">
+			<p align="center">
+				<font size="7" color="#008080" face="garamond">
+					Введите логин и пароль: 
+				</font>
+			</p>
+			<p align="center">
+				Логин:
+				<input type='text'/>
+			</p>
+			<p align="center">
+				Пароль:
+				<input type='text'/>
+			</p>
+			<p align="center">
+				<input type="submit" value="Войти">
+			</p>
+		</form>
+		<br/>
+		<br/>
 		<p align="center">
-			<font size="9" color="#008080" face="garamond">
-				Страница не найдена :с
+			<font size="5" color="#008080" face="garamond">
+					Регистрация 
 			</font>
 		</p>
 	</main>
-	
-	<footer></footer>
 </body>
 </html>
