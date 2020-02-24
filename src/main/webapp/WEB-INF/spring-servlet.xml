@@ -12,7 +12,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     <context:property-placeholder location="classpath:database.properties"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 
