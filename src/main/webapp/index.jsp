@@ -36,9 +36,9 @@
             </td>
         </tr>
     </table>
+    <a href="swagger-ui.html"> API </a>
     <hr>
 </header>
-<p>ПРИВЕТ</p>
 <main>
     <p align="center">
         <font size="6" color="#000000" face="garamond">
