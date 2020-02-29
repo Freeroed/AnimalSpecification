@@ -1,5 +1,9 @@
-ru\vlsu\animalSpecification\config\swaggerConfig\SwaggerConfig.class
-ru\vlsu\animalSpecification\web\controller\HomeController.class
 ru\vlsu\animalSpecification\web\rest\AnimalResource.class
+ru\vlsu\animalSpecification\DAO\RegionDAO.class
 ru\vlsu\animalSpecification\domain\Animal.class
 ru\vlsu\animalSpecification\config\swaggerConfig\WebAppConfig.class
+ru\vlsu\animalSpecification\config\swaggerConfig\SwaggerConfig.class
+ru\vlsu\animalSpecification\utils\HibernateSessionFactoryUtil.class
+ru\vlsu\animalSpecification\web\controller\HomeController.class
+ru\vlsu\animalSpecification\domain\Region.class
+ru\vlsu\animalSpecification\web\rest\RegionController.class
