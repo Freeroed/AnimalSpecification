@@ -37,7 +37,8 @@ public class RegionDAO {
     }
 
     public List<Region> findAll() {
-        List<Region> users = (List<Region>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Region").list();
-        return users;
+        Object o = HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Region").list();
+        List<Region> regions = (List<Region>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Region").list();
+        return regions;
     }
 }

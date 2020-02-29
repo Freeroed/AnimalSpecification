@@ -17,9 +17,14 @@ public class HibernateSessionFactoryUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                Configuration configuration = new Configuration().configure();
-               // configuration.addAnnotatedClass(Region.class);
-                configuration.addResource("hibernate/Region.hbm.xml");
+                Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+                configuration.addAnnotatedClass(Region.class);
+                // все setProperty добавлены хрен знает зачем
+               configuration.setProperty("hibernate.connection.username", "root");
+                configuration.setProperty("hibernate.connection.password", "root");
+                configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+
+                //configuration.addResource("hibernate/Region.hbm.xml");
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());
 

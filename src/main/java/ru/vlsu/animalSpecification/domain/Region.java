@@ -3,11 +3,11 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table(name = "Region")
+@Entity
+@Table(name = "Region")
 public class Region {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     public int getId() {
@@ -18,7 +18,7 @@ public class Region {
         this.id = id;
     }
 
-   // @Column (name = "name")
+    @Column (name = "name")
     private String name;
 
     public String getName() {
@@ -29,7 +29,7 @@ public class Region {
         this.name = name;
     }
 
-   // @Column (name = "name_ENG")
+    @Column (name = "name_ENG")
     private String name_ENG;
 
     public String getName_ENG() {

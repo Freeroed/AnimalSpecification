@@ -5,20 +5,20 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">
-            org.hibernate.dialect.MySQLDialect
+            org.hibernate.dialect.MySQL8Dialect
         </property>
         <property name="hibernate.connection.driver_class">
             com.mysql.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/animal_specification
+            jdbc:mysql://localhost/animal_specification?useUnicode=true&amp;serverTimezone=UTC
         </property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">root</property>
         <property name="show_sql">true</property>
 
-        <!-- List of XML mapping files -->
-        <mapping resource="hibernate/Region.hbm.xml"/>
+        <!-- List of XML mapping files
+        <mapping resource="hibernate/Region.hbm.xml"/>-->
 
     </session-factory>
 </hibernate-configuration>
