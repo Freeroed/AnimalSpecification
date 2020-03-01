@@ -30,4 +30,6 @@ public class RegionService {
         repo.deleteById(id);
     }
 
+    public List<Region> search(String keyword){ return repo.search(keyword); }
+
 }
