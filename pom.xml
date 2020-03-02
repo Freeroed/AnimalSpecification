@@ -74,12 +74,12 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.11</version>
-    </dependency>
+    </dependency> -->
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>
@@ -95,12 +95,12 @@
       <version>1.2.17</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
     <dependency>
       <groupId>org.springframework.data</groupId>
       <artifactId>spring-data-jpa</artifactId>
       <version>2.2.4.RELEASE</version>
-    </dependency>
+    </dependency> -->
 
     <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
     <dependency>
