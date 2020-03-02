@@ -7,6 +7,7 @@ import ru.vlsu.animalSpecification.domain.Region;
 
 import java.util.List;
 
+// CrudRepository<МОДЕЛЬ, ТИП ID>
 public interface RegionRepository extends CrudRepository<Region, Long> {
 
     @Query(value = "SELECT c from Region c WHERE c.name LIKE :keyword ")
