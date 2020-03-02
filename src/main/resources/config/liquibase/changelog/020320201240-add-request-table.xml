@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="elena" id="020320201240-1">
+
+        <comment>Create Request table</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE `Request` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `animal` BIGINT NULL,
+            `recipient` BIGINT NULL,
+            `destination_country` BIGINT NULL,
+            `border_crossing_point` BIGINT NULL,
+            `transport` BIGINT NULL,
+            `vehicle_number` VARCHAR(50) NULL,
+            `veterinarian` BIGINT NULL,
+            `transaction_type` VARCHAR(50) NULL,
+            `way_of_storage_during_transportation` VARCHAR(50) NULL,
+            `quarantine_location` VARCHAR(50) NULL,
+            `number_of_days_to_quarantine` INTEGER NULL,
+            `inspector_of_Rosselkhoznadzor` BIGINT NULL,
+            `destination_city` VARCHAR(50) NULL,
+            `postal_code` VARCHAR(50) NULL,
+            `date_of_departure` DATE NOT NULL,
+            `certificate_1_form_number` VARCHAR(50) NULL,
+            PRIMARY KEY (`id`)
+            );
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
