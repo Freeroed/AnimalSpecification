@@ -19,6 +19,7 @@
     <include file="config/liquibase/changelog/02032001220-change-id-region.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/020320201240-add-request-table.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/030320201334-add-transport-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/030320201340-insert-test-data-in-transport.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
