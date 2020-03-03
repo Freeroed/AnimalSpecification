@@ -14,4 +14,12 @@ public class Transport {
 
     @Column (name = "transport_name_ENG")
     private String transportNameENG;
+
+    @Override
+    public String toString() {
+        return "Transport{" +
+                "transportName='" + transportName + '\'' +
+                ", transportNameENG='" + transportNameENG + '\'' +
+                '}';
+    }
 }

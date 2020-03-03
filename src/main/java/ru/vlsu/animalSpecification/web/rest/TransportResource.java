@@ -16,7 +16,9 @@ public class TransportResource {
     private TransportService transportService;
 
     @GetMapping("/transports")
-    public List<Transport> getAllRequests() {
-        return  transportService.listAll();
+    public List<Transport> getAll() {
+        List<Transport> list = transportService.listAll();
+        System.out.println(list);
+        return list;
     }
 }
