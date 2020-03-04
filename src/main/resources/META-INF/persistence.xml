@@ -9,6 +9,8 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ru.vlsu.animalSpecification.domain.Region</class>
         <class>ru.vlsu.animalSpecification.domain.Request</class>
+        <class>ru.vlsu.animalSpecification.domain.User</class>
+        <class>ru.vlsu.animalSpecification.domain.Authority</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/animal_specification?useUnicode=true&amp;serverTimezone=UTC" />
             <property name="javax.persistence.jdbc.user" value="root" />

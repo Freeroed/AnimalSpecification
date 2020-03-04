@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="sevdokimov" id="040320201233-1">
+
+        <comment>Create user table</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE user(
+                    id BIGINT NOT NULL,
+                    login VARCHAR(50) NOT NULL,
+                    password_hash VARCHAR(65) NOT NULL
+            );
+            CREATE TABLE auth(
+                id BIGINT NOT NULL,
+                user_id BIGINT NOT NULL,
+                user_role VARCHAR(50) NOT NULL
+            );
+        </sql>
+
+    </changeSet>
+
+    <changeSet author="sevdokimov" id="040320201233-2">
+
+        <comment>Insert test values into user and auth tables</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            INSERT INTO USER(id, login, password_hash) values (
+                1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'
+            );
+            INSERT INTO auth (id, user_id, user_role) values (
+                1,1, 'USER_ADMIN'
+            );
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
