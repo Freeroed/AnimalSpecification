@@ -10,15 +10,27 @@
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
             CREATE TABLE user(
-                    id BIGINT NOT NULL,
+                    id BIGINT NOT NULL AUTO_INCREMENT,
                     login VARCHAR(50) NOT NULL,
-                    password_hash VARCHAR(65) NOT NULL
+                    password VARCHAR(255) NOT NULL,
+                    PRIMARY KEY (id)
             );
-            CREATE TABLE auth(
-                id BIGINT NOT NULL,
+            CREATE TABLE role(
+                id BIGINT NOT NULL AUTO_INCREMENT,
+                role_name VARCHAR(50) NOT NULL,
+                PRIMARY KEY (id)
+            );
+
+            CREATE TABLE user_role (
                 user_id BIGINT NOT NULL,
-                user_role VARCHAR(50) NOT NULL
+                role_id BIGINT NOT NULL,
+
+            FOREIGN KEY (user_id) REFERENCES user (id),
+            FOREIGN KEY (role_id) REFERENCES role (id),
+
+            UNIQUE (user_id, role_id)
             );
+
         </sql>
 
     </changeSet>
@@ -29,11 +41,14 @@
 
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
-            INSERT INTO USER(id, login, password_hash) values (
+            INSERT INTO USER(id, login, password) values (
                 1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'
             );
-            INSERT INTO auth (id, user_id, user_role) values (
-                1,1, 'USER_ADMIN'
+            INSERT INTO role (id,  role_name) values (
+                1, 'USER_ADMIN'
+            );
+            INSERT INTO role (id,  role_name) values (
+                2, 'USER_USER'
             );
         </sql>
 
