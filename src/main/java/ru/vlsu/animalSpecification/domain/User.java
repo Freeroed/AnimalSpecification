@@ -3,6 +3,7 @@ package ru.vlsu.animalSpecification.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -13,25 +14,22 @@ public class User implements Serializable {
     Long id;
 
     @Column(name = "login")
-    String login;
+    private String userName;
 
-    @Column(name = "password_hash")
-    String password;
+    @Column(name = "password")
+    private String password;
 
-    public Long getId() {
-        return id;
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -42,27 +40,21 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) &&
-                Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password);
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, login, password);
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public Long getId() {
+        return id;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
 }

@@ -1,5 +1,11 @@
 package ru.vlsu.animalSpecification.service;
 
-public class UserService {
+import ru.vlsu.animalSpecification.domain.User;
+
+public interface UserService {
+
+    void save(User user);
+
+    User findByUserName(String userName);
 
 }

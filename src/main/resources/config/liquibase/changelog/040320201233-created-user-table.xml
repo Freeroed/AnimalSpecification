@@ -42,13 +42,13 @@
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
             INSERT INTO USER(id, login, password) values (
-                1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'
+                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu'
             );
             INSERT INTO role (id,  role_name) values (
-                1, 'USER_ADMIN'
+                1, 'ROLE_ADMIN'
             );
             INSERT INTO role (id,  role_name) values (
-                2, 'USER_USER'
+                2, 'ROLE_USER'
             );
             INSERT INTO user_role (user_id,  role_id) values (
             1, 1
