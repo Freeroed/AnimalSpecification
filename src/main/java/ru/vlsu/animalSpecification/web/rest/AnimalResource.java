@@ -1,15 +1,19 @@
 package ru.vlsu.animalSpecification.web.rest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.vlsu.animalSpecification.domain.Animal;
+import ru.vlsu.animalSpecification.service.AnimalService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class AnimalResource {
+    @Autowired
+    private AnimalService animalService;
 
     @GetMapping("/animals/get")
     public String getAnimalName(){
@@ -17,10 +21,8 @@ public class AnimalResource {
     }
 
     @GetMapping("/alimals")
-    public List<String> getAllAnimals(){
-        List<String> result = new ArrayList<>();
-        result.add("cat one");
-        result.add("cat two");
-        return result;
+    public List<Animal> getAllAnimals(){
+        List<Animal> list = animalService.listAll();
+        return list;
     }
 }

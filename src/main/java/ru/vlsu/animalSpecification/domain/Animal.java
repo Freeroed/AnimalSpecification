@@ -18,19 +18,19 @@ public class Animal implements Serializable {
     private char sex; // пол
 
     @Column (name = "type")
-    private long type; // кошка/собака/хомяк (id типа)
+    private Long type; // кошка/собака/хомяк (id типа)
 
     @Column (name = "chip")
     private String chip; // чип
 
     @Column (name = "weight")
-    private int weight; // вес
+    private Integer weight; // вес
 
     @Column (name = "birthday")
     private Date birthday; // дата рождения
 
     @Column (name = "breed")
-    private long breed; // порода (id)
+    private Long breed; // порода (id)
 
     @Column (name = "color")
     private String color; //цвет
@@ -39,7 +39,7 @@ public class Animal implements Serializable {
     private String placeOfBirth; // местро рождения
 
     @Column (name = "human")
-    private long human; //хозяин животного
+    private Long human; //хозяин животного
 
     @Column (name = "TNVED_code")
     private String tnvedCode; // код ТНВЭД
