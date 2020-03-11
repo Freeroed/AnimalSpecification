@@ -15,21 +15,21 @@
             `sex` CHAR NOT NULL,
             `type` BIGINT NOT NULL ,
             `chip` VARCHAR(50) NULL ,
-            `weight` INTEGER NULL ,
-            `birthday` DATE NULL ,
-            `breed` INTEGER NULL ,
-            `color` VARCHAR(50) NULL ,
-            `place_of_birth` VARCHAR(50) NULL ,
-            `human` INTEGER NULL ,
-            `TNVED_code` VARCHAR(20) NULL ,
-            `color_ENG` VARCHAR(50) NULL ,
+            `weight` INTEGER NOT NULL ,
+            `birthday` NOT TIMESTAMP  ,
+            `breed` INTEGER NOT NULL ,
+            `color` VARCHAR(50) NOT NULL ,
+            `place_of_birth` VARCHAR(50) NOT NULL ,
+            `human` INTEGER NOT NULL ,
+            `TNVED_code` VARCHAR(20) NOT NULL ,
+            `color_ENG` VARCHAR(50) NOT NULL ,
             PRIMARY KEY (`id`)
             );
 
-            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`)
-                VALUES ('Собакен','m','1','643093300085088','1','черный','black');
-            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`)
-                VALUES ('Кошак','w','1','6430934223488','1','белый','white');
+            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`, `birthday`, `human`, `TNVED_code`, `place_of_birth`, `weight`)
+                VALUES ('Собакен','m','1','643093300085088','1','черный','black','2020-12-11 19:22:00', 1, '123', 'Владимир', 4500);
+            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`, `birthday`, `human`, `TNVED_code`, `place_of_birth`, `weight`)
+                VALUES ('Кошак','w','1','6430934223488','1','белый','white','2020-12-11 19:22:00', 1, '123', 'Владимир', 50000);
         </sql>
 
     </changeSet>

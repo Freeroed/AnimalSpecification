@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -27,7 +28,7 @@ public class Animal implements Serializable {
     private Integer weight; // вес
 
     @Column (name = "birthday")
-    private Date birthday; // дата рождения
+    private Instant birthday; // дата рождения
 
     @Column (name = "breed")
     private Long breed; // порода (id)
@@ -99,11 +100,11 @@ public class Animal implements Serializable {
         this.weight = weight;
     }
 
-    public Date getBirthday() {
+    public Instant getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(Instant birthday) {
         this.birthday = birthday;
     }
 

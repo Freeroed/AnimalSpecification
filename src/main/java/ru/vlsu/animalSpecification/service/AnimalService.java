@@ -19,12 +19,12 @@ public class AnimalService {
     private static final Logger log = Logger.getLogger(AnimalService.class);
 
     public List<Animal> listAll() {
-        //log.debug("Request to get all animals");
-        return (List<Animal>) repo.findAll();
+        log.debug("Request to get all animals");
+        return (List<Animal>)repo.findAll();
     }
 
     public Animal get(Long id) {
-        //log.debug("Request to get animal by id=" + id);
+        log.debug("Request to get animal by id=" + id);
         return repo.findById(id).get();
     }
 }
