@@ -21,7 +21,8 @@ public class TransportResource {
     @GetMapping("/transports")
     public List<Transport> getAll() {
         List<Transport> list = transportService.listAll();
-        log.debug("Request go get All Transport: {}", (Throwable) list);
+        // Этот логер выкидывает 500 ошибку
+        //log.debug("Request go get All Transport: {}", (Throwable) list);
         return list;
     }
 }
