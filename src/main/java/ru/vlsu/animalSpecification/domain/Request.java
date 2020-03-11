@@ -11,54 +11,50 @@ public class Request {
     private Long id;
 
     @Column (name = "animal")
-    private long animal;
+    private long animal; // список жвотных в заявке (ну типа)
 
     @Column (name = "recipient")
-    private long recipient;
+    private long recipient; // получатель - id человека
 
     @Column (name = "destination_country")
-    private long destinationCountry;
+    private long destinationCountry; // страна назначения (id)
 
     @Column (name = "border_crossing_point")
-    private long borderCrossingPoint;
+    private long borderCrossingPoint; // пункт пересечения границы (его id)
 
     @Column (name = "transport")
-    private long transport;
+    private long transport; // тип транспорта (id)
 
     @Column (name = "vehicle_number")
-    private String vehicleNumber;
+    private String vehicleNumber; // номер автомобиля (если транпорт автомобитль, если самолет - мб номер самолета?)
 
     @Column (name = "veterinarian")
-    private long veterinarian;
+    private long veterinarian; // ветеринар, который выдаел сертификат 1
 
     @Column (name = "transaction_type")
-    private String transactionType;
+    private String transactionType; // в примере - "перевозка без смены владельца" (серт.1 в меркурии)
+                                    // возможно тут имеется в виду на продажу, на путешествие или как еще
 
-    // способ хранения при транспортировке
     @Column (name = "way_of_storage_during_transportation")
-    private String wayOfStorageDuringTransportation;
+    private String wayOfStorageDuringTransportation; // способ хранения при транспортировке (прим: вентилируемые)
 
-    // место карантирования
     @Column (name = "quarantine_location")
-    private String quarantineLocation;
+    private String quarantineLocation; // место карантирования (прим: В домашних условиях)
 
     @Column (name = "number_of_days_to_quarantine")
-    private int numberOfDaysToQuarantine;
+    private int numberOfDaysToQuarantine; // колличесвто дней карантирования (прим: 30)
 
     @Column (name = "inspector_of_Rosselkhoznadzor")
-    private long inspectorOfRosselkhoznadzor;
-
-    @Column (name = "destination_city")
-    private String destinationCity;
+    private long inspectorOfRosselkhoznadzor; // инспектор Р-а, выдавший сертиф. 5а / евросправку
 
     @Column (name = "postal_code")
-    private String postalCode;
+    private String postalCode; // почтовый индекс грузополучателя для евросправки
 
     @Column (name = "date_of_departure")
-    private Date dateOfDeparture;
+    private Date dateOfDeparture; // дата отправления
 
     @Column (name = "certificate_1_form_number")
-    private String certificate1FormNumber;
+    private String certificate1FormNumber;  // Уникальный идентификатор ВСД
 
     /*
     Getters and Setters
@@ -166,14 +162,6 @@ public class Request {
 
     public void setInspectorOfRosselkhoznadzor(long inspectorOfRosselkhoznadzor) {
         this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
-    }
-
-    public String getDestinationCity() {
-        return destinationCity;
-    }
-
-    public void setDestinationCity(String destinationCity) {
-        this.destinationCity = destinationCity;
     }
 
     public String getPostalCode() {
