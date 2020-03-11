@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="elena" id="110320202028-1">
+
+        <comment>Create Animal table and test data</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE `Animal` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `nickname` VARCHAR(50) NOT NULL,
+            `sex` CHAR NOT NULL,
+            `type` INTEGER NOT NULL ,
+            `chip` VARCHAR(50) NULL ,
+            `weight` INTEGER NULL ,
+            `birthday` DATE NULL ,
+            `breed` INTEGER NULL ,
+            `color` VARCHAR(50) NULL ,
+            `place_of_birth` VARCHAR(50) NULL ,
+            `human` INTEGER NULL ,
+            `TNVED_code` VARCHAR(20) NULL ,
+            `color_ENG` VARCHAR(50) NULL ,
+            PRIMARY KEY (`id`)
+            );
+
+            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`)
+                VALUES ('Собакен','m','1','643093300085088','1','черный','black');
+            INSERT INTO `Animal` (`nickname`,`sex`, `type`,`chip`,`breed`,`color`,`color_ENG`)
+                VALUES ('Кошак','w','1','6430934223488','1','белый','white');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
