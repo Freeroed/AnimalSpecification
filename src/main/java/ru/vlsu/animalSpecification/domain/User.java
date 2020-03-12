@@ -1,5 +1,7 @@
 package ru.vlsu.animalSpecification.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,16 +18,18 @@ public class User implements Serializable {
     @Column(name = "login")
     private String userName;
 
+
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+
+    @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     @Column(name = "surname")
-    private String Surname;
+    private String surname;
 
     @Column(name = "name")
     private String name;
@@ -40,7 +44,7 @@ public class User implements Serializable {
     private String address;
 
     @Column(name = "INN")
-    private String Inn;
+    private String inn;
 
     @Column(name = "surname_ENG")
     private String surnameEng;
@@ -48,12 +52,13 @@ public class User implements Serializable {
     @Column(name = "name_ENG")
     private String nameEng;
 
+
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        surname = surname;
     }
 
     public String getName() {
@@ -89,11 +94,11 @@ public class User implements Serializable {
     }
 
     public String getInn() {
-        return Inn;
+        return inn;
     }
 
     public void setInn(String inn) {
-        Inn = inn;
+        inn = inn;
     }
 
     public String getSurnameEng() {
@@ -150,14 +155,18 @@ public class User implements Serializable {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", Surname='" + Surname + '\'' +
+                ", Surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", patronymic='" + patronymic + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", Inn='" + Inn + '\'' +
+                ", Inn='" + inn + '\'' +
                 ", surnameEng='" + surnameEng + '\'' +
                 ", nameEng='" + nameEng + '\'' +
                 '}';
     }
+
+    public User() {
+    }
+    
 }

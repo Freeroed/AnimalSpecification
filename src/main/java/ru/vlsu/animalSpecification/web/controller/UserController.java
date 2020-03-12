@@ -42,7 +42,7 @@ public class UserController {
         if(logout != null) {
             model.addAttribute("SUCCESS");
         }
-        return "login";
+        return "account/login";
     }
 
 
