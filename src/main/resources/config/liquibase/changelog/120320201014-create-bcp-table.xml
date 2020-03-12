@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="elena" id="120320201014-1">
+
+        <comment>Create Border_crossing_point table</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE `Border_crossing_point` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `location` VARCHAR(100) NOT NULL,
+            `adjacent_point` VARCHAR(50) NULL,
+            `classification` VARCHAR(100) NULL,
+            `schedule` VARCHAR(100) NULL,
+            `schedule_of_management_officials` VARCHAR(120) NULL ,
+            PRIMARY KEY (`id`)
+            );
+
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

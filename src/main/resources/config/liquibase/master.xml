@@ -22,6 +22,8 @@
     <include file="config/liquibase/changelog/030320201340-insert-test-data-in-transport.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/110320202028-create-animal-table.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/120320200931-edit-animal-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320201014-create-bcp-table.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
