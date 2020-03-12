@@ -20,7 +20,7 @@ public class AnimalResource {
         return "SOBAKEN";
     }
 
-    @GetMapping("/alimals")
+    @GetMapping("/animals")
     public List<Animal> getAllAnimals(){
         List<Animal> list = animalService.listAll();
         return list;
