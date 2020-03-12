@@ -11,7 +11,7 @@
              dbms="mysql">
             CREATE TABLE `Border_crossing_point` (
             `id` BIGINT NOT NULL AUTO_INCREMENT,
-            `location` VARCHAR(100) NOT NULL,
+            `location` VARCHAR(500) NOT NULL,
             `adjacent_point` VARCHAR(50) NULL,
             `classification` VARCHAR(100) NULL,
             `schedule` VARCHAR(100) NULL,

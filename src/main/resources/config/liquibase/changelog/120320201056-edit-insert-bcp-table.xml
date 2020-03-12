@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="elena" id="120320201056-1">
+
+        <comment>Edit and insert Border_crossing_point table</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            ALTER TABLE Border_crossing_point ADD `regionRF` VARCHAR(100) NOT NULL;
+            ALTER TABLE Border_crossing_point ADD `name` VARCHAR(50) NOT NULL;
+            ALTER TABLE Border_crossing_point ADD `phone` VARCHAR(20) NULL;
+            ALTER TABLE Border_crossing_point ADD `email` VARCHAR(50) NULL;
+
+            INSERT INTO `Border_crossing_point`
+            (`name`,`location`, `adjacent_point`, `classification`, `schedule`, `schedule_of_management_officials`,
+                `regionRF`, `phone`, `email`)
+            VALUES ('Грайворон',
+                    'Белгородская обл., Грайворонский р-н, с. Козинка, ул. Республиканская, автодорога Белгород – Ахтырка, 96 км на российско-украинской границе',
+                    'Великая Писаревка, Украина',
+                    'автомобильный грузопассажирский постоянный многосторонний',
+                    'круглосуточно',
+                    '09:00 - 21:00',
+                    'Белгородская область',
+                    '+7(47261)4-75-68',
+                    'graivoron-ppkr@yandex.ru'
+            );
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
