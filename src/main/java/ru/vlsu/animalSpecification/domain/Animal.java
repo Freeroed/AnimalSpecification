@@ -76,11 +76,11 @@ public class Animal implements Serializable {
         this.sex = sex;
     }
 
-    public long getType() {
+    public Long getType() {
         return type;
     }
 
-    public void setType(long type) {
+    public void setType(Long type) {
         this.type = type;
     }
 
@@ -92,11 +92,11 @@ public class Animal implements Serializable {
         this.chip = chip;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
@@ -108,11 +108,11 @@ public class Animal implements Serializable {
         this.birthday = birthday;
     }
 
-    public long getBreed() {
+    public Long getBreed() {
         return breed;
     }
 
-    public void setBreed(long breed) {
+    public void setBreed(Long breed) {
         this.breed = breed;
     }
 
@@ -132,11 +132,11 @@ public class Animal implements Serializable {
         this.placeOfBirth = placeOfBirth;
     }
 
-    public long getHuman() {
+    public Long getHuman() {
         return human;
     }
 
-    public void setHuman(long human) {
+    public void setHuman(Long human) {
         this.human = human;
     }
 
