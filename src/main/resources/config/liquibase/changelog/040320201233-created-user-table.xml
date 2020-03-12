@@ -13,6 +13,14 @@
                     id BIGINT NOT NULL AUTO_INCREMENT,
                     login VARCHAR(50) NOT NULL,
                     password VARCHAR(255) NOT NULL,
+                    surname VARCHAR(50) NOT NULL,
+                    name VARCHAR(50) NOT NULL,
+                    patronymic VARCHAR(50) NOT NULL,
+                    phone VARCHAR(13) NOT NULL,
+                    address VARCHAR (300) NOT NULL,
+                    INN VARCHAR(20) NULL,
+                    surname_ENG VARCHAR(50) NOT NULL,
+                    name_ENG VARCHAR(50) NOT NULL,
                     PRIMARY KEY (id)
             );
             CREATE TABLE role(
@@ -41,8 +49,8 @@
 
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
-            INSERT INTO USER(id, login, password) values (
-                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu'
+            INSERT INTO USER(id, login, password, surname, name, patronymic, phone, address, surname_ENG, name_ENG) values (
+                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey'
             );
             INSERT INTO role (id,  role_name) values (
                 1, 'ROLE_ADMIN'

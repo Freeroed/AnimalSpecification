@@ -12,7 +12,7 @@
         <intercept-url pattern="/api/   animals/get" access="permitAll()"/>
 
 
-        <form-login login-page="/login"  authentication-failure-url="/login?error"
+        <form-login
                     username-parameter="username" password-parameter="password"/>
 
         <logout logout-success-url="/login?logout"/>
