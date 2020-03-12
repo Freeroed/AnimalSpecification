@@ -12,6 +12,8 @@
         <class>ru.vlsu.animalSpecification.domain.Transport</class>
         <class>ru.vlsu.animalSpecification.domain.Animal</class>
         <class>ru.vlsu.animalSpecification.domain.BorderCrossingPoint</class>
+        <class>ru.vlsu.animalSpecification.domain.BreedsOfAnimal</class>
+
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/animal_specification?useUnicode=true&amp;serverTimezone=UTC" />
             <property name="javax.persistence.jdbc.user" value="root" />
