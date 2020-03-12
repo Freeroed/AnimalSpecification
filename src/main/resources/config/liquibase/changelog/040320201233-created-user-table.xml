@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="sevdokimov" id="040320201233-1">
+
+        <comment>Create user table</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE user(
+                    id BIGINT NOT NULL AUTO_INCREMENT,
+                    login VARCHAR(50) NOT NULL,
+                    password VARCHAR(255) NOT NULL,
+                    surname VARCHAR(50) NOT NULL,
+                    name VARCHAR(50) NOT NULL,
+                    patronymic VARCHAR(50) NOT NULL,
+                    phone VARCHAR(13) NOT NULL,
+                    address VARCHAR (300) NOT NULL,
+                    INN VARCHAR(20) NULL,
+                    surname_ENG VARCHAR(50) NOT NULL,
+                    name_ENG VARCHAR(50) NOT NULL,
+                    PRIMARY KEY (id)
+            );
+            CREATE TABLE role(
+                id BIGINT NOT NULL AUTO_INCREMENT,
+                role_name VARCHAR(50) NOT NULL,
+                PRIMARY KEY (id)
+            );
+
+            CREATE TABLE user_role (
+                user_id BIGINT NOT NULL,
+                role_id BIGINT NOT NULL,
+
+            FOREIGN KEY (user_id) REFERENCES user (id),
+            FOREIGN KEY (role_id) REFERENCES role (id),
+
+            UNIQUE (user_id, role_id)
+            );
+
+        </sql>
+
+    </changeSet>
+
+    <changeSet author="sevdokimov" id="040320201233-2">
+
+        <comment>Insert test values into user and auth tables</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            INSERT INTO USER(id, login, password, surname, name, patronymic, phone, address, surname_ENG, name_ENG) values (
+                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey'
+            );
+            INSERT INTO role (id,  role_name) values (
+                1, 'ROLE_ADMIN'
+            );
+            INSERT INTO role (id,  role_name) values (
+                2, 'ROLE_USER'
+            );
+            INSERT INTO user_role (user_id,  role_id) values (
+            1, 1
+            );
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

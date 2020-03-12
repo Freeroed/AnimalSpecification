@@ -9,6 +9,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>ru.vlsu.animalSpecification.domain.Region</class>
         <class>ru.vlsu.animalSpecification.domain.Request</class>
+        <class>ru.vlsu.animalSpecification.domain.User</class>
+        <class>ru.vlsu.animalSpecification.domain.Authority</class>
+        <class>ru.vlsu.animalSpecification.domain.Role</class>
         <class>ru.vlsu.animalSpecification.domain.Transport</class>
         <class>ru.vlsu.animalSpecification.domain.Animal</class>
         <class>ru.vlsu.animalSpecification.domain.BorderCrossingPoint</class>
