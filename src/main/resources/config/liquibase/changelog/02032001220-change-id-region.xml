@@ -3,7 +3,7 @@
 <databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
 
 
-    <changeSet author="sevdokimov" id="230220200017-1">
+    <changeSet author="sevdokimov" id="02032001220-1">
 
         <comment>Id in table Region: INT -> BIGINT </comment>
 
