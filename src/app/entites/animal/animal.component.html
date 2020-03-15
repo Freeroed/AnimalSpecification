@@ -1,4 +1,4 @@
-<div class="card my-5">
+  <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
@@ -18,5 +18,10 @@
         </tr>
       </tbody>
     </table>
+    <select class="form-control" id="reg" name="resionns">
+      <option *ngFor="let animal of regs" [value]="animal.id">
+        {{ animal.name }}
+      </option>
+      </select>
   </div>
 </div>

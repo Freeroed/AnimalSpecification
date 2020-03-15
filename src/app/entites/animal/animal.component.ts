@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Region } from './../../shared/model/region.model';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,6 +15,10 @@ import { AnimalService } from './animal.service';
 })
 export class AnimalComponent implements OnInit {
     animals: Animal[];
+    regs: Region[] = [
+        {id: 1, name: 'Страны Евросоюза'},
+        {id: 2, name: 'Регионы России'}
+    ]
 
 
     constructor(
@@ -21,11 +26,8 @@ export class AnimalComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        console.log("LOOOOOOG");
         this.animalService.fiidAll().subscribe(data => {
-            console.log(data);
             this.animals = data;
-            console.log(this.animals);
         });
     }
 }

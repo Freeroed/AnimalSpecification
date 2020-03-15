@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimalSpecificationAnimalModule } from './entites/animal/animal.module'
 import { AnimalService } from './entites/animal/animal.service';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { AnimalSpecificationHomeModule } from './home/home.module';
 
 @NgModule({
   
@@ -12,11 +14,12 @@ import { AnimalService } from './entites/animal/animal.service';
     BrowserModule,
     AppRoutingModule,
     AnimalSpecificationAnimalModule,
-    HttpClientModule
+    HttpClientModule,
+    AnimalSpecificationHomeModule
   ],
   declarations: [
     AppComponent,
-    
+    NavbarComponent
   ],
   providers: [AnimalService],
   bootstrap: [AppComponent]
