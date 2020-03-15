@@ -1,11 +1,31 @@
-<div>
-  <select class="form-control" id="reg" name="resionns" >
-    <option *ngFor="let region of regs" [value]="region.id">
-      {{ region.name }}
-    </option> 
-    
-  </select>
-      <h2>
-        THIS IS HOME PAGE SUKA
+
+<div class="card my-5">
+  <div class="card-body">
+    <h2>
+    Добрый вечор, куда полетим со своей псиной?
     </h2>
+<div class="dropdown">
+  <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" on-click="check()">
+    <option *ngFor="let region of regions" [value]="region.id">
+      {{ region.name }}
+    </option>
+
+  </select>
+  <div *ngIf="checkRegion">
+    <h2>
+    Да, это страна Евросоюза, теперь выбирай конкретную страну
+  </h2>
+  <div class="dropdown">
+    <select id="reg" name="regiion" class="btn btn-info dropdown-toggle"  on-click="check()">
+      <option *ngFor="let region of regions" [value]="region.id">
+        {{ region.name }}
+      </option>
+    </select>
+    <p>
+      Для поедки в эту страну вам нужно будет сделать то-то, и то-то, привить свою псину от того-то, и вообще, проще было бы дома сидеть
+    </p>
+    <button type="button" class="btn btn-outline-primary">Создать заявку</button>
+  </div>
 </div>
+</div>
+  </div></div>

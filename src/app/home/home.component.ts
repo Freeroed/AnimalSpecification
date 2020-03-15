@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Region } from './../shared/model/region.model'
+import { RegionService } from '../entites/region/region.service';
+import { HttpResponse } from '@angular/common/http';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-home',
@@ -7,13 +10,30 @@ import { Region } from './../shared/model/region.model'
 })
 
 export class HomeComponent implements OnInit {
-    regs: Region[] = [
-        {id: 1, name: 'Страны Евросоюза'},
-        {id: 2, name: 'Регионы России'}
-    ]
+    regions: Region[];
+    checkRegion =false;
+    selected;
 
-    constructor() { }
+    editForm = this.fb.group({
+        region: []
+    })
+
+    constructor(
+        protected regionService: RegionService,
+        protected fb: FormBuilder
+        ) { }
+
     ngOnInit(){
-        console.log(this.regs);
+        this.regionService.findAll().subscribe((res: HttpResponse<Region[]>) =>
+        this.regions = res.body);
+    }
+
+    check(): void {
+        if(this.selected === '1'){
+            this.checkRegion = true;
+        } else {
+            this.checkRegion = false;
+        }
+        
     }
 }

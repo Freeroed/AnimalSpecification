@@ -15,10 +15,6 @@ import { AnimalService } from './animal.service';
 })
 export class AnimalComponent implements OnInit {
     animals: Animal[];
-    regs: Region[] = [
-        {id: 1, name: 'Страны Евросоюза'},
-        {id: 2, name: 'Регионы России'}
-    ]
 
 
     constructor(

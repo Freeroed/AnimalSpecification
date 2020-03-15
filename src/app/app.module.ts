@@ -7,6 +7,9 @@ import { AnimalSpecificationAnimalModule } from './entites/animal/animal.module'
 import { AnimalService } from './entites/animal/animal.service';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { AnimalSpecificationHomeModule } from './home/home.module';
+import { RegionService } from './entites/region/region.service';
+import { RouterModule } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
   
@@ -15,13 +18,14 @@ import { AnimalSpecificationHomeModule } from './home/home.module';
     AppRoutingModule,
     AnimalSpecificationAnimalModule,
     HttpClientModule,
-    AnimalSpecificationHomeModule
+    AnimalSpecificationHomeModule,
+    RouterModule
   ],
   declarations: [
     AppComponent,
     NavbarComponent
   ],
-  providers: [AnimalService],
+  providers: [AnimalService, RegionService, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

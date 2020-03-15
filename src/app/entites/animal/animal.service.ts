@@ -17,10 +17,10 @@ export class AnimalService {
 
     constructor(private http: HttpClient) {}
 
-    find(id: number): Observable<EntityResponseType> {
+    find(id: number): Observable<Animal> {
         return this.http
-        .get<Animal>(`${this.resourceUrl}`, {observe: 'response'})
-        .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+        .get<Animal>(`${this.resourceUrl}/${id}`, {observe: 'response'})
+        .pipe(map((res: Animal) => this.convertDateFromServer(res)));
     }
 
     fiidAll(): Observable<Animal[]> {
@@ -29,9 +29,9 @@ export class AnimalService {
         .get<Animal[]>(this.resourceUrl);
     }
 
-    protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
-        if(res.body) {
-            res.body.birthday = res.body.birthday ? moment(res.body.birthday) : undefined;
+    protected convertDateFromServer(res: Animal): Animal {
+        if(res) {
+            res.birthday = res.birthday ? moment(res.birthday) : undefined;
         }
         return res;
     }
