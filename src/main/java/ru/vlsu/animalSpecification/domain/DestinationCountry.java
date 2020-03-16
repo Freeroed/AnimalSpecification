@@ -28,5 +28,63 @@ public class DestinationCountry implements Serializable {
     @Column (name = "region_of_the_country_ENG")
     private String region_of_the_country_ENG; // регион внутри страны (английское)
 
+    public DestinationCountry() { }
 
+    /* Getters and Setters */
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getCountryNameENG() {
+        return countryNameENG;
+    }
+
+    public void setCountryNameENG(String countryNameENG) {
+        this.countryNameENG = countryNameENG;
+    }
+
+    public long getRegion() {
+        return region;
+    }
+
+    public void setRegion(long region) {
+        this.region = region;
+    }
+
+    public String getISO_code() {
+        return ISO_code;
+    }
+
+    public void setISO_code(String ISO_code) {
+        this.ISO_code = ISO_code;
+    }
+
+    public String getRegion_of_the_country() {
+        return region_of_the_country;
+    }
+
+    public void setRegion_of_the_country(String region_of_the_country) {
+        this.region_of_the_country = region_of_the_country;
+    }
+
+    public String getRegion_of_the_country_ENG() {
+        return region_of_the_country_ENG;
+    }
+
+    public void setRegion_of_the_country_ENG(String region_of_the_country_ENG) {
+        this.region_of_the_country_ENG = region_of_the_country_ENG;
+    }
 }
