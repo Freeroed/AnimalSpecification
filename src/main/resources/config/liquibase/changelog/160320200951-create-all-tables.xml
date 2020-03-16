@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+    <changeSet author="elena" id="160320200951-1">
+
+        <comment>Create and insert Laboratory_test_result</comment>
+
+        <sql stripComments="true" splitStatements="true"
+             dbms="mysql">
+            CREATE TABLE `Laboratory_test_result` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `result_name` VARCHAR(60) NOT NULL,
+            `result_name_ENG` VARCHAR(60) NOT NULL,
+            PRIMARY KEY (`id`)
+            );
+
+            INSERT INTO `Laboratory_test_result` (`result_name`,`result_name_ENG`) VALUES ('отрицательный','negative');
+            INSERT INTO `Laboratory_test_result` (`result_name`,`result_name_ENG`) VALUES ('положительный','positive');
+
+            CREATE TABLE `Laboratory_research` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `laboratory` VARCHAR(100) NULL,
+            `indicator` VARCHAR(100) NULL,
+            `date_of_receipt_of_result` DATE NULL,
+            `research_method` VARCHAR(100) NULL,
+            `examination_number` VARCHAR(50) NULL,
+            `result` BIGINT NULL,
+            `animal` BIGINT NULL,
+            PRIMARY KEY (`id`)
+            );
+
+            CREATE TABLE `Vaccine` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `animal` BIGINT NOT NULL,
+            `type` VARCHAR(100) NULL,
+            `title` VARCHAR(150) NULL,
+            `date` DATE NOT NULL,
+            `vaccine_batch_number` VARCHAR(100) NULL,
+            `vaccine_name_and_manufacturer` VARCHAR(200) NULL,
+            `valid_until` DATE NULL,
+            PRIMARY KEY (`id`)
+            );
+
+            CREATE TABLE `Destination_country` (
+            `id` BIGINT NOT NULL AUTO_INCREMENT,
+            `country_name` VARCHAR(100) NOT NULL,
+            `region` BIGINT NOT NULL,
+            `ISO_code` VARCHAR(10) NOT NULL,
+            `country_name_ENG` VARCHAR(100) NULL,
+            `region_of_the_country` VARCHAR(100) NULL,
+            `region_of_the_country_ENG` VARCHAR(100) NULL,
+            PRIMARY KEY (`id`)
+            );
+
+
+            INSERT INTO `Destination_country` (`country_name`,`country_name_ENG`,`region`,`ISO_code`) VALUES ('Россия','Russia',2,'RU');
+            INSERT INTO `Destination_country` (`country_name`,`country_name_ENG`,`region`,`ISO_code`,`region_of_the_country`,`region_of_the_country_ENG`) VALUES ('Италия','Italy',1,'IT','Болонья','Bologna');
+
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>
