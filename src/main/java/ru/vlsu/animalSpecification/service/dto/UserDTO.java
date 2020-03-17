@@ -41,9 +41,9 @@ public class UserDTO {
         this.inn = user.getInn();
         this.surnameEng = user.getSurnameEng();
         this.nameEng = user.getNameEng();
-        this.roles = user.getRoles().stream()
+        /*this.roles = user.getRoles().stream()
                 .map(Role::getName)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toSet());*/
     }
 
     public Long getId() {

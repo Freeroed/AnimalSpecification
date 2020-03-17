@@ -21,6 +21,8 @@
                     INN VARCHAR(20) NULL,
                     surname_ENG VARCHAR(50) NOT NULL,
                     name_ENG VARCHAR(50) NOT NULL,
+                    email VARCHAR(255) NOT NULL,
+                    created_at TIMESTAMP(0) NOT NULL,
                     PRIMARY KEY (id)
             );
             CREATE TABLE role(
@@ -49,8 +51,8 @@
 
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
-            INSERT INTO USER(id, login, password, surname, name, patronymic, phone, address, surname_ENG, name_ENG) values (
-                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey'
+            INSERT INTO USER(id, login, password, surname, name, patronymic, phone, address, surname_ENG, name_ENG, email, created_at) values (
+                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey', '123@mail.ru', '2009-06-04 18:13:56'
             );
             INSERT INTO role (id,  role_name) values (
                 1, 'ROLE_ADMIN'

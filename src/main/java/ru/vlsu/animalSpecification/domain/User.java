@@ -1,10 +1,13 @@
 package ru.vlsu.animalSpecification.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ru.vlsu.animalSpecification.domain.emun.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +26,7 @@ public class User implements Serializable {
     private String password;
 
 
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
@@ -53,9 +56,34 @@ public class User implements Serializable {
     private String nameEng;
 
 
-    public String getSurname() {
-        return surname;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "created_at")
+    private Instant createdAd;
+
+
+
+    public String getEmail() {
+      return email;
     }
+
+    public void setEmail(String email) {
+      this.email = email;
+    }
+
+    public Instant getCreatedAd() {
+      return createdAd;
+    }
+
+    public void setCreatedAd(Instant createdAd) {
+      this.createdAd = createdAd;
+    }
+
+
+    public String getSurname() {
+          return surname;
+      }
 
     public void setSurname(String surname) {
         surname = surname;
@@ -149,24 +177,28 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", Surname='" + surname + '\'' +
-                ", name='" + name + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", Inn='" + inn + '\'' +
-                ", surnameEng='" + surnameEng + '\'' +
-                ", nameEng='" + nameEng + '\'' +
-                '}';
-    }
 
-    public User() {
-    }
-    
+  @Override
+  public String toString() {
+    return "User{" +
+      "id=" + id +
+      ", userName='" + userName + '\'' +
+      ", password='" + password + '\'' +
+      ", roles=" + roles +
+      ", surname='" + surname + '\'' +
+      ", name='" + name + '\'' +
+      ", patronymic='" + patronymic + '\'' +
+      ", phone='" + phone + '\'' +
+      ", address='" + address + '\'' +
+      ", inn='" + inn + '\'' +
+      ", surnameEng='" + surnameEng + '\'' +
+      ", nameEng='" + nameEng + '\'' +
+      ", email='" + email + '\'' +
+      ", createdAd=" + createdAd +
+      '}';
+  }
+
+
+  public User() {
+  }
 }
