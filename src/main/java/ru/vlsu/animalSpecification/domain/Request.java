@@ -1,11 +1,12 @@
 package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "Request")
-public class Request {
+public class Request implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -55,6 +56,9 @@ public class Request {
 
     @Column (name = "certificate_1_form_number")
     private String certificate1FormNumber;  // Уникальный идентификатор ВСД
+
+    @Column (name = "creator")
+    private long creator;  // User создатель заявки
 
     /*
     Getters and Setters
@@ -186,5 +190,13 @@ public class Request {
 
     public void setCertificate1FormNumber(String certificate1FormNumber) {
         this.certificate1FormNumber = certificate1FormNumber;
+    }
+
+    public long getCreator() {
+        return creator;
+    }
+
+    public void setCreator(long creator) {
+        this.creator = creator;
     }
 }

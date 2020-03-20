@@ -14,8 +14,8 @@ public class RequestService {
     @Autowired
     private RequestRepository repo;
 
-    public void save(Request region) {
-        repo.save(region);
+    public void save(Request req) {
+        repo.save(req);
     }
 
     public List<Request> listAll() {
