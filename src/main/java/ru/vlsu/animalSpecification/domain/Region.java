@@ -30,14 +30,14 @@ public class Region implements Serializable {
     }
 
     @Column (name = "name_ENG")
-    private String name_ENG;
+    private String nameEng;
 
-    public String getName_ENG() {
-        return name_ENG;
+    public String getNameEng() {
+        return nameEng;
     }
 
-    public void setName_ENG(String name_ENG) {
-        this.name_ENG = name_ENG;
+    public void setNameEng(String name_ENG) {
+        this.nameEng = name_ENG;
     }
 
     public Region(){}

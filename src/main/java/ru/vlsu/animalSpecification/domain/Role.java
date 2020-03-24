@@ -2,7 +2,10 @@ package ru.vlsu.animalSpecification.domain;
 
 
 
+import ru.vlsu.animalSpecification.domain.emun.ERole;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,12 +13,12 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_name")
-    private String name;
-
+    private ERole name;
 
 
     public Role() {
@@ -29,15 +32,15 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+  public ERole getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(ERole name) {
+    this.name = name;
+  }
 
-    @Override
+  @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
