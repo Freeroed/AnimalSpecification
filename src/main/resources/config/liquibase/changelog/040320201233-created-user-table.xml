@@ -52,7 +52,7 @@
         <sql stripComments="true" splitStatements="true"
              dbms="mysql">
             INSERT INTO USER(id, login, password, surname, name, patronymic, phone, address, surname_ENG, name_ENG, email, created_at) values (
-                1, 'admin', '$2a$11$lj85C9xSO98dN19JcgcZw.neRCBLIDgMhByhHdMDTTzQ0PAwVoRHu', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey', '123@mail.ru', '2009-06-04 18:13:56'
+                1, 'admin', '$2y$12$KnL8tvfj6gkhXmeKrR1OFumNk67EFF2qU/lJ7KXJ4BShrDt8KIqJe', 'Беркут', 'Сергей', 'Павлович', '71234567890', 'VLADIMIR', 'Berkut', 'Sergey', '123@mail.ru', '2009-06-04 18:13:56'
             );
             INSERT INTO role (id,  role_name) values (
                 1, 'ROLE_ADMIN'
