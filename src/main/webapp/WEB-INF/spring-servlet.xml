@@ -16,6 +16,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <mvc:resources mapping="/img/**" location="/static/img/"/>
     <mvc:resources mapping="/css/**" location="/static/css/"/>
 
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>

@@ -10,6 +10,12 @@ import { AnimalSpecificationHomeModule } from './home/home.module';
 import { RegionService } from './entites/region/region.service';
 import { RouterModule } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
+import { authInterceptorProviders } from './blocks/interceptor/auth.intercoptor';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/signin/login.component';
+import { FormsModule }   from '@angular/forms';
+
+
 
 @NgModule({
   
@@ -19,13 +25,16 @@ import { FormBuilder } from '@angular/forms';
     AnimalSpecificationAnimalModule,
     HttpClientModule,
     AnimalSpecificationHomeModule,
-    RouterModule
+    RouterModule,
+    FormsModule      
   ],
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent,
+    LoginComponent
   ],
-  providers: [AnimalService, RegionService, FormBuilder],
+  providers: [AnimalService, RegionService, FormBuilder, authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

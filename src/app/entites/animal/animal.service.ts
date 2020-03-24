@@ -24,7 +24,6 @@ export class AnimalService {
     }
 
     fiidAll(): Observable<Animal[]> {
-        console.log("log bu servive");
         return this.http
         .get<Animal[]>(this.resourceUrl);
     }
