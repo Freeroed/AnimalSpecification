@@ -155,5 +155,24 @@ public class Animal implements Serializable {
     public void setColorENG(String colorENG) {
         this.colorENG = colorENG;
     }
+
+  @Override
+  public String toString() {
+    return "Animal{" +
+      "id=" + id +
+      ", nickname='" + nickname + '\'' +
+      ", sex=" + sex +
+      ", type=" + type +
+      ", chip='" + chip + '\'' +
+      ", weight=" + weight +
+      ", birthday=" + birthday +
+      ", breed=" + breed +
+      ", color='" + color + '\'' +
+      ", placeOfBirth='" + placeOfBirth + '\'' +
+      ", human=" + human +
+      ", tnvedCode='" + tnvedCode + '\'' +
+      ", colorENG='" + colorENG + '\'' +
+      '}';
+  }
 }
 

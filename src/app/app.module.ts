@@ -15,6 +15,7 @@ import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/signin/login.component';
 import { FormsModule }   from '@angular/forms';
 import { authExpiredInterceptorProviders } from './blocks/interceptor/auth-expired.interceptor';
+import { DocsComponent } from './admin/docs/docs.component';
 
 
 
@@ -33,7 +34,8 @@ import { authExpiredInterceptorProviders } from './blocks/interceptor/auth-expir
     AppComponent,
     NavbarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DocsComponent
   ],
   providers: [AnimalService, RegionService, FormBuilder, authInterceptorProviders, authExpiredInterceptorProviders],
   bootstrap: [AppComponent]
