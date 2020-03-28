@@ -11,6 +11,8 @@ import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.repository.AnimalRepository;
 import ru.vlsu.animalSpecification.service.AnimalService;
 import ru.vlsu.animalSpecification.service.UserService;
+import ru.vlsu.animalSpecification.service.dto.AnimalDTO;
+import ru.vlsu.animalSpecification.service.mapper.AnimalMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,24 +25,26 @@ public class AnimalServiceImpl implements AnimalService {
 
     private final UserService userService;
 
+    private final AnimalMapper animalMapper;
 
   private static final Logger log =
     LoggerFactory.getLogger(AnimalServiceImpl.class);
 
   @Autowired
-  public AnimalServiceImpl(AnimalRepository repo, UserService userService) {
+  public AnimalServiceImpl(AnimalRepository repo, UserService userService, AnimalMapper animalMapper) {
     this.repo = repo;
     this.userService = userService;
+    this.animalMapper = animalMapper;
   }
 
-  public List<Animal> listAll() {
+  public List<AnimalDTO> listAll() {
         log.debug("Request to get all animals");
-        return (List<Animal>)repo.findAll();
+        return animalMapper.animalsToAnimalsDTO(repo.findAll());
     }
 
   @Override
-  public List<Animal> findByUser(Long userId) {
-    return repo.findAllByHuman(userId);
+  public List<AnimalDTO> findByUser(Long userId) {
+    return null;
   }
 
   public Animal get(Long id) {
@@ -49,22 +53,23 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
   @Override
-  public Animal save(Animal animal, String username) {
+  public AnimalDTO save(Animal animal, String username) {
     log.debug("Request to save animal : {} with human with username : {}" , animal.toString(), username);
-    animal.setHuman(userService.findByUsername(username).getId());
+    animal.setMaster(userService.findByUsername(username));
     log.debug("Saving animal : " + animal);
-    return repo.save(animal);
+    return new AnimalDTO(repo.save(animal));
   }
 
   @Override
-  public Page<Animal> findAll(Pageable pageable) {
+  public Page<AnimalDTO> findAll(Pageable pageable) {
     return null;
   }
 
   @Override
-  public Optional<Animal> findOne(Long id) {
+  public Optional<AnimalDTO> findOne(Long id) {
     log.debug("Request to find Animal by id : {}", id);
-    return repo.findById(id);
+    //return null;
+    return repo.findById(id).map(animalMapper::animalToAnimalsDTO);
   }
 
   @Override

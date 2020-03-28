@@ -18,8 +18,9 @@ public class Animal implements Serializable {
     @Column (name = "sex")
     private char sex; // пол
 
-    @Column (name = "type")
-    private Long type; // кошка/собака/хомяк (id типа)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "type", nullable = false)
+    private TypeOfAnimal type; // кошка/собака/хомяк (id типа)
 
     @Column (name = "chip")
     private String chip; // чип
@@ -30,8 +31,9 @@ public class Animal implements Serializable {
     @Column (name = "birthday")
     private Instant birthday; // дата рождения
 
-    @Column (name = "breed")
-    private Long breed; // порода (id)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "breed", nullable = false)
+    private BreedsOfAnimal breed; // порода (id)
 
     @Column (name = "color")
     private String color; //цвет
@@ -39,14 +41,25 @@ public class Animal implements Serializable {
     @Column (name = "place_of_birth")
     private String placeOfBirth; // местро рождения
 
-    @Column (name = "human")
-    private Long human; //хозяин животного
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "human", nullable = false)
+    private User master;
 
     @Column (name = "TNVED_code")
     private String tnvedCode; // код ТНВЭД
 
     @Column (name = "color_ENG")
     private String colorENG; // цвет на английском
+
+  public User getMaster() {
+    return master;
+  }
+
+  public void setMaster(User master) {
+    this.master = master;
+  }
+
+
 
     /*
         Getters and Setters
@@ -76,11 +89,11 @@ public class Animal implements Serializable {
         this.sex = sex;
     }
 
-    public Long getType() {
+    public TypeOfAnimal getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(TypeOfAnimal type) {
         this.type = type;
     }
 
@@ -108,11 +121,11 @@ public class Animal implements Serializable {
         this.birthday = birthday;
     }
 
-    public Long getBreed() {
+    public BreedsOfAnimal getBreed() {
         return breed;
     }
 
-    public void setBreed(Long breed) {
+    public void setBreed(BreedsOfAnimal breed) {
         this.breed = breed;
     }
 
@@ -132,13 +145,7 @@ public class Animal implements Serializable {
         this.placeOfBirth = placeOfBirth;
     }
 
-    public Long getHuman() {
-        return human;
-    }
 
-    public void setHuman(Long human) {
-        this.human = human;
-    }
 
     public String getTnvedCode() {
         return tnvedCode;
@@ -169,7 +176,6 @@ public class Animal implements Serializable {
       ", breed=" + breed +
       ", color='" + color + '\'' +
       ", placeOfBirth='" + placeOfBirth + '\'' +
-      ", human=" + human +
       ", tnvedCode='" + tnvedCode + '\'' +
       ", colorENG='" + colorENG + '\'' +
       '}';

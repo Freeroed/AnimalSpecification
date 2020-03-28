@@ -10,15 +10,15 @@ import java.util.Optional;
 
 public interface AnimalService {
 
-  Animal save(Animal animal, String username);
+  AnimalDTO save(Animal animal, String username);
 
-  Page<Animal> findAll(Pageable pageable);
+  Page<AnimalDTO> findAll(Pageable pageable);
 
-  Optional<Animal> findOne(Long id);
+  Optional<AnimalDTO> findOne(Long id);
 
   void delete(Long id);
 
-  List<Animal> listAll();
+  List<AnimalDTO> listAll();
 
-  List<Animal> findByUser(Long userId);
+  List<AnimalDTO> findByUser(Long userId);
 }

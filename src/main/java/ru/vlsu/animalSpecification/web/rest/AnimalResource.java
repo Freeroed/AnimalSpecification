@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.security.jwt.JwtUtils;
 import ru.vlsu.animalSpecification.service.AnimalService;
+import ru.vlsu.animalSpecification.service.dto.AnimalDTO;
 import ru.vlsu.animalSpecification.service.impl.AnimalServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,19 +37,6 @@ public class AnimalResource {
         return "SOBAKEN";
     }
 
-  /**
-   * {@code GET /animals} : get all animals must return animals by user (use after complete Swagger in Angular CLI)
-   *
-   * @param authentication
-   * @return
-   */
-    @GetMapping("/animal")
-    public List<Animal> getAllAnimal(Authentication authentication){
-       // log.debug(jwtUtils.getUserNameFromJwtToken(token));
-          log.debug(authentication.getName());
-        List<Animal> list = animalService.listAll();
-        return list;
-    }
 
   /**
    * {@code GET /animals} : get all animals
@@ -60,7 +48,7 @@ public class AnimalResource {
       //log.debug(jwtUtils.getUserNameFromJwtToken(token));
       //log.debug(authentication.getName());
         log.debug("REST request to get all animals");
-      List<Animal> result = animalService.listAll();
+      List<AnimalDTO> result = animalService.listAll();
       return ResponseEntity.ok().body(result);
   }
 
@@ -76,10 +64,11 @@ public class AnimalResource {
     public ResponseEntity createAnimal(@RequestBody Animal animal) throws URISyntaxException {
       //TODO Get user id from authorization
       log.debug("REST request to save animal : " + animal);
-      Animal result = animalService.save(animal, "admin");
+
       if (animal.getId() != null) {
         return ResponseEntity.badRequest().build();
       } else {
+        AnimalDTO result = animalService.save(animal, "admin");
         return ResponseEntity.created(new URI("/api/animals/" + result.getId()))
           .body(result);
       }
@@ -103,7 +92,7 @@ public class AnimalResource {
         return ResponseEntity.badRequest().build();
       }
       else {
-        Animal result = animalService.save(animal, "admin");
+        AnimalDTO result = animalService.save(animal, "admin");
         return ResponseEntity.ok()
           .body(result);
       }
@@ -118,7 +107,7 @@ public class AnimalResource {
     @GetMapping("/animals/{id}")
     public ResponseEntity getAnimal(@PathVariable Long id){
       log.debug("REST request to get animal with id : {}", id);
-      Optional<Animal> animal = animalService.findOne(id);
+      Optional<AnimalDTO> animal = animalService.findOne(id);
       if (!animal.equals(Optional.empty())) {
         return ResponseEntity.ok()
           .body(animal);

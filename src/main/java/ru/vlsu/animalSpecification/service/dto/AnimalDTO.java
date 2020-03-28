@@ -1,5 +1,7 @@
 package ru.vlsu.animalSpecification.service.dto;
 
+import ru.vlsu.animalSpecification.domain.Animal;
+
 public class AnimalDTO {
 
   private Long id;
@@ -8,19 +10,19 @@ public class AnimalDTO {
 
   private char sex;
 
-  private Long type;
+  private TypeOfAnimalDTO type;
 
   private String chip;
 
   private Integer weight;
 
-  private Long breed;
+  private BreedsOfAnimalDTO breed;
 
   private String color;
 
   private String placeOfBirth;
 
-  private Long human;
+  private UserDTO human;
 
   private String tnvedCde;
 
@@ -50,11 +52,11 @@ public class AnimalDTO {
     this.sex = sex;
   }
 
-  public Long getType() {
+  public TypeOfAnimalDTO getType() {
     return type;
   }
 
-  public void setType(Long type) {
+  public void setType(TypeOfAnimalDTO type) {
     this.type = type;
   }
 
@@ -74,11 +76,11 @@ public class AnimalDTO {
     this.weight = weight;
   }
 
-  public Long getBreed() {
+  public BreedsOfAnimalDTO getBreed() {
     return breed;
   }
 
-  public void setBreed(Long breed) {
+  public void setBreed(BreedsOfAnimalDTO breed) {
     this.breed = breed;
   }
 
@@ -98,11 +100,11 @@ public class AnimalDTO {
     this.placeOfBirth = placeOfBirth;
   }
 
-  public Long getHuman() {
+  public UserDTO getHuman() {
     return human;
   }
 
-  public void setHuman(Long human) {
+  public void setHuman(UserDTO human) {
     this.human = human;
   }
 
@@ -120,5 +122,20 @@ public class AnimalDTO {
 
   public void setColorENG(String colorENG) {
     this.colorENG = colorENG;
+  }
+
+  public AnimalDTO(Animal animal) {
+    this.id = animal.getId();
+    this.nickname = animal.getNickname();
+    this.sex = animal.getSex();
+    this.type = new TypeOfAnimalDTO(animal.getType());
+    this.chip = animal.getChip();
+    this.weight = animal.getWeight();
+    this.breed = new BreedsOfAnimalDTO(animal.getBreed());
+    this.color = animal.getColor();
+    this.placeOfBirth = animal.getPlaceOfBirth();
+    this.human = new UserDTO(animal.getMaster());
+    this.tnvedCde = animal.getTnvedCode();
+    this.colorENG = animal.getColorENG();
   }
 }

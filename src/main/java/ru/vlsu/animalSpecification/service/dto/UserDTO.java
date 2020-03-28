@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.service.dto;
 
 import ru.vlsu.animalSpecification.domain.Role;
 import ru.vlsu.animalSpecification.domain.User;
+import ru.vlsu.animalSpecification.domain.emun.ERole;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class UserDTO {
 
     private String nameEng;
 
-    private Set<String> roles;
+    private Set<ERole> roles;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -41,9 +42,9 @@ public class UserDTO {
         this.inn = user.getInn();
         this.surnameEng = user.getSurnameEng();
         this.nameEng = user.getNameEng();
-        /*this.roles = user.getRoles().stream()
+        this.roles = user.getRoles().stream()
                 .map(Role::getName)
-                .collect(Collectors.toSet());*/
+                .collect(Collectors.toSet());
     }
 
     public Long getId() {
@@ -126,11 +127,11 @@ public class UserDTO {
         this.nameEng = nameEng;
     }
 
-    public Set<String> getRoles() {
+    public Set<ERole> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<ERole> roles) {
         this.roles = roles;
     }
 }
