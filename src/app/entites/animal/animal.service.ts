@@ -28,6 +28,9 @@ export class AnimalService {
         .get<Animal[]>(this.resourceUrl);
     }
 
+    /*
+    Корневрт даты
+    */
     protected convertDateFromServer(res: Animal): Animal {
         if(res) {
             res.birthday = res.birthday ? moment(res.birthday) : undefined;

@@ -34,8 +34,5 @@ export const animalRoute: Routes = [
     {
         path: 'animals',
         component: AnimalComponent,
-        data: {
-            pageTitle: 'Животные'
-        }
     }
 ];

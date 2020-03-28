@@ -5,7 +5,7 @@
     Добрый вечор, куда полетим со своей псиной?
     </h2>
 <div class="dropdown">
-  <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" on-click="check()">
+  <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" (click)="check()">
     <option *ngFor="let region of regions" [value]="region.id">
       {{ region.name }}
     </option>

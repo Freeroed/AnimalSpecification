@@ -12,6 +12,7 @@ import ru.vlsu.animalSpecification.security.jwt.JwtUtils;
 import ru.vlsu.animalSpecification.service.AnimalService;
 import ru.vlsu.animalSpecification.service.impl.AnimalServiceImpl;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -25,6 +26,9 @@ public class AnimalResource {
     LoggerFactory.getLogger(AnimalResource.class);
     @Autowired
     private AnimalService animalService;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
 
     @GetMapping("/animals/get")
@@ -41,7 +45,7 @@ public class AnimalResource {
     @GetMapping("/animal")
     public List<Animal> getAllAnimal(Authentication authentication){
        // log.debug(jwtUtils.getUserNameFromJwtToken(token));
-        log.debug(authentication.getName());
+          log.debug(authentication.getName());
         List<Animal> list = animalService.listAll();
         return list;
     }
@@ -52,7 +56,8 @@ public class AnimalResource {
    */
   @GetMapping("/animals")
     public ResponseEntity getAllAnimals(/*Authentication authentication*/){
-      // log.debug(jwtUtils.getUserNameFromJwtToken(token));
+    log.debug("User that getted from servler request : {} ", httpServletRequest.getRemoteUser());
+      //log.debug(jwtUtils.getUserNameFromJwtToken(token));
       //log.debug(authentication.getName());
         log.debug("REST request to get all animals");
       List<Animal> result = animalService.listAll();

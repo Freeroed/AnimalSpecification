@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface AnimalRepository extends CrudRepository<Animal, Long> {
 
-  public List<Animal> findAllByHuman(Long human);
+  List<Animal> findAllByHuman(Long human);
+
+  void deleteById(Long id);
 }

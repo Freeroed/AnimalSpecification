@@ -69,6 +69,7 @@ public class AnimalServiceImpl implements AnimalService {
 
   @Override
   public void delete(Long id) {
-
+    log.debug("Request to delete animal with : {}", id);
+    repo.deleteById(id);
   }
 }
