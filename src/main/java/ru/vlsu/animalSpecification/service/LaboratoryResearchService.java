@@ -30,12 +30,30 @@ public class LaboratoryResearchService {
     }
 
     public LaboratoryResearch get(Long id) {
-        return repo.findById(id).get();
+        log.debug("Find laboratory research by id: " + id);
+        LaboratoryResearch res = null;
+        try {
+          res = repo.findById(id).get();
+        } catch (Exception e){
+            log.debug("Error finding laboratory research by id: " + e);
+        }
+        return res;
     }
 
     public void delete(Long id) {
         log.debug("Delete laboratory research : " + id);
         repo.deleteById(id);
+    }
+
+    public List <LaboratoryResearch> getByAnimal(Long id) {
+      log.debug("Find laboratory research by animal id: " + id);
+      List <LaboratoryResearch> res = null;
+      try {
+        res = repo.getByAnimal(id);
+      } catch (Exception e){
+        log.debug("Error finding laboratory research by animal id: " + e);
+      }
+      return res;
     }
 
 }

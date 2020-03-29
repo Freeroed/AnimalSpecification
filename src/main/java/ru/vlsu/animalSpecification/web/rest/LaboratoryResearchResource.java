@@ -13,6 +13,7 @@ import ru.vlsu.animalSpecification.service.dto.AnimalDTO;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -64,5 +65,33 @@ public class LaboratoryResearchResource {
       log.debug("REST request to delete laboratory research with id : {}", id);
       lrService.delete(id);
       return ResponseEntity.noContent().build();
+    }
+
+    // Получить лабораторное исследование по id
+    @GetMapping("/laboratoryResearch/{id}")
+    public ResponseEntity getLabResearch(@PathVariable Long id) {
+      log.debug("REST request to get laboratory research with id : {}", id);
+      LaboratoryResearch lr = lrService.get(id);
+      if (lr != null) {
+        return ResponseEntity.ok()
+          .body(lr);
+      } else {
+        return ResponseEntity.notFound().build();
+      }
+    }
+
+    /* Получить все лабораторные исследования конкретного животного
+       @param id - Id животного
+    */
+    @GetMapping("/laboratoryResearchByAnimal/{id}")
+    public ResponseEntity getLabResearchByAnimal(@PathVariable Long id) {
+      log.debug("REST request to get laboratory research by animal with id : {}", id);
+      List <LaboratoryResearch> lr = lrService.getByAnimal(id);
+      if (lr != null) {
+        return ResponseEntity.ok()
+          .body(lr);
+      } else {
+        return ResponseEntity.notFound().build();
+      }
     }
 }
