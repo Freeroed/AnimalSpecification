@@ -62,31 +62,44 @@ public class User implements Serializable {
     @Column(name = "created_at")
     private Instant createdAd;
 
-
-
-    public String getEmail() {
-      return email;
+    public Long getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-      this.email = email;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Instant getCreatedAd() {
-      return createdAd;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCreatedAd(Instant createdAd) {
-      this.createdAd = createdAd;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getSurname() {
-          return surname;
-      }
+        return surname;
+    }
 
     public void setSurname(String surname) {
-        surname = surname;
+        this.surname = surname;
     }
 
     public String getName() {
@@ -126,7 +139,7 @@ public class User implements Serializable {
     }
 
     public void setInn(String inn) {
-        inn = inn;
+        this.inn = inn;
     }
 
     public String getSurnameEng() {
@@ -145,40 +158,23 @@ public class User implements Serializable {
         this.nameEng = nameEng;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Instant getCreatedAd() {
+        return createdAd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCreatedAd(Instant createdAd) {
+        this.createdAd = createdAd;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
-  @Override
+    @Override
   public String toString() {
     return "User{" +
       "id=" + id +

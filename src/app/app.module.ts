@@ -13,9 +13,13 @@ import { FormBuilder } from '@angular/forms';
 import { authInterceptorProviders } from './blocks/interceptor/auth.intercoptor';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/signin/login.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { authExpiredInterceptorProviders } from './blocks/interceptor/auth-expired.interceptor';
 import { DocsComponent } from './admin/docs/docs.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { SessionStorageService } from 'ngx-webstorage';
+
 
 
 
@@ -28,7 +32,11 @@ import { DocsComponent } from './admin/docs/docs.component';
     HttpClientModule,
     AnimalSpecificationHomeModule,
     RouterModule,
-    FormsModule      
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    NgxWebstorageModule.forRoot()
+        
   ],
   declarations: [
     AppComponent,
@@ -37,7 +45,7 @@ import { DocsComponent } from './admin/docs/docs.component';
     LoginComponent,
     DocsComponent
   ],
-  providers: [AnimalService, RegionService, FormBuilder, authInterceptorProviders, authExpiredInterceptorProviders],
+  providers: [AnimalService, RegionService, FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

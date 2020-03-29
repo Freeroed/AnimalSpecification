@@ -1,86 +1,214 @@
-<div class="col-md-12">
-    <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            minlength="3"
-            maxlength="20"
-            #username="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">Username is required</div>
-            <div *ngIf="username.errors.minlength">
-              Username must be at least 3 characters
-            </div>
-            <div *ngIf="username.errors.maxlength">
-              Username must be at most 20 characters
-            </div>
-          </div>
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" [formGroup]="editForm">
+      <h2>Регистрация нового пользователя</h2>
+      <div class="form-group">
+        <label>
+          Логин
+        </label>
+        <input type="text" class="form-control" id="userName" name="userName"
+        formControlName="userName" required/>
+        <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('userName')?.errors?.minlength">
+                        Логин должен быть длиннее 6 символов
+                        </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('userName')?.errors?.maxlength" >
+                        Логин должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('userName')!.dirty || editForm.get('userName')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">
-              Email must be a valid email address
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
-        </div>
-  
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
-        </div>
-      </form>
-  
-      <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
       </div>
+
+      <div class="form-group">
+        <label>
+          E-mail
+        </label>
+        <input type="text" class="form-control" id="email" name="email"
+        formControlName="email" required/>
+        <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('userName')?.errors && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                        Введённые данные не являются e-mail адресом
+                        </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>
+          Пароль
+        </label>
+        <input type="password" class="form-control" id="password" name="password"
+        formControlName="password" required/>
+        <div *ngIf="editForm.get('password')!.invalid && (editForm.get('password')!.dirty || editForm.get('password')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')?.errors?.minlength">
+                        Пароль должен быть длиннее 6 символов
+                        </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')?.errors?.maxlength" >
+                        Пароль должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('password')!.dirty || editForm.get('password')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Фамилия
+        </label>
+        <input type="text" class="form-control" id="surname" name="surname"
+        formControlName="surname" required/>
+        <div *ngIf="editForm.get('surname')!.invalid && (editForm.get('surname')!.dirty || editForm.get('surname')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('surname')?.errors?.maxlength" >
+                        Фамилия должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('surname')!.dirty || editForm.get('surname')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>
+          Фамилия на английском
+        </label>
+        <input type="text" class="form-control" id="surnameEng" name="surnameEng"
+        formControlName="surnameEng" required/>
+        <div *ngIf="editForm.get('surnameEng')!.invalid && (editForm.get('surnameEng')!.dirty || editForm.get('surnameEng')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('surnameEng')?.errors?.maxlength" >
+                        Фамилия должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('surnameEng')!.dirty || editForm.get('surnameEng')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Имя
+        </label>
+        <input type="text" class="form-control" id="name" name="name"
+        formControlName="name" required/>
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.maxlength" >
+                        Имя должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')!.dirty || editForm.get('name')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Имя на английском
+        </label>
+        <input type="text" class="form-control" id="nameEng" name="nameEng"
+        formControlName="nameEng" required/>
+        <div *ngIf="editForm.get('nameEng')!.invalid && (editForm.get('nameEng')!.dirty || editForm.get('nameEng')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('nameEng')?.errors?.maxlength" >
+                        Имя должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('nameEng')!.dirty || editForm.get('nameEng')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Отчество
+        </label>
+        <input type="text" class="form-control" id="patronymic" name="patronymic"
+        formControlName="patronymic" required/>
+        <div *ngIf="editForm.get('patronymic')!.invalid && (editForm.get('patronymic')!.dirty || editForm.get('patronymic')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('patronymic')?.errors?.maxlength" >
+                        Отчество должен быть не  длиннее 50 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('patronymic')!.dirty || editForm.get('patronymic')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Адрес проживания
+        </label>
+        <input type="text" class="form-control" id="address" name="address"
+        formControlName="address" required/>
+        <div *ngIf="editForm.get('address')!.invalid && (editForm.get('address')!.dirty || editForm.get('address')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('address')?.errors?.maxlength" >
+                        Адрес должен быть не  длиннее 255 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('address')!.dirty || editForm.get('address')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          Номер телефона
+        </label>
+        <input type="text" class="form-control" id="phone" name="phone"
+        formControlName="phone" required/>
+        <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')?.errors?.maxlength" >
+                        Номер телефона должен быть не  длиннее 13 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')?.errors?.minlength" >
+                        Номер телефона должен быть не  короче 11 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('phone')!.dirty || editForm.get('phone')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div class="form-group" >
+        <label>
+          ИНН
+        </label>
+        <input type="text" class="form-control" id="inn" name="inn"
+        formControlName="inn" required/>
+        <div *ngIf="editForm.get('inn')!.invalid && (editForm.get('inn')!.dirty || editForm.get('inn')!.touched)">
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('inn')?.errors?.maxlength" >
+                        ИНН должен быть не  длиннее 20 символов
+          </small>
+          <small class="form-text text-danger"
+                               *ngIf="editForm.get('inn')!.dirty || editForm.get('inn')!.touched" >
+                      Это поле обязательно к заполнению
+          </small>
+        </div>
+      </div>
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" >
+            &nbsp;<span>Отменить</span>
+        </button>
+        &nbsp;
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="register()">
+            &nbsp;<span>Зарегистрироваться</span>
+        </button>
     </div>
+    </form>
   </div>
+</div>

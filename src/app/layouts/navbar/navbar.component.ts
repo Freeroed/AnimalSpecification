@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { LoginModalService } from 'src/app/account/signin/login-modal.service';
 
 @Component( {
     selector: 'navbar',
@@ -6,5 +8,18 @@ import { Component, Input } from '@angular/core';
 })
 
 export class NavbarComponent {
+
+    constructor(
+        private authService: AuthService,
+        private loginModalService: LoginModalService
+    ) {}
+
+    login() : void {
+        this.loginModalService.open();
+    }
+
+    logout(): void {
+        this.authService.logout();
+    }
 
 }
