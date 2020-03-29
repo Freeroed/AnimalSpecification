@@ -34,6 +34,7 @@ public class LaboratoryResearchService {
     }
 
     public void delete(Long id) {
+        log.debug("Delete laboratory research : " + id);
         repo.deleteById(id);
     }
 

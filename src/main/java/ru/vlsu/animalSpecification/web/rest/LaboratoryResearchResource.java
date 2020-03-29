@@ -57,4 +57,12 @@ public class LaboratoryResearchResource {
         return ResponseEntity.ok().body(lr);
       }
     }
+
+    // Удалить по id результат лабораторного исследования
+    @DeleteMapping("/laboratoryResearch/{id}")
+    public ResponseEntity deleteLabResearch(@PathVariable Long id) {
+      log.debug("REST request to delete laboratory research with id : {}", id);
+      lrService.delete(id);
+      return ResponseEntity.noContent().build();
+    }
 }
