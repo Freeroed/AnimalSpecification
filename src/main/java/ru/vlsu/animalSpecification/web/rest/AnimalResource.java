@@ -19,8 +19,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class AnimalResource {
 
-  private static final Logger log =
-    LoggerFactory.getLogger(AnimalResource.class);
+    private static final Logger log = LoggerFactory.getLogger(AnimalResource.class);
     @Autowired
     private AnimalService animalService;
 
