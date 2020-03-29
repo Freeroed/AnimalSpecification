@@ -16,7 +16,7 @@ public class DestinationCountryResource {
     private DestinationCountryService dcService;
 
     @GetMapping("/countries")
-    public List<DestinationCountry> getAllRegions() {
+    public List<DestinationCountry> getAllCountries() {
         return  dcService.listAll();
     }
 }
