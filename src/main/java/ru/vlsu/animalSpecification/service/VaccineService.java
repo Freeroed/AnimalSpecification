@@ -49,7 +49,7 @@ public class VaccineService {
       log.debug("Find laboratory research by animal id: " + id);
       List <Vaccine> res = null;
       try {
-        res = repo.getByAnimal(id);
+        res = repo.findAllByAnimal(id);
       } catch (Exception e){
         log.debug("Error finding vaccine by animal with id. Exc: " + e);
       }

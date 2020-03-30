@@ -5,15 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.domain.LaboratoryResearch;
 import ru.vlsu.animalSpecification.service.LaboratoryResearchService;
-import ru.vlsu.animalSpecification.service.dto.AnimalDTO;
+
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
