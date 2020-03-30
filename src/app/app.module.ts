@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'; 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +13,16 @@ import { FormBuilder } from '@angular/forms';
 import { authInterceptorProviders } from './blocks/interceptor/auth.intercoptor';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/signin/login.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { authExpiredInterceptorProviders } from './blocks/interceptor/auth-expired.interceptor';
 import { DocsComponent } from './admin/docs/docs.component';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { SessionStorageService } from 'ngx-webstorage';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AnimalSpecificatonAccountModule } from './account/account.module';
 
 
 @NgModule({
@@ -28,16 +34,20 @@ import { DocsComponent } from './admin/docs/docs.component';
     HttpClientModule,
     AnimalSpecificationHomeModule,
     RouterModule,
-    FormsModule      
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+    NgxWebstorageModule.forRoot(),
+    NgbModule,
+    AnimalSpecificatonAccountModule
   ],
   declarations: [
     AppComponent,
     NavbarComponent,
-    RegisterComponent,
-    LoginComponent,
-    DocsComponent
+    DocsComponent,
+    FooterComponent
   ],
-  providers: [AnimalService, RegionService, FormBuilder, authInterceptorProviders, authExpiredInterceptorProviders],
+  providers: [AnimalService, RegionService, FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

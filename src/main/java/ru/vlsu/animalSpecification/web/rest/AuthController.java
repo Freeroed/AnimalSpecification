@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.Role;
 import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.ERole;
+import ru.vlsu.animalSpecification.model.jackson.auth.AccountResponse;
 import ru.vlsu.animalSpecification.model.jackson.auth.JwtResponse;
 import ru.vlsu.animalSpecification.model.jackson.auth.LoginRequest;
 import ru.vlsu.animalSpecification.model.jackson.auth.MessageResponse;
@@ -24,6 +25,8 @@ import ru.vlsu.animalSpecification.service.dto.UserDTO;
 import ru.vlsu.animalSpecification.service.impl.UserDetailsImpl;
 import ru.vlsu.animalSpecification.service.mapper.UserMapper;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -71,15 +74,15 @@ public class AuthController {
     List<String> roles = userDetails.getAuthorities().stream()
       .map(item -> item.getAuthority())
       .collect(Collectors.toList());
-    return ResponseEntity.ok(new JwtResponse(jwt,
-                                              userDetails.getId(),
+    return ResponseEntity.ok(new JwtResponse(jwt,new AccountResponse(
                                               userDetails.getUsername(),
                                               userDetails.getEmail(),
-                                              roles));
+                                              roles)));
   }
 
   @PostMapping("/signup")
   public ResponseEntity registerUser(@RequestBody User user) {
+    log.debug("REST request to register user : {}", user);
     //TODO log
     if(userRepository.existsByUserName(user.getUserName())) {
       return ResponseEntity.badRequest().body(new MessageResponse("ERROR: username is already exist"));
@@ -90,10 +93,12 @@ public class AuthController {
     }
 
     Set<Role> roles = new HashSet<>();
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
     roles.add(userRole);
     user.setRoles(roles);
-    UserDTO result = userMapper.userToUserDTO(userRepository.save(user));
+    user.setCreatedAd(Instant.now());
+    userRepository.save(user);
     //TODO return new user
     return ResponseEntity.ok(new MessageResponse("User registered successfully"));
   }
