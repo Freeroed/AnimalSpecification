@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class VaccineResource {
 
-    private static final Logger log = LoggerFactory.getLogger(Vaccine.class);
+    private static final Logger log = LoggerFactory.getLogger(VaccineResource.class);
 
     @Autowired
     private VaccineService vaccineService;

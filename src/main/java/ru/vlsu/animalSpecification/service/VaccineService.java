@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 public class VaccineService {
 
-    private static final Logger log = LoggerFactory.getLogger(Vaccine.class);
+    private static final Logger log = LoggerFactory.getLogger(VaccineService.class);
 
     @Autowired
     private VaccineRepository repo;
