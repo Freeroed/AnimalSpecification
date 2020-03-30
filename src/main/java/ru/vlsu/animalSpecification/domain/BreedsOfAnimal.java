@@ -16,6 +16,9 @@ public class BreedsOfAnimal implements Serializable {
     @Column (name = "breed_name_ENG")
     private String breedNameENG; // название породы на английском
 
+    @Column (name = "animal_type")
+    private Long animalType; // id типа животного, к которому относится данная порода
+
     /* Getters and Setters */
 
     public Long getId() {
@@ -40,5 +43,13 @@ public class BreedsOfAnimal implements Serializable {
 
     public void setBreedNameENG(String breedNameENG) {
         this.breedNameENG = breedNameENG;
+    }
+
+    public Long getAnimalType() {
+      return animalType;
+    }
+
+    public void setAnimalType(Long animalType) {
+      this.animalType = animalType;
     }
 }

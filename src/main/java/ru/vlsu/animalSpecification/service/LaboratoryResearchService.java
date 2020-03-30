@@ -49,9 +49,9 @@ public class LaboratoryResearchService {
       log.debug("Find laboratory research by animal id: " + id);
       List <LaboratoryResearch> res = null;
       try {
-        res = repo.getByAnimal(id);
+        res = repo.getAllByAnimal(id);
       } catch (Exception e){
-        log.debug("Error finding laboratory research by animal id: " + e);
+        log.debug("Error finding laboratory research by animal with id. Exc: : " + e);
       }
       return res;
     }

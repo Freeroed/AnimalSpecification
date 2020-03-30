@@ -1,5 +1,7 @@
 package ru.vlsu.animalSpecification.web.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +15,20 @@ import java.util.List;
 @RequestMapping("/api")
 public class RegionResource {
 
+    private static final Logger log = LoggerFactory.getLogger(RegionResource.class);
+
     @Autowired
     private RegionService regionService;
 
     @GetMapping("/regions")
     public List<Region> getAllRegions() {
-        return  regionService.listAll();
+      log.debug("REST request to get all regions");
+      return  regionService.listAll();
     }
 
-    @GetMapping("/search")
+    /*@GetMapping("/search")
     List<Region> searchRegions() {
         return regionService.search("Евросоюз");
-    }
+    }*/
 
 }

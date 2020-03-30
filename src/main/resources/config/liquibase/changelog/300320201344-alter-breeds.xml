@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="300320201344-1">
+
+    <comment>Add scientific_name_ENG and animal_type in table breeds_of_animal</comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+        ALTER TABLE breeds_of_animal ADD scientific_name_ENG VARCHAR(250) NULL;
+        ALTER TABLE breeds_of_animal ADD animal_type BIGINT NULL;
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

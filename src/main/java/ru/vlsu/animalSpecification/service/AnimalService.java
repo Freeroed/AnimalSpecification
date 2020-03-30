@@ -21,4 +21,5 @@ public interface AnimalService {
   List<AnimalDTO> listAll();
 
   List<AnimalDTO> findByUser(Long userId);
+
 }
