@@ -1,7 +1,11 @@
 <div class="row justify-content-center">
-  <div class="col-8">
+  <div class="card my-5">
+  <div class="card-body">
     <form name="editForm" role="form" [formGroup]="editForm">
       <h2>Регистрация нового пользователя</h2>
+      <div class="alert alert-danger" *ngIf="isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
       <div class="form-group">
         <label>
           Логин
@@ -28,11 +32,11 @@
         <label>
           E-mail
         </label>
-        <input type="text" class="form-control" id="email" name="email"
+        <input type="email" class="form-control" id="email" name="email"
         formControlName="email" required/>
         <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
           <small class="form-text text-danger"
-                               *ngIf="editForm.get('userName')?.errors && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+                               *ngIf="editForm.get('email')?.errors && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
                         Введённые данные не являются e-mail адресом
                         </small>
         </div>
@@ -201,14 +205,18 @@
         </div>
       </div>
       <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" >
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
             &nbsp;<span>Отменить</span>
         </button>
         &nbsp;
-        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="register()">
+        <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="register()" placement="top" ngbTooltip="Tooltip on top">
             &nbsp;<span>Зарегистрироваться</span>
         </button>
+      </span>
     </div>
+    
     </form>
   </div>
+</div>
 </div>

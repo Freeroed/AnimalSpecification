@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.Role;
 import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.ERole;
+import ru.vlsu.animalSpecification.model.jackson.auth.AccountResponse;
 import ru.vlsu.animalSpecification.model.jackson.auth.JwtResponse;
 import ru.vlsu.animalSpecification.model.jackson.auth.LoginRequest;
 import ru.vlsu.animalSpecification.model.jackson.auth.MessageResponse;
@@ -73,11 +74,10 @@ public class AuthController {
     List<String> roles = userDetails.getAuthorities().stream()
       .map(item -> item.getAuthority())
       .collect(Collectors.toList());
-    return ResponseEntity.ok(new JwtResponse(jwt,
-                                              userDetails.getId(),
+    return ResponseEntity.ok(new JwtResponse(jwt,new AccountResponse(
                                               userDetails.getUsername(),
                                               userDetails.getEmail(),
-                                              roles));
+                                              roles)));
   }
 
   @PostMapping("/signup")

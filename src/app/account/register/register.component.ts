@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(private authService: AuthService, private fb: FormBuilder) {}
 
-    editForm = this. fb.group ({
+    editForm = this.fb.group ({
         id:[],
         userName: ['',[Validators.maxLength(50), Validators.minLength(6)]],
         password: ['',[Validators.maxLength(50),Validators.minLength(6)]],
@@ -76,7 +76,13 @@ export class RegisterComponent implements OnInit {
         result.subscribe(
             //TODO check errors
             () => window.history.back(),
-            err => this.errorMessage = err.console.error.message
+            message => {this.errorMessage = message.error.message,
+                window.scrollTo(0,0);
+            this.isSignUpFailed=true;}
         )
+    }
+
+    previousState(): void {
+        window.history.back();
     }
 }

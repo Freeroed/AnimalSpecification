@@ -26,4 +26,8 @@ export class AnimalComponent implements OnInit {
             this.animals = data;
         });
     }
+
+    previousState(): void {
+        window.history.back();
+    }
 }

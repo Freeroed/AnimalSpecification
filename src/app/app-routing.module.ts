@@ -4,6 +4,7 @@ import { AnimalComponent } from './entites/animal/animal.component';
 import { LoginComponent } from './account/signin/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { DocsComponent } from './admin/docs/docs.component';
+import { UserRouteAccessService } from './core/auth/user-route-access-service';
 
 
 const routes: Routes = [];
@@ -12,19 +13,20 @@ const routes: Routes = [];
   imports: [RouterModule.forRoot([
     {
       path: 'animals',
-      component: AnimalComponent
+      component: AnimalComponent,
+      data : {
+        autorities: ['ROLE_USER', 'ROLE_ADMIN']
+      },
+      canActivate: [UserRouteAccessService]
     }, 
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'singup',
-      component: RegisterComponent
-    },
+    
     {
       path: 'admin/docs',
-      component: DocsComponent
+      component: DocsComponent,
+      data : {
+        autorities: ['ROLE_ADMIN']
+      },
+      canActivate: [UserRouteAccessService]
     }
   ])],
   exports: [RouterModule]

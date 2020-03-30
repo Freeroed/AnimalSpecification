@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { LoginModalService } from 'src/app/account/signin/login-modal.service';
 
 @Component( {
     selector: 'navbar',
-    templateUrl: './navbar.component.html',
+    templateUrl: './navbar.component.html'
 })
 
 export class NavbarComponent {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { serialize } from 'v8';
+import { IAccount } from 'src/app/shared/model/account.model';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -23,12 +24,12 @@ export class TokenStorageService {
 
     }
 
-    public saveUser(user) {
+    public saveUser(user: IAccount) {
         window.sessionStorage.removeItem(USER_KEY);
         window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
     }
 
-    public getUser() {
+    public getUser(): IAccount{
         return JSON.parse(sessionStorage.getItem(USER_KEY));
     }
 

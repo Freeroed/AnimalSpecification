@@ -8,7 +8,6 @@ export class StateStorageService {
   constructor(private $sessionStorage: LocalStorageService) {}
 
   storeUrl(url: string): void {
-    console.log(url);
     this.$sessionStorage.store(this.previousUrlKey, url);
   }
 
