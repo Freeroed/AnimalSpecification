@@ -29,6 +29,7 @@
     <include file="config/liquibase/changelog/120320201539-create-type-table.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/160320200951-create-all-tables.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/160320201249-create-rsn-division.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/300320201344-alter-breeds.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
