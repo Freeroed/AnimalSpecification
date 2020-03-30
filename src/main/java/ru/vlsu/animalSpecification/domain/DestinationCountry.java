@@ -20,13 +20,13 @@ public class DestinationCountry implements Serializable {
     private long region; // регион Region.class
 
     @Column (name = "ISO_code")
-    private String ISO_code; // https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    private String ISOcode; // https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
     @Column (name = "region_of_the_country")
-    private String region_of_the_country; // регион внутри страны (русское)
+    private String regionOfTheCountry; // регион внутри страны (русское)
 
     @Column (name = "region_of_the_country_ENG")
-    private String region_of_the_country_ENG; // регион внутри страны (английское)
+    private String regionOfTheCountryENG; // регион внутри страны (английское)
 
     public DestinationCountry() { }
 
@@ -64,27 +64,27 @@ public class DestinationCountry implements Serializable {
         this.region = region;
     }
 
-    public String getISO_code() {
-        return ISO_code;
+    public String getISOcode() {
+      return ISOcode;
     }
 
-    public void setISO_code(String ISO_code) {
-        this.ISO_code = ISO_code;
+    public void setISOcode(String ISOcode) {
+      this.ISOcode = ISOcode;
     }
 
-    public String getRegion_of_the_country() {
-        return region_of_the_country;
+    public String getRegionOfTheCountry() {
+      return regionOfTheCountry;
     }
 
-    public void setRegion_of_the_country(String region_of_the_country) {
-        this.region_of_the_country = region_of_the_country;
+    public void setRegionOfTheCountry(String regionOfTheCountry) {
+      this.regionOfTheCountry = regionOfTheCountry;
     }
 
-    public String getRegion_of_the_country_ENG() {
-        return region_of_the_country_ENG;
+    public String getRegionOfTheCountryENG() {
+      return regionOfTheCountryENG;
     }
 
-    public void setRegion_of_the_country_ENG(String region_of_the_country_ENG) {
-        this.region_of_the_country_ENG = region_of_the_country_ENG;
+    public void setRegionOfTheCountryENG(String regionOfTheCountryENG) {
+      this.regionOfTheCountryENG = regionOfTheCountryENG;
     }
 }
