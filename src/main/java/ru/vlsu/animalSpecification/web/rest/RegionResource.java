@@ -21,9 +21,9 @@ public class RegionResource {
         return  regionService.listAll();
     }
 
-    @GetMapping("/search")
+    /*@GetMapping("/search")
     List<Region> searchRegions() {
         return regionService.search("Евросоюз");
-    }
+    }*/
 
 }
