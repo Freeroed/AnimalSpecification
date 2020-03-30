@@ -23,8 +23,10 @@ public class DestinationCountryResource {
     @Autowired
     private DestinationCountryService dcService;
 
+    // Можно удалить (скорее всего не будет использоваться)
     @GetMapping("/countries")
     public List<DestinationCountry> getAllCountries() {
+        log.debug("REST request to get all countries");
         return  dcService.listAll();
     }
 
