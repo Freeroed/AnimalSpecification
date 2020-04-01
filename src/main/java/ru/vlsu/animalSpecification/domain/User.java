@@ -1,13 +1,9 @@
 package ru.vlsu.animalSpecification.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import ru.vlsu.animalSpecification.domain.emun.Status;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

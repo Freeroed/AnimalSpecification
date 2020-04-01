@@ -37,7 +37,7 @@ public class AnimalResource {
    * {@code GET /animals} : get all animals
    * @return the {@link ResponseEntity} with status {@code 200(OK)} and the list of animals in body
    */
-  @GetMapping("/animals")
+    @GetMapping("/animals")
     public ResponseEntity getAllAnimals(/*Authentication authentication*/){
     log.debug("User that getted from servler request : {} ", httpServletRequest.getRemoteUser());
       //log.debug(jwtUtils.getUserNameFromJwtToken(token));
@@ -45,7 +45,7 @@ public class AnimalResource {
         log.debug("REST request to get all animals");
       List<AnimalDTO> result = animalService.listAll();
       return ResponseEntity.ok().body(result);
-  }
+    }
 
 
   /**

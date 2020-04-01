@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "Request")
@@ -55,6 +56,7 @@ public class Request {
 
     @Column (name = "certificate_1_form_number")
     private String certificate1FormNumber;  // Уникальный идентификатор ВСД
+
 
     /*
     Getters and Setters

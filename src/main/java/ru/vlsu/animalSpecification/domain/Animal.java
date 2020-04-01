@@ -43,7 +43,7 @@ public class Animal implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "human", nullable = false)
-    private User master;
+    private User master; //Хозяин животного
 
     @Column (name = "TNVED_code")
     private String tnvedCode; // код ТНВЭД

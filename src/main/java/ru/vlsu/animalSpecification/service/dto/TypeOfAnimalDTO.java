@@ -2,11 +2,6 @@ package ru.vlsu.animalSpecification.service.dto;
 
 import ru.vlsu.animalSpecification.domain.TypeOfAnimal;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 public class TypeOfAnimalDTO {
 
   private Long id;

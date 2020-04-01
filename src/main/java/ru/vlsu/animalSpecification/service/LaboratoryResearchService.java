@@ -21,7 +21,7 @@ public class LaboratoryResearchService {
     private LaboratoryResearchRepository repo;
 
     public void save(LaboratoryResearch lr) {
-        log.debug("Save laboratory research : " + lr);
+        log.debug("Save laboratory research : {}", lr);
         repo.save(lr);
     }
 
@@ -30,28 +30,28 @@ public class LaboratoryResearchService {
     }
 
     public LaboratoryResearch get(Long id) {
-        log.debug("Find laboratory research by id: " + id);
+        log.debug("Find laboratory research by id : {}", id);
         LaboratoryResearch res = null;
         try {
           res = repo.findById(id).get();
         } catch (Exception e){
-            log.debug("Error finding laboratory research by id: " + e);
+            log.debug("Error finding laboratory research by id : {}", e.getMessage());
         }
         return res;
     }
 
     public void delete(Long id) {
-        log.debug("Delete laboratory research : " + id);
+        log.debug("Delete laboratory research : {} ", id);
         repo.deleteById(id);
     }
 
     public List <LaboratoryResearch> getByAnimal(Long id) {
-      log.debug("Find laboratory research by animal id: " + id);
+      log.debug("Find laboratory research by animal id: {} ", id);
       List <LaboratoryResearch> res = null;
       try {
         res = repo.getAllByAnimal(id);
       } catch (Exception e){
-        log.debug("Error finding laboratory research by animal with id. Exc: : " + e);
+        log.debug("Error finding laboratory research by animal with id. Exc: {} ", e.getMessage());
       }
       return res;
     }

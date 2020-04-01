@@ -11,8 +11,6 @@ import { RegionService } from './entites/region/region.service';
 import { RouterModule } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { authInterceptorProviders } from './blocks/interceptor/auth.intercoptor';
-import { RegisterComponent } from './account/register/register.component';
-import { LoginComponent } from './account/signin/login.component';
 import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { authExpiredInterceptorProviders } from './blocks/interceptor/auth-expired.interceptor';
 import { DocsComponent } from './admin/docs/docs.component';
@@ -20,7 +18,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { SessionStorageService } from 'ngx-webstorage';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AnimalSpecificatonAccountModule } from './account/account.module';
 
