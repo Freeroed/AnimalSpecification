@@ -2,6 +2,8 @@ package ru.vlsu.animalSpecification.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,9 @@ import ru.vlsu.animalSpecification.repository.RegionRepository;
 @Service
 @Transactional
 public class RegionService {
+
+    private static final Logger log = LoggerFactory.getLogger(RegionService.class);
+
     @Autowired
     private RegionRepository repo;
 
@@ -19,6 +24,7 @@ public class RegionService {
     }
 
     public List<Region> listAll() {
+        log.debug("Get all regions");
         return (List<Region>) repo.findAll();
     }
 

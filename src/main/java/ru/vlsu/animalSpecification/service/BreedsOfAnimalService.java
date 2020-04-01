@@ -30,7 +30,7 @@ public class BreedsOfAnimalService {
       try {
         res = repo.getAllByAnimalType(id);
       } catch (Exception e){
-        log.debug("Error finding brees by animal type with id. Exc: " + e);
+        log.debug("Error finding brees by animal type with id. Exc: " + e.getMessage());
       }
       return res;
     }
