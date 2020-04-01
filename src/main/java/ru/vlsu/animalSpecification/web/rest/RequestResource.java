@@ -42,4 +42,19 @@ public class RequestResource {
           .body(request);
       }
     }
+
+    // Редактировать заявку
+    @PutMapping("/request")
+    public ResponseEntity updateRequest(@RequestBody Request request) {
+
+      log.debug("REST request to update request with id : {} ", request.getId());
+
+      if (request.getId() == null) {
+        return ResponseEntity.badRequest().build();
+      }
+      else {
+        requestService.save(request);
+        return ResponseEntity.ok().body(request);
+      }
+    }
 }

@@ -20,7 +20,7 @@ public class RequestService {
     private RequestRepository repo;
 
     public void save(Request req) {
-        log.debug("Save request: " + req);
+        log.debug("Save request: {}", req);
         repo.save(req);
     }
 

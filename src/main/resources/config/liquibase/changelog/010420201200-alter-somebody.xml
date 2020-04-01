@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="010420201200-1">
+
+    <comment>Alter tables Request and destination_country </comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+        ALTER TABLE Request DROP animal;
+        ALTER TABLE destination_country DROP region_of_the_country;
+        ALTER TABLE destination_country DROP region_of_the_country_ENG;
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

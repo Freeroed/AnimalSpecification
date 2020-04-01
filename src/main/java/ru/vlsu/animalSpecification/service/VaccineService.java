@@ -21,7 +21,7 @@ public class VaccineService {
     private VaccineRepository repo;
 
     public void save(Vaccine vac) {
-        log.debug("Save vaccine: " + vac);
+        log.debug("Save vaccine: {}", vac);
         repo.save(vac);
     }
 
