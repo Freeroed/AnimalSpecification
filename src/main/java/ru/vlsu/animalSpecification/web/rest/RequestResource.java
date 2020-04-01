@@ -57,4 +57,25 @@ public class RequestResource {
         return ResponseEntity.ok().body(request);
       }
     }
+
+    // Удалить заявку
+    @DeleteMapping("/request/{id}")
+    public ResponseEntity deleteRequest(@PathVariable Long id) {
+      log.debug("REST request to delete request with id : {}", id);
+      requestService.delete(id);
+      return ResponseEntity.noContent().build();
+    }
+
+    // Получить заявку по id
+    @GetMapping("/request/{id}")
+    public ResponseEntity getRequestById(@PathVariable Long id) {
+      log.debug("REST request to get request with id : {}", id);
+      Request res = requestService.get(id);
+      if (res != null) {
+        return ResponseEntity.ok()
+          .body(res);
+      } else {
+        return ResponseEntity.notFound().build();
+      }
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.Request;
+import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
 
 import java.util.List;
@@ -29,10 +30,18 @@ public class RequestService {
     }
 
     public Request get(Long id) {
-        return repo.findById(id).get();
+        log.debug("Find request by id: {}", id);
+        Request res = null;
+        try {
+          res = repo.findById(id).get();
+        } catch (Exception e){
+          log.debug("Error finding vaccine by id: " + e.getMessage());
+        }
+        return res;
     }
 
     public void delete(Long id) {
+        log.debug("Delete request with id: {}", id);
         repo.deleteById(id);
     }
 
