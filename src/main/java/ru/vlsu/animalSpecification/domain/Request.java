@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -57,6 +58,10 @@ public class Request {
     @Column (name = "certificate_1_form_number")
     private String certificate1FormNumber;  // Уникальный идентификатор ВСД
 
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "AnimalsInRequest", joinColumns = @JoinColumn(name = "request_id"),
+      inverseJoinColumns = @JoinColumn(name = "animal_id"))
+    private Set<Animal> animals = new HashSet<>();
 
     /*
     Getters and Setters
@@ -188,5 +193,13 @@ public class Request {
 
     public void setCertificate1FormNumber(String certificate1FormNumber) {
         this.certificate1FormNumber = certificate1FormNumber;
+    }
+
+    public Set<Animal> getAnimals() {
+      return animals;
+    }
+
+    public void setAnimals(Set<Animal> animals) {
+      this.animals = animals;
     }
 }
