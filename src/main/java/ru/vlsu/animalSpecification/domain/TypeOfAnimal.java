@@ -52,4 +52,14 @@ public class TypeOfAnimal implements Serializable {
     public void setScientificNameENG(String scientificNameENG) {
         this.scientificNameENG = scientificNameENG;
     }
+
+    @Override
+    public String toString() {
+      return "TypeOfAnimal{" +
+        "id=" + id +
+        ", typeName='" + typeName + '\'' +
+        ", typeNameENG='" + typeNameENG + '\'' +
+        ", scientificNameENG='" + scientificNameENG + '\'' +
+        '}';
+    }
 }

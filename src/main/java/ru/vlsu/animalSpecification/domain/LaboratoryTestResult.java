@@ -45,4 +45,13 @@ public class LaboratoryTestResult implements Serializable {
     public void setResultNameENG(String resultNameENG) {
         this.resultNameENG = resultNameENG;
     }
+
+    @Override
+    public String toString() {
+      return "LaboratoryTestResult{" +
+        "id=" + id +
+        ", resultName='" + resultName + '\'' +
+        ", resultNameENG='" + resultNameENG + '\'' +
+        '}';
+    }
 }

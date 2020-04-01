@@ -66,4 +66,14 @@ public class DestinationCountry implements Serializable {
       this.ISOcode = ISOcode;
     }
 
+    @Override
+    public String toString() {
+      return "DestinationCountry{" +
+        "id=" + id +
+        ", countryName='" + countryName + '\'' +
+        ", countryNameENG='" + countryNameENG + '\'' +
+        ", region=" + region +
+        ", ISOcode='" + ISOcode + '\'' +
+        '}';
+    }
 }

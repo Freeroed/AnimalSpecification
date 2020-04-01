@@ -42,4 +42,13 @@ public class RosselkhoznadzorDivision implements Serializable {
     public void setNameENG(String nameENG) {
         this.nameENG = nameENG;
     }
+
+    @Override
+    public String toString() {
+      return "RosselkhoznadzorDivision{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", nameENG='" + nameENG + '\'' +
+        '}';
+    }
 }

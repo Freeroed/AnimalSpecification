@@ -192,25 +192,25 @@ public class Request {
       this.animals = animals;
     }
 
-  @Override
-  public String toString() {
-    return "Request{" +
-      "id=" + id +
-      ", recipient=" + recipient +
-      ", destinationCountry=" + destinationCountry +
-      ", borderCrossingPoint=" + borderCrossingPoint +
-      ", transport=" + transport +
-      ", vehicleNumber='" + vehicleNumber + '\'' +
-      ", veterinarian=" + veterinarian +
-      ", transactionType='" + transactionType + '\'' +
-      ", wayOfStorageDuringTransportation='" + wayOfStorageDuringTransportation + '\'' +
-      ", quarantineLocation='" + quarantineLocation + '\'' +
-      ", numberOfDaysToQuarantine=" + numberOfDaysToQuarantine +
-      ", inspectorOfRosselkhoznadzor=" + inspectorOfRosselkhoznadzor +
-      ", postalCode='" + postalCode + '\'' +
-      ", dateOfDeparture=" + dateOfDeparture +
-      ", certificate1FormNumber='" + certificate1FormNumber + '\'' +
-      ", animals=" + animals +
-      '}';
-  }
+    @Override
+    public String toString() {
+      return "Request{" +
+        "id=" + id +
+        ", recipient=" + recipient +
+        ", destinationCountry=" + destinationCountry +
+        ", borderCrossingPoint=" + borderCrossingPoint +
+        ", transport=" + transport +
+        ", vehicleNumber='" + vehicleNumber + '\'' +
+        ", veterinarian=" + veterinarian +
+        ", transactionType='" + transactionType + '\'' +
+        ", wayOfStorageDuringTransportation='" + wayOfStorageDuringTransportation + '\'' +
+        ", quarantineLocation='" + quarantineLocation + '\'' +
+        ", numberOfDaysToQuarantine=" + numberOfDaysToQuarantine +
+        ", inspectorOfRosselkhoznadzor=" + inspectorOfRosselkhoznadzor +
+        ", postalCode='" + postalCode + '\'' +
+        ", dateOfDeparture=" + dateOfDeparture +
+        ", certificate1FormNumber='" + certificate1FormNumber + '\'' +
+        ", animals=" + animals +
+        '}';
+    }
 }
