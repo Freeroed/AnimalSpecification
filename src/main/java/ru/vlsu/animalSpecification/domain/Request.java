@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -11,14 +12,11 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "animal")
-    private long animal; // список жвотных в заявке (ну типа)
-
     @Column (name = "recipient")
     private long recipient; // получатель - id человека
 
     @Column (name = "destination_country")
-    private long destinationCountry; // страна назначения (id)
+    private long destinationCountry; // ГОРОД назначения (id)
 
     @Column (name = "border_crossing_point")
     private long borderCrossingPoint; // пункт пересечения границы (его id)
@@ -57,6 +55,10 @@ public class Request {
     @Column (name = "certificate_1_form_number")
     private String certificate1FormNumber;  // Уникальный идентификатор ВСД
 
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "AnimalsInRequest", joinColumns = @JoinColumn(name = "request_id"),
+      inverseJoinColumns = @JoinColumn(name = "animal_id"))
+    private Set<Animal> animals = new HashSet<>();
 
     /*
     Getters and Setters
@@ -68,14 +70,6 @@ public class Request {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(long animal) {
-        this.animal = animal;
     }
 
     public long getRecipient() {
@@ -188,5 +182,35 @@ public class Request {
 
     public void setCertificate1FormNumber(String certificate1FormNumber) {
         this.certificate1FormNumber = certificate1FormNumber;
+    }
+
+    public Set<Animal> getAnimals() {
+      return animals;
+    }
+
+    public void setAnimals(Set<Animal> animals) {
+      this.animals = animals;
+    }
+
+    @Override
+    public String toString() {
+      return "Request{" +
+        "id=" + id +
+        ", recipient=" + recipient +
+        ", destinationCountry=" + destinationCountry +
+        ", borderCrossingPoint=" + borderCrossingPoint +
+        ", transport=" + transport +
+        ", vehicleNumber='" + vehicleNumber + '\'' +
+        ", veterinarian=" + veterinarian +
+        ", transactionType='" + transactionType + '\'' +
+        ", wayOfStorageDuringTransportation='" + wayOfStorageDuringTransportation + '\'' +
+        ", quarantineLocation='" + quarantineLocation + '\'' +
+        ", numberOfDaysToQuarantine=" + numberOfDaysToQuarantine +
+        ", inspectorOfRosselkhoznadzor=" + inspectorOfRosselkhoznadzor +
+        ", postalCode='" + postalCode + '\'' +
+        ", dateOfDeparture=" + dateOfDeparture +
+        ", certificate1FormNumber='" + certificate1FormNumber + '\'' +
+        ", animals=" + animals +
+        '}';
     }
 }

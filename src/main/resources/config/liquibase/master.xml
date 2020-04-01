@@ -31,6 +31,8 @@
     <include file="config/liquibase/changelog/160320201249-create-rsn-division.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/300320201344-alter-breeds.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/300320201422-alter-breeds-2.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/010420201142-add-animal-request.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/010420201200-alter-somebody.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

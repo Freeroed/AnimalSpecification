@@ -101,4 +101,18 @@ public class LaboratoryResearch implements Serializable {
     public void setAnimal(long animal) {
         this.animal = animal;
     }
+
+    @Override
+    public String toString() {
+      return "LaboratoryResearch{" +
+        "id=" + id +
+        ", laboratory='" + laboratory + '\'' +
+        ", indicator='" + indicator + '\'' +
+        ", dateOfReceiptOfResult=" + dateOfReceiptOfResult +
+        ", researchMethod='" + researchMethod + '\'' +
+        ", examinationNumber='" + examinationNumber + '\'' +
+        ", result=" + result +
+        ", animal=" + animal +
+        '}';
+    }
 }

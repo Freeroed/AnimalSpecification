@@ -22,12 +22,6 @@ public class DestinationCountry implements Serializable {
     @Column (name = "ISO_code")
     private String ISOcode; // https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2
 
-    @Column (name = "region_of_the_country")
-    private String regionOfTheCountry; // регион внутри страны (русское)
-
-    @Column (name = "region_of_the_country_ENG")
-    private String regionOfTheCountryENG; // регион внутри страны (английское)
-
     public DestinationCountry() { }
 
     /* Getters and Setters */
@@ -72,19 +66,14 @@ public class DestinationCountry implements Serializable {
       this.ISOcode = ISOcode;
     }
 
-    public String getRegionOfTheCountry() {
-      return regionOfTheCountry;
-    }
-
-    public void setRegionOfTheCountry(String regionOfTheCountry) {
-      this.regionOfTheCountry = regionOfTheCountry;
-    }
-
-    public String getRegionOfTheCountryENG() {
-      return regionOfTheCountryENG;
-    }
-
-    public void setRegionOfTheCountryENG(String regionOfTheCountryENG) {
-      this.regionOfTheCountryENG = regionOfTheCountryENG;
+    @Override
+    public String toString() {
+      return "DestinationCountry{" +
+        "id=" + id +
+        ", countryName='" + countryName + '\'' +
+        ", countryNameENG='" + countryNameENG + '\'' +
+        ", region=" + region +
+        ", ISOcode='" + ISOcode + '\'' +
+        '}';
     }
 }

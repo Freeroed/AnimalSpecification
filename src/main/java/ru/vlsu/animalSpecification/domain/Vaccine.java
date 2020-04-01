@@ -101,4 +101,18 @@ public class Vaccine implements Serializable {
     public void setValidUntil(Date validUntil) {
         this.validUntil = validUntil;
     }
+
+    @Override
+    public String toString() {
+      return "Vaccine{" +
+        "id=" + id +
+        ", animal=" + animal +
+        ", type='" + type + '\'' +
+        ", title='" + title + '\'' +
+        ", date=" + date +
+        ", vaccineBatchNumber='" + vaccineBatchNumber + '\'' +
+        ", vaccineNameAndManufacturer='" + vaccineNameAndManufacturer + '\'' +
+        ", validUntil=" + validUntil +
+        '}';
+    }
 }

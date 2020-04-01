@@ -42,5 +42,12 @@ public class Region implements Serializable {
 
     public Region(){}
 
-
+    @Override
+    public String toString() {
+      return "Region{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", nameEng='" + nameEng + '\'' +
+        '}';
+    }
 }

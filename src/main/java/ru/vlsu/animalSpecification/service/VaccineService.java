@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.vlsu.animalSpecification.domain.LaboratoryResearch;
 import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.repository.VaccineRepository;
 
@@ -21,37 +20,38 @@ public class VaccineService {
     private VaccineRepository repo;
 
     public void save(Vaccine vac) {
-        log.debug("Save vaccine: " + vac);
+        log.debug("Save vaccine: {}", vac);
         repo.save(vac);
     }
 
     public List<Vaccine> listAll() {
+        log.debug("Get all vaccines");
         return (List<Vaccine>) repo.findAll();
     }
 
     public Vaccine get(Long id) {
-        log.debug("Find vaccine by id: " + id);
+        log.debug("Find vaccine by id: {}", id);
       Vaccine res = null;
         try {
           res = repo.findById(id).get();
         } catch (Exception e){
-          log.debug("Error finding vaccine by id: " + e);
+          log.debug("Error finding vaccine by id: " + e.getMessage());
         }
         return res;
     }
 
     public void delete(Long id) {
-        log.debug("Delete vaccine with id: " + id);
+        log.debug("Delete vaccine with id: {}", id);
         repo.deleteById(id);
     }
 
     public List <Vaccine> getByAnimal(Long id) {
-      log.debug("Find laboratory research by animal id: " + id);
+      log.debug("Find vaccine by animal id: {}", id);
       List <Vaccine> res = null;
       try {
         res = repo.findAllByAnimal(id);
       } catch (Exception e){
-        log.debug("Error finding vaccine by animal with id. Exc: " + e);
+        log.debug("Error finding vaccine by animal with id. Exc: " + e.getMessage());
       }
       return res;
     }

@@ -76,4 +76,16 @@ public class BorderCrossingPoint implements Serializable {
     public void setScheduleOfManagementOfficials(String scheduleOfManagementOfficials) {
         this.scheduleOfManagementOfficials = scheduleOfManagementOfficials;
     }
+
+    @Override
+    public String toString() {
+      return "BorderCrossingPoint{" +
+        "id=" + id +
+        ", location='" + location + '\'' +
+        ", adjacentPoint='" + adjacentPoint + '\'' +
+        ", classification='" + classification + '\'' +
+        ", schedule='" + schedule + '\'' +
+        ", scheduleOfManagementOfficials='" + scheduleOfManagementOfficials + '\'' +
+        '}';
+    }
 }

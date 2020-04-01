@@ -52,4 +52,14 @@ public class BreedsOfAnimal implements Serializable {
     public void setAnimalType(Long animalType) {
       this.animalType = animalType;
     }
+
+    @Override
+    public String toString() {
+      return "BreedsOfAnimal{" +
+        "id=" + id +
+        ", breedName='" + breedName + '\'' +
+        ", breedNameENG='" + breedNameENG + '\'' +
+        ", animalType=" + animalType +
+        '}';
+    }
 }
