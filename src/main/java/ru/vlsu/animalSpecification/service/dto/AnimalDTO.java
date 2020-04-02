@@ -28,6 +28,8 @@ public class AnimalDTO {
 
   private String colorENG;
 
+  private String status;
+
   public Long getId() {
     return id;
   }
@@ -124,6 +126,14 @@ public class AnimalDTO {
     this.colorENG = colorENG;
   }
 
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
   public AnimalDTO(Animal animal) {
     this.id = animal.getId();
     this.nickname = animal.getNickname();
@@ -137,5 +147,6 @@ public class AnimalDTO {
     this.human = new UserDTO(animal.getMaster());
     this.tnvedCde = animal.getTnvedCode();
     this.colorENG = animal.getColorENG();
+    this.status = animal.getStatus();
   }
 }

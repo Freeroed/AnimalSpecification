@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="020420201501-1">
+
+    <comment>Create status column in Request and Animal </comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      ALTER TABLE Animal ADD status VARCHAR(50) NULL;
+      ALTER TABLE Request ADD status VARCHAR(50) NULL;
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

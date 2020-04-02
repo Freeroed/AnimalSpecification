@@ -60,6 +60,9 @@ public class Request {
       inverseJoinColumns = @JoinColumn(name = "animal_id"))
     private Set<Animal> animals = new HashSet<>();
 
+  @Column (name = "status")
+  private String status; // статус заявки
+
     /*
     Getters and Setters
     * */
@@ -192,7 +195,15 @@ public class Request {
       this.animals = animals;
     }
 
-    @Override
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  @Override
     public String toString() {
       return "Request{" +
         "id=" + id +

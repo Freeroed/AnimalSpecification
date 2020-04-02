@@ -59,6 +59,9 @@ public class Animal implements Serializable {
     this.master = master;
   }
 
+  @Column (name = "status")
+  private String status; // состояние животного
+
 
 
     /*
@@ -145,8 +148,6 @@ public class Animal implements Serializable {
         this.placeOfBirth = placeOfBirth;
     }
 
-
-
     public String getTnvedCode() {
         return tnvedCode;
     }
@@ -162,6 +163,14 @@ public class Animal implements Serializable {
     public void setColorENG(String colorENG) {
         this.colorENG = colorENG;
     }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
   @Override
   public String toString() {
