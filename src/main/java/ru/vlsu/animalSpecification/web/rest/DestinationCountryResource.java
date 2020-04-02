@@ -20,10 +20,14 @@ public class DestinationCountryResource {
 
     private static final Logger log = LoggerFactory.getLogger(Vaccine.class);
 
-    @Autowired
-    private DestinationCountryService dcService;
+    private final DestinationCountryService dcService;
 
-    // Можно удалить (скорее всего не будет использоваться)
+    @Autowired
+    public DestinationCountryResource(DestinationCountryService dcService) {
+      this.dcService = dcService;
+    }
+
+  // Можно удалить (скорее всего не будет использоваться)
     @GetMapping("/countries")
     public List<DestinationCountry> getAllCountries() {
         log.debug("REST request to get all countries");

@@ -13,12 +13,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class TransportResource {
-    @Autowired
-    private TransportService transportService;
-
     private static final Logger log = Logger.getLogger(TransportResource.class);
 
-    @GetMapping("/transports")
+    @Autowired
+    private final TransportService transportService;
+
+
+
+  public TransportResource(TransportService transportService) {
+    this.transportService = transportService;
+  }
+
+  @GetMapping("/transports")
     public List<Transport> getAll() {
         List<Transport> list = transportService.listAll();
         log.debug("Request go get All Transport");

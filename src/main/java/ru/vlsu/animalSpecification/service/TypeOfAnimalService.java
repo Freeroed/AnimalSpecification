@@ -16,10 +16,14 @@ public class TypeOfAnimalService {
 
     private static final Logger log = LoggerFactory.getLogger(TypeOfAnimalService.class);
 
-    @Autowired
-    private TypeOfAnimalRepository repo;
+    private final TypeOfAnimalRepository repo;
 
-    public List<TypeOfAnimal> listAll() {
+    @Autowired
+    public TypeOfAnimalService(TypeOfAnimalRepository repo) {
+      this.repo = repo;
+    }
+
+  public List<TypeOfAnimal> listAll() {
         log.debug("Get all types of animals");
         return (List<TypeOfAnimal>) repo.findAll();
     }

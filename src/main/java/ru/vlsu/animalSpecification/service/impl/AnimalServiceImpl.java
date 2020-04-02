@@ -27,54 +27,54 @@ public class AnimalServiceImpl implements AnimalService {
 
     private final AnimalMapper animalMapper;
 
-  private static final Logger log =
-    LoggerFactory.getLogger(AnimalServiceImpl.class);
+    private static final Logger log =
+      LoggerFactory.getLogger(AnimalServiceImpl.class);
 
-  @Autowired
-  public AnimalServiceImpl(AnimalRepository repo, UserService userService, AnimalMapper animalMapper) {
-    this.repo = repo;
-    this.userService = userService;
-    this.animalMapper = animalMapper;
-  }
-
-  public List<AnimalDTO> listAll() {
-        log.debug("Request to get all animals");
-        return animalMapper.animalsToAnimalsDTO(repo.findAll());
+    @Autowired
+    public AnimalServiceImpl(AnimalRepository repo, UserService userService, AnimalMapper animalMapper) {
+      this.repo = repo;
+      this.userService = userService;
+      this.animalMapper = animalMapper;
     }
 
-  @Override
-  public List<AnimalDTO> findByUser(Long userId) {
-    return null;
-  }
+    public List<AnimalDTO> listAll() {
+          log.debug("Request to get all animals");
+          return animalMapper.animalsToAnimalsDTO(repo.findAll());
+      }
 
-  public Animal get(Long id) {
-        log.debug("Request to get animal by id=" + id);
-        return repo.findById(id).get();
+    @Override
+    public List<AnimalDTO> findByUser(Long userId) {
+      return null;
     }
 
-  @Override
-  public AnimalDTO save(Animal animal, String username) {
-    log.debug("Request to save animal : {} with human with username : {}" , animal.toString(), username);
-    animal.setMaster(userService.findByUsername(username));
-    log.debug("Saving animal : " + animal);
-    return new AnimalDTO(repo.save(animal));
-  }
+    public Animal get(Long id) {
+          log.debug("Request to get animal by id=" + id);
+          return repo.findById(id).get();
+      }
 
-  @Override
-  public Page<AnimalDTO> findAll(Pageable pageable) {
-    return null;
-  }
+    @Override
+    public AnimalDTO save(Animal animal, String username) {
+      log.debug("Request to save animal : {} with human with username : {}" , animal.toString(), username);
+      animal.setMaster(userService.findByUsername(username));
+      log.debug("Saving animal : " + animal);
+      return new AnimalDTO(repo.save(animal));
+    }
 
-  @Override
-  public Optional<AnimalDTO> findOne(Long id) {
-    log.debug("Request to find Animal by id : {}", id);
-    //return null;
-    return repo.findById(id).map(animalMapper::animalToAnimalsDTO);
-  }
+    @Override
+    public Page<AnimalDTO> findAll(Pageable pageable) {
+      return null;
+    }
 
-  @Override
-  public void delete(Long id) {
-    log.debug("Request to delete animal with : {}", id);
-    repo.deleteById(id);
-  }
+    @Override
+    public Optional<AnimalDTO> findOne(Long id) {
+      log.debug("Request to find Animal by id : {}", id);
+      //return null;
+      return repo.findById(id).map(animalMapper::animalToAnimalsDTO);
+    }
+
+    @Override
+    public void delete(Long id) {
+      log.debug("Request to delete animal with : {}", id);
+      repo.deleteById(id);
+    }
 }

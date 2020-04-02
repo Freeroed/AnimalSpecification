@@ -17,10 +17,14 @@ public class BorderCrossingPointResouce {
 
     private static final Logger log = LoggerFactory.getLogger(BorderCrossingPointResouce.class);
 
-    @Autowired
-    private BorderCrossingPointService bcpService;
+    private final BorderCrossingPointService bcpService;
 
-    @GetMapping("/borderCrossingPoints")
+    @Autowired
+    public BorderCrossingPointResouce(BorderCrossingPointService bcpService) {
+      this.bcpService = bcpService;
+    }
+
+  @GetMapping("/borderCrossingPoints")
     public List<BorderCrossingPoint> getAllBorderCrossingPoints(){
         log.debug("REST request to get all border crossing points");
         List<BorderCrossingPoint> list = bcpService.listAll();

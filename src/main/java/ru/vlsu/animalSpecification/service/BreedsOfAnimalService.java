@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.BreedsOfAnimal;
-import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.repository.BreedsOfAnimalRepository;
 
 import java.util.List;
@@ -17,10 +16,14 @@ public class BreedsOfAnimalService {
 
     private static final Logger log = LoggerFactory.getLogger(BreedsOfAnimalService.class);
 
-    @Autowired
-    private BreedsOfAnimalRepository repo;
+    private final BreedsOfAnimalRepository repo;
 
-    public List<BreedsOfAnimal> listAll() {
+    @Autowired
+    public BreedsOfAnimalService(BreedsOfAnimalRepository repo) {
+      this.repo = repo;
+    }
+
+  public List<BreedsOfAnimal> listAll() {
         return (List<BreedsOfAnimal>)repo.findAll();
     }
 

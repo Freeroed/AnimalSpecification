@@ -18,10 +18,14 @@ public class VaccineResource {
 
     private static final Logger log = LoggerFactory.getLogger(VaccineResource.class);
 
-    @Autowired
-    private VaccineService vaccineService;
+    private final VaccineService vaccineService;
 
-    // Думаю, можно вообще удалить, но пока пусть будет для тестов
+    @Autowired
+    public VaccineResource(VaccineService vaccineService) {
+      this.vaccineService = vaccineService;
+    }
+
+  // Думаю, можно вообще удалить, но пока пусть будет для тестов
     @GetMapping("/vaccines")
     public List<Vaccine> getAllVaccines() {
         return  vaccineService.listAll();
@@ -31,7 +35,7 @@ public class VaccineResource {
     @PostMapping("/vaccine")
     public ResponseEntity createVaccine(@RequestBody Vaccine vaccine) throws URISyntaxException {
 
-      log.debug("REST request to save vaccine : " + vaccine);
+      log.debug("REST request to save vaccine : {}", vaccine);
 
       if ((vaccine.getId() != null)||(vaccine.getAnimal() == 0)) {
         return ResponseEntity.badRequest().build();

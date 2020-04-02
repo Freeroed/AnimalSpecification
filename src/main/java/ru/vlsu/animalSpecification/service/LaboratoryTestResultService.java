@@ -16,10 +16,14 @@ public class LaboratoryTestResultService {
 
     private static final Logger log = LoggerFactory.getLogger(VaccineService.class);
 
-    @Autowired
-    private LaboratoryTestResultRepository repo;
+    private final LaboratoryTestResultRepository repo;
 
-    public List<LaboratoryTestResult> listAll() {
+    @Autowired
+    public LaboratoryTestResultService(LaboratoryTestResultRepository repo) {
+      this.repo = repo;
+    }
+
+  public List<LaboratoryTestResult> listAll() {
         log.debug("Get all lab test results");
         return (List<LaboratoryTestResult>) repo.findAll();
     }

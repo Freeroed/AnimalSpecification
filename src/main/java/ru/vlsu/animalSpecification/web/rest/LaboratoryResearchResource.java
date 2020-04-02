@@ -19,10 +19,15 @@ public class LaboratoryResearchResource {
 
     private static final Logger log = LoggerFactory.getLogger(LaboratoryResearchResource.class);
 
-    @Autowired
-    private LaboratoryResearchService lrService;
 
-    @GetMapping("/laboratoryResearchs")
+    private final LaboratoryResearchService lrService;
+
+    @Autowired
+    public LaboratoryResearchResource(LaboratoryResearchService lrService) {
+      this.lrService = lrService;
+    }
+
+  @GetMapping("/laboratoryResearchs")
     public List<LaboratoryResearch> getAllLaboratoryResearchs() {
         return  lrService.listAll();
     }
@@ -31,7 +36,7 @@ public class LaboratoryResearchResource {
     @PostMapping("/laboratoryResearch")
     public ResponseEntity createLabResearch(@RequestBody LaboratoryResearch lr) throws URISyntaxException {
 
-      log.debug("REST request to save laboratory research : " + lr);
+      log.debug("REST request to save laboratory research : {}", lr);
 
       if ((lr.getId() != null)||(lr.getAnimal() == 0)) {
         return ResponseEntity.badRequest().build();

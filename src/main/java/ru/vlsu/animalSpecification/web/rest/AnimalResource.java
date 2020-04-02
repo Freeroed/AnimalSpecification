@@ -20,14 +20,18 @@ import java.util.Optional;
 public class AnimalResource {
 
     private static final Logger log = LoggerFactory.getLogger(AnimalResource.class);
-    @Autowired
-    private AnimalService animalService;
+    private final AnimalService animalService;
+
+    private final HttpServletRequest httpServletRequest;
 
     @Autowired
-    private HttpServletRequest httpServletRequest;
+    public AnimalResource(AnimalService animalService, HttpServletRequest httpServletRequest) {
+      this.animalService = animalService;
+      this.httpServletRequest = httpServletRequest;
+    }
 
 
-    @GetMapping("/animals/get")
+  @GetMapping("/animals/get")
     public String getAnimalName(){
         return "SOBAKEN";
     }
@@ -38,7 +42,7 @@ public class AnimalResource {
    * @return the {@link ResponseEntity} with status {@code 200(OK)} and the list of animals in body
    */
     @GetMapping("/animals")
-    public ResponseEntity getAllAnimals(/*Authentication authentication*/){
+    public ResponseEntity getAllAnimals(){
     log.debug("User that getted from servler request : {} ", httpServletRequest.getRemoteUser());
       //log.debug(jwtUtils.getUserNameFromJwtToken(token));
       //log.debug(authentication.getName());

@@ -16,10 +16,14 @@ public class BorderCrossingPointService {
 
     private static final Logger log = LoggerFactory.getLogger(BorderCrossingPointService.class);
 
-    @Autowired
-    private BorderCrossingPointRepository repo;
+    private final BorderCrossingPointRepository repo;
 
-    public List<BorderCrossingPoint> listAll() {
+    @Autowired
+    public BorderCrossingPointService(BorderCrossingPointRepository repo) {
+      this.repo = repo;
+    }
+
+  public List<BorderCrossingPoint> listAll() {
         log.debug("Get all border crossing points");
         return (List<BorderCrossingPoint>) repo.findAll();
     }

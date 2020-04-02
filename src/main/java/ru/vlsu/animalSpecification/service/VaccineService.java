@@ -16,10 +16,14 @@ public class VaccineService {
 
     private static final Logger log = LoggerFactory.getLogger(VaccineService.class);
 
-    @Autowired
-    private VaccineRepository repo;
+    private final VaccineRepository repo;
 
-    public void save(Vaccine vac) {
+    @Autowired
+    public VaccineService(VaccineRepository repo) {
+      this.repo = repo;
+    }
+
+  public void save(Vaccine vac) {
         log.debug("Save vaccine: {}", vac);
         repo.save(vac);
     }
@@ -35,7 +39,7 @@ public class VaccineService {
         try {
           res = repo.findById(id).get();
         } catch (Exception e){
-          log.debug("Error finding vaccine by id: " + e.getMessage());
+          log.debug("Error finding vaccine by id: {}", e.getMessage());
         }
         return res;
     }
@@ -51,7 +55,7 @@ public class VaccineService {
       try {
         res = repo.findAllByAnimal(id);
       } catch (Exception e){
-        log.debug("Error finding vaccine by animal with id. Exc: " + e.getMessage());
+        log.debug("Error finding vaccine by animal with id. Exc: {}", e.getMessage());
       }
       return res;
     }

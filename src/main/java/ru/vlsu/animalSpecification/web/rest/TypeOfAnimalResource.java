@@ -17,10 +17,14 @@ public class TypeOfAnimalResource {
 
     private static final Logger log = LoggerFactory.getLogger(TypeOfAnimalResource.class);
 
-    @Autowired
-    private TypeOfAnimalService typeService;
+    private final TypeOfAnimalService typeService;
 
-    @GetMapping("/types")
+     @Autowired
+    public TypeOfAnimalResource(TypeOfAnimalService typeService) {
+      this.typeService = typeService;
+    }
+
+  @GetMapping("/types")
     public List<TypeOfAnimal> getAllTypes() {
         log.debug("REST request to get all types of animals");
         List<TypeOfAnimal> list = typeService.listAll();

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.LaboratoryResearch;
 import ru.vlsu.animalSpecification.repository.LaboratoryResearchRepository;
-import ru.vlsu.animalSpecification.web.rest.LaboratoryResearchResource;
 
 import java.util.List;
 
@@ -17,10 +16,14 @@ public class LaboratoryResearchService {
 
     private static final Logger log = LoggerFactory.getLogger(LaboratoryResearchService.class);
 
-    @Autowired
-    private LaboratoryResearchRepository repo;
+    private final LaboratoryResearchRepository repo;
 
-    public void save(LaboratoryResearch lr) {
+    @Autowired
+    public LaboratoryResearchService(LaboratoryResearchRepository repo) {
+      this.repo = repo;
+    }
+
+  public void save(LaboratoryResearch lr) {
         log.debug("Save laboratory research : {}", lr);
         repo.save(lr);
     }

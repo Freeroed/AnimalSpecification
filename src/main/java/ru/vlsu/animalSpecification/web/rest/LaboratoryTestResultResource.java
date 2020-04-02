@@ -17,10 +17,15 @@ public class LaboratoryTestResultResource {
 
     private static final Logger log = LoggerFactory.getLogger(LaboratoryTestResultResource.class);
 
-    @Autowired
-    private LaboratoryTestResultService ltrService;
 
-    @GetMapping("/testResults")
+    private final LaboratoryTestResultService ltrService;
+
+    @Autowired
+    public LaboratoryTestResultResource(LaboratoryTestResultService ltrService) {
+      this.ltrService = ltrService;
+    }
+
+  @GetMapping("/testResults")
     public List<LaboratoryTestResult> getAllTestResults() {
         log.debug("REST request to get all lab test results");
         return  ltrService.listAll();

@@ -17,9 +17,14 @@ public class RosselkhoznadzorDivisionService {
     private static final Logger log = LoggerFactory.getLogger(RosselkhoznadzorDivisionService.class);
 
     @Autowired
-    private RosselkhoznadzorDivisionRepository repo;
+    private final RosselkhoznadzorDivisionRepository repo;
 
-    public List<RosselkhoznadzorDivision> listAll() {
+    @Autowired
+    public RosselkhoznadzorDivisionService(RosselkhoznadzorDivisionRepository repo) {
+      this.repo = repo;
+    }
+
+  public List<RosselkhoznadzorDivision> listAll() {
         log.debug("Get all Rosselkhoznadzor Divisions");
         return (List<RosselkhoznadzorDivision>) repo.findAll();
     }

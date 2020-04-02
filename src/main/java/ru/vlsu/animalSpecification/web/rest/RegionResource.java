@@ -17,10 +17,15 @@ public class RegionResource {
 
     private static final Logger log = LoggerFactory.getLogger(RegionResource.class);
 
-    @Autowired
-    private RegionService regionService;
 
-    @GetMapping("/regions")
+    private final RegionService regionService;
+
+    @Autowired
+    public RegionResource(RegionService regionService) {
+      this.regionService = regionService;
+    }
+
+  @GetMapping("/regions")
     public List<Region> getAllRegions() {
       log.debug("REST request to get all regions");
       return  regionService.listAll();

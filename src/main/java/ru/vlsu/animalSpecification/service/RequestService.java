@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.Request;
-import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
 
 import java.util.List;
@@ -17,10 +16,15 @@ public class RequestService {
 
     private static final Logger log = LoggerFactory.getLogger(RequestService.class);
 
-    @Autowired
-    private RequestRepository repo;
 
-    public void save(Request req) {
+    private final RequestRepository repo;
+
+    @Autowired
+    public RequestService(RequestRepository repo) {
+      this.repo = repo;
+    }
+
+  public void save(Request req) {
         log.debug("Save request: {}", req);
         repo.save(req);
     }

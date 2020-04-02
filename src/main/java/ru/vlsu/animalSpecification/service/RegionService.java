@@ -16,10 +16,14 @@ public class RegionService {
 
     private static final Logger log = LoggerFactory.getLogger(RegionService.class);
 
-    @Autowired
-    private RegionRepository repo;
+    private final RegionRepository repo;
 
-    public void save(Region region) {
+    @Autowired
+    public RegionService(RegionRepository repo) {
+      this.repo = repo;
+    }
+
+  public void save(Region region) {
         repo.save(region);
     }
 

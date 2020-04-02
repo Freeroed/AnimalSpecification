@@ -17,10 +17,14 @@ public class RosselkhoznadzorDivisionResource {
 
     private static final Logger log = LoggerFactory.getLogger(RosselkhoznadzorDivisionResource.class);
 
-    @Autowired
-    private RosselkhoznadzorDivisionService rshService;
+    private final RosselkhoznadzorDivisionService rshService;
 
-    @GetMapping("/divisionsRsh")
+    @Autowired
+    public RosselkhoznadzorDivisionResource(RosselkhoznadzorDivisionService rshService) {
+      this.rshService = rshService;
+    }
+
+  @GetMapping("/divisionsRsh")
     public List<RosselkhoznadzorDivision> getAllDivisionsRsh() {
         log.debug("REST request to get all Rosselkhoznadzor Divisions");
         return  rshService.listAll();

@@ -39,7 +39,6 @@ public class AuthController {
 
   private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
-  //TODO log
   private final AuthenticationManager authenticationManager;
 
   private final UserRepository userRepository;
@@ -64,6 +63,7 @@ public class AuthController {
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    log.debug("REST request tu auth user with login : {}", loginRequest.getUsername());
     Authentication authentication = authenticationManager.authenticate(
       new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
     );

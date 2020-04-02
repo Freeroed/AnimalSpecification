@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.DestinationCountry;
-import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.repository.DestinationCountryRepository;
 
 import java.util.List;
@@ -17,10 +16,14 @@ public class DestinationCountryService {
 
     private static final Logger log = LoggerFactory.getLogger(DestinationCountryService.class);
 
-    @Autowired
-    private DestinationCountryRepository repo;
+    private final DestinationCountryRepository repo;
 
-    public void save(DestinationCountry country) {
+    @Autowired
+    public DestinationCountryService(DestinationCountryRepository repo) {
+      this.repo = repo;
+    }
+
+  public void save(DestinationCountry country) {
         repo.save(country);
     }
 
