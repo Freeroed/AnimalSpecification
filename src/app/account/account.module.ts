@@ -8,6 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './signin/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckboxModule, WavesModule, IconsModule,} from 'angular-bootstrap-md';
+import { BrowserModule } from '@angular/platform-browser';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
     imports: [RouterModule.forChild(accountRoute), 
@@ -16,7 +18,7 @@ import { CheckboxModule, WavesModule, IconsModule,} from 'angular-bootstrap-md';
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        CheckboxModule, WavesModule, NgbModule, IconsModule],
-    declarations: [RegisterComponent, LoginComponent]
+        CheckboxModule, WavesModule, NgbModule, IconsModule, BrowserModule ],
+    declarations: [RegisterComponent, LoginComponent,AccountComponent]
 })
 export class AnimalSpecificatonAccountModule {}

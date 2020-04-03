@@ -4,7 +4,8 @@ import { LoginModalService } from 'src/app/account/signin/login-modal.service';
 
 @Component( {
     selector: 'navbar',
-    templateUrl: './navbar.component.html'
+    templateUrl: './navbar.component.html',
+    styleUrls: ['navbar.scss']
 })
 
 export class NavbarComponent {

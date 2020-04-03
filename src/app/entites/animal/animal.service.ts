@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Animal } from '../../shared/model/animal.model';
 import { Observable, observable, pipe } from 'rxjs';
@@ -25,7 +25,8 @@ export class AnimalService {
 
     fiidAll(): Observable<Animal[]> {
         return this.http
-        .get<Animal[]>(this.resourceUrl);
+        .get<Animal[]>(this.resourceUrl)
+        .pipe(map((res: Animal[]) => this.convertDateArrayFromServer(res)));
     }
 
     /*

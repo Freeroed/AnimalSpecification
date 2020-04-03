@@ -1,0 +1,15 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+       <h2 class="page-heading">
+        <span *ngIf="date >= 18 && 23 > date">Добрый вечер</span>
+        <span *ngIf="date >= 23 || 5 >= date">Доброй ночи</span>
+        <span *ngIf="date >= 6 && 12 > date">Доброе утро</span>
+        <span *ngIf="date >= 12 && 18 > date">Добрый день</span> 
+        {{user.userName}}!
+    </h2> 
+    
+    </div>
+    
+</div>
+
+
