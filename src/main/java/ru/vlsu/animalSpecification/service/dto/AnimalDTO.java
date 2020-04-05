@@ -2,6 +2,8 @@ package ru.vlsu.animalSpecification.service.dto;
 
 import ru.vlsu.animalSpecification.domain.Animal;
 
+import java.time.Instant;
+
 public class AnimalDTO {
 
   private Long id;
@@ -10,7 +12,6 @@ public class AnimalDTO {
 
   private char sex;
 
-  private TypeOfAnimalDTO type;
 
   private String chip;
 
@@ -29,6 +30,19 @@ public class AnimalDTO {
   private String colorENG;
 
   private String status;
+
+  private Instant birthday;
+
+  private String inn;
+
+
+  public Instant getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(Instant birthday) {
+    this.birthday = birthday;
+  }
 
   public Long getId() {
     return id;
@@ -54,13 +68,6 @@ public class AnimalDTO {
     this.sex = sex;
   }
 
-  public TypeOfAnimalDTO getType() {
-    return type;
-  }
-
-  public void setType(TypeOfAnimalDTO type) {
-    this.type = type;
-  }
 
   public String getChip() {
     return chip;
@@ -138,7 +145,6 @@ public class AnimalDTO {
     this.id = animal.getId();
     this.nickname = animal.getNickname();
     this.sex = animal.getSex();
-    this.type = new TypeOfAnimalDTO(animal.getType());
     this.chip = animal.getChip();
     this.weight = animal.getWeight();
     this.breed = new BreedsOfAnimalDTO(animal.getBreed());
@@ -148,5 +154,6 @@ public class AnimalDTO {
     this.tnvedCde = animal.getTnvedCode();
     this.colorENG = animal.getColorENG();
     this.status = animal.getStatus();
+    this.birthday = animal.getBirthday();
   }
 }

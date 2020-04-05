@@ -44,7 +44,7 @@ import { AnimalSpecificatonAccountModule } from './account/account.module';
     DocsComponent,
     FooterComponent
   ],
-  providers: [AnimalService, RegionService, FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders],
+  providers: [FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,11 +2,7 @@ import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from './../../app.constants'
-import { logging } from 'protractor';
 import { TokenStorageService } from './token-storage.service';
-import { StateStorageService } from './state-storage.service';
-import { Router } from '@angular/router';
-import { User } from 'src/app/shared/model/user.model';
 import { ICredentials } from 'src/app/shared/model/credentials.model';
 
 

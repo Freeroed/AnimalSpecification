@@ -31,9 +31,12 @@ public class AnimalResource {
     }
 
 
-  @GetMapping("/animals/get")
-    public String getAnimalName(){
-        return "SOBAKEN";
+  @GetMapping("/animals/my")
+    public ResponseEntity getMyAnimals(){
+      log.debug("REST request to get animals by user");
+      String userName = httpServletRequest.getRemoteUser();
+      List<AnimalDTO> result = animalService.findByUser(userName);
+      return ResponseEntity.ok(result);
     }
 
 
@@ -67,7 +70,8 @@ public class AnimalResource {
       if (animal.getId() != null) {
         return ResponseEntity.badRequest().build();
       } else {
-        AnimalDTO result = animalService.save(animal, "admin");
+        String userName = httpServletRequest.getRemoteUser();
+        AnimalDTO result = animalService.save(animal, userName);
         return ResponseEntity.created(new URI("/api/animals/" + result.getId()))
           .body(result);
       }

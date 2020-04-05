@@ -16,8 +16,10 @@ public class DestinationCountry implements Serializable {
     @Column (name = "country_name_ENG")
     private String countryNameENG; // название страны (английское)
 
-    @Column (name = "region")
-    private long region; // регион Region.class
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "region", nullable = false)
+    private Region region; // регион Region.class
 
     @Column (name = "ISO_code")
     private String ISOcode; // https://ru.wikipedia.org/wiki/ISO_3166-1_alpha-2
@@ -50,15 +52,15 @@ public class DestinationCountry implements Serializable {
         this.countryNameENG = countryNameENG;
     }
 
-    public long getRegion() {
-        return region;
+    public Region getRegion() {
+      return region;
     }
 
-    public void setRegion(long region) {
-        this.region = region;
+    public void setRegion(Region region) {
+      this.region = region;
     }
 
-    public String getISOcode() {
+  public String getISOcode() {
       return ISOcode;
     }
 

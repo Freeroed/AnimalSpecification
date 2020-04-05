@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { serialize } from 'v8';
 import { IAccount } from 'src/app/shared/model/account.model';
 
 const TOKEN_KEY = 'auth-token';

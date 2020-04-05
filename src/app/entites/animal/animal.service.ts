@@ -11,16 +11,16 @@ import { createRequestOption } from '../../shared/util/request-util';
 type EntityResponseType = HttpResponse<Animal>;
 type EntityArrayResponseType = HttpResponse<Animal[]>;
 
-@Injectable()
+@Injectable({ providedIn: 'root'})
 export class AnimalService {
     private resourceUrl = SERVER_API_URL + 'api/animals';
 
     constructor(private http: HttpClient) {}
 
-    find(id: number): Observable<Animal> {
+    find(id: number): Observable<EntityResponseType> {
         return this.http
         .get<Animal>(`${this.resourceUrl}/${id}`, {observe: 'response'})
-        .pipe(map((res: Animal) => this.convertDateFromServer(res)));
+        .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     fiidAll(): Observable<Animal[]> {
@@ -32,9 +32,9 @@ export class AnimalService {
     /*
     Корневрт даты
     */
-    protected convertDateFromServer(res: Animal): Animal {
-        if(res) {
-            res.birthday = res.birthday ? moment(res.birthday) : undefined;
+    protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+        if(res.body) {
+            res.body.birthday = res.body.birthday ? moment(res.body.birthday) : undefined;
         }
         return res;
     }

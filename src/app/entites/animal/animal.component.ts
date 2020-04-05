@@ -25,8 +25,11 @@ export class AnimalComponent implements OnInit {
         this.animalService.fiidAll().subscribe(data => {
             this.animals = data;
         });
+        
     }
-
+    check():void {
+     console.log(this.animals);  
+    }
     previousState(): void {
         window.history.back();
     }

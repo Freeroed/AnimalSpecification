@@ -7,9 +7,9 @@ import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from '../../app.constants'
 import { createRequestOption } from '../../shared/util/request-util';
 
-type EntityResponseType = HttpResponse<Region>;
-type EntityArrayResponseType = HttpResponse<Region[]>;
-@Injectable()
+type EntityResponseType = HttpResponse<IRegion>;
+type EntityArrayResponseType = HttpResponse<IRegion[]>;
+@Injectable({ providedIn: 'root' })
 export class RegionService {
     private resourceUrl = SERVER_API_URL + 'api/regions';
 
@@ -17,7 +17,7 @@ export class RegionService {
 
     find(id: number): Observable<EntityResponseType> {
         return this.http
-        .get<Region>(`${this.resourceUrl}/${id}`, {observe: 'response'});
+        .get<IRegion>(`${this.resourceUrl}/${id}`, {observe: 'response'});
     }
 
     findAll(): Observable<EntityArrayResponseType> {

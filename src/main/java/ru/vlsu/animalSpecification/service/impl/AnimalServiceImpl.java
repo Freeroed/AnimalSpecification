@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.Animal;
+import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.repository.AnimalRepository;
 import ru.vlsu.animalSpecification.service.AnimalService;
 import ru.vlsu.animalSpecification.service.UserService;
@@ -43,8 +44,12 @@ public class AnimalServiceImpl implements AnimalService {
       }
 
     @Override
-    public List<AnimalDTO> findByUser(Long userId) {
-      return null;
+    public List<AnimalDTO> findByUser(String userName) {
+      log.debug("Request to get all animals by user with userName : {}", userName);
+      User user = userService.findByUsername(userName);
+      List<Animal> animals = repo.findAllByMaster(user);
+      List<AnimalDTO> result = animalMapper.animalsToAnimalsDTO(animals);
+      return result;
     }
 
     public Animal get(Long id) {

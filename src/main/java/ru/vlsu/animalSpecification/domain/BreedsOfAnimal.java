@@ -16,8 +16,10 @@ public class BreedsOfAnimal implements Serializable {
     @Column (name = "breed_name_ENG")
     private String breedNameENG; // название породы на английском
 
-    @Column (name = "animal_type")
-    private Long animalType; // id типа животного, к которому относится данная порода
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "animal_type", nullable = false)
+    private TypeOfAnimal animalType; // id типа животного, к которому относится данная порода
 
     /* Getters and Setters */
 
@@ -45,15 +47,15 @@ public class BreedsOfAnimal implements Serializable {
         this.breedNameENG = breedNameENG;
     }
 
-    public Long getAnimalType() {
-      return animalType;
-    }
+  public TypeOfAnimal getAnimalType() {
+    return animalType;
+  }
 
-    public void setAnimalType(Long animalType) {
-      this.animalType = animalType;
-    }
+  public void setAnimalType(TypeOfAnimal animalType) {
+    this.animalType = animalType;
+  }
 
-    @Override
+  @Override
     public String toString() {
       return "BreedsOfAnimal{" +
         "id=" + id +

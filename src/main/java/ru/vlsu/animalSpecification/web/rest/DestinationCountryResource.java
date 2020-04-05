@@ -4,16 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.DestinationCountry;
+import ru.vlsu.animalSpecification.domain.Region;
 import ru.vlsu.animalSpecification.domain.Vaccine;
 import ru.vlsu.animalSpecification.service.DestinationCountryService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class DestinationCountryResource {
@@ -34,10 +33,21 @@ public class DestinationCountryResource {
         return  dcService.listAll();
     }
 
+    @PostMapping("/countries/get")
+    public ResponseEntity getCountriesByRegion(@RequestBody Region region) {
+      log.debug("REST request to get countries by region : {} ", region);
+      List<DestinationCountry> result = dcService.getByRegion(region);
+      if (result != null) {
+        return ResponseEntity.ok(result);
+      } else {
+        return ResponseEntity.notFound().build();
+      }
+    }
+
     /* Получить все страны региона
        @param id - Id региона
     */
-    @GetMapping("/countries/{id}")
+    /*@GetMapping("/countries/{id}")
     public ResponseEntity getVaccineByRegionId(@PathVariable Long id) {
       log.debug("REST request to get countries by region with id : {}", id);
       List <DestinationCountry> res = dcService.getByRegion(id);
@@ -47,5 +57,5 @@ public class DestinationCountryResource {
       } else {
         return ResponseEntity.notFound().build();
       }
-    }
+    }*/
 }

@@ -6,29 +6,32 @@
     </h2>
 <div class="dropdown">
   <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" (click)="check()">
-    <option *ngFor="let region of regions" [value]="region.id">
+    <option *ngFor="let region of regions" [ngValue]="region">
       {{ region.name }}
     </option>
 
   </select>
-  <div *ngIf="checkRegion">
+  <div *ngIf="selected">
     <h2>
-    Да, это страна Евросоюза, теперь выбирай конкретную страну
+    Вы выбрали {{selected.name}}
   </h2>
   <div class="dropdown">
-    <select id="reg" name="regiion" class="btn btn-info dropdown-toggle"  on-click="check()">
-      <option *ngFor="let region of regions" [value]="region.id">
-        {{ region.name }}
+    <select id="country" name="country" class="btn btn-info dropdown-toggle"  [(ngModel)]="selectedCountry">
+      <option *ngFor="let country of countries" [ngValue]="country">
+        {{ country.countryName }}
       </option>
     </select>
-    <p>
-      Для поедки в эту страну вам нужно будет сделать то-то, и то-то, привить свою псину от того-то, и вообще, проще было бы дома сидеть
+    <div *ngIf="selectedCountry">
+    <p >
+      Для поедки в {{selectedCountry.countryName}} вам нужно будет сделать то-то, и то-то, привить свою псину от того-то, и вообще, проще было бы дома сидеть
     </p>
     <button type="button" class="btn btn-primary">Создать заявку</button>
+  </div>
   </div>
 </div>
 <p>
  <a routerLink="animals"> Тестовая ссылка для проверки запроса животных</a>
 </p>
+<button (click)="cheking()">ЧЕКНИ</button>
 </div>
   </div></div>

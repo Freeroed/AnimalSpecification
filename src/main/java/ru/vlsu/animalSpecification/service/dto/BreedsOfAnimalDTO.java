@@ -10,6 +10,8 @@ public class BreedsOfAnimalDTO {
 
   private String breedNameENG; // название породы на английском
 
+  private TypeOfAnimalDTO typeOfAnimal;
+
   public Long getId() {
     return id;
   }
@@ -34,10 +36,19 @@ public class BreedsOfAnimalDTO {
     this.breedNameENG = breedNameENG;
   }
 
+  public TypeOfAnimalDTO getTypeOfAnimal() {
+    return typeOfAnimal;
+  }
+
+  public void setTypeOfAnimal(TypeOfAnimalDTO typeOfAnimal) {
+    this.typeOfAnimal = typeOfAnimal;
+  }
+
   public BreedsOfAnimalDTO(BreedsOfAnimal breedsOfAnimal) {
     this.id = breedsOfAnimal.getId();
     this.breedName = breedsOfAnimal.getBreedName();
     this.breedNameENG = breedsOfAnimal.getBreedNameENG();
+    this.typeOfAnimal = new TypeOfAnimalDTO((breedsOfAnimal.getAnimalType()));
   }
 
   @Override

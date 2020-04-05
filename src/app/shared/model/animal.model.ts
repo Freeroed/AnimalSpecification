@@ -1,14 +1,14 @@
 import { Moment } from 'moment';
+import { BreedOfAnimal } from './breedOfAnimal.model';
 export class Animal {
     constructor(
     public id?: number,
     public nickname?: string,
     public sex?: string,
-    public type?: number,
     public chip?: string,
     public weight?: number,
     public birthday?: Moment,
-    public breed?: number,
+    public breed?: BreedOfAnimal,
     public color?: string,
     public placeOfBirth?: string,
     public human?: number,

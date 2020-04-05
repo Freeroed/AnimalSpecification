@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.DestinationCountry;
+import ru.vlsu.animalSpecification.domain.Region;
 import ru.vlsu.animalSpecification.repository.DestinationCountryRepository;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class DestinationCountryService {
       this.repo = repo;
     }
 
-  public void save(DestinationCountry country) {
+    public void save(DestinationCountry country) {
         repo.save(country);
     }
 
@@ -39,11 +40,11 @@ public class DestinationCountryService {
         repo.deleteById(id);
     }
 
-    public List <DestinationCountry> getByRegion(Long id) {
-      log.debug("Find countrys by region id: " + id);
+    public List <DestinationCountry> getByRegion(Region region) {
+      log.debug("Find countrys by region id: " + region);
       List <DestinationCountry> res = null;
       try {
-        res = repo.findAllByRegion(id);
+        res = repo.findAllByRegion(region);
       } catch (Exception e){
         log.debug("Error finding countrys by region with id. Exc: " + e.getMessage());
       }
