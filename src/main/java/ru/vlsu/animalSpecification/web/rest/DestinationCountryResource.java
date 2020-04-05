@@ -28,34 +28,16 @@ public class DestinationCountryResource {
 
   // Можно удалить (скорее всего не будет использоваться)
     @GetMapping("/countries")
-    public List<DestinationCountry> getAllCountries() {
-        log.debug("REST request to get all countries");
-        return  dcService.listAll();
-    }
-
-    @PostMapping("/countries/get")
-    public ResponseEntity getCountriesByRegion(@RequestBody Region region) {
-      log.debug("REST request to get countries by region : {} ", region);
-      List<DestinationCountry> result = dcService.getByRegion(region);
-      if (result != null) {
+    public ResponseEntity getAllCountries(Long id) {
+      if (id != null) {
+        log.debug("REST request to get Countries by region with id: {}", id);
+        Region region = new Region();
+        region.setId(id);
+        List<DestinationCountry> result = dcService.getByRegion(region);
         return ResponseEntity.ok(result);
-      } else {
-        return ResponseEntity.notFound().build();
       }
+        log.debug("REST request to get all countries");
+        return  ResponseEntity.ok(dcService.listAll());
     }
 
-    /* Получить все страны региона
-       @param id - Id региона
-    */
-    /*@GetMapping("/countries/{id}")
-    public ResponseEntity getVaccineByRegionId(@PathVariable Long id) {
-      log.debug("REST request to get countries by region with id : {}", id);
-      List <DestinationCountry> res = dcService.getByRegion(id);
-      if (res != null) {
-        return ResponseEntity.ok()
-          .body(res);
-      } else {
-        return ResponseEntity.notFound().build();
-      }
-    }*/
 }

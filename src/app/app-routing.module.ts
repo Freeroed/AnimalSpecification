@@ -9,14 +9,7 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot([
-    {
-      path: 'animals',
-      component: AnimalComponent,
-      data : {
-        autorities: ['ROLE_USER', 'ROLE_ADMIN']
-      },
-      canActivate: [UserRouteAccessService]
-    }, 
+   
     
     {
       path: 'admin/docs',

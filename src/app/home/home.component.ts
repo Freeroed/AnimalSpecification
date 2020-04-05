@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
     regions: Region[];
     countries!: IDestinationCounry[];
     checkRegion =false;
-    selected;
-    selectedCountry;
+    selected = null;
+    selectedCountry = null;
 
     editForm = this.fb.group({
         region: [],
@@ -32,17 +32,15 @@ export class HomeComponent implements OnInit {
     ngOnInit(){
         this.regionService.findAll().subscribe((res: HttpResponse<Region[]>) =>
         this.regions = res.body);
-        this.countryService.findAll().subscribe((res: HttpResponse<IDestinationCounry[]>) => 
-        this.countries = res.body);
     }
 
     check(): void {
-        if(this.selected){
-            this.countryService.findAllByRegion(this.selected).subscribe((res: IDestinationCounry[]) =>
-            this.countries = res)
-        this.selectedCountry = null;
-        }
+        if(this.selected && this.selected !== ''){
+            this.countryService.findAll({'id' : this.selected.id ? this.selected.id : null})
+            .subscribe((res: HttpResponse<IDestinationCounry[]>) =>
+            this.countries = res.body)
         
+        }
     }
     cheking(): void {
         console.log(this.countries);

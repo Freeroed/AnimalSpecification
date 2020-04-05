@@ -7,6 +7,8 @@ import { flatMap } from 'rxjs/operators';
 import { Animal } from '../../shared/model/animal.model';
 import { AnimalService } from './animal.service';
 import { AnimalComponent } from './animal.component';
+import { UserRouteAccessService } from 'src/app/core/auth/user-route-access-service';
+import { AnimalCreateComponent } from './animal-create.component';
 
 @Injectable()
 export class AnimalResolve implements Resolve<Animal> {
@@ -31,8 +33,20 @@ export class AnimalResolve implements Resolve<Animal> {
     }
 }
 export const animalRoute: Routes = [
-    {
+        {
         path: 'animals',
         component: AnimalComponent,
-    }
+        data : {
+          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+        },
+        canActivate: [UserRouteAccessService]
+      }, 
+      {
+        path: 'animals/new',
+        component: AnimalCreateComponent,
+        data : {
+          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+        },
+        canActivate: [UserRouteAccessService]
+      },
 ];

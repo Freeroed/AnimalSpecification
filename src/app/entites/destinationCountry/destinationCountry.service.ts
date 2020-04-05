@@ -4,6 +4,7 @@ import { DestinationCounry, IDestinationCounry } from 'src/app/shared/model/dest
 import { SERVER_API_URL } from 'src/app/app.constants';
 import { Observable } from 'rxjs';
 import { Region, IRegion } from 'src/app/shared/model/region.model';
+import { createRequestOption } from 'src/app/shared/util/request-util';
 
 
 type EntityResponseType = HttpResponse<IDestinationCounry>;
@@ -18,14 +19,12 @@ export class DestinationCounryService {
 
     constructor(private http: HttpClient) {}
 
-    findAll(): Observable<EntityArrayResponseType> {
+    findAll(req?: any): Observable<EntityArrayResponseType> {
+        const optional = createRequestOption(req);
+        
         return this.http
-            .get<DestinationCounry[]>(this.resourseUrl, { observe: 'response'});
+            .get<DestinationCounry[]>(this.resourseUrl, {params: optional, observe: 'response'});
     }
 
-    findAllByRegion(region: IRegion): Observable<IDestinationCounry[]> {
-        return this.http
-            .post<IDestinationCounry[]>(this.resourseUrl+'/get', region, httpOptions);
-    }
 
 }

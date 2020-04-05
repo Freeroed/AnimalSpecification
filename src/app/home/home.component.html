@@ -6,6 +6,7 @@
     </h2>
 <div class="dropdown">
   <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" (click)="check()">
+    <option [ngValue]=null>Выберите регион названичения</option>
     <option *ngFor="let region of regions" [ngValue]="region">
       {{ region.name }}
     </option>
@@ -17,6 +18,7 @@
   </h2>
   <div class="dropdown">
     <select id="country" name="country" class="btn btn-info dropdown-toggle"  [(ngModel)]="selectedCountry">
+      <option [ngValue]=null>Выберите страну названичения</option>
       <option *ngFor="let country of countries" [ngValue]="country">
         {{ country.countryName }}
       </option>
@@ -32,6 +34,5 @@
 <p>
  <a routerLink="animals"> Тестовая ссылка для проверки запроса животных</a>
 </p>
-<button (click)="cheking()">ЧЕКНИ</button>
 </div>
   </div></div>

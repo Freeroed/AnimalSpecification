@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.BreedsOfAnimal;
+import ru.vlsu.animalSpecification.domain.TypeOfAnimal;
 import ru.vlsu.animalSpecification.repository.BreedsOfAnimalRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,13 +29,13 @@ public class BreedsOfAnimalService {
         return (List<BreedsOfAnimal>)repo.findAll();
     }
 
-    public List <BreedsOfAnimal> getByType(Long id) {
-      log.debug("Find brees by animal type id: " + id);
-      List <BreedsOfAnimal> res = null;
+    public List <BreedsOfAnimal> getByType(TypeOfAnimal typeOfAnimal) {
+      log.debug("Request to find breeds by animal type type: " + typeOfAnimal);
+      List <BreedsOfAnimal> res = new ArrayList<>();
       try {
-        res = repo.getAllByAnimalType(id);
+        res = repo.getAllByAnimalType(typeOfAnimal);
       } catch (Exception e){
-        log.debug("Error finding brees by animal type with id. Exc: " + e.getMessage());
+        log.debug("Error finding breeds by animal type with id. Exc: " + e.getMessage());
       }
       return res;
     }
