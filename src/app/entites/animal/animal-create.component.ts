@@ -7,6 +7,9 @@ import { BreedsOfAnimalService } from '../breedsOfAnimal/breedsOfAnimal.service'
 import { TypeOfAnimalService } from '../typesOfAnimal/typeOfAnimal.service';
 import { HttpResponse } from '@angular/common/http';
 import { Animal } from 'src/app/shared/model/animal.model';
+import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'src/app/app.constants';
 
 @Component({
     selector: 'app-create-animal',
@@ -18,6 +21,9 @@ export class AnimalCreateComponent implements OnInit {
     isSuccessful = false;
     isSignUpFailed = false;
     errorMessage = '';
+    selectedType = null;
+    selectedBreed = null;
+    selectedSex = null;
 
     constructor(
         private animalService: AnimalService,
@@ -34,6 +40,7 @@ export class AnimalCreateComponent implements OnInit {
         weitht: [],
         birthday: [],
         breed: [],
+        type: [],
         color: [],
         placeOfBirth: [],
         tnvedCode: [],
@@ -48,6 +55,42 @@ export class AnimalCreateComponent implements OnInit {
     createFormFrom(): Animal {
         return {
             ...new Animal(),
+            id: this.editForm.get(['id'])!.value,
+            nickname: this.editForm.get(['nickname'])!.value,
+            sex: this.editForm.get(['sex'])!.value,
+            weight: this.editForm.get(['weitht'])!.value,
+            birthday: this.editForm.get(['birthday'])!.value != null ? moment(this.editForm.get(['birthday'])!.value, DATE_TIME_FORMAT) : undefined,
+            breed: this.editForm.get(['breed'])!.value,
+            color: this.editForm.get(['color'])!.value,
+            placeOfBirth: this.editForm.get(['placeOfBirth'])!.value,
+            tnvedCode: this.editForm.get(['tnvedCode'])!.value,
+            colorENG: this.editForm.get(['colorENG'])!.value,
+            chip: this.editForm.get(['chip'])!.value,
         }
     }
+    check() : void {
+        const animal = this.createFormFrom();
+        console.log(animal);
+    }
+    getBreeds() : void {
+        if (this.selectedType) {
+        this.selectedBreed = null;
+        this.breedsService.findAll({'id' : this.selectedType.id ? this.selectedType.id : null}).subscribe((res: HttpResponse<BreedOfAnimal[]>) => 
+        this.breeds = res.body)
+        }
+    }
+    save() {
+        const animal = this.createFormFrom();
+        this.subscribeToSaveResponse(this.animalService.save(animal));
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<Animal>>): void {
+        result.subscribe(
+            () => window.history.back(),
+            message => {this.errorMessage = message.error.message;
+                //TODO check errors
+            }
+        )
+    }
+    
 }

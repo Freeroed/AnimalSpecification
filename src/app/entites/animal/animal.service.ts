@@ -29,6 +29,12 @@ export class AnimalService {
         .pipe(map((res: Animal[]) => this.convertDateArrayFromServer(res)));
     }
 
+    save(animal: Animal): Observable<any> {
+        const copy = this.convetDateFromClient(animal);
+        return this.http.post(this.resourceUrl , copy)
+        .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
     /*
     Корневрт даты
     */
@@ -46,5 +52,14 @@ export class AnimalService {
             });
         }
         return res;
+    }
+
+    protected convetDateFromClient(animal: Animal): Animal {
+        console.log("LOG BY SERVICE");
+        console.log(animal);
+        const copy: Animal = Object.assign({}, animal, {
+            birthday: animal.birthday && animal.birthday.isValid() ? animal.birthday.toJSON() : undefined
+        });
+        return copy;
     }
 }

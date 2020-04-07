@@ -1,11 +1,130 @@
 <div class="row justify-content-center">
-    <div class="card my-5">
+    <div >
         <div class="card-body">
             <form name="editForm" role="form" [formGroup]="editForm">
                 <h2>
                     Создание или редактирование животного
                 </h2>
+                <div class="form-group">
+                    <label>
+                        Кличка животного
+                    </label>
+                        <input type="text" class="form-control" id="nickname"
+                        formControlName="nickname" required/>
+                        <div  *ngIf="editForm.get('nickname')!.invalid && (editForm.get('nickname')!.dirty || editForm.get('nickname')!.touched)">
+                            <small class="form-text text-danger"
+                            *ngIf="editForm.get('nickname')?.errors?.minlength">
+                        Логин должен быть длиннее 6 символов
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Тип животного
+                    </label>
+                    <select class="form-control" name="type" [(ngModel)]="selectedType" formControlName="type" (click)="getBreeds()">
+                        <option [ngValue]=null >Выберите тип животного</option>
+                        <option *ngFor="let type of types" [ngValue]="type" >{{type.typeName}}</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="selectedType"> 
+                    <label>
+                        Порода вашего животного
+                    </label>
+                    <select class="form-control" name="breed" [(ngModel)]="selectedBreed" formControlName="breed" >
+                        <option [ngValue]=null >Выберите породу животного</option>
+                        <option *ngFor="let breed of breeds" [ngValue]="breed" >{{breed.breedName}}</option>
+                    </select>
+                </div>
+                <div class="form-group"> 
+                    <label>
+                        Порода вашего животного
+                    </label>
+                    <select class="form-control" name="sex" [(ngModel)]="selectedSex" formControlName="sex" >
+                        <option [ngValue]=null >Выберите пол животного</option>
+                        <option  Value="М" >Мужской</option>
+                        <option  Value="Ж" >Женский</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Цвет животного животного
+                    </label>
+                        <input type="text" class="form-control" id="color"
+                        formControlName="color" required/>
+                        <div  *ngIf="editForm.get('color')!.invalid && (editForm.get('color')!.dirty || editForm.get('color')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Цвет животного животного на английском
+                    </label>
+                        <input type="text" class="form-control" id="colorENG"
+                        formControlName="colorENG" required/>
+                        <div  *ngIf="editForm.get('colorENG')!.invalid && (editForm.get('colorENG')!.dirty || editForm.get('colorENG')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Дата рождения животного
+                    </label>
+                        <input type="date" class="form-control" id="birthday"
+                        formControlName="birthday" required/>
+                        <div  *ngIf="editForm.get('birthday')!.invalid && (editForm.get('birthday')!.dirty || editForm.get('birthday')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Место рождения животного
+                    </label>
+                        <input type="text" class="form-control" id="placeOfBirth"
+                        formControlName="placeOfBirth" required/>
+                        <div  *ngIf="editForm.get('placeOfBirth')!.invalid && (editForm.get('placeOfBirth')!.dirty || editForm.get('placeOfBirth')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Вес животного
+                    </label>
+                        <input type="number" class="form-control" id="weitht"
+                        formControlName="weitht" required/>
+                        <div  *ngIf="editForm.get('weitht')!.invalid && (editForm.get('weitht')!.dirty || editForm.get('weitht')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Код ТНвед
+                    </label>
+                        <input type="number" class="form-control" id="tnvedCode"
+                        formControlName="tnvedCode" required/>
+                        <div  *ngIf="editForm.get('tnvedCode')!.invalid && (editForm.get('tnvedCode')!.dirty || editForm.get('tnvedCode')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Номер чипа
+                    </label>
+                        <input type="number" class="form-control" id="chip"
+                        formControlName="chip" required/>
+                        <div  *ngIf="editForm.get('chip')!.invalid && (editForm.get('chip')!.dirty || editForm.get('chip')!.touched)">
+                            <small class="form-text text-danger">
+                        </small>
+                    </div>
+                </div>
             </form>
+            <button (click)="save()">Сохранить</button>
             </div>
         </div>
 </div>

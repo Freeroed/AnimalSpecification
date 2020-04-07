@@ -15,6 +15,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class AnimalResource {
@@ -71,6 +72,7 @@ public class AnimalResource {
         return ResponseEntity.badRequest().build();
       } else {
         String userName = httpServletRequest.getRemoteUser();
+        animal.setType(animal.getBreed().getAnimalType());
         AnimalDTO result = animalService.save(animal, userName);
         return ResponseEntity.created(new URI("/api/animals/" + result.getId()))
           .body(result);
