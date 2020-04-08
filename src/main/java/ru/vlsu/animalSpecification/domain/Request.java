@@ -12,23 +12,31 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "recipient")
-    private long recipient; // получатель - id человека
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipient", nullable = false)
+    private User recipient; // получатель - человек
 
-    @Column (name = "destination_country")
-    private long destinationCountry; // ГОРОД назначения (id)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "destination_country", nullable = false)
+    private DestinationCountry destinationCountry; // СТРАНА назначения
 
-    @Column (name = "border_crossing_point")
-    private long borderCrossingPoint; // пункт пересечения границы (его id)
+    @Column (name = "destination_city")
+    private long destinationCity; // ГОРОД назначения
 
-    @Column (name = "transport")
-    private long transport; // тип транспорта (id)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "border_crossing_point", nullable = false)
+    private BorderCrossingPoint borderCrossingPoint; // пункт пересечения границы
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "transport", nullable = false)
+    private Transport transport; // тип транспорта
 
     @Column (name = "vehicle_number")
     private String vehicleNumber; // номер автомобиля (если транпорт автомобитль, если самолет - мб номер самолета?)
 
-    @Column (name = "veterinarian")
-    private long veterinarian; // ветеринар, который выдаел сертификат 1
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "veterinarian", nullable = false)
+    private User veterinarian; // ветеринар, который выдаел сертификат 1
 
     @Column (name = "transaction_type")
     private String transactionType; // в примере - "перевозка без смены владельца" (серт.1 в меркурии)
@@ -43,8 +51,9 @@ public class Request {
     @Column (name = "number_of_days_to_quarantine")
     private int numberOfDaysToQuarantine; // колличесвто дней карантирования (прим: 30)
 
-    @Column (name = "inspector_of_Rosselkhoznadzor")
-    private long inspectorOfRosselkhoznadzor; // инспектор Р-а, выдавший сертиф. 5а / евросправку
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "inspector_of_Rosselkhoznadzor", nullable = false)
+    private User inspectorOfRosselkhoznadzor; // инспектор Р-а, выдавший сертиф. 5а / евросправку
 
     @Column (name = "postal_code")
     private String postalCode; // почтовый индекс грузополучателя для евросправки
@@ -75,52 +84,12 @@ public class Request {
         this.id = id;
     }
 
-    public long getRecipient() {
-        return recipient;
-    }
-
-    public void setRecipient(long recipient) {
-        this.recipient = recipient;
-    }
-
-    public long getDestinationCountry() {
-        return destinationCountry;
-    }
-
-    public void setDestinationCountry(long destinationCountry) {
-        this.destinationCountry = destinationCountry;
-    }
-
-    public long getBorderCrossingPoint() {
-        return borderCrossingPoint;
-    }
-
-    public void setBorderCrossingPoint(long borderCrossingPoint) {
-        this.borderCrossingPoint = borderCrossingPoint;
-    }
-
-    public long getTransport() {
-        return transport;
-    }
-
-    public void setTransport(long transport) {
-        this.transport = transport;
-    }
-
     public String getVehicleNumber() {
         return vehicleNumber;
     }
 
     public void setVehicleNumber(String vehicleNumber) {
         this.vehicleNumber = vehicleNumber;
-    }
-
-    public long getVeterinarian() {
-        return veterinarian;
-    }
-
-    public void setVeterinarian(long veterinarian) {
-        this.veterinarian = veterinarian;
     }
 
     public String getTransactionType() {
@@ -153,14 +122,6 @@ public class Request {
 
     public void setNumberOfDaysToQuarantine(int numberOfDaysToQuarantine) {
         this.numberOfDaysToQuarantine = numberOfDaysToQuarantine;
-    }
-
-    public long getInspectorOfRosselkhoznadzor() {
-        return inspectorOfRosselkhoznadzor;
-    }
-
-    public void setInspectorOfRosselkhoznadzor(long inspectorOfRosselkhoznadzor) {
-        this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
     }
 
     public String getPostalCode() {
@@ -201,6 +162,62 @@ public class Request {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  public User getRecipient() {
+    return recipient;
+  }
+
+  public void setRecipient(User recipient) {
+    this.recipient = recipient;
+  }
+
+  public DestinationCountry getDestinationCountry() {
+    return destinationCountry;
+  }
+
+  public void setDestinationCountry(DestinationCountry destinationCountry) {
+    this.destinationCountry = destinationCountry;
+  }
+
+  public long getDestinationCity() {
+    return destinationCity;
+  }
+
+  public void setDestinationCity(long destinationCity) {
+    this.destinationCity = destinationCity;
+  }
+
+  public BorderCrossingPoint getBorderCrossingPoint() {
+    return borderCrossingPoint;
+  }
+
+  public void setBorderCrossingPoint(BorderCrossingPoint borderCrossingPoint) {
+    this.borderCrossingPoint = borderCrossingPoint;
+  }
+
+  public Transport getTransport() {
+    return transport;
+  }
+
+  public void setTransport(Transport transport) {
+    this.transport = transport;
+  }
+
+  public User getVeterinarian() {
+    return veterinarian;
+  }
+
+  public void setVeterinarian(User veterinarian) {
+    this.veterinarian = veterinarian;
+  }
+
+  public User getInspectorOfRosselkhoznadzor() {
+    return inspectorOfRosselkhoznadzor;
+  }
+
+  public void setInspectorOfRosselkhoznadzor(User inspectorOfRosselkhoznadzor) {
+    this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
   }
 
   @Override

@@ -38,7 +38,7 @@ public class LaboratoryResearchResource {
 
       log.debug("REST request to save laboratory research : {}", lr);
 
-      if ((lr.getId() != null)||(lr.getAnimal() == 0)) {
+      if ((lr.getId() != null)||(lr.getAnimal() == null)) {
         return ResponseEntity.badRequest().build();
       } else {
         lrService.save(lr);

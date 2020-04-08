@@ -13,8 +13,9 @@ public class Vaccine implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "animal")
-    private long animal; // животное
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "animal", nullable = false)
+    private Animal animal; // животное
 
     @Column (name = "type")
     private String type; // тип вакцины
@@ -44,14 +45,6 @@ public class Vaccine implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public long getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(long animal) {
-        this.animal = animal;
     }
 
     public String getType() {
@@ -102,7 +95,15 @@ public class Vaccine implements Serializable {
         this.validUntil = validUntil;
     }
 
-    @Override
+    public Animal getAnimal() {
+      return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+      this.animal = animal;
+    }
+
+  @Override
     public String toString() {
       return "Vaccine{" +
         "id=" + id +

@@ -20,7 +20,7 @@ public class Animal implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "type", nullable = false)
-    private TypeOfAnimal type; // кошка/собака/хомяк (id типа)
+    private TypeOfAnimal type; // кошка/собака/хомяк
 
     @Column (name = "chip")
     private String chip; // чип
@@ -33,7 +33,7 @@ public class Animal implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "breed", nullable = false)
-    private BreedsOfAnimal breed; // порода (id)
+    private BreedsOfAnimal breed; // порода
 
     @Column (name = "color")
     private String color; //цвет
@@ -51,16 +51,16 @@ public class Animal implements Serializable {
     @Column (name = "color_ENG")
     private String colorENG; // цвет на английском
 
-  public User getMaster() {
-    return master;
-  }
+    public User getMaster() {
+      return master;
+    }
 
-  public void setMaster(User master) {
-    this.master = master;
-  }
+    public void setMaster(User master) {
+      this.master = master;
+    }
 
-  @Column (name = "status")
-  private String status; // состояние животного
+    @Column (name = "status")
+    private String status; // состояние животного
 
 
 
