@@ -1,5 +1,6 @@
 package ru.vlsu.animalSpecification.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.vlsu.animalSpecification.domain.Animal;
 
 import java.time.Instant;
@@ -11,7 +12,6 @@ public class AnimalDTO {
   private String nickname;
 
   private char sex;
-
 
   private String chip;
 
@@ -31,6 +31,7 @@ public class AnimalDTO {
 
   private String status;
 
+  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
   private Instant birthday;
 
   private String inn;

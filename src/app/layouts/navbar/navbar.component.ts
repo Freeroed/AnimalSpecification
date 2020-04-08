@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { LoginModalService } from 'src/app/account/signin/login-modal.service';
 
@@ -8,13 +8,16 @@ import { LoginModalService } from 'src/app/account/signin/login-modal.service';
     styleUrls: ['navbar.scss']
 })
 
-export class NavbarComponent {
-
+export class NavbarComponent implements OnInit{
+    hasRoles = false;
     constructor(
         private authService: AuthService,
-        private loginModalService: LoginModalService
+        private loginModalService: LoginModalService,
     ) {}
 
+    ngOnInit(): void {
+        this.hasRoles = this.authService.hasRoles();
+    }
     login() : void {
         this.loginModalService.open();
     }
@@ -22,5 +25,6 @@ export class NavbarComponent {
     logout(): void {
         this.authService.logout();
     }
+
 
 }

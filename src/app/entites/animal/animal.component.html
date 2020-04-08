@@ -7,6 +7,7 @@
           <th scope="col">Name</th>
           <th scope="col">color</th>
           <th scope="col">weight</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +16,26 @@
           <td>{{ animal.nickname }}</td>
           <td>{{ animal.color }}</td>
           <td>{{ animal.weight }}</td>
+          <td>
+                  <button type="button" id="show-entity" class="btn btn-outline-primary btn-sm"
+                                style="width: 40px;" placement="top" ngbTooltip="Предпросмотр">
+                                
+                                <span class="d-none d-md-inline"></span>
+                     </button>
+                            &emsp;
+                            <button type="submit" [routerLink]="['/news', animal.id, 'edit']"
+                                class="btn btn-primary btn-sm" style="width: 40px;" placement="top"
+                                ngbTooltip="Изменить">
+                                
+                                <span class="d-none d-md-inline"></span>
+                            </button>
+                            &emsp;
+                            <button type="submit"  class="btn btn-danger btn-sm"
+                                style="width: 40px;" placement="top" ngbTooltip="Удалить">
+                                
+                                <span class="d-none d-md-inline "></span>
+                            </button>
+          </td>
         </tr>
       </tbody>
     </table>

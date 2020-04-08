@@ -24,10 +24,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DateParserFormatter } from './core/dateParseFormatter';
 import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
+import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
 
 
 @NgModule({
-  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,13 +42,14 @@ import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
     NgbModule,
     AnimalSpecificatonAccountModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   declarations: [
     AppComponent,
     NavbarComponent,
     DocsComponent,
-    FooterComponent
+    FooterComponent,
+    HasAnyAuthorityDirective
   ],
   providers: [FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders, { provide: NgbDateParserFormatter, useClass: DateParserFormatter }, { provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
   bootstrap: [AppComponent]

@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
         this.roles = this.tokenStorage.getUser().roles;
         this.navigateToStoredUrl();
         this.activeModal.close();
+        this.authService.authenticate(this.tokenStorage.getUser())
       },
       error => {
         this.isLoginFailed = true;

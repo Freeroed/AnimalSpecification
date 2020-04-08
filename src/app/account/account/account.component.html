@@ -6,11 +6,48 @@
         <span *ngIf="date >= 23 || 5 >= date">Доброй ночи</span>
         <span *ngIf="date >= 6 && 12 > date">Доброе утро</span>
         <span *ngIf="date >= 12 && 18 > date">Добрый день</span> 
-        ,{{user.userName}}!
+        , {{user.name}}!
     </h2> 
-    <button type="submit" class="btn btn-primary btn-sm" [routerLink]="['/animals/new']">
-        Создать животное
+    <br>
+    <h2>
+      <span>Мои животные</span>
+    </h2>
+    <button type="submit" class="btn btn-primary float-right btn-sm btn-pad"  [routerLink]="['/animals/new']">
+        Добавить животное
     </button>
+    <div class="table-responsive" *ngIf="animals && animals.length > 0">
+      <table class="table table-striped" aria-describedby="page-heading" style="table-layout: fixed;">
+        <thead class="thead">
+          <tr>
+            <th scope="col" width="30%">Кличка</th>
+            <th scope="col" width="25%">Порода</th>
+            <th scope="col" width="25%">Дата рождения</th>
+            <th width="20%" ></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let animal of animals">
+            <td class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{ animal.nickname }}</td>
+            <td>{{ animal.breed.typeOfAnimal.typeName }} : {{animal.breed.breedName}}</td>
+            <td>{{ animal.birthday | date: 'yyyy-MM-dd' }}</td>
+            <td>
+                        <button type="submit" [routerLink]="['/news', animal.id, 'edit']"
+                            class="btn btn-primary btn-sm" placement="top"
+                            ngbTooltip="Изменить">
+                            Редактировать
+                            <span class="d-none d-md-inline"></span>
+                        </button>
+                        &nbsp;
+                        <button type="submit"  class="btn btn-danger btn-sm"
+                             placement="top" ngbTooltip="Удалить">
+                             Удалить
+                            <span class="d-none d-md-inline "></span>
+                        </button>
+      </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
     </div>
     </div>
 </div>

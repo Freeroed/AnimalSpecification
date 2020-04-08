@@ -24,7 +24,7 @@ export class AnimalService {
     }
 
     findAll(): Observable<EntityArrayResponseType> {
-        return this.http.get<Animal[]>(this.resourceUrl + '/my', { observe: 'response'})
+        return this.http.get<Animal[]>(this.resourceUrl, { observe: 'response'})
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)))
     }
     findMy(): Observable<EntityArrayResponseType> {
