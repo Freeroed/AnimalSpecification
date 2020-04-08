@@ -8,6 +8,8 @@ import { AccountServive } from 'src/app/account/account/account.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnimalCreateComponent } from './animal-create.component';
+import { NgbModule, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 
 @NgModule({
     imports: [RouterModule.forChild(animalRoute), 
@@ -15,8 +17,9 @@ import { AnimalCreateComponent } from './animal-create.component';
         CommonModule, 
         BrowserModule, 
         FormsModule, 
-        ReactiveFormsModule],
-    declarations: [AnimalComponent, AnimalCreateComponent]
+        ReactiveFormsModule, NgbModule],
+    declarations: [AnimalComponent, AnimalCreateComponent],
+    
     
 })
 export class AnimalSpecificationAnimalModule {}

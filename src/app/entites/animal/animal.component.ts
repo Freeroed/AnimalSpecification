@@ -22,8 +22,8 @@ export class AnimalComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.animalService.fiidAll().subscribe(data => {
-            this.animals = data;
+        this.animalService.findAll().subscribe(data => {
+            this.animals = data.body;
         });
         
     }

@@ -19,6 +19,16 @@
     font-size: 13px;
 }
 
+.buttoncalendar {
+    width: 2.75rem;
+    background-image: url("./content/img/calendar.png");
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position: 50%;
+}
+
+
+
 /**/
 /*.twitter-typeahead .tt-query:focus,*/
 /*.twitter-typeahead .tt-hint:focus {*/
@@ -1844,3 +1854,4 @@ i.unknown {
 .beauty-xml {
     white-space: pre-line;
 }
+

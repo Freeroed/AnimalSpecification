@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class AccountComponent implements OnInit {
     user : IUser | null = null;
     date : number;
-    temp =  " sssss";
+    
 
     constructor(
         protected accountService: AccountServive,

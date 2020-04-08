@@ -9,7 +9,7 @@ import { Animal } from 'src/app/shared/model/animal.model';
 
 type EntityResponseType = HttpResponse<User>;
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AccountServive {
     private resourseUrl = SERVER_API_URL + "api/users/";
     

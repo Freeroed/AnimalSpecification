@@ -23,12 +23,14 @@ export class AnimalService {
         .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    fiidAll(): Observable<Animal[]> {
-        return this.http
-        .get<Animal[]>(this.resourceUrl)
-        .pipe(map((res: Animal[]) => this.convertDateArrayFromServer(res)));
+    findAll(): Observable<EntityArrayResponseType> {
+        return this.http.get<Animal[]>(this.resourceUrl + '/my', { observe: 'response'})
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)))
     }
-
+    findMy(): Observable<EntityArrayResponseType> {
+        return this.http.get<Animal[]>(this.resourceUrl + '/my', { observe: 'response'})
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)))
+    } 
     save(animal: Animal): Observable<any> {
         const copy = this.convetDateFromClient(animal);
         return this.http.post(this.resourceUrl , copy)
@@ -45,9 +47,9 @@ export class AnimalService {
         return res;
     }
 
-    protected convertDateArrayFromServer(res: Animal[]): Animal[] {
-        if (res) {
-            res.forEach((animal: Animal) => {
+    protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+        if (res.body) {
+            res.body.forEach((animal: Animal) => {
                 animal.birthday = animal.birthday ? moment(animal.birthday) : undefined;
             });
         }

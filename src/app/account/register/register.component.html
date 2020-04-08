@@ -11,7 +11,7 @@
           Логин
         </label>
         <input type="text" class="form-control" id="userName" name="userName"
-        formControlName="userName" required/>
+        formControlName="userName" required trim="blur"/>
         <div *ngIf="editForm.get('userName')!.invalid && (editForm.get('userName')!.dirty || editForm.get('userName')!.touched)">
           <small class="form-text text-danger"
                                *ngIf="editForm.get('userName')?.errors?.minlength">
@@ -210,7 +210,7 @@
         </button>
         &nbsp;
         <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
-        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="register()" placement="top" ngbTooltip="Tooltip on top">
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="register()" placement="top" >
             &nbsp;<span>Зарегистрироваться</span>
         </button>
       </span>

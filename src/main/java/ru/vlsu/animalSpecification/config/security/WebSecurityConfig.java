@@ -21,7 +21,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import ru.vlsu.animalSpecification.security.jwt.AuthEntryPoint;
 import ru.vlsu.animalSpecification.security.jwt.AuthTokenFilter;
-import ru.vlsu.animalSpecification.service.impl.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +34,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private AuthEntryPoint unauthorizedHandler;
+
+  private final CorsFilter corsFilter;
+
+  public WebSecurityConfig(CorsFilter corsFilter) {
+    this.corsFilter = corsFilter;
+  }
 
 
   @Bean
@@ -61,7 +66,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
-      .cors().and().csrf().disable()
+      .cors().configurationSource(request -> {
+      CorsConfiguration cors = new CorsConfiguration();
+      cors.setAllowedOrigins(ImmutableList.of("*"));
+      cors.setAllowedMethods(ImmutableList.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+      cors.setAllowedHeaders(ImmutableList.of("*"));
+      return cors;
+    }).and().csrf().disable()
       .httpBasic().and()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -72,7 +83,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .anyRequest().authenticated();
 
     http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class);
   }
+
   @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     final CorsConfiguration configuration = new CorsConfiguration();
@@ -89,5 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     source.registerCorsConfiguration("/**", configuration);
     return source;
   }
+
+
 
 }

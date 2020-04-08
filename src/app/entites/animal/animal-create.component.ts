@@ -10,16 +10,20 @@ import { Animal } from 'src/app/shared/model/animal.model';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'src/app/app.constants';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 
 @Component({
     selector: 'app-create-animal',
-    templateUrl: './animal-create.component.html'
+    templateUrl: './animal-create.component.html',
+    providers: [{ provide: NgbDateParserFormatter, useClass: DateParserFormatter }]
+    
 })
 export class AnimalCreateComponent implements OnInit {
     breeds : BreedOfAnimal[];
     types : TypeOfAnimal[];
     isSuccessful = false;
-    isSignUpFailed = false;
+    isCreateFailed = false;
     errorMessage = '';
     selectedType = null;
     selectedBreed = null;
@@ -59,7 +63,12 @@ export class AnimalCreateComponent implements OnInit {
             nickname: this.editForm.get(['nickname'])!.value,
             sex: this.editForm.get(['sex'])!.value,
             weight: this.editForm.get(['weitht'])!.value,
-            birthday: this.editForm.get(['birthday'])!.value != null ? moment(this.editForm.get(['birthday'])!.value, DATE_TIME_FORMAT) : undefined,
+            birthday: this.editForm.get(['birthday'])!.value != null && this.editForm.get(['birthday'])!.value != null
+            ? moment(
+                this.editForm.get(['birthday'])!.value,
+                DATE_TIME_FORMAT
+              )
+            : undefined,
             breed: this.editForm.get(['breed'])!.value,
             color: this.editForm.get(['color'])!.value,
             placeOfBirth: this.editForm.get(['placeOfBirth'])!.value,
@@ -67,10 +76,6 @@ export class AnimalCreateComponent implements OnInit {
             colorENG: this.editForm.get(['colorENG'])!.value,
             chip: this.editForm.get(['chip'])!.value,
         }
-    }
-    check() : void {
-        const animal = this.createFormFrom();
-        console.log(animal);
     }
     getBreeds() : void {
         if (this.selectedType) {
@@ -88,9 +93,13 @@ export class AnimalCreateComponent implements OnInit {
         result.subscribe(
             () => window.history.back(),
             message => {this.errorMessage = message.error.message;
-                //TODO check errors
+            this.isCreateFailed = true;   //TODO check errors
             }
         )
+    }
+
+    previousState(): void {
+        window.history.back();
     }
     
 }

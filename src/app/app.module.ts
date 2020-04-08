@@ -18,8 +18,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { SessionStorageService } from 'ngx-webstorage';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbDateParserFormatter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { AnimalSpecificatonAccountModule } from './account/account.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DateParserFormatter } from './core/dateParseFormatter';
+import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { AnimalSpecificatonAccountModule } from './account/account.module';
     FontAwesomeModule,
     NgxWebstorageModule.forRoot(),
     NgbModule,
-    AnimalSpecificatonAccountModule
+    AnimalSpecificatonAccountModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -44,7 +50,7 @@ import { AnimalSpecificatonAccountModule } from './account/account.module';
     DocsComponent,
     FooterComponent
   ],
-  providers: [FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders],
+  providers: [FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders, { provide: NgbDateParserFormatter, useClass: DateParserFormatter }, { provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
