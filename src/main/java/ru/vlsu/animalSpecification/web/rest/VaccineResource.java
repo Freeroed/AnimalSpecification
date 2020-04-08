@@ -37,7 +37,7 @@ public class VaccineResource {
 
       log.debug("REST request to save vaccine : {}", vaccine);
 
-      if ((vaccine.getId() != null)||(vaccine.getAnimal() == 0)) {
+      if ((vaccine.getId() != null)||(vaccine.getAnimal() == null)) {
         return ResponseEntity.badRequest().build();
       } else {
         vaccineService.save(vaccine);

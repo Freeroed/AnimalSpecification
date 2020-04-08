@@ -28,11 +28,13 @@ public class LaboratoryResearch implements Serializable {
     @Column (name = "examination_number")
     private String examinationNumber; // номер экспертизы
 
-    @Column (name = "result")
-    private long result; // результат исследования	LaboratoryTestResult.class
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "result", nullable = false)
+    private LaboratoryTestResult result; // результат исследования	LaboratoryTestResult.class
 
-    @Column (name = "animal")
-    private long animal; // животное
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "animal", nullable = false)
+    private Animal animal; // животное
 
     public LaboratoryResearch() { }
 
@@ -86,23 +88,23 @@ public class LaboratoryResearch implements Serializable {
         this.examinationNumber = examinationNumber;
     }
 
-    public long getResult() {
-        return result;
+    public LaboratoryTestResult getResult() {
+      return result;
     }
 
-    public void setResult(long result) {
-        this.result = result;
+    public void setResult(LaboratoryTestResult result) {
+      this.result = result;
     }
 
-    public long getAnimal() {
-        return animal;
+    public Animal getAnimal() {
+      return animal;
     }
 
-    public void setAnimal(long animal) {
-        this.animal = animal;
+    public void setAnimal(Animal animal) {
+      this.animal = animal;
     }
 
-    @Override
+  @Override
     public String toString() {
       return "LaboratoryResearch{" +
         "id=" + id +

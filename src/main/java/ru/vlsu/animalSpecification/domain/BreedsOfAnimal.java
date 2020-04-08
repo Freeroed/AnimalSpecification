@@ -19,7 +19,7 @@ public class BreedsOfAnimal implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "animal_type", nullable = false)
-    private TypeOfAnimal animalType; // id типа животного, к которому относится данная порода
+    private TypeOfAnimal animalType; // тип животного, к которому относится данная порода
 
     /* Getters and Setters */
 
