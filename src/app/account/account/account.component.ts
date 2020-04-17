@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { Animal } from 'src/app/shared/model/animal.model';
 import { AnimalService } from 'src/app/entites/animal/animal.service';
 import { HttpResponse } from '@angular/common/http';
+import { RequestService } from 'src/app/entites/request/request.service';
+import { IRequest } from 'src/app/shared/model/request.model';
 
 @Component({
     selector: 'app-account',
@@ -15,12 +17,14 @@ export class AccountComponent implements OnInit {
     user : IUser | null = null;
     date : number;
     animals: Animal[];
+    requests?: IRequest[];
     
 
     constructor(
         protected accountService: AccountServive,
         protected activatedRoute: ActivatedRoute,
-        protected animalService: AnimalService
+        protected animalService: AnimalService,
+        protected requestService: RequestService 
     ) {}
 
     ngOnInit() {
@@ -31,6 +35,10 @@ export class AccountComponent implements OnInit {
         this.animalService.findMy().subscribe( (res: HttpResponse<Animal[]>) => 
         this.animals = res.body
         );
+        this.requestService.findMy().subscribe((res: HttpResponse<IRequest[]>) =>
+        {this.requests = res.body; 
+        console.log(res.body);}
+        )
         
     }
 

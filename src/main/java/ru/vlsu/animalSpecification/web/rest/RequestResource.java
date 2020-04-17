@@ -52,7 +52,7 @@ public class RequestResource {
     }
 
     // Добавить заявку
-    @PostMapping("/request")
+    @PostMapping("/requests")
     public ResponseEntity createRequest(@RequestBody Request request) throws URISyntaxException {
       String userName = httpServletRequest.getRemoteUser();
       log.debug("REST request to save request : {}, by user with userName : {}", request, userName);
@@ -66,7 +66,7 @@ public class RequestResource {
     }
 
     // Редактировать заявку
-    @PutMapping("/request")
+    @PutMapping("/requests")
     public ResponseEntity updateRequest(@RequestBody Request request) {
       String userName = httpServletRequest.getRemoteUser();
       log.debug("REST request to update request with id : {}, with userName : {}", request, userName);
@@ -81,7 +81,7 @@ public class RequestResource {
     }
 
     // Удалить заявку
-    @DeleteMapping("/request/{id}")
+    @DeleteMapping("/requests/{id}")
     public ResponseEntity deleteRequest(@PathVariable Long id) {
       log.debug("REST request to delete request with id : {}", id);
       requestService.delete(id);
@@ -89,7 +89,7 @@ public class RequestResource {
     }
 
     // Получить заявку по id
-    @GetMapping("/request/{id}")
+    @GetMapping("/requests/{id}")
     public ResponseEntity getRequestById(@PathVariable Long id) {
       log.debug("REST request to get request with id : {}", id);
       Request res = requestService.get(id);

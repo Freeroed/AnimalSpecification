@@ -5,6 +5,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { DestinationCounryService } from '../entites/destinationCountry/destinationCountry.service';
 import { IDestinationCounry } from '../shared/model/destinationCountry.model';
+import { RequestService } from '../entites/request/request.service';
+import { IRequest, Request } from '../shared/model/request.model';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-home',
@@ -26,7 +31,9 @@ export class HomeComponent implements OnInit {
     constructor(
         protected regionService: RegionService,
         protected countryService: DestinationCounryService,
-        protected fb: FormBuilder
+        protected fb: FormBuilder,
+        protected requestService: RequestService,
+        protected router: Router
         ) { }
 
     ngOnInit(){
@@ -42,8 +49,36 @@ export class HomeComponent implements OnInit {
         
         }
     }
+
+    createFormFrom(): IRequest {
+        return {
+            ...new Request(),
+            destinationCountry: this.selectedCountry,
+            dateOfDeparture: moment()
+        }
+    }
+
+    createRequest(): void {
+        const request = this.createFormFrom();
+        this.subscribeToSaveResponse(this.requestService.save(request));
+    }
+
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IRequest>>): void {
+        result.subscribe(
+            () => this.onSaveSuccess(),
+            () => this.onSaveError()
+        );
+    }
+
+    protected onSaveSuccess(): void {
+        this.router.navigate(['account'])
+    }
+
+    protected onSaveError(): void {
+        console.log("CREATING ERROR")
+    }
     cheking(): void {
-        console.log(this.countries);
+        console.log(this.createFormFrom());
         
     }
 }

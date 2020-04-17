@@ -41,7 +41,7 @@ export class AnimalService {
     Корневрт даты
     */
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
-        if(res.body) {
+        if (res.body) {
             res.body.birthday = res.body.birthday ? moment(res.body.birthday) : undefined;
         }
         return res;
@@ -57,8 +57,6 @@ export class AnimalService {
     }
 
     protected convetDateFromClient(animal: Animal): Animal {
-        console.log("LOG BY SERVICE");
-        console.log(animal);
         const copy: Animal = Object.assign({}, animal, {
             birthday: animal.birthday && animal.birthday.isValid() ? animal.birthday.toJSON() : undefined
         });

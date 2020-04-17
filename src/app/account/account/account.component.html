@@ -10,12 +10,40 @@
     </h2> 
     <br>
     <h2>
+      <span>Мои заявки</span>
+    </h2>
+    <div *ngIf="requests && requests?.length > 0" class="table-responsive">
+      <table class="table table-striped" aria-describedby="page-heading" style="table-layout: fixed;">
+        <thead class="thead">
+          <tr>
+            <th scope="col" width="30%">Страна назначения</th>
+            <th scope="col" width="30%">Статус</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of requests">
+            <td>{{request.destinationCountry.countryName}}</td>
+            <td><span *ngIf="request.status == 'CREATED'">Создана</span>
+              <span *ngIf="request.status == 'PREPARED'">Подготовлена</span>
+              <span *ngIf="request.status == 'CONFIRM'">Подтверждена</span>
+              <span *ngIf="request.status == 'FROM_ONE_SERTIFICATED'">Выдан Сертификат формы 1</span>
+              <span *ngIf="request.status == 'EXPORT_DOCS_ISSUED'">Выданы экспотрные документы</span>
+              <span *ngIf="request.status == 'CLOSED'">Закрыта</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="requests?.length == 0"  class="alert alert-warning">
+      <span>У вас нет созданных заявок</span>
+    </div>
+    <h2>
       <span>Мои животные</span>
     </h2>
     <button type="submit" class="btn btn-primary float-right btn-sm btn-pad"  [routerLink]="['/animals/new']">
         Добавить животное
     </button>
-    <div class="table-responsive" *ngIf="animals && animals.length > 0">
+    <div class="table-responsive" *ngIf="animals && animals?.length > 0">
       <table class="table table-striped" aria-describedby="page-heading" style="table-layout: fixed;">
         <thead class="thead">
           <tr>
