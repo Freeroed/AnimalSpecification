@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 // Сведение о вакцинации
@@ -24,7 +25,7 @@ public class Vaccine implements Serializable {
     private String title; // наименование
 
     @Column (name = "date")
-    private Date date; // дата проведения
+    private Instant date; // дата проведения
 
     @Column (name = "vaccine_batch_number")
     private String vaccineBatchNumber; // номер серии вакцины
@@ -33,7 +34,7 @@ public class Vaccine implements Serializable {
     private String vaccineNameAndManufacturer; // название и производитель вакцины
 
     @Column (name = "valid_until")
-    private Date validUntil; // действие до
+    private Instant validUntil; // действие до
 
     public Vaccine() { }
 
@@ -63,11 +64,11 @@ public class Vaccine implements Serializable {
         this.title = title;
     }
 
-    public Date getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Instant date) {
         this.date = date;
     }
 
@@ -87,11 +88,11 @@ public class Vaccine implements Serializable {
         this.vaccineNameAndManufacturer = vaccineNameAndManufacturer;
     }
 
-    public Date getValidUntil() {
+    public Instant getValidUntil() {
         return validUntil;
     }
 
-    public void setValidUntil(Date validUntil) {
+    public void setValidUntil(Instant validUntil) {
         this.validUntil = validUntil;
     }
 

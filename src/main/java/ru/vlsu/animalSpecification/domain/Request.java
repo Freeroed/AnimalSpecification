@@ -1,6 +1,9 @@
 package ru.vlsu.animalSpecification.domain;
 
+import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
+
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +24,7 @@ public class Request {
     private DestinationCountry destinationCountry; // СТРАНА назначения
 
     @Column (name = "destination_city")
-    private long destinationCity; // ГОРОД назначения
+    private String destinationCity; // ГОРОД назначения
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "border_crossing_point", nullable = false)
@@ -59,7 +62,7 @@ public class Request {
     private String postalCode; // почтовый индекс грузополучателя для евросправки
 
     @Column (name = "date_of_departure")
-    private Date dateOfDeparture; // дата отправления
+    private Instant dateOfDeparture; // дата отправления
 
     @Column (name = "certificate_1_form_number")
     private String certificate1FormNumber;  // Уникальный идентификатор ВСД
@@ -69,8 +72,9 @@ public class Request {
       inverseJoinColumns = @JoinColumn(name = "animal_id"))
     private Set<Animal> animals = new HashSet<>();
 
-  @Column (name = "status")
-  private String status; // статус заявки
+    @Enumerated(EnumType.STRING)
+    @Column (name = "status")
+    private RequestStatus status; // статус заявки
 
     /*
     Getters and Setters
@@ -132,11 +136,11 @@ public class Request {
         this.postalCode = postalCode;
     }
 
-    public Date getDateOfDeparture() {
+    public Instant getDateOfDeparture() {
         return dateOfDeparture;
     }
 
-    public void setDateOfDeparture(Date dateOfDeparture) {
+    public void setDateOfDeparture(Instant dateOfDeparture) {
         this.dateOfDeparture = dateOfDeparture;
     }
 
@@ -156,11 +160,11 @@ public class Request {
       this.animals = animals;
     }
 
-  public String getStatus() {
+  public RequestStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(RequestStatus status) {
     this.status = status;
   }
 
@@ -180,11 +184,11 @@ public class Request {
     this.destinationCountry = destinationCountry;
   }
 
-  public long getDestinationCity() {
+  public String getDestinationCity() {
     return destinationCity;
   }
 
-  public void setDestinationCity(long destinationCity) {
+  public void setDestinationCity(String destinationCity) {
     this.destinationCity = destinationCity;
   }
 

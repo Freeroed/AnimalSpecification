@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.domain.User;
+import ru.vlsu.animalSpecification.domain.emun.AnimalStatus;
 import ru.vlsu.animalSpecification.repository.AnimalRepository;
 import ru.vlsu.animalSpecification.service.AnimalService;
 import ru.vlsu.animalSpecification.service.UserService;
@@ -61,6 +62,7 @@ public class AnimalServiceImpl implements AnimalService {
     public AnimalDTO save(Animal animal, String username) {
       log.debug("Request to save animal : {} with human with username : {}" , animal.toString(), username);
       animal.setMaster(userService.findByUsername(username));
+      animal.setStatus(AnimalStatus.READY_TO_REQUEST);
       log.debug("Saving animal : " + animal);
       return new AnimalDTO(repo.save(animal));
     }
@@ -73,7 +75,6 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public Optional<AnimalDTO> findOne(Long id) {
       log.debug("Request to find Animal by id : {}", id);
-      //return null;
       return repo.findById(id).map(animalMapper::animalToAnimalsDTO);
     }
 

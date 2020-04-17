@@ -51,7 +51,6 @@ public class User implements Serializable {
     @Column(name = "name_ENG")
     private String nameEng;
 
-
     @Column(name = "email")
     private String email;
 

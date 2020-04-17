@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.vlsu.animalSpecification.domain.Animal;
+import ru.vlsu.animalSpecification.domain.emun.AnimalStatus;
 
 import java.time.Instant;
 
@@ -29,7 +30,7 @@ public class AnimalDTO {
 
   private String colorENG;
 
-  private String status;
+  private AnimalStatus status;
 
   @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
   private Instant birthday;
@@ -134,11 +135,11 @@ public class AnimalDTO {
     this.colorENG = colorENG;
   }
 
-  public String getStatus() {
+  public AnimalStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(AnimalStatus status) {
     this.status = status;
   }
 

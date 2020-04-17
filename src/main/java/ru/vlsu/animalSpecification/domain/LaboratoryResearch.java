@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 
 // Лабораторное исследование
@@ -20,7 +21,7 @@ public class LaboratoryResearch implements Serializable {
     private String indicator; // показатель
 
     @Column (name = "date_of_receipt_of_result")
-    private Date dateOfReceiptOfResult; // день получения результата
+    private Instant dateOfReceiptOfResult; // день получения результата
 
     @Column (name = "research_method")
     private String researchMethod; // метод исследования
@@ -64,11 +65,11 @@ public class LaboratoryResearch implements Serializable {
         this.indicator = indicator;
     }
 
-    public Date getDateOfReceiptOfResult() {
+    public Instant getDateOfReceiptOfResult() {
         return dateOfReceiptOfResult;
     }
 
-    public void setDateOfReceiptOfResult(Date dateOfReceiptOfResult) {
+    public void setDateOfReceiptOfResult(Instant dateOfReceiptOfResult) {
         this.dateOfReceiptOfResult = dateOfReceiptOfResult;
     }
 

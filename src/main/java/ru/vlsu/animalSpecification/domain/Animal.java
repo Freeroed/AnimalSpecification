@@ -1,5 +1,7 @@
 package ru.vlsu.animalSpecification.domain;
 
+import ru.vlsu.animalSpecification.domain.emun.AnimalStatus;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -59,8 +61,9 @@ public class Animal implements Serializable {
       this.master = master;
     }
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "status")
-    private String status; // состояние животного
+    private AnimalStatus status; // состояние животного
 
 
 
@@ -164,11 +167,11 @@ public class Animal implements Serializable {
         this.colorENG = colorENG;
     }
 
-  public String getStatus() {
+  public AnimalStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(AnimalStatus status) {
     this.status = status;
   }
 
