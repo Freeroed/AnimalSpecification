@@ -32,8 +32,11 @@ public class RequestService {
     public Request save(Request req, String userName) {
         log.debug("Request save request : {} by user with userName : {}", req, userName);
         User master = userService.findByUsername(userName);
-        req.setRecipient(master);
-        req.setStatus(RequestStatus.CREATED);
+        if (req.getId() != null) {
+          req.setRecipient(master);
+          req.setStatus(RequestStatus.CREATED);
+        }
+
         return repo.save(req);
     }
 
