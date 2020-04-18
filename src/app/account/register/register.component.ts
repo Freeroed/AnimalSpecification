@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
         createdAt: []
     })
     ngOnInit() {
-        this.authService.logout();
+        //this.authService.logout();
     }
 
     private createFormFrom(): IUser {

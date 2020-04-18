@@ -136,7 +136,7 @@
                     <label>
                         Код ТНвед
                     </label>
-                        <input type="number" class="form-control" id="tnvedCode"
+                        <input type="text" class="form-control" id="tnvedCode"
                         formControlName="tnvedCode" required/>
                         <div  *ngIf="editForm.get('tnvedCode')!.invalid && (editForm.get('tnvedCode')!.dirty || editForm.get('tnvedCode')!.touched)">
                             <small class="form-text text-danger">
@@ -148,7 +148,7 @@
                     <label>
                         Номер чипа
                     </label>
-                        <input type="number" class="form-control" id="chip"
+                        <input type="text" class="form-control" id="chip"
                         formControlName="chip" required/>
                         <div  *ngIf="editForm.get('chip')!.invalid && (editForm.get('chip')!.dirty || editForm.get('chip')!.touched)">
                             <small class="form-text text-danger">
