@@ -63,14 +63,14 @@
             </div>
 
             <h3><span>Лабораторные исследования</span>
-                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad">
+                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad" (click)="createLaboratoryResearch()">
                     Добавить исследование
                 </button>
                 
             </h3>
                 <br>
-            <div *ngIf="laboretoryResurches.length == 0"  class="alert alert-warning"><span>Нет информации об исследованиях </span></div>
-            <div *ngIf="laboretoryResurches && laboretoryResurches?.length > 0" class="table-responsive">
+            <div *ngIf="laboratoryResurches?.length == 0"  class="alert alert-warning"><span>Нет информации об исследованиях </span></div>
+            <div *ngIf="laboratoryResurches && laboratoryResurches?.length > 0" class="table-responsive">
                 <table class="table table-striped" style="table-layout: fixed;">
                     <thead>
                         <tr>
@@ -83,10 +83,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let laboretoryResurch of laboretoryResurches">
+                        <tr *ngFor="let laboretoryResurch of laboratoryResurches">
                             <td>{{laboretoryResurch.laboratory}}</td>
                             <td>{{laboretoryResurch.indicator}}</td>
-                            <td>{{laboretoryResurch.dateOfReceiptOfResult}}</td>
+                            <td>{{laboretoryResurch.dateOfReceiptOfResult | date : 'yyyy-MM-dd'}}</td>
                             <td>{{laboretoryResurch.result}}</td>
                             <td>{{laboretoryResurch.researchMethod}}</td>
                             <td>{{laboretoryResurch.examinationNumber}}</td>

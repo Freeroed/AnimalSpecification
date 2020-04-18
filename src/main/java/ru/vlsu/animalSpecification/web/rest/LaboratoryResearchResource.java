@@ -21,20 +21,27 @@ public class LaboratoryResearchResource {
     private static final Logger log = LoggerFactory.getLogger(LaboratoryResearchResource.class);
 
 
-    private final LaboratoryResearchService lrService;
+    private final LaboratoryResearchService laboratoryResearchService;
 
     @Autowired
     public LaboratoryResearchResource(LaboratoryResearchService lrService) {
-      this.lrService = lrService;
+      this.laboratoryResearchService = lrService;
     }
 
-  @GetMapping("/laboratoryResearchs")
-    public List<LaboratoryResearchDTO> getAllLaboratoryResearchs() {
-        return  lrService.listAll();
+    @GetMapping("/laboratoryResearches")
+    public ResponseEntity getAllLaboratoryResearchs(Long id) {
+        if(id != null) {
+          log.debug("REST request to get all LaboratoryResearches by Animal with id : {}", id);
+          List<LaboratoryResearchDTO> result = laboratoryResearchService.getByAnimal(id);
+          return ResponseEntity.ok(result);
+        }
+        log.debug("REST request to get all LaboratoryResearches");
+        List<LaboratoryResearchDTO> result = laboratoryResearchService.listAll();
+        return ResponseEntity.ok(result);
     }
 
     // Создать результат лабораторного исследования
-    @PostMapping("/laboratoryResearch")
+    @PostMapping("/laboratoryResearches")
     public ResponseEntity createLabResearch(@RequestBody LaboratoryResearch lr) throws URISyntaxException {
 
       log.debug("REST request to save laboratory research : {}", lr);
@@ -42,14 +49,14 @@ public class LaboratoryResearchResource {
       if ((lr.getId() != null)||(lr.getAnimal() == null)) {
         return ResponseEntity.badRequest().build();
       } else {
-        lrService.save(lr);
+        laboratoryResearchService.save(lr);
         return ResponseEntity.created(new URI("/laboratoryResearchs" ))
           .body(lr);
       }
     }
 
     // Обновить результат лабораторного иссладованич
-    @PutMapping("/laboratoryResearch")
+    @PutMapping("/laboratoryResearches")
     public ResponseEntity updateLabResearch(@RequestBody LaboratoryResearch lr) {
 
       log.debug("REST request to update laboratory research with id : {} ", lr.getId());
@@ -58,24 +65,24 @@ public class LaboratoryResearchResource {
         return ResponseEntity.badRequest().build();
       }
       else {
-        lrService.save(lr);
+        laboratoryResearchService.save(lr);
         return ResponseEntity.ok().body(lr);
       }
     }
 
     // Удалить по id результат лабораторного исследования
-    @DeleteMapping("/laboratoryResearch/{id}")
+    @DeleteMapping("/laboratoryResearches/{id}")
     public ResponseEntity deleteLabResearch(@PathVariable Long id) {
       log.debug("REST request to delete laboratory research with id : {}", id);
-      lrService.delete(id);
+      laboratoryResearchService.delete(id);
       return ResponseEntity.noContent().build();
     }
 
     // Получить лабораторное исследование по id
-    @GetMapping("/laboratoryResearch/{id}")
+    @GetMapping("/laboratoryResearches/{id}")
     public ResponseEntity getLabResearch(@PathVariable Long id) {
       log.debug("REST request to get laboratory research with id : {}", id);
-      LaboratoryResearchDTO lr = lrService.get(id);
+      LaboratoryResearchDTO lr = laboratoryResearchService.get(id);
       if (lr != null) {
         return ResponseEntity.ok()
           .body(lr);
@@ -90,7 +97,7 @@ public class LaboratoryResearchResource {
     @GetMapping("/laboratoryResearchByAnimal/{id}")
     public ResponseEntity getLabResearchByAnimal(@PathVariable Long id) {
       log.debug("REST request to get laboratory research by animal with id : {}", id);
-      List <LaboratoryResearchDTO> lr = lrService.getByAnimal(id);
+      List <LaboratoryResearchDTO> lr = laboratoryResearchService.getByAnimal(id);
       if (lr != null) {
         return ResponseEntity.ok()
           .body(lr);

@@ -1,0 +1,71 @@
+<div class="modal-header">
+    <h4 class="modal-title">Добавление информации об исследовании</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+
+<div class="modal-body"> 
+    <form name="editForm" role="form" [formGroup]="editForm">
+
+    <div class="form-group">
+        <label>
+            Лаборатория
+        </label>
+        <input type="text" class="form-control" id="laboratory" formControlName="laboratory" required/>
+    </div>
+
+    <div class="form-group">
+        <label>
+            Наименовари индикатора
+        </label>
+        <input type="text" class="form-control" id="indicator" formControlName="indicator" required/>
+    </div>
+
+    <div class="form-group">
+        <label>
+            Метод исследования
+        </label>
+        <input type="text" class="form-control" id="researchMethod" formControlName="researchMethod" required/>
+    </div>
+    <div class="form-group">
+        <label>
+            Номер экспертизы
+        </label>
+        <input type="text" class="form-control" id="examinationNumber" formControlName="examinationNumber" required/>
+    </div>
+
+    <div class="form-group row" >
+        <div class="form-group" style="margin-left: 15px;">
+            <label>
+                Результат исследования
+            </label>
+            <select class="form-control" name="result" formControlName="result" id="field_result" required>
+                <option value="POSITIVE">Положительный</option>
+                <option value="NEGATIVE">Отрицательный</option>
+                <option value="NOT_KNOWN">Не известно</option>
+                <option value="NOT_STANDARDIZED">Не нормированный</option>
+            </select>
+        </div>
+    <div class="form-group" style="width: 40%; margin-left: 30px;">
+        <label>
+            Дата исследования
+        </label>
+        <div class="input-group" >
+            <input class="form-control" placeholder="ДД.ММ.ГГГГ" 
+                        name="dateOfReceiptOfResult" ngbDatepicker #s="ngbDatepicker" readonly 
+                        formControlName="dateOfReceiptOfResult" id="dateOfReceiptOfResult" required >
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary buttoncalendar" (click)="s.toggle()"  type="button">
+                </button>
+            </div>
+        </div>
+    </div>
+        
+            
+    </div>
+   
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="save()" placement="top" >
+            &nbsp;<span>Сохранить</span>
+        </button>
+</form>
+</div>
