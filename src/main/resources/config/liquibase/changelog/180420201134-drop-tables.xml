@@ -14,7 +14,7 @@
       DROP TABLE laboratory_test_result;
       DROP TABLE transport;
       ALTER TABLE Animal DROP COLUMN weight;
-      ALTER TABLE Request ADD dateOfCreation DATE NULL ;
+      ALTER TABLE Request ADD dateOfCreationa timestamp NULL ;
     </sql>
 
   </changeSet>
