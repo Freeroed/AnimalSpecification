@@ -25,6 +25,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DateParserFormatter } from './core/dateParseFormatter';
 import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
 import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
+import { AnimasSpecificationVaccineModule } from './entites/vaccine/vaccine.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.direct
     NgbModule,
     AnimalSpecificatonAccountModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    AnimasSpecificationVaccineModule
   ],
   declarations: [
     AppComponent,

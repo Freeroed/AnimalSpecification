@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.LaboratoryResearch;
 import ru.vlsu.animalSpecification.service.LaboratoryResearchService;
+import ru.vlsu.animalSpecification.service.dto.LaboratoryResearchDTO;
 
 
 import java.net.URI;
@@ -28,7 +29,7 @@ public class LaboratoryResearchResource {
     }
 
   @GetMapping("/laboratoryResearchs")
-    public List<LaboratoryResearch> getAllLaboratoryResearchs() {
+    public List<LaboratoryResearchDTO> getAllLaboratoryResearchs() {
         return  lrService.listAll();
     }
 
@@ -74,7 +75,7 @@ public class LaboratoryResearchResource {
     @GetMapping("/laboratoryResearch/{id}")
     public ResponseEntity getLabResearch(@PathVariable Long id) {
       log.debug("REST request to get laboratory research with id : {}", id);
-      LaboratoryResearch lr = lrService.get(id);
+      LaboratoryResearchDTO lr = lrService.get(id);
       if (lr != null) {
         return ResponseEntity.ok()
           .body(lr);
@@ -89,7 +90,7 @@ public class LaboratoryResearchResource {
     @GetMapping("/laboratoryResearchByAnimal/{id}")
     public ResponseEntity getLabResearchByAnimal(@PathVariable Long id) {
       log.debug("REST request to get laboratory research by animal with id : {}", id);
-      List <LaboratoryResearch> lr = lrService.getByAnimal(id);
+      List <LaboratoryResearchDTO> lr = lrService.getByAnimal(id);
       if (lr != null) {
         return ResponseEntity.ok()
           .body(lr);

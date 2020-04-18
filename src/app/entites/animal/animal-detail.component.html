@@ -30,13 +30,13 @@
                 </dd>
             </dl>
             <h3><span>Вакцинации</span>
-                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad">
+                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad" (click)="createVaccine()">
                     Добавить вакцину
                 </button>
                 
             </h3>
                 <br>
-            <div *ngIf="vaccines.length == 0"  class="alert alert-warning"><span>Нет информации о вакцинациях</span></div>
+            <div *ngIf="vaccines?.length == 0"  class="alert alert-warning"><span>Нет информации о вакцинациях</span></div>
             <div *ngIf="vaccines && vaccines?.length > 0" class="table-responsive">
                 <table class="table table-striped" style="table-layout: fixed;">
                     <thead>
@@ -53,10 +53,10 @@
                         <tr *ngFor="let vaccine of vaccines">
                             <td>{{vaccine.type}}</td>
                             <td>{{vaccine.title}}</td>
-                            <td>{{vaccine.date}}</td>
+                            <td>{{vaccine.date | date : 'yyyy-MM-dd'}}</td>
                             <td>{{vaccine.vaccineBatchNumber}}</td>
                             <td>{{vaccine.vaccineNameAndManufacturer}}</td>
-                            <td>{{vaccine.validUntil}}</td>
+                            <td>{{vaccine.validUntil | date : 'yyyy-MM-dd'}}</td>
                         </tr>
                     </tbody>
                 </table>

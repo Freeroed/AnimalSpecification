@@ -1,5 +1,6 @@
 package ru.vlsu.animalSpecification.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import ru.vlsu.animalSpecification.domain.emun.VaccineType;
 
 import javax.persistence.*;

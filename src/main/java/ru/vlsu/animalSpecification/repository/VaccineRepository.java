@@ -12,5 +12,5 @@ import ru.vlsu.animalSpecification.domain.Vaccine;
 import java.util.List;
 
 public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
-  List<Vaccine> findAllByAnimal(long id);
+  List<Vaccine> findAllByAnimal(Animal animal);
 }

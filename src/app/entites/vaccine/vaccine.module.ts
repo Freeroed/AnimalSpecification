@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { VaccineUpdateComponent } from './vaccine-update.component';
 
 @NgModule({
     imports: [HttpClientModule, 
@@ -11,7 +12,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         BrowserModule, 
         FormsModule, 
         ReactiveFormsModule, NgbModule],
-    declarations: []
+    declarations: [VaccineUpdateComponent],
+    entryComponents: [VaccineUpdateComponent]
 })
 
 export class AnimasSpecificationVaccineModule {}
