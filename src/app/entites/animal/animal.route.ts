@@ -9,8 +9,9 @@ import { AnimalService } from './animal.service';
 import { AnimalComponent } from './animal.component';
 import { UserRouteAccessService } from 'src/app/core/auth/user-route-access-service';
 import { AnimalCreateComponent } from './animal-create.component';
+import { AnimalDetailComponent } from './animal-detail.component';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class AnimalResolve implements Resolve<Animal> {
     constructor(private service: AnimalService, private router: Router) {}
 
@@ -49,4 +50,14 @@ export const animalRoute: Routes = [
         },
         canActivate: [UserRouteAccessService]
       },
+      {
+        path: 'animals/:id/view',
+        component: AnimalDetailComponent,
+        data: {
+          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+        },
+        canActivate: [UserRouteAccessService],
+        resolve: {
+          animal : AnimalResolve }
+      }
 ];

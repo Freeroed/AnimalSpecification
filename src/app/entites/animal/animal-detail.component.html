@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card-body">
+            <h2>Информация о жифотном</h2>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Кличка</span></dt>
+                <dd>
+                    <span>{{animal.nickname}}</span>
+                </dd>
+                <dt><span>Пол</span></dt>
+                <dd>
+                    <span>{{animal.sex}}</span>
+                </dd>
+                <dt><span>Номер чипа</span></dt>
+                <dd>
+                    <span>{{animal.chip}}</span>
+                </dd>
+                <dt><span>Дата рождения</span></dt>
+                <dd>
+                    <span>{{animal.birthday | date : 'yyyy-MM-dd'}}</span>
+                </dd>
+                <dt><span>Цвет</span></dt>
+                <dd>
+                    <span>{{animal.color}}  ({{animal.colorENG}})</span>
+                </dd>
+                <dt><span>Место рождения</span></dt>
+                <dd>
+                    <span>{{animal.placeOfBirth}}</span>
+                </dd>
+            </dl>
+            <h3><span>Вакцинации</span>
+                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad">
+                    Добавить вакцину
+                </button>
+                
+            </h3>
+                <br>
+            <div *ngIf="vaccines.length == 0"  class="alert alert-warning"><span>Нет информации о вакцинациях</span></div>
+            <div *ngIf="vaccines && vaccines?.length > 0" class="table-responsive">
+                <table class="table table-striped" style="table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Тип вакцинации</th>
+                            <th scope="col">Наименование вакцины</th>
+                            <th scope="col">Дата вакцинации</th>
+                            <th scope="col">Номер серии партии</th>
+                            <th scope="col">Название и производитель вакцины</th>
+                            <th scope="col">Действует до</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let vaccine of vaccines">
+                            <td>{{vaccine.type}}</td>
+                            <td>{{vaccine.title}}</td>
+                            <td>{{vaccine.date}}</td>
+                            <td>{{vaccine.vaccineBatchNumber}}</td>
+                            <td>{{vaccine.vaccineNameAndManufacturer}}</td>
+                            <td>{{vaccine.validUntil}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3><span>Лабораторные исследования</span>
+                <button type="submit" class="btn btn-primary float-right btn-sm btn-pad">
+                    Добавить исследование
+                </button>
+                
+            </h3>
+                <br>
+            <div *ngIf="laboretoryResurches.length == 0"  class="alert alert-warning"><span>Нет информации об исследованиях </span></div>
+            <div *ngIf="laboretoryResurches && laboretoryResurches?.length > 0" class="table-responsive">
+                <table class="table table-striped" style="table-layout: fixed;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Лаборатория</th>
+                            <th scope="col">Индикатор</th>
+                            <th scope="col">Дата получения результата</th>
+                            <th scope="col">Результат</th>
+                            <th scope="col">Метод</th>
+                            <th scope="col">Номер экспертицы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let laboretoryResurch of laboretoryResurches">
+                            <td>{{laboretoryResurch.laboratory}}</td>
+                            <td>{{laboretoryResurch.indicator}}</td>
+                            <td>{{laboretoryResurch.dateOfReceiptOfResult}}</td>
+                            <td>{{laboretoryResurch.result}}</td>
+                            <td>{{laboretoryResurch.researchMethod}}</td>
+                            <td>{{laboretoryResurch.examinationNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
