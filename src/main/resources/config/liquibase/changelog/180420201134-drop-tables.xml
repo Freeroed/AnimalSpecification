@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="180420201134-1">
+
+    <comment>Drop tables: Transport, Laboratort Test Result </comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      ALTER TABLE Request MODIFY COLUMN transport VARCHAR(60) NULL;
+      ALTER TABLE laboratory_research MODIFY COLUMN result VARCHAR(60) NULL;
+      DROP TABLE laboratory_test_result;
+      DROP TABLE transport;
+      ALTER TABLE Animal DROP COLUMN weight;
+      ALTER TABLE Request ADD dateOfCreation DATE NULL ;
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>
