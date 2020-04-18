@@ -1,7 +1,8 @@
 package ru.vlsu.animalSpecification.security.jwt;
 
 import io.jsonwebtoken.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.Authentication;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Component
 @PropertySource(value= {"classpath:application.properties"})
 public class JwtUtils {
-  private static final Logger log = Logger.getLogger(JwtUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(JwtUtils.class);
 
   @Value("${jwt.token.secret}")
   private String jwtSecret;

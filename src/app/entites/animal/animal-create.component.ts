@@ -41,7 +41,6 @@ export class AnimalCreateComponent implements OnInit {
         nickname: [],
         sex: [],
         chip: [],
-        weitht: [],
         birthday: [],
         breed: [],
         type: [],
@@ -62,7 +61,6 @@ export class AnimalCreateComponent implements OnInit {
             id: this.editForm.get(['id'])!.value,
             nickname: this.editForm.get(['nickname'])!.value,
             sex: this.editForm.get(['sex'])!.value,
-            weight: this.editForm.get(['weitht'])!.value,
             birthday: this.editForm.get(['birthday'])!.value != null && this.editForm.get(['birthday'])!.value != null
             ? moment(
                 this.editForm.get(['birthday'])!.value,

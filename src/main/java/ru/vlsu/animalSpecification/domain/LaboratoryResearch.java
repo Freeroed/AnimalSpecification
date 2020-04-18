@@ -1,5 +1,7 @@
 package ru.vlsu.animalSpecification.domain;
 
+import ru.vlsu.animalSpecification.domain.emun.LaboratoryTestResult;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -29,7 +31,8 @@ public class LaboratoryResearch implements Serializable {
     @Column (name = "examination_number")
     private String examinationNumber; // номер экспертизы
 
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @Enumerated(EnumType.STRING)
     @JoinColumn(name = "result", nullable = false)
     private LaboratoryTestResult result; // результат исследования	LaboratoryTestResult.class
 

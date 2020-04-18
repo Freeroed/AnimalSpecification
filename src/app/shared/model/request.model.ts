@@ -1,9 +1,9 @@
 import { IDestinationCounry } from './destinationCountry.model';
 import { IBorderCrossingPoint } from './borderCrossingPoint.model';
-import { Itransport } from './transport.model';
 import { Moment } from 'moment';
 import { Animal } from './animal.model';
 import { RequestStatus } from './enum/requestStatus.model';
+import { TransportType } from './enum/transportType.model';
 
 export interface IRequest {
     id?: number,
@@ -11,7 +11,7 @@ export interface IRequest {
     destinationCountry?: IDestinationCounry,
     destinationCity?: string,
     borderCrossingPoint?: IBorderCrossingPoint,
-    transport?: Itransport,
+    transport?: TransportType,
     vehicleNumber?: string,
     veterinarian?: Account,
     transactionType?: string,
@@ -32,7 +32,7 @@ export class Request implements IRequest {
         public destinationCountry?: IDestinationCounry,
         public destinationCity?: string,
         public borderCrossingPoint?: IBorderCrossingPoint,
-        public transport?: Itransport,
+        public transport?: TransportType,
         public vehicleNumber?: string,
         public veterinarian?: Account,
         public transactionType?: string,

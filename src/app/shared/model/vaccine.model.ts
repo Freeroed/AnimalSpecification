@@ -1,10 +1,11 @@
 import { Animal } from './animal.model';
 import { Moment } from 'moment';
+import { VacctineType } from './enum/vaccineType.model';
 
 export interface IVaccine {
     id?: number,
     animal?: Animal,
-    type?: string,
+    type?: VacctineType,
     title?: string,
     date?: Moment,
     vaccineBatchNumber?: string,
@@ -16,7 +17,7 @@ export class Vaccine implements IVaccine {
     constructor(
         public id?: number,
         public animal?: Animal,
-        public type?: string,
+        public type?: VacctineType,
         public title?: string,
         public date?: Moment,
         public vaccineBatchNumber?: string,

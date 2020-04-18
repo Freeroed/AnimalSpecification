@@ -1,9 +1,10 @@
 package ru.vlsu.animalSpecification.domain;
 
+import ru.vlsu.animalSpecification.domain.emun.VaccineType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
 
 // Сведение о вакцинации
 
@@ -18,8 +19,9 @@ public class Vaccine implements Serializable {
     @JoinColumn(name = "animal", nullable = false)
     private Animal animal; // животное
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "type")
-    private String type; // тип вакцины
+    private VaccineType type; // тип вакцины
 
     @Column (name = "title")
     private String title; // наименование
@@ -48,11 +50,11 @@ public class Vaccine implements Serializable {
         this.id = id;
     }
 
-    public String getType() {
+    public VaccineType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(VaccineType type) {
         this.type = type;
     }
 

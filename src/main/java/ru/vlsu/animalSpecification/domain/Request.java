@@ -1,10 +1,10 @@
 package ru.vlsu.animalSpecification.domain;
 
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
+import ru.vlsu.animalSpecification.domain.emun.TransportType;
 
 import javax.persistence.*;
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,9 +30,9 @@ public class Request {
     @JoinColumn(name = "border_crossing_point", nullable = false)
     private BorderCrossingPoint borderCrossingPoint; // пункт пересечения границы
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "transport", nullable = false)
-    private Transport transport; // тип транспорта
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transport", nullable = false)
+    private TransportType transport; // тип транспорта
 
     @Column (name = "vehicle_number")
     private String vehicleNumber; // номер автомобиля (если транпорт автомобитль, если самолет - мб номер самолета?)
@@ -41,8 +41,9 @@ public class Request {
     @JoinColumn(name = "veterinarian", nullable = false)
     private User veterinarian; // ветеринар, который выдаел сертификат 1
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "transaction_type")
-    private String transactionType; // в примере - "перевозка без смены владельца" (серт.1 в меркурии)
+    private TransportType transactionType; // в примере - "перевозка без смены владельца" (серт.1 в меркурии)
                                     // возможно тут имеется в виду на продажу, на путешествие или как еще
 
     @Column (name = "way_of_storage_during_transportation")
@@ -69,12 +70,15 @@ public class Request {
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "AnimalsInRequest", joinColumns = @JoinColumn(name = "request_id"),
-      inverseJoinColumns = @JoinColumn(name = "animal_id"))
+              inverseJoinColumns = @JoinColumn(name = "animal_id"))
     private Set<Animal> animals = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     @Column (name = "status")
     private RequestStatus status; // статус заявки
+
+    @Column(name="dateOfCreationa")
+    private Instant createdAt;
 
     /*
     Getters and Setters
@@ -96,11 +100,11 @@ public class Request {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public String getTransactionType() {
+    public TransportType getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
+    public void setTransactionType(TransportType transactionType) {
         this.transactionType = transactionType;
     }
 
@@ -160,89 +164,100 @@ public class Request {
       this.animals = animals;
     }
 
-  public RequestStatus getStatus() {
-    return status;
+    public RequestStatus getStatus() {
+      return status;
+    }
+
+    public void setStatus(RequestStatus status) {
+      this.status = status;
+    }
+
+    public User getRecipient() {
+      return recipient;
+    }
+
+    public void setRecipient(User recipient) {
+      this.recipient = recipient;
+    }
+
+    public DestinationCountry getDestinationCountry() {
+      return destinationCountry;
+    }
+
+    public void setDestinationCountry(DestinationCountry destinationCountry) {
+      this.destinationCountry = destinationCountry;
+    }
+
+    public String getDestinationCity() {
+      return destinationCity;
+    }
+
+    public void setDestinationCity(String destinationCity) {
+      this.destinationCity = destinationCity;
+    }
+
+    public BorderCrossingPoint getBorderCrossingPoint() {
+      return borderCrossingPoint;
+    }
+
+    public void setBorderCrossingPoint(BorderCrossingPoint borderCrossingPoint) {
+      this.borderCrossingPoint = borderCrossingPoint;
+    }
+
+    public TransportType getTransport() {
+      return transport;
+    }
+
+    public void setTransport(TransportType transport) {
+      this.transport = transport;
+    }
+
+    public User getVeterinarian() {
+      return veterinarian;
+    }
+
+    public void setVeterinarian(User veterinarian) {
+      this.veterinarian = veterinarian;
+    }
+
+    public User getInspectorOfRosselkhoznadzor() {
+      return inspectorOfRosselkhoznadzor;
+    }
+
+    public void setInspectorOfRosselkhoznadzor(User inspectorOfRosselkhoznadzor) {
+      this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
+    }
+
+  public Instant getCreatedAt() {
+    return createdAt;
   }
 
-  public void setStatus(RequestStatus status) {
-    this.status = status;
-  }
-
-  public User getRecipient() {
-    return recipient;
-  }
-
-  public void setRecipient(User recipient) {
-    this.recipient = recipient;
-  }
-
-  public DestinationCountry getDestinationCountry() {
-    return destinationCountry;
-  }
-
-  public void setDestinationCountry(DestinationCountry destinationCountry) {
-    this.destinationCountry = destinationCountry;
-  }
-
-  public String getDestinationCity() {
-    return destinationCity;
-  }
-
-  public void setDestinationCity(String destinationCity) {
-    this.destinationCity = destinationCity;
-  }
-
-  public BorderCrossingPoint getBorderCrossingPoint() {
-    return borderCrossingPoint;
-  }
-
-  public void setBorderCrossingPoint(BorderCrossingPoint borderCrossingPoint) {
-    this.borderCrossingPoint = borderCrossingPoint;
-  }
-
-  public Transport getTransport() {
-    return transport;
-  }
-
-  public void setTransport(Transport transport) {
-    this.transport = transport;
-  }
-
-  public User getVeterinarian() {
-    return veterinarian;
-  }
-
-  public void setVeterinarian(User veterinarian) {
-    this.veterinarian = veterinarian;
-  }
-
-  public User getInspectorOfRosselkhoznadzor() {
-    return inspectorOfRosselkhoznadzor;
-  }
-
-  public void setInspectorOfRosselkhoznadzor(User inspectorOfRosselkhoznadzor) {
-    this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
+  public void setCreatedAt(Instant createdAt) {
+    this.createdAt = createdAt;
   }
 
   @Override
-    public String toString() {
-      return "Request{" +
-        "id=" + id +
-        ", recipient=" + recipient +
-        ", destinationCountry=" + destinationCountry +
-        ", borderCrossingPoint=" + borderCrossingPoint +
-        ", transport=" + transport +
-        ", vehicleNumber='" + vehicleNumber + '\'' +
-        ", veterinarian=" + veterinarian +
-        ", transactionType='" + transactionType + '\'' +
-        ", wayOfStorageDuringTransportation='" + wayOfStorageDuringTransportation + '\'' +
-        ", quarantineLocation='" + quarantineLocation + '\'' +
-        ", numberOfDaysToQuarantine=" + numberOfDaysToQuarantine +
-        ", inspectorOfRosselkhoznadzor=" + inspectorOfRosselkhoznadzor +
-        ", postalCode='" + postalCode + '\'' +
-        ", dateOfDeparture=" + dateOfDeparture +
-        ", certificate1FormNumber='" + certificate1FormNumber + '\'' +
-        ", animals=" + animals +
-        '}';
-    }
+  public String toString() {
+    return "Request{" +
+      "id=" + id +
+      ", recipient=" + recipient +
+      ", destinationCountry=" + destinationCountry +
+      ", destinationCity='" + destinationCity + '\'' +
+      ", borderCrossingPoint=" + borderCrossingPoint +
+      ", transport=" + transport +
+      ", vehicleNumber='" + vehicleNumber + '\'' +
+      ", veterinarian=" + veterinarian +
+      ", transactionType='" + transactionType + '\'' +
+      ", wayOfStorageDuringTransportation='" + wayOfStorageDuringTransportation + '\'' +
+      ", quarantineLocation='" + quarantineLocation + '\'' +
+      ", numberOfDaysToQuarantine=" + numberOfDaysToQuarantine +
+      ", inspectorOfRosselkhoznadzor=" + inspectorOfRosselkhoznadzor +
+      ", postalCode='" + postalCode + '\'' +
+      ", dateOfDeparture=" + dateOfDeparture +
+      ", certificate1FormNumber='" + certificate1FormNumber + '\'' +
+      ", animals=" + animals +
+      ", status=" + status +
+      ", createdAtl=" + createdAt +
+      '}';
+  }
 }

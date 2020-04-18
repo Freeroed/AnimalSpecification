@@ -16,8 +16,6 @@ public class AnimalDTO {
 
   private String chip;
 
-  private Integer weight;
-
   private BreedsOfAnimalDTO breed;
 
   private String color;
@@ -77,14 +75,6 @@ public class AnimalDTO {
 
   public void setChip(String chip) {
     this.chip = chip;
-  }
-
-  public Integer getWeight() {
-    return weight;
-  }
-
-  public void setWeight(Integer weight) {
-    this.weight = weight;
   }
 
   public BreedsOfAnimalDTO getBreed() {
@@ -148,7 +138,6 @@ public class AnimalDTO {
     this.nickname = animal.getNickname();
     this.sex = animal.getSex();
     this.chip = animal.getChip();
-    this.weight = animal.getWeight();
     this.breed = new BreedsOfAnimalDTO(animal.getBreed());
     this.color = animal.getColor();
     this.placeOfBirth = animal.getPlaceOfBirth();

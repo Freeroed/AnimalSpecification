@@ -6,7 +6,6 @@ export class Animal {
     public nickname?: string,
     public sex?: string,
     public chip?: string,
-    public weight?: number,
     public birthday?: Moment,
     public breed?: BreedOfAnimal,
     public color?: string,

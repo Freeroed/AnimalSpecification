@@ -27,9 +27,6 @@ public class Animal implements Serializable {
     @Column (name = "chip")
     private String chip; // чип
 
-    @Column (name = "weight")
-    private Integer weight; // вес
-
     @Column (name = "birthday")
     private Instant birthday; // дата рождения
 
@@ -53,13 +50,6 @@ public class Animal implements Serializable {
     @Column (name = "color_ENG")
     private String colorENG; // цвет на английском
 
-    public User getMaster() {
-      return master;
-    }
-
-    public void setMaster(User master) {
-      this.master = master;
-    }
 
     @Enumerated(EnumType.STRING)
     @Column (name = "status")
@@ -111,13 +101,6 @@ public class Animal implements Serializable {
         this.chip = chip;
     }
 
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
 
     public Instant getBirthday() {
         return birthday;
@@ -167,13 +150,21 @@ public class Animal implements Serializable {
         this.colorENG = colorENG;
     }
 
-  public AnimalStatus getStatus() {
-    return status;
-  }
+    public AnimalStatus getStatus() {
+      return status;
+    }
 
-  public void setStatus(AnimalStatus status) {
-    this.status = status;
-  }
+    public void setStatus(AnimalStatus status) {
+      this.status = status;
+    }
+
+    public User getMaster() {
+      return master;
+    }
+
+    public void setMaster(User master) {
+      this.master = master;
+    }
 
   @Override
   public String toString() {
@@ -183,7 +174,6 @@ public class Animal implements Serializable {
       ", sex=" + sex +
       ", type=" + type +
       ", chip='" + chip + '\'' +
-      ", weight=" + weight +
       ", birthday=" + birthday +
       ", breed=" + breed +
       ", color='" + color + '\'' +

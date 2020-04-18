@@ -1,6 +1,7 @@
 package ru.vlsu.animalSpecification.security.jwt;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.vlsu.animalSpecification.service.impl.UserDetailsImpl;
-import ru.vlsu.animalSpecification.service.impl.UserDetailsServiceImpl;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ import java.io.IOException;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
 
-  private static final Logger log = Logger.getLogger(AuthTokenFilter.class);
+  private static final Logger log = LoggerFactory.getLogger(AuthTokenFilter.class);
 
   @Autowired
   private JwtUtils jwtUtils;
@@ -44,7 +43,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
       }
     } catch (Exception e) {
-      logger.error("Cannot set user authentication : " + e );
+      log.error("Cannot set user authentication : " + e );
     }
 
     filterChain.doFilter(request, response);

@@ -10,6 +10,7 @@ import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -35,6 +36,7 @@ public class RequestService {
         if (req.getId() == null) {
           req.setRecipient(master);
           req.setStatus(RequestStatus.CREATED);
+          req.setCreatedAt(Instant.now());
         }
 
         return repo.save(req);

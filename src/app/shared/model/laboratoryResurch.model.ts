@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { Animal } from './animal.model';
-import { ILaboratoryTestResult } from './laboratoryTestResult.model';
+import { LaboratoryTestResult } from './enum/laboratoryTestResult.model';
 
 export interface ILaboratoryResurch {
     id?: number,
@@ -9,7 +9,7 @@ export interface ILaboratoryResurch {
     dateOfReceiptOfResult?: Moment,
     researchMethod?: string,
     examinationNumber?: string,
-    result?: ILaboratoryTestResult,
+    result?: LaboratoryTestResult,
     animal?: Animal
 }
 
@@ -21,7 +21,7 @@ export class LaboratoryResurch implements ILaboratoryResurch {
         public dateOfReceiptOfResult?: Moment,
         public researchMethod?: string,
         public examinationNumber?: string,
-        public result?: ILaboratoryTestResult,
+        public result?: LaboratoryTestResult,
         public animal?: Animal
     ){}
 }
