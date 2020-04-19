@@ -9,17 +9,19 @@ import { HttpResponse } from '@angular/common/http';
 import { Animal } from 'src/app/shared/model/animal.model';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'src/app/app.constants';
+import { DATE_TIME_FORMAT, DATE_FORMAT } from 'src/app/app.constants';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
+import { ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/shared/model/user.model';
 
 @Component({
     selector: 'app-create-animal',
-    templateUrl: './animal-create.component.html',
+    templateUrl: './animal-update.component.html',
     providers: [{ provide: NgbDateParserFormatter, useClass: DateParserFormatter }]
     
 })
-export class AnimalCreateComponent implements OnInit {
+export class AnimalUpdateComponent implements OnInit {
     breeds : BreedOfAnimal[];
     types : TypeOfAnimal[];
     isSuccessful = false;
@@ -30,6 +32,7 @@ export class AnimalCreateComponent implements OnInit {
     selectedSex = null;
 
     constructor(
+        private activatedRoute: ActivatedRoute,
         private animalService: AnimalService,
         private fb: FormBuilder,
         private breedsService: BreedsOfAnimalService,
@@ -53,8 +56,32 @@ export class AnimalCreateComponent implements OnInit {
     ngOnInit() {
         this.typesService.findAll().subscribe((res: HttpResponse<TypeOfAnimal[]>) =>
         this.types = res.body);
+        this.activatedRoute.data.subscribe(({ animal}) => {
+            this.updateForm(animal);
+        })
     }
 
+    updateForm(animal: Animal): void {
+        if (animal) {
+            this.editForm.patchValue({
+            id: animal.id,
+            nickname: animal.nickname,
+            sex: animal.sex,
+            chip: animal.chip,
+            birthday: animal.birthday !=null ? moment(animal.birthday.format(DATE_FORMAT)) : undefined,
+            breed: animal.breed,
+            type: animal.breed.typeOfAnimal,
+            color: animal.color,
+            placeOfBirth: animal.placeOfBirth,
+            tnvedCode: animal.tnvedCode,
+            colorENG: animal.colorENG
+            });
+            this.selectedType = animal.breed.typeOfAnimal;
+            this.getBreeds();
+            this.selectedBreed = animal.breed;
+            
+        }
+    }
     createFormFrom(): Animal {
         return {
             ...new Animal(),
@@ -77,14 +104,18 @@ export class AnimalCreateComponent implements OnInit {
     }
     getBreeds() : void {
         if (this.selectedType) {
-        this.selectedBreed = null;
-        this.breedsService.findAll({'id' : this.selectedType.id ? this.selectedType.id : null}).subscribe((res: HttpResponse<BreedOfAnimal[]>) => 
-        this.breeds = res.body)
+            this.selectedBreed = null;
+            this.breedsService.findAll({'id' : this.selectedType.id ? this.selectedType.id : null}).subscribe((res: HttpResponse<BreedOfAnimal[]>) => 
+            this.breeds = res.body)
         }
     }
     save() {
         const animal = this.createFormFrom();
-        this.subscribeToSaveResponse(this.animalService.save(animal));
+        if (animal.id) {
+            this.subscribeToSaveResponse(this.animalService.update(animal));
+        } else {
+            this.subscribeToSaveResponse(this.animalService.save(animal));
+        }
     }
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<Animal>>): void {

@@ -38,7 +38,6 @@ export class AnimalDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ animal }) => {
             this.animal = animal;
             this.loadPage();
-            console.log(this.animal);
         });
         this.today = moment();
         this.registerChangesInAnimal();

@@ -5,7 +5,6 @@ import ru.vlsu.animalSpecification.domain.emun.AnimalStatus;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
 
 @Entity
 @Table(name = "Animal")
@@ -19,10 +18,6 @@ public class Animal implements Serializable {
 
     @Column (name = "sex")
     private char sex; // пол
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "type", nullable = false)
-    private TypeOfAnimal type; // кошка/собака/хомяк
 
     @Column (name = "chip")
     private String chip; // чип
@@ -56,7 +51,6 @@ public class Animal implements Serializable {
     private AnimalStatus status; // состояние животного
 
 
-
     /*
         Getters and Setters
     */
@@ -85,14 +79,6 @@ public class Animal implements Serializable {
         this.sex = sex;
     }
 
-    public TypeOfAnimal getType() {
-        return type;
-    }
-
-    public void setType(TypeOfAnimal type) {
-        this.type = type;
-    }
-
     public String getChip() {
         return chip;
     }
@@ -100,7 +86,6 @@ public class Animal implements Serializable {
     public void setChip(String chip) {
         this.chip = chip;
     }
-
 
     public Instant getBirthday() {
         return birthday;
@@ -172,7 +157,6 @@ public class Animal implements Serializable {
       "id=" + id +
       ", nickname='" + nickname + '\'' +
       ", sex=" + sex +
-      ", type=" + type +
       ", chip='" + chip + '\'' +
       ", birthday=" + birthday +
       ", breed=" + breed +

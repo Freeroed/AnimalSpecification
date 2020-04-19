@@ -8,6 +8,8 @@ import { AnimalService } from 'src/app/entites/animal/animal.service';
 import { HttpResponse } from '@angular/common/http';
 import { RequestService } from 'src/app/entites/request/request.service';
 import { IRequest } from 'src/app/shared/model/request.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AnimalDeleteDialogComponent } from 'src/app/entites/animal/animal-delete-dialog.component';
 
 @Component({
     selector: 'app-account',
@@ -24,7 +26,8 @@ export class AccountComponent implements OnInit {
         protected accountService: AccountServive,
         protected activatedRoute: ActivatedRoute,
         protected animalService: AnimalService,
-        protected requestService: RequestService 
+        protected requestService: RequestService,
+        protected modalService: NgbModal,
     ) {}
 
     ngOnInit() {
@@ -36,8 +39,7 @@ export class AccountComponent implements OnInit {
         this.animals = res.body
         );
         this.requestService.findMy().subscribe((res: HttpResponse<IRequest[]>) =>
-        {this.requests = res.body; 
-        console.log(res.body);}
+        {this.requests = res.body;  }
         )
         
     }
@@ -48,5 +50,10 @@ export class AccountComponent implements OnInit {
 
     clicker(): void {
         console.log(this.user);
+    }
+
+    delete(id: number): void {
+        const modalRef = this.modalService.open(AnimalDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+        
     }
 }

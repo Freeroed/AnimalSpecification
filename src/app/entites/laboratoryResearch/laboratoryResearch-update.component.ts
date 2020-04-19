@@ -62,7 +62,6 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
     }
 
     updateForm(laboratoryResearch: ILaboratoryResurch): void {
-        console.log(laboratoryResearch)
         this.editForm.patchValue({
             id: laboratoryResearch.id,
             laboratory: laboratoryResearch.laboratory,

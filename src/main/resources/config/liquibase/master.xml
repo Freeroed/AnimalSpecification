@@ -35,6 +35,7 @@
     <include file="config/liquibase/changelog/010420201200-alter-somebody.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/020420201501-add-status.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/180420201134-drop-tables.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/190420202003-delete_type-from-animal.xml" relativeToChangelogFile="false"/>
 
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

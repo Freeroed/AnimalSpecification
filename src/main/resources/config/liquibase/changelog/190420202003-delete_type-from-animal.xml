@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="sevdokimov" id="190420202003-1">
+
+    <comment>Delete type from animal table</comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      ALTER TABLE Animal DROP COLUMN type;
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

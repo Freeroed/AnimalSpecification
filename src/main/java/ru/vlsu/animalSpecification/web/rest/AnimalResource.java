@@ -70,7 +70,6 @@ public class AnimalResource {
         return ResponseEntity.badRequest().build();
       } else {
         String userName = httpServletRequest.getRemoteUser();
-        animal.setType(animal.getBreed().getAnimalType());
         AnimalDTO result = animalService.save(animal, userName);
         return ResponseEntity.created(new URI("/api/animals/" + result.getId()))
           .body(result);
@@ -89,13 +88,13 @@ public class AnimalResource {
       //TODO Get user id from authorization
       //TODO check user as animals's master
       //TODO check NotFound
-      log.debug("REST request to update animal with name : {} ", animal.getNickname());
+      log.debug("REST request to update animal : {} ", animal);
 
       if (animal.getId() == null) {
         return ResponseEntity.badRequest().build();
       }
       else {
-        AnimalDTO result = animalService.save(animal, "admin");
+        AnimalDTO result = animalService.save(animal, httpServletRequest.getRemoteUser());
         return ResponseEntity.ok()
           .body(result);
       }

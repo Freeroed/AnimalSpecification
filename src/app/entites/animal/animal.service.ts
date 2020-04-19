@@ -13,6 +13,7 @@ type EntityArrayResponseType = HttpResponse<Animal[]>;
 
 @Injectable({ providedIn: 'root'})
 export class AnimalService {
+    
     private resourceUrl = SERVER_API_URL + 'api/animals';
 
     constructor(private http: HttpClient) {}
@@ -35,6 +36,13 @@ export class AnimalService {
         const copy = this.convetDateFromClient(animal);
         return this.http.post(this.resourceUrl , copy)
         .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    update(animal: Animal): Observable<HttpResponse<Animal>> {
+        const copy = this.convetDateFromClient(animal);
+        return this.http
+                .put<Animal>(this.resourceUrl, copy, { observe: 'response' })
+                .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     /*

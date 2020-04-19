@@ -22,9 +22,9 @@ public class AnimalDTO {
 
   private String placeOfBirth;
 
-  private UserDTO human;
+  private UserDTO master;
 
-  private String tnvedCde;
+  private String tnvedCode;
 
   private String colorENG;
 
@@ -101,20 +101,20 @@ public class AnimalDTO {
     this.placeOfBirth = placeOfBirth;
   }
 
-  public UserDTO getHuman() {
-    return human;
+  public UserDTO getMaster() {
+    return master;
   }
 
-  public void setHuman(UserDTO human) {
-    this.human = human;
+  public void setMaster(UserDTO master) {
+    this.master = master;
   }
 
-  public String getTnvedCde() {
-    return tnvedCde;
+  public String getTnvedCode() {
+    return tnvedCode;
   }
 
-  public void setTnvedCde(String tnvedCde) {
-    this.tnvedCde = tnvedCde;
+  public void setTnvedCode(String tnvedCode) {
+    this.tnvedCode = tnvedCode;
   }
 
   public String getColorENG() {
@@ -141,8 +141,8 @@ public class AnimalDTO {
     this.breed = new BreedsOfAnimalDTO(animal.getBreed());
     this.color = animal.getColor();
     this.placeOfBirth = animal.getPlaceOfBirth();
-    this.human = new UserDTO(animal.getMaster());
-    this.tnvedCde = animal.getTnvedCode();
+    this.master = new UserDTO(animal.getMaster());
+    this.tnvedCode = animal.getTnvedCode();
     this.colorENG = animal.getColorENG();
     this.status = animal.getStatus();
     this.birthday = animal.getBirthday();

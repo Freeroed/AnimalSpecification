@@ -91,7 +91,6 @@ export class VaccineUpdateComponent implements OnInit{
     }
 
     save(): void {
-        console.log(this.createFormFrom());
         const vaccine = this.createFormFrom();
         if (vaccine.id === undefined || vaccine.id === null) {
             this.subscribeToSaveResponse(this.vaccineService.save(vaccine));

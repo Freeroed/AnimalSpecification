@@ -77,8 +77,5 @@ export class HomeComponent implements OnInit {
     protected onSaveError(): void {
         console.log("CREATING ERROR")
     }
-    cheking(): void {
-        console.log(this.createFormFrom());
-        
-    }
+
 }

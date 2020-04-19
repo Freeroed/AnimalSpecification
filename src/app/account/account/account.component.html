@@ -59,7 +59,7 @@
               <td>{{ animal.breed.typeOfAnimal.typeName }} : {{animal.breed.breedName}}</td>
               <td>{{ animal.birthday | date: 'yyyy-MM-dd' }}</td>
               <td>
-                          <button type="submit" [routerLink]="['/news', animal.id, 'edit']"
+                          <button type="submit" [routerLink]="['/animals', animal.id, 'edit']"
                               class="btn btn-primary btn-sm" placement="top"
                               ngbTooltip="Изменить">
                               Редактировать
@@ -67,7 +67,7 @@
                           </button>
                           &nbsp;
                           <button type="submit"  class="btn btn-danger btn-sm"
-                              placement="top" ngbTooltip="Удалить">
+                              placement="top" ngbTooltip="Удалить" (click)="delete(animal.id)">
                               Удалить
                               <span class="d-none d-md-inline "></span>
                           </button>

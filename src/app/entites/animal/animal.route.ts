@@ -8,7 +8,7 @@ import { Animal } from '../../shared/model/animal.model';
 import { AnimalService } from './animal.service';
 import { AnimalComponent } from './animal.component';
 import { UserRouteAccessService } from 'src/app/core/auth/user-route-access-service';
-import { AnimalCreateComponent } from './animal-create.component';
+import { AnimalUpdateComponent } from './animal-update.component';
 import { AnimalDetailComponent } from './animal-detail.component';
 
 @Injectable({providedIn: 'root'})
@@ -44,7 +44,7 @@ export const animalRoute: Routes = [
       }, 
       {
         path: 'animals/new',
-        component: AnimalCreateComponent,
+        component: AnimalUpdateComponent,
         data : {
           autorities: ['ROLE_USER', 'ROLE_ADMIN']
         },
@@ -59,5 +59,16 @@ export const animalRoute: Routes = [
         canActivate: [UserRouteAccessService],
         resolve: {
           animal : AnimalResolve }
+      },
+      {
+        path: 'animals/:id/edit',
+        component: AnimalUpdateComponent,
+        data: {
+          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+        },
+        canActivate: [UserRouteAccessService],
+        resolve: {
+          animal : AnimalResolve
+        }
       }
 ];

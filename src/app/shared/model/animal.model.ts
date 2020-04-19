@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { BreedOfAnimal } from './breedOfAnimal.model';
+import { User } from './user.model';
 export class Animal {
     constructor(
     public id?: number,
@@ -10,7 +11,7 @@ export class Animal {
     public breed?: BreedOfAnimal,
     public color?: string,
     public placeOfBirth?: string,
-    public human?: number,
+    public master?: User,
     public tnvedCode?: string,
     public colorENG?: string,
     ) {}

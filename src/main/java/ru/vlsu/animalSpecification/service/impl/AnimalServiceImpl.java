@@ -61,8 +61,14 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public AnimalDTO save(Animal animal, String username) {
       log.debug("Request to save animal : {} with human with username : {}" , animal.toString(), username);
-      animal.setMaster(userService.findByUsername(username));
-      animal.setStatus(AnimalStatus.READY_TO_REQUEST);
+      if (animal.getId() == null) {
+        animal.setMaster(userService.findByUsername(username));
+        animal.setStatus(AnimalStatus.READY_TO_REQUEST);
+      } else {
+        User master = new User();
+        master.setId(findOne(animal.getId()).get().getMaster().getId());
+        animal.setMaster(master);
+      }
       log.debug("Saving animal : " + animal);
       return new AnimalDTO(repo.save(animal));
     }

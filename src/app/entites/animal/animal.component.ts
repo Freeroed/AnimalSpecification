@@ -27,9 +27,7 @@ export class AnimalComponent implements OnInit {
         });
         
     }
-    check():void {
-     console.log(this.animals);  
-    }
+
     previousState(): void {
         window.history.back();
     }
