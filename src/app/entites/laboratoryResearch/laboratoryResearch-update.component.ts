@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
     templateUrl: './laboratoryResearch-update.component.html',
@@ -23,7 +24,8 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
     constructor(
         private laboratoryResearchService: LaboratoryResearchService,
         private fb: FormBuilder,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        protected eventManager: JhiEventManager
     ) {}
 
     editForm = this.fb.group ({
@@ -76,7 +78,8 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
     }
 
     protected onSaveSuccess(): void {
-        this.activeModal.dismiss();
+        this.eventManager.broadcast('animalModification');
+        this.activeModal.close();
     }
 
     protected onSaveError(): void {

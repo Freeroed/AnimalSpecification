@@ -12,6 +12,8 @@ import { VaccineService } from '../vaccine/vaccine.service';
 import { HttpResponse } from '@angular/common/http';
 import { LaboratoryResearchUpdateComponent } from '../laboratoryResearch/laboratoryResearch-update.component';
 import { LaboratoryResearchService } from '../laboratoryResearch/laboratoryResearch.service';
+import { JhiEventManager } from 'ng-jhipster';
+import { Subscription } from 'rxjs';
 
 @Component ({
     selector: 'app-animal-detail',
@@ -22,24 +24,30 @@ export class AnimalDetailComponent implements OnInit {
     animal: Animal= new Animal();
     vaccines: IVaccine[];
     laboratoryResurches: ILaboratoryResurch[];
+    eventSubscriber?: Subscription;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         protected modalService: NgbModal,
         protected vaccineService: VaccineService,
-        protected laboratoryResearchService: LaboratoryResearchService
+        protected laboratoryResearchService: LaboratoryResearchService,
+        protected eventManager: JhiEventManager,
     ) {}
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(({ animal }) => {
             this.animal = animal;
-            this.vaccineService.findAlByAnimal({'id' : animal.id ? animal.id : null}).subscribe((res : HttpResponse<IVaccine[]>) =>
-                this.vaccines = res.body);
-            this.laboratoryResearchService.findAlByAnimal({'id' : animal.id ? animal.id : null}).subscribe((res: HttpResponse<ILaboratoryResurch[]>) =>
-                this.laboratoryResurches = res.body);
+            this.loadPage();
         });
-        
         this.today = moment();
+        this.registerChangesInAnimal();
+    }
+
+    loadPage(): void {
+        this.vaccineService.findAlByAnimal({'id' : this.animal.id ? this.animal.id : null}).subscribe((res : HttpResponse<IVaccine[]>) =>
+                this.vaccines = res.body);
+            this.laboratoryResearchService.findAlByAnimal({'id' : this.animal.id ? this.animal.id : null}).subscribe((res: HttpResponse<ILaboratoryResurch[]>) =>
+                this.laboratoryResurches = res.body);
     }
 
     createVaccine(): void {
@@ -50,5 +58,9 @@ export class AnimalDetailComponent implements OnInit {
     createLaboratoryResearch(): void {
         const modalRef = this.modalService.open(LaboratoryResearchUpdateComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.animal = this.animal;
+    }
+
+    registerChangesInAnimal(): void {
+        this.eventSubscriber = this.eventManager.subscribe('animalModification', ()=> this.ngOnInit())
     }
 }

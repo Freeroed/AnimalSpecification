@@ -10,6 +10,7 @@ import { NgbActiveModal, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstr
 import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
+import { JhiEventManager } from 'ng-jhipster';
 
 @Component({
     templateUrl: './vaccine-update.component.html',
@@ -22,7 +23,8 @@ export class VaccineUpdateComponent {
     constructor(
         private vaccineService: VaccineService,
         private fb: FormBuilder,
-        public activeModal: NgbActiveModal
+        public activeModal: NgbActiveModal,
+        protected eventManager: JhiEventManager
     ) {}
 
     editForm = this.fb.group ({
@@ -80,7 +82,8 @@ export class VaccineUpdateComponent {
     }
 
     protected onSaveSuccess(): void {
-        this.activeModal.dismiss();
+        this.eventManager.broadcast('animalModification');
+        this.activeModal.close();
     }
 
     protected onSaveError(): void {
