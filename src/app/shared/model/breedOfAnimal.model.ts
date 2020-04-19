@@ -4,13 +4,13 @@ export interface IBreedOfAnimal {
     id?: number,
     breedName?: string,
     breedNameEng?: string,
-    animalType?: TypeOfAnimal
+    typeOfAnimal?: TypeOfAnimal
 }
 export class BreedOfAnimal implements IBreedOfAnimal {
     constructor(
         public id?: number,
         public breedName?: string,
         public breedNameEng?: string,
-        public animalType?: TypeOfAnimal
+        public typeOfAnimal?: TypeOfAnimal
     ){}
 }

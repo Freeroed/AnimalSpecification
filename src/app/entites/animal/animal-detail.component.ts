@@ -38,6 +38,7 @@ export class AnimalDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ animal }) => {
             this.animal = animal;
             this.loadPage();
+            console.log(this.animal);
         });
         this.today = moment();
         this.registerChangesInAnimal();
@@ -62,5 +63,17 @@ export class AnimalDetailComponent implements OnInit {
 
     registerChangesInAnimal(): void {
         this.eventSubscriber = this.eventManager.subscribe('animalModification', ()=> this.ngOnInit())
+    }
+
+    updateLaboratoryResearch(laboratoryResearch: ILaboratoryResurch) {
+        const modalRef = this.modalService.open(LaboratoryResearchUpdateComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.animal = this.animal;
+        modalRef.componentInstance.laboratoryResearch = laboratoryResearch;
+    }
+
+    updateVaccine(vaccine: IVaccine): void {
+        const modalRef = this.modalService.open(VaccineUpdateComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.animal = this.animal ;
+        modalRef.componentInstance.vaccine = vaccine;
     }
 }

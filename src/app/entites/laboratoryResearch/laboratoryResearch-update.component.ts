@@ -5,7 +5,7 @@ import { NgbActiveModal, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstr
 import { Moment } from 'moment';
 import { Animal } from 'src/app/shared/model/animal.model';
 import { LaboratoryResurch, ILaboratoryResurch } from 'src/app/shared/model/laboratoryResurch.model';
-import { DATE_TIME_FORMAT } from 'src/app/app.constants';
+import { DATE_TIME_FORMAT, DATE_FORMAT } from 'src/app/app.constants';
 import * as moment from 'moment';
 import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 import { HttpResponse } from '@angular/common/http';
@@ -21,12 +21,14 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
 
     date: Moment;
     animal: Animal;
+    isDateValid: boolean;
     constructor(
         private laboratoryResearchService: LaboratoryResearchService,
         private fb: FormBuilder,
         public activeModal: NgbActiveModal,
         protected eventManager: JhiEventManager
     ) {}
+    laboratoryResearch: ILaboratoryResurch;
 
     editForm = this.fb.group ({
         id: [],
@@ -59,6 +61,19 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
         }
     }
 
+    updateForm(laboratoryResearch: ILaboratoryResurch): void {
+        console.log(laboratoryResearch)
+        this.editForm.patchValue({
+            id: laboratoryResearch.id,
+            laboratory: laboratoryResearch.laboratory,
+            indicator: laboratoryResearch.indicator,
+            dateOfReceiptOfResult: laboratoryResearch.dateOfReceiptOfResult != null ? moment(laboratoryResearch.dateOfReceiptOfResult.format(DATE_FORMAT)) : null,
+            examinationNumber: laboratoryResearch.examinationNumber,
+            result: laboratoryResearch.result,
+            researchMethod: laboratoryResearch.researchMethod
+        })
+    }
+
     clear(): void {
         this.activeModal.dismiss();
     }
@@ -67,6 +82,8 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
         const laboratoryResearch = this.createFormFrom();
         if (laboratoryResearch.id === undefined || laboratoryResearch.id === null) {
             this.subscribeToSaveResponse(this.laboratoryResearchService.save(laboratoryResearch));
+        } else {
+            this.subscribeToSaveResponse(this.laboratoryResearchService.update(laboratoryResearch));
         }
     }
 
@@ -86,6 +103,24 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
         console.log("CREATING ERROR");
     }
     ngOnInit(): void{
+        this.date = moment(moment().format('YYYY-MM-DD'));
+        this.isDateValid = true;
+        if (this.laboratoryResearch) {
+            this.updateForm(this.laboratoryResearch);
+        }
+    }
 
+    checkDate(): boolean {
+        const dateOfReceiptOfResult = this.editForm.get(['dateOfReceiptOfResult'])!.value != null && this.editForm.get(['dateOfReceiptOfResult'])!.value != null
+        ? moment(
+            this.editForm.get(['dateOfReceiptOfResult'])!.value,
+            'YYYY-MM-DD'
+          )
+        : undefined;
+        if (dateOfReceiptOfResult && this.date.isBefore(dateOfReceiptOfResult)) {
+            return this.isDateValid = true;
+        } else {
+            return this.isDateValid = false;
+        }
     }
 }

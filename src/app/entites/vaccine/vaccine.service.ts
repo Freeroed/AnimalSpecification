@@ -12,28 +12,42 @@ type EntityArrayResponseType = HttpResponse<IVaccine[]>;
 
 @Injectable({providedIn:'root'})
 export class VaccineService {
-    private resourseUrl = SERVER_API_URL + 'api/vaccines';
+    
+    private resourceUrl = SERVER_API_URL + 'api/vaccines';
 
     constructor(private http: HttpClient) {}
 
     find(id: number) : Observable<EntityResponseType> {
         return this.http
-            .get<IVaccine>(`${this.resourseUrl}/${id}`, {observe: 'response'})
+            .get<IVaccine>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     findAlByAnimal(req?: any) : Observable<EntityArrayResponseType> {
         const optional = createRequestOption(req);
         return this.http
-            .get<IVaccine[]>(this.resourseUrl, {params: optional, observe: 'response'})
+            .get<IVaccine[]>(this.resourceUrl, {params: optional, observe: 'response'})
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     save(vaccine: IVaccine) {
         const copy = this.convertDateFromClient(vaccine);
         return this.http
-            .post(this.resourseUrl, copy)
+            .post(this.resourceUrl, copy)
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    update(vaccine: IVaccine): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(vaccine);
+        return this.http
+            .put<IVaccine>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+        
+    }
+
+    delete(id: number): Observable<HttpResponse<{}>> {
+        return this.http
+                .delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {

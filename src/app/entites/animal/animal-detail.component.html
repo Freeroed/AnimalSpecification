@@ -12,6 +12,10 @@
                 <dd>
                     <span>{{animal.sex}}</span>
                 </dd>
+                <dt><span>Порода</span></dt>
+                <dd>
+                    <span>{{animal.breed.typeOfAnimal.typeName}} : {{animal.breed.breedName}}</span>
+                </dd>
                 <dt><span>Номер чипа</span></dt>
                 <dd>
                     <span>{{animal.chip}}</span>
@@ -47,16 +51,27 @@
                             <th scope="col">Номер серии партии</th>
                             <th scope="col">Название и производитель вакцины</th>
                             <th scope="col">Действует до</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let vaccine of vaccines">
-                            <td>{{vaccine.type}}</td>
+                            <td>
+                                <span *ngIf="vaccine.type == 'TREATMENT'">Обратобка</span>
+                                <span *ngIf="vaccine.type == 'IMMUNIZATION'">Иммунизация</span></td>
                             <td>{{vaccine.title}}</td>
                             <td>{{vaccine.date | date : 'yyyy-MM-dd'}}</td>
                             <td>{{vaccine.vaccineBatchNumber}}</td>
                             <td>{{vaccine.vaccineNameAndManufacturer}}</td>
                             <td>{{vaccine.validUntil | date : 'yyyy-MM-dd'}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit"
+                                        class="btn btn-primary btn-sm" (click)="updateVaccine(vaccine)">
+                                        <span class="d-none d-md-inline" >Редактировать</span>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,6 +95,7 @@
                             <th scope="col">Результат</th>
                             <th scope="col">Метод</th>
                             <th scope="col">Номер экспертицы</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,9 +103,22 @@
                             <td>{{laboretoryResurch.laboratory}}</td>
                             <td>{{laboretoryResurch.indicator}}</td>
                             <td>{{laboretoryResurch.dateOfReceiptOfResult | date : 'yyyy-MM-dd'}}</td>
-                            <td>{{laboretoryResurch.result}}</td>
+                            <td>
+                                <span *ngIf="laboretoryResurch.result == 'POSITIVE'">Положительный</span>
+                                <span *ngIf="laboretoryResurch.result == 'NEGATIVE'">Отрицательный</span>
+                                <span *ngIf="laboretoryResurch.result == 'NOT_KNOWN'">Не изместно</span>
+                                <span *ngIf="laboretoryResurch.result == 'NOT_STANDARDIZED'">Не нормируется</span>
+                            </td>
                             <td>{{laboretoryResurch.researchMethod}}</td>
                             <td>{{laboretoryResurch.examinationNumber}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <button type="submit"
+                                        class="btn btn-primary btn-sm" (click)="updateLaboratoryResearch(laboretoryResurch)">
+                                        <span class="d-none d-md-inline" >Редактировать</span>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

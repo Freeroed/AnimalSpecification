@@ -12,29 +12,42 @@ type EntityArrayResponseType = HttpResponse<ILaboratoryResurch[]>;
 
 @Injectable({providedIn: 'root'})
 export class LaboratoryResearchService {
-    private resourseUrl = SERVER_API_URL + 'api/laboratoryResearches';
+    
+    private resourceUrl = SERVER_API_URL + 'api/laboratoryResearches';
 
     constructor(private http: HttpClient) {}
 
     find(id: number) : Observable<EntityResponseType> {
         return this.http
-            .get<ILaboratoryResurch>(`${this.resourseUrl}/${id}`, {observe: 'response'})
+            .get<ILaboratoryResurch>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
     findAlByAnimal(req?: any) : Observable<EntityArrayResponseType> {
         const optional = createRequestOption(req);
         return this.http
-            .get<ILaboratoryResurch[]>(this.resourseUrl, {params: optional, observe: 'response'})
+            .get<ILaboratoryResurch[]>(this.resourceUrl, {params: optional, observe: 'response'})
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    save(vaccine: ILaboratoryResurch) {
-        const copy = this.convertDateFromClient(vaccine);
+    save(laboratoryResearch: ILaboratoryResurch) {
+        const copy = this.convertDateFromClient(laboratoryResearch);
         return this.http
-            .post(this.resourseUrl, copy)
+            .post(this.resourceUrl, copy)
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
+    update(laboratoryResearch: ILaboratoryResurch): Observable<EntityResponseType> {
+        const copy = this.convertDateFromClient(laboratoryResearch);
+        return this.http
+            .put<ILaboratoryResurch>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    delete(id: number): Observable<HttpResponse<{}>> {
+        return this.http
+                .delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
 
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {

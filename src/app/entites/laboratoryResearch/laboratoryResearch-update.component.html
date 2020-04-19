@@ -12,6 +12,11 @@
             Лаборатория
         </label>
         <input type="text" class="form-control" id="laboratory" formControlName="laboratory" required/>
+        <div  *ngIf="editForm.get('laboratory')!.invalid && (editForm.get('laboratory')!.dirty || editForm.get('laboratory')!.touched)">
+            <small class="form-text text-danger">
+             Это поле обязательно к заполнению
+             </small>
+        </div>
     </div>
 
     <div class="form-group">
@@ -19,6 +24,11 @@
             Наименовари индикатора
         </label>
         <input type="text" class="form-control" id="indicator" formControlName="indicator" required/>
+        <div  *ngIf="editForm.get('indicator')!.invalid && (editForm.get('indicator')!.dirty || editForm.get('indicator')!.touched)">
+            <small class="form-text text-danger">
+             Это поле обязательно к заполнению
+             </small>
+        </div>
     </div>
 
     <div class="form-group">
@@ -26,12 +36,22 @@
             Метод исследования
         </label>
         <input type="text" class="form-control" id="researchMethod" formControlName="researchMethod" required/>
+        <div  *ngIf="editForm.get('researchMethod')!.invalid && (editForm.get('researchMethod')!.dirty || editForm.get('researchMethod')!.touched)">
+            <small class="form-text text-danger">
+             Это поле обязательно к заполнению
+             </small>
+        </div>
     </div>
     <div class="form-group">
         <label>
             Номер экспертизы
         </label>
         <input type="text" class="form-control" id="examinationNumber" formControlName="examinationNumber" required/>
+        <div  *ngIf="editForm.get('examinationNumber')!.invalid && (editForm.get('examinationNumber')!.dirty || editForm.get('examinationNumber')!.touched)">
+            <small class="form-text text-danger">
+             Это поле обязательно к заполнению
+             </small>
+        </div>
     </div>
 
     <div class="form-group row" >
@@ -45,6 +65,11 @@
                 <option value="NOT_KNOWN">Не известно</option>
                 <option value="NOT_STANDARDIZED">Не нормированный</option>
             </select>
+            <div  *ngIf="editForm.get('result')!.invalid && (editForm.get('result')!.dirty || editForm.get('result')!.touched)">
+                <small class="form-text text-danger">
+                 Это поле обязательно к заполнению
+                 </small>
+            </div>
         </div>
     <div class="form-group" style="width: 40%; margin-left: 30px;">
         <label>
@@ -53,12 +78,22 @@
         <div class="input-group" >
             <input class="form-control" placeholder="ДД.ММ.ГГГГ" 
                         name="dateOfReceiptOfResult" ngbDatepicker #s="ngbDatepicker" readonly 
-                        formControlName="dateOfReceiptOfResult" id="dateOfReceiptOfResult" required >
+                        formControlName="dateOfReceiptOfResult" id="dateOfReceiptOfResult" required  (ngModelChange)="checkDate()">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary buttoncalendar" (click)="s.toggle()"  type="button">
                 </button>
             </div>
         </div>
+        <div  *ngIf="editForm.get('dateOfReceiptOfResult')!.invalid && (editForm.get('dateOfReceiptOfResult')!.dirty || editForm.get('dateOfReceiptOfResult')!.touched)">
+            <small class="form-text text-danger">
+             Это поле обязательно к заполнению
+             </small>
+        </div>
+        <div *ngIf="!isDateValid">
+            <small class="form-text text-danger">
+                Дата проведения исследования не может быть позже текущей
+                </small>
+            </div>
     </div>
         
             

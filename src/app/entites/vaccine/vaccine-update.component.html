@@ -14,6 +14,11 @@
                 <option value="TREATMENT">Обработка</option>
                 <option value="IMMUNIZATION">Иммунизация</option>
             </select>
+            <div  *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+                <small class="form-text text-danger">
+                 Это поле обязательно к заполнению
+                 </small>
+            </div>
         </div>
 
         <div class="form-group">
@@ -21,6 +26,11 @@
                 Название вакцины
             </label>
             <input type="text" class="form-control" id="title" formControlName="title" required/>
+            <div  *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+                <small class="form-text text-danger">
+                 Это поле обязательно к заполнению
+                 </small>
+            </div>
         </div>
 
         <div class="form-group">
@@ -28,6 +38,11 @@
                 Номер серии
             </label>
             <input type="text" class="form-control" id="vaccineBatchNumber" formControlName="vaccineBatchNumber" required/>
+            <div  *ngIf="editForm.get('vaccineBatchNumber')!.invalid && (editForm.get('vaccineBatchNumber')!.dirty || editForm.get('vaccineBatchNumber')!.touched)">
+                <small class="form-text text-danger">
+                 Это поле обязательно к заполнению
+                 </small>
+            </div>
         </div>
 
         <div class="form-group">
@@ -35,37 +50,60 @@
                 Производитель вакцины
             </label>
             <input type="text" class="form-control" id="vaccineNameAndManufacturer" formControlName="vaccineNameAndManufacturer" required/>
+            <div  *ngIf="editForm.get('vaccineNameAndManufacturer')!.invalid && (editForm.get('vaccineNameAndManufacturer')!.dirty || editForm.get('vaccineNameAndManufacturer')!.touched)">
+                <small class="form-text text-danger">
+                 Это поле обязательно к заполнению
+                 </small>
+            </div>
         </div>
 
         <div class="form-group row" >
-            <div class="form-group" style="margin-left: 15px;">
+            <div class="form-group" style="margin-left: 15px;width: 40%;">
                 <label>
                     Дата вакцинации
                 </label>
                 <div class="input-group" >
                     <input class="form-control" placeholder="ДД.ММ.ГГГГ" 
                                 name="date" ngbDatepicker #s="ngbDatepicker" readonly 
-                                formControlName="date" id="date" required >
+                                formControlName="date" id="date" required (ngModelChange)="checkDate()">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary buttoncalendar" (click)="s.toggle()"  type="button">
                         </button>
                     </div>
                 </div>
-                
+                <div  *ngIf="editForm.get('date')!.touched || !isDateValid ">
+                    <small class="form-text text-danger" *ngIf="editForm.get('date')?.errors?.required">
+                     Это поле обязательно к заполнению
+                    </small>
+                    <small class="form-text text-danger" *ngIf="!isDateValid">
+                        Дата вакцинации не может быть позже текущей даты
+                    </small>
+                    
+                </div>
+
             </div>
-            <div class="form-group" style="margin-left: 30px;">
+            <div class="form-group" style="margin-left: 30px; width: 40%;">
                 <label>
                     Срок действия
                 </label>
                 <div class="input-group" >
                     <input class="form-control" placeholder="ДД.ММ.ГГГГ" 
                                 name="validUntil" ngbDatepicker #v="ngbDatepicker" readonly 
-                                formControlName="validUntil" id="validUntil" required >
+                                formControlName="validUntil" id="validUntil" required (ngModelChange)="checkDate()" >
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary buttoncalendar" (click)="v.toggle()"  type="button">
                         </button>
                     </div>
                 </div>
+                <div  *ngIf="editForm.get('validUntil')!.touched || !isValidUtilValid">
+                    <small class="form-text text-danger" *ngIf="editForm.get('validUntil')?.errors?.required">
+                     Это поле обязательно к заполнению
+                     </small>
+                     <small class="form-text text-danger" *ngIf="!isValidUtilValid">
+                        Дата проведения вакцинации не может быть позже срока её действия
+                    </small>
+                </div>
+                
             </div>  
         </div>
         &nbsp;
