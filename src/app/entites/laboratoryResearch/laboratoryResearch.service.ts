@@ -30,7 +30,7 @@ export class LaboratoryResearchService {
             .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    save(laboratoryResearch: ILaboratoryResurch) {
+    save(laboratoryResearch: ILaboratoryResurch): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(laboratoryResearch);
         return this.http
             .post(this.resourceUrl, copy)

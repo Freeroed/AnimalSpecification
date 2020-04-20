@@ -17,7 +17,7 @@ public class LaboratoryResearchDTO implements Serializable {
 
   private String indicator;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant dateOfReceiptOfResult;
 
   private String researchMethod;
@@ -90,6 +90,9 @@ public class LaboratoryResearchDTO implements Serializable {
 
   public void setAnimal(AnimalDTO animal) {
     this.animal = animal;
+  }
+
+  public LaboratoryResearchDTO() {
   }
 
   public LaboratoryResearchDTO(LaboratoryResearch laboratoryResearch) {

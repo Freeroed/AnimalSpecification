@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card-body">
+            <h2>Информация о заявке</h2>
+        </div>
+        <dl class="row-md jh-entity-details">
+            <dt><span>Страна назначения</span></dt>
+            <dd>
+                <span>{{request.destinationCountry.countryName}}</span>
+            </dd>
+            <dt><span>Дата отправления</span></dt>
+            <dd>
+                <span>{{request.dateOfDeparture | date: 'yyyy-MM-dd'}}</span>
+            </dd>
+            <dt><span>Статус</span></dt>
+            <dd>
+                <span>{{request.status}}</span>
+            </dd>
+        </dl>
+        <h3>
+            <span>Животные в заявке</span>
+            <button type="submit" class="btn btn-primary float-right btn-sm btn-pad" (click)="addAnimal()">
+                Добавить
+            </button>
+        </h3>
+        <div *ngIf="request.animals?.length == 0"  class="alert alert-warning">
+            <span>Нет животных в этой заявке</span>
+        </div>
+    </div>
+</div>

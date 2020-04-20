@@ -51,6 +51,9 @@ public class TypeOfAnimalDTO {
     this.scientificNameENG = typeOfAnimal.getScientificNameENG();
   }
 
+  public TypeOfAnimalDTO() {
+  }
+
   @Override
   public String toString() {
     return "TypeOfAnimalDTO{" +

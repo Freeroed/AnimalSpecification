@@ -4,17 +4,19 @@ import { Moment } from 'moment';
 import { Animal } from './animal.model';
 import { RequestStatus } from './enum/requestStatus.model';
 import { TransportType } from './enum/transportType.model';
+import { User } from './user.model';
+import { TransactionType } from './enum/transactionType.model';
 
 export interface IRequest {
     id?: number,
-    recipient?: Account,
+    recipient?: User,
     destinationCountry?: IDestinationCounry,
     destinationCity?: string,
     borderCrossingPoint?: IBorderCrossingPoint,
     transport?: TransportType,
     vehicleNumber?: string,
     veterinarian?: Account,
-    transactionType?: string,
+    transactionType?: TransactionType,
     wayOfStorageDuringTransportation?: string,
     quarantineLocation?: string,
     numberOfDaysToQuarantine?: number,
@@ -22,20 +24,21 @@ export interface IRequest {
     postalCode?: string,
     dateOfDeparture?: Moment,
     certificate1FormNumber?: string,
-    status?: RequestStatus
+    status?: RequestStatus,
+    animals?: Animal[]
 }
 
 export class Request implements IRequest {
     constructor(
         public id?: number,
-        public recipient?: Account,
+        public recipient?: User,
         public destinationCountry?: IDestinationCounry,
         public destinationCity?: string,
         public borderCrossingPoint?: IBorderCrossingPoint,
         public transport?: TransportType,
         public vehicleNumber?: string,
         public veterinarian?: Account,
-        public transactionType?: string,
+        public transactionType?: TransactionType,
         public wayOfStorageDuringTransportation?: string,
         public quarantineLocation?: string,
         public numberOfDaysToQuarantine?: number,
@@ -43,6 +46,7 @@ export class Request implements IRequest {
         public postalCode?: string,
         public dateOfDeparture?: Moment,
         public certificate1FormNumber?: string,
-        public status?: RequestStatus
+        public status?: RequestStatus,
+        public animals?: Animal[]
     ){}
 }

@@ -46,8 +46,8 @@ export class AnimalDetailComponent implements OnInit {
     loadPage(): void {
         this.vaccineService.findAlByAnimal({'id' : this.animal.id ? this.animal.id : null}).subscribe((res : HttpResponse<IVaccine[]>) =>
                 this.vaccines = res.body);
-            this.laboratoryResearchService.findAlByAnimal({'id' : this.animal.id ? this.animal.id : null}).subscribe((res: HttpResponse<ILaboratoryResurch[]>) =>
-                this.laboratoryResurches = res.body);
+        this.laboratoryResearchService.findAlByAnimal({'id' : this.animal.id ? this.animal.id : null}).subscribe((res: HttpResponse<ILaboratoryResurch[]>) =>
+            this.laboratoryResurches = res.body);
     }
 
     createVaccine(): void {

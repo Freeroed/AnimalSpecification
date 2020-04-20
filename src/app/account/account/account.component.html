@@ -22,7 +22,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let request of requests">
-              <td>{{request.destinationCountry.countryName}}</td>
+              <td><a [routerLink]="['/requests', request.id, 'view']" class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{request.destinationCountry.countryName}}</a></td>
               <td><span *ngIf="request.status == 'CREATED'">Создана</span>
                 <span *ngIf="request.status == 'PREPARED'">Подготовлена</span>
                 <span *ngIf="request.status == 'CONFIRM'">Подтверждена</span>
@@ -30,6 +30,7 @@
                 <span *ngIf="request.status == 'EXPORT_DOCS_ISSUED'">Выданы экспотрные документы</span>
                 <span *ngIf="request.status == 'CLOSED'">Закрыта</span>
               </td>
+              <td></td>
             </tr>
           </tbody>
         </table>

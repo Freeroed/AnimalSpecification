@@ -47,7 +47,10 @@ public class UserDTO {
                 .collect(Collectors.toSet());
     }
 
-    public Long getId() {
+  public UserDTO() {
+  }
+
+  public Long getId() {
         return id;
     }
 

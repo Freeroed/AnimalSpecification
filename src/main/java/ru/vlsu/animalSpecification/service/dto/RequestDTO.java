@@ -1,94 +1,59 @@
-package ru.vlsu.animalSpecification.domain;
+package ru.vlsu.animalSpecification.service.dto;
 
-import org.hibernate.annotations.Cascade;
-import ru.vlsu.animalSpecification.domain.Animal;
-import ru.vlsu.animalSpecification.domain.BorderCrossingPoint;
-import ru.vlsu.animalSpecification.domain.DestinationCountry;
-import ru.vlsu.animalSpecification.domain.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import ru.vlsu.animalSpecification.domain.*;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.domain.emun.TransactionType;
 import ru.vlsu.animalSpecification.domain.emun.TransportType;
+import ru.vlsu.animalSpecification.service.mapper.AnimalMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import java.util.stream.Collectors;
 
-@Entity
-@Table(name = "Request")
-public class Request implements Serializable {
+public class RequestDTO implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  private UserDTO recipient; // получатель - человек
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "recipient", nullable = false)
-  private User recipient; // получатель - человек
-
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "destination_country", nullable = false)
   private DestinationCountry destinationCountry; // СТРАНА назначения
 
-  @Column (name = "destination_city")
   private String destinationCity; // ГОРОД назначения
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "border_crossing_point", nullable = true)
   private BorderCrossingPoint borderCrossingPoint; // пункт пересечения границы
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "transport", nullable = true)
   private TransportType transport; // тип транспорта
 
-  @Column (name = "vehicle_number")
   private String vehicleNumber; // номер автомобиля (если транпорт автомобитль, если самолет - мб номер самолета?)
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "veterinarian", nullable = true)
-  private User veterinarian; // ветеринар, который выдаел сертификат 1
+  private UserDTO veterinarian; // ветеринар, который выдаел сертификат 1
 
-  @Enumerated(EnumType.STRING)
-  @Column (name = "transaction_type")
-  private TransactionType transactionType; // в примере - "перевозка без смены владельца" (серт.1 в меркурии)
-  // возможно тут имеется в виду на продажу, на путешествие или как еще
+  private TransactionType transactionType;
 
-  @Column (name = "way_of_storage_during_transportation")
   private String wayOfStorageDuringTransportation; // способ хранения при транспортировке (прим: вентилируемые)
 
-  @Column (name = "quarantine_location")
   private String quarantineLocation; // место карантирования (прим: В домашних условиях)
 
-  @Column (name = "number_of_days_to_quarantine")
   private Integer numberOfDaysToQuarantine; // колличесвто дней карантирования (прим: 30)
 
-  @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "inspector_of_Rosselkhoznadzor", nullable = true)
-  private User inspectorOfRosselkhoznadzor; // инспектор Р-а, выдавший сертиф. 5а / евросправку
+  private UserDTO inspectorOfRosselkhoznadzor; // инспектор Р-а, выдавший сертиф. 5а / евросправку
 
-  @Column (name = "postal_code")
   private String postalCode; // почтовый индекс грузополучателя для евросправки
 
-  @Column (name = "date_of_departure")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant dateOfDeparture; // дата отправления
 
-  @Column (name = "certificate_1_form_number")
   private String certificate1FormNumber;  // Уникальный идентификатор ВСД
 
-  @ManyToMany(fetch=FetchType.EAGER)
-  @JoinTable(name = "AnimalsInRequest", joinColumns = @JoinColumn(name = "request_id"),
-    inverseJoinColumns = @JoinColumn(name = "animal_id"))
-  private Set<Animal> animals = new HashSet<>();
+  private Set<AnimalDTO> animals = new HashSet<>();
 
-  @Enumerated(EnumType.STRING)
-  @Column (name = "status")
   private RequestStatus status; // статус заявки
 
-  @Column(name="dateOfCreationa")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant createdAt;
 
   public Long getId() {
@@ -99,11 +64,11 @@ public class Request implements Serializable {
     this.id = id;
   }
 
-  public User getRecipient() {
+  public UserDTO getRecipient() {
     return recipient;
   }
 
-  public void setRecipient(User recipient) {
+  public void setRecipient(UserDTO recipient) {
     this.recipient = recipient;
   }
 
@@ -147,11 +112,11 @@ public class Request implements Serializable {
     this.vehicleNumber = vehicleNumber;
   }
 
-  public User getVeterinarian() {
+  public UserDTO getVeterinarian() {
     return veterinarian;
   }
 
-  public void setVeterinarian(User veterinarian) {
+  public void setVeterinarian(UserDTO veterinarian) {
     this.veterinarian = veterinarian;
   }
 
@@ -187,11 +152,11 @@ public class Request implements Serializable {
     this.numberOfDaysToQuarantine = numberOfDaysToQuarantine;
   }
 
-  public User getInspectorOfRosselkhoznadzor() {
+  public UserDTO getInspectorOfRosselkhoznadzor() {
     return inspectorOfRosselkhoznadzor;
   }
 
-  public void setInspectorOfRosselkhoznadzor(User inspectorOfRosselkhoznadzor) {
+  public void setInspectorOfRosselkhoznadzor(UserDTO inspectorOfRosselkhoznadzor) {
     this.inspectorOfRosselkhoznadzor = inspectorOfRosselkhoznadzor;
   }
 
@@ -219,11 +184,11 @@ public class Request implements Serializable {
     this.certificate1FormNumber = certificate1FormNumber;
   }
 
-  public Set<Animal> getAnimals() {
+  public Set<AnimalDTO> getAnimals() {
     return animals;
   }
 
-  public void setAnimals(Set<Animal> animals) {
+  public void setAnimals(Set<AnimalDTO> animals) {
     this.animals = animals;
   }
 
@@ -241,5 +206,29 @@ public class Request implements Serializable {
 
   public void setCreatedAt(Instant createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public RequestDTO(Request request) {
+    this.id = request.getId();
+    this.recipient = new UserDTO(request.getRecipient());
+    this.destinationCountry = request.getDestinationCountry() != null ? request.getDestinationCountry() : null;
+    this.destinationCity = request.getDestinationCity() != null ? request.getDestinationCity() : null;
+    this.borderCrossingPoint = request.getBorderCrossingPoint() != null ? request.getBorderCrossingPoint() : null;
+    this.transport = request.getTransport() != null ? request.getTransport() : null;
+    this.vehicleNumber = request.getVehicleNumber() != null ? request.getVehicleNumber() : null;
+    this.veterinarian =request.getVeterinarian() != null ? new UserDTO(request.getVeterinarian()) : null;
+    this.transactionType = request.getTransactionType() != null ? request.getTransactionType() : null;
+    this.wayOfStorageDuringTransportation = request.getWayOfStorageDuringTransportation() != null ? request.getWayOfStorageDuringTransportation() : null;
+    this.quarantineLocation = request.getQuarantineLocation() != null ? request.getQuarantineLocation() : null;
+    this.numberOfDaysToQuarantine = request.getNumberOfDaysToQuarantine() != null ? request.getNumberOfDaysToQuarantine() : null;
+    this.inspectorOfRosselkhoznadzor = request.getInspectorOfRosselkhoznadzor() != null ? new UserDTO(request.getInspectorOfRosselkhoznadzor()) : null;
+    this.postalCode = request.getPostalCode() != null ? request.getPostalCode() : null;
+    this.dateOfDeparture = request.getDateOfDeparture() != null ? request.getDateOfDeparture() : null;
+    this.certificate1FormNumber = request.getCertificate1FormNumber() != null ? request.getCertificate1FormNumber() : null;
+    this.status = request.getStatus() != null ? request.getStatus() : null;
+    this.createdAt = request.getCreatedAt() != null ? request.getCreatedAt() : null;
+  }
+
+  public RequestDTO() {
   }
 }

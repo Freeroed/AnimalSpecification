@@ -1,7 +1,7 @@
 import { HttpResponse, HttpClient } from "@angular/common/http";
 import { IRequest } from 'src/app/shared/model/request.model';
 import { Injectable } from '@angular/core';
-import { SERVER_API_URL } from 'src/app/app.constants';
+import { SERVER_API_URL, DATE_FORMAT } from 'src/app/app.constants';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
@@ -27,16 +27,28 @@ export class RequestService {
             .pipe(map((res:EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
-    save(request: IRequest) {
+    save(request: IRequest): Observable<EntityResponseType> {
         const copy = this.convetDateFromClient(request);
         return this.http
             .post(this.resourceUrl, copy)
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
+    update(request: IRequest):Observable<EntityResponseType> {
+        const copy = this.convetDateFromClient(request);
+        return this.http
+            .put<IRequest>(this.resourceUrl, copy, { observe: 'response' })
+            .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+    }
+
+    delete(id: number): Observable<HttpResponse<{}>> {
+        return this.http
+                .delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
+
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
-            res.body.dateOfDeparture = res.body.dateOfDeparture ? moment(res.body.dateOfDeparture) : undefined;
+            res.body.dateOfDeparture = res.body.dateOfDeparture ? moment(res.body.dateOfDeparture, DATE_FORMAT) : undefined;
         }
         return res;
     }

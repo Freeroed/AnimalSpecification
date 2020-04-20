@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title">Добавление животного в заявку</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+<div  class="modal-body">
+    <h3>К содалению, данная функция пока недоступна, приносим свои извинения :(</h3>
+    <form name="editForm" role="form" [formGroup]="editForm">
+        <select class="form-control" name="animal" formControlName="animal" required>
+            <option *ngFor="let animal of animals" [ngValue]="animal">{{animal.nickname}}</option>
+        </select>
+    </form>
+    <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="save()" placement="top" >
+            &nbsp;<span>Сохранить</span>
+        </button>
+      </span>
+</div>

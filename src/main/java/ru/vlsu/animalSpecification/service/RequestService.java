@@ -9,9 +9,12 @@ import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
+import ru.vlsu.animalSpecification.service.dto.RequestDTO;
+import ru.vlsu.animalSpecification.service.mapper.RequestMapper;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,26 +27,31 @@ public class RequestService {
 
     private final UserService userService;
 
+    private final RequestMapper requestMapper;
+
     @Autowired
-    public RequestService(RequestRepository repo, UserService userService) {
+    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper) {
       this.repo = repo;
       this.userService = userService;
+      this.requestMapper = requestMapper;
     }
 
-    public Request save(Request req, String userName) {
+    public RequestDTO save(RequestDTO req, String userName) {
         log.debug("Request save request : {} by user with userName : {}", req, userName);
         User master = userService.findByUsername(userName);
-        if (req.getId() == null) {
-          req.setRecipient(master);
-          req.setStatus(RequestStatus.CREATED);
-          req.setCreatedAt(Instant.now());
+        Request request = requestMapper.toEntity(req);
+        if (request.getId() == null) {
+          request.setRecipient(master);
+          request.setStatus(RequestStatus.CREATED);
+          request.setCreatedAt(Instant.now());
         }
-
-        return repo.save(req);
+        Request result = repo.save(request);
+        return requestMapper.requestToRequestDTO(result);
     }
 
-    public List<Request> listAll() {
-        return (List<Request>) repo.findAll();
+    public List<RequestDTO> listAll()
+    {
+        return requestMapper.requestsToRequestsDTO(repo.findAll());
     }
 
     public Request get(Long id) {
@@ -52,9 +60,15 @@ public class RequestService {
         try {
           res = repo.findById(id).get();
         } catch (Exception e){
-          log.debug("Error finding vaccine by id: " + e.getMessage());
+          log.error("Error finding request by id: " + e.getMessage());
+          log.trace(e.getStackTrace().toString());
         }
         return res;
+    }
+
+    public Optional<RequestDTO> findOne(Long id) {
+      log.debug("Request to get request by id : {}", id);
+      return  repo.findFirstById(id).map(requestMapper::requestToRequestDTO);
     }
 
     public void delete(Long id) {
@@ -62,11 +76,14 @@ public class RequestService {
         repo.deleteById(id);
     }
 
-    public List<Request> findRequestByUser(String userName) {
+    public List<RequestDTO> findRequestByUser(String userName) {
       log.debug("Request to get requests by user with userName : {}", userName);
       User recipient = userService.findByUsername(userName);
       if (recipient != null) {
-        return repo.findAllByRecipient(recipient);
+        List<Request> requests = repo.findAllByRecipient(recipient);
+        if (requests != null ) {
+          return requestMapper.requestsToRequestsDTO(requests);
+        } else return null;
       } else {
         return null;
       }

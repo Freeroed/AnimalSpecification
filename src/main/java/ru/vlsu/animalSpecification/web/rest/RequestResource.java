@@ -7,13 +7,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+
 import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.service.RequestService;
+import ru.vlsu.animalSpecification.service.dto.RequestDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -37,7 +40,7 @@ public class RequestResource {
     public  ResponseEntity getMyRequests(){
       String userName = httpServletRequest.getRemoteUser();
       log.debug("REST request to get all requests by user with userName : {}", userName);
-      List<Request> result = requestService.findRequestByUser(userName);
+      List<RequestDTO> result = requestService.findRequestByUser(userName);
       if (result != null) {
         return  ResponseEntity.ok().body(result);
       } else {
@@ -46,14 +49,14 @@ public class RequestResource {
     }
   // Можно удалить. Пока пусть будет для тестов
     @GetMapping("/requests")
-    public List<Request> getAllRequests() {
+    public List<RequestDTO> getAllRequests() {
       log.debug("REST request to get All requests");
       return  requestService.listAll();
     }
 
     // Добавить заявку
     @PostMapping("/requests")
-    public ResponseEntity createRequest(@RequestBody Request request) throws URISyntaxException {
+    public ResponseEntity createRequest(@RequestBody RequestDTO request) throws URISyntaxException {
       String userName = httpServletRequest.getRemoteUser();
       log.debug("REST request to save request : {}, by user with userName : {}", request, userName);
       if (request.getId() != null) {
@@ -67,9 +70,9 @@ public class RequestResource {
 
     // Редактировать заявку
     @PutMapping("/requests")
-    public ResponseEntity updateRequest(@RequestBody Request request) {
+    public ResponseEntity updateRequest(@RequestBody RequestDTO request) {
       String userName = httpServletRequest.getRemoteUser();
-      log.debug("REST request to update request with id : {}, with userName : {}", request, userName);
+      log.debug("REST request to update request with id : {}, with userName : {}", request.getId(), userName);
 
       if (request.getId() == null) {
         return ResponseEntity.badRequest().build();
@@ -88,16 +91,14 @@ public class RequestResource {
       return ResponseEntity.noContent().build();
     }
 
-    // Получить заявку по id
     @GetMapping("/requests/{id}")
-    public ResponseEntity getRequestById(@PathVariable Long id) {
-      log.debug("REST request to get request with id : {}", id);
-      Request res = requestService.get(id);
-      if (res != null) {
-        return ResponseEntity.ok()
-          .body(res);
+    public ResponseEntity getRequest(@PathVariable Long id) {
+      log.debug("REST request to get get Request by id : {}", id);
+      Optional<RequestDTO> request = requestService.findOne(id);
+      if(!request.equals(Optional.empty())) {
+        return  ResponseEntity.ok().body(request);
       } else {
-        return ResponseEntity.notFound().build();
+        return  ResponseEntity.notFound().build();
       }
     }
 }

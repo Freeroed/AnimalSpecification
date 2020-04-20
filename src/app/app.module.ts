@@ -27,6 +27,7 @@ import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
 import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
 import { AnimasSpecificationVaccineModule } from './entites/vaccine/vaccine.module';
 import { AnimalSpecificationLaboratoryResearchModule } from './entites/laboratoryResearch/laboratoryResearch.module';
+import { AnimalSpecificationRequestModule } from './entites/request/request.module';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AnimalSpecificationLaboratoryResearchModule } from './entites/laborator
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     AnimasSpecificationVaccineModule,
-    AnimalSpecificationLaboratoryResearchModule
+    AnimalSpecificationLaboratoryResearchModule,
+    AnimalSpecificationRequestModule
   ],
   declarations: [
     AppComponent,
@@ -55,7 +57,12 @@ import { AnimalSpecificationLaboratoryResearchModule } from './entites/laborator
     FooterComponent,
     HasAnyAuthorityDirective
   ],
-  providers: [FormBuilder,SessionStorageService, authInterceptorProviders, authExpiredInterceptorProviders, { provide: NgbDateParserFormatter, useClass: DateParserFormatter }, { provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
+  providers: [FormBuilder,
+    SessionStorageService, 
+    authInterceptorProviders, 
+    authExpiredInterceptorProviders, 
+    { provide: NgbDateParserFormatter, useClass: DateParserFormatter }, 
+    { provide: NgbDateAdapter, useClass: NgbDateMomentAdapter }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

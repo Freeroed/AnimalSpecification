@@ -17,14 +17,14 @@ public class VaccineDTO implements Serializable {
 
   private String title;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant date; // дата проведения
 
   private String vaccineBatchNumber;
 
   private String vaccineNameAndManufacturer;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant validUntil;
 
   public Long getId() {
@@ -89,6 +89,9 @@ public class VaccineDTO implements Serializable {
 
   public void setValidUntil(Instant validUntil) {
     this.validUntil = validUntil;
+  }
+
+  public VaccineDTO() {
   }
 
   public VaccineDTO(Vaccine vaccine) {

@@ -51,6 +51,9 @@ public class BreedsOfAnimalDTO {
     this.typeOfAnimal = new TypeOfAnimalDTO((breedsOfAnimal.getAnimalType()));
   }
 
+  public BreedsOfAnimalDTO() {
+  }
+
   @Override
   public String toString() {
     return "BreedsOfAnimalDTO{" +

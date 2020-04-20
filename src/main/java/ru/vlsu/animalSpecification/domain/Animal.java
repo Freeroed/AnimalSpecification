@@ -55,92 +55,69 @@ public class Animal implements Serializable {
         Getters and Setters
     */
 
+
     public Long getId() {
-        return id;
+      return id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+      this.id = id;
     }
 
     public String getNickname() {
-        return nickname;
+      return nickname;
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+      this.nickname = nickname;
     }
 
     public char getSex() {
-        return sex;
+      return sex;
     }
 
     public void setSex(char sex) {
-        this.sex = sex;
+      this.sex = sex;
     }
 
     public String getChip() {
-        return chip;
+      return chip;
     }
 
     public void setChip(String chip) {
-        this.chip = chip;
+      this.chip = chip;
     }
 
     public Instant getBirthday() {
-        return birthday;
+      return birthday;
     }
 
     public void setBirthday(Instant birthday) {
-        this.birthday = birthday;
+      this.birthday = birthday;
     }
 
     public BreedsOfAnimal getBreed() {
-        return breed;
+      return breed;
     }
 
     public void setBreed(BreedsOfAnimal breed) {
-        this.breed = breed;
+      this.breed = breed;
     }
 
     public String getColor() {
-        return color;
+      return color;
     }
 
     public void setColor(String color) {
-        this.color = color;
+      this.color = color;
     }
 
     public String getPlaceOfBirth() {
-        return placeOfBirth;
+      return placeOfBirth;
     }
 
     public void setPlaceOfBirth(String placeOfBirth) {
-        this.placeOfBirth = placeOfBirth;
-    }
-
-    public String getTnvedCode() {
-        return tnvedCode;
-    }
-
-    public void setTnvedCode(String tnvedCode) {
-        this.tnvedCode = tnvedCode;
-    }
-
-    public String getColorENG() {
-        return colorENG;
-    }
-
-    public void setColorENG(String colorENG) {
-        this.colorENG = colorENG;
-    }
-
-    public AnimalStatus getStatus() {
-      return status;
-    }
-
-    public void setStatus(AnimalStatus status) {
-      this.status = status;
+      this.placeOfBirth = placeOfBirth;
     }
 
     public User getMaster() {
@@ -149,6 +126,30 @@ public class Animal implements Serializable {
 
     public void setMaster(User master) {
       this.master = master;
+    }
+
+    public String getTnvedCode() {
+      return tnvedCode;
+    }
+
+    public void setTnvedCode(String tnvedCode) {
+      this.tnvedCode = tnvedCode;
+    }
+
+    public String getColorENG() {
+      return colorENG;
+    }
+
+    public void setColorENG(String colorENG) {
+      this.colorENG = colorENG;
+    }
+
+    public AnimalStatus getStatus() {
+      return status;
+    }
+
+    public void setStatus(AnimalStatus status) {
+      this.status = status;
     }
 
   @Override

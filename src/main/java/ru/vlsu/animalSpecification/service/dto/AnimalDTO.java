@@ -30,7 +30,7 @@ public class AnimalDTO {
 
   private AnimalStatus status;
 
-  @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss",timezone = "UTC")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant birthday;
 
   private String inn;
@@ -146,5 +146,8 @@ public class AnimalDTO {
     this.colorENG = animal.getColorENG();
     this.status = animal.getStatus();
     this.birthday = animal.getBirthday();
+  }
+
+  public AnimalDTO() {
   }
 }
