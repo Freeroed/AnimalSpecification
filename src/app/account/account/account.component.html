@@ -59,7 +59,8 @@
               <td><a [routerLink]="['/animals', animal.id, 'view']" class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{ animal.nickname }}</a></td>
               <td>{{ animal.breed.typeOfAnimal.typeName }} : {{animal.breed.breedName}}</td>
               <td>{{ animal.birthday | date: 'yyyy-MM-dd' }}</td>
-              <td>
+              <td  class="text-right">
+                <div class="btn-group">
                           <button type="submit" [routerLink]="['/animals', animal.id, 'edit']"
                               class="btn btn-primary btn-sm" placement="top"
                               ngbTooltip="Изменить">
@@ -72,6 +73,7 @@
                               Удалить
                               <span class="d-none d-md-inline "></span>
                           </button>
+                        </div>
               </td>
             </tr>
           </tbody>

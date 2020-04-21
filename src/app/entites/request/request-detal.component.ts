@@ -5,6 +5,9 @@ import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.component';
+import { Animal } from 'src/app/shared/model/animal.model';
+import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-request-detail',
@@ -12,6 +15,7 @@ import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.com
 })
 export class RequestDetailComponent implements OnInit {
     request: IRequest;
+    eventSubscriber?: Subscription;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -20,13 +24,29 @@ export class RequestDetailComponent implements OnInit {
         protected eventManager: JhiEventManager){}
 
     ngOnInit(): void {
+        this.loadPage();
+        this.registerChangesInRequest();
+    }
+    loadPage(): void {
         this.activatedRoute.data.subscribe(({ request }) => {
             this.request = request;
-        })
+        });
+    }
+
+    registerChangesInRequest(): void {
+        this.eventSubscriber = this.eventManager.subscribe('requestModification', () => this.loadPage())
     }
 
     addAnimal(): void {
         const modalRef = this.modalService.open(RequestAddAnimalDialogComponent,  { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.request = this.request;
     }
+
+    deleteAnimalFromRequest(animal: Animal): void {
+        const modalRef = this.modalService.open(RequestDeleteAnimalDeleteDialogComponent,  { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.request = this.request;
+        modalRef.componentInstance.animal = animal;
+    }
+
+    
 }

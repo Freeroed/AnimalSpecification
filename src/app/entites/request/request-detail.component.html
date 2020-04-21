@@ -26,5 +26,34 @@
         <div *ngIf="request.animals?.length == 0"  class="alert alert-warning">
             <span>Нет животных в этой заявке</span>
         </div>
+        <div *ngIf="request.animals && request.animals?.length > 0" class="table-responsive">
+            <table class="table table-striped" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th scope="col">Кличка животного</th>
+                        <th scope="col">Дата рождения</th>
+                        <th scope="col">Статус</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let animal of request.animals">
+                        <td><a [routerLink]="['/animals', request.id, 'view']" class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{animal.nickname}}</a></td>
+                        <td>{{ animal.birthday | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ animal.status }}</td>
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <button type="submit"  class="btn btn-danger btn-sm"
+                              placement="top" ngbTooltip="Удалить животное из заявки" (click)="deleteAnimalFromRequest(animal)">
+                              Удалить
+                              <span class="d-none d-md-inline "></span>
+                          </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
     </div>
 </div>

@@ -1,0 +1,18 @@
+<form *ngIf="animal && request" name="deleteForm" (ngSubmit)="confirmDelete()">
+    <div class="modal-header">
+        <h4 class="modal-title">Удаление животного из заявки</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div  class="modal-body">
+        <h3>Вы уверены, что хотите удалить животное с кличной {{animal.nickname}} из заявки?</h3>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+                <span >Cancel</span>
+            </button>
+            <button id="jhi-confirm-delete-todo" type="submit" class="btn btn-danger">
+                <span >Delete</span>
+            </button>
+        </div>
+    </div>
+</form>

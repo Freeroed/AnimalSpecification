@@ -30,23 +30,26 @@ export class RequestAddAnimalDialogComponent implements OnInit{
         animal:[]
     })
     ngOnInit(): void {
-        this.animalService.findMy().subscribe((res: HttpResponse<Animal[]>) =>
-        this.animals = res.body);
+        this.animalService.findMy().subscribe((res: HttpResponse<Animal[]>) => {
+        this.animals = res.body;
+        console.log(this.deleteAnimals(res.body));
+        });
     }
     clear(): void {
         this.activeModal.close();
     }
 
-    addAnimalToRequest(): void {
+    addAnimalToRequest(request: IRequest): IRequest {
+        const req = request;
         const animal=this.editForm.get(['animal'])!.value;
-        this.request.animals.push(animal);
+        req.animals.push(animal);
+        return req;
 
     }
 
     save(): void {
-        this.addAnimalToRequest();
-        console.log(this.request);
-        this.subscribeToSaveResponse(this.requestService.update(this.request));
+        const request = this.addAnimalToRequest(this.request);
+        this.subscribeToSaveResponse(this.requestService.update(request));
     }
 
     subscribeToSaveResponse(result: Observable<HttpResponse<IRequest>>): void {
@@ -57,10 +60,24 @@ export class RequestAddAnimalDialogComponent implements OnInit{
     }
 
     onSaveSuccess(): void {
+        this.eventManager.broadcast('requestModification');
         this.activeModal.close();
     }
 
     onSaveError(): void {
         console.log('ERROR IN SAVING');
     }
+
+    deleteAnimals(animals: Animal[]): Animal[] {
+        this.request.animals.forEach(animal => {
+            animals.forEach(anim => {
+                if (animal.id === anim.id) {
+                    animals.splice(animals.indexOf(anim),1)
+                }
+            })
+        })
+        return animals;
+    }
+
+    
 }

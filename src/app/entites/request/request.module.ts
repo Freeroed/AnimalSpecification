@@ -8,6 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { requestRoute } from './request.route';
 import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.component';
+import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
 
 @NgModule({
     imports: [RouterModule.forChild(requestRoute),
@@ -16,8 +17,8 @@ import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.com
         BrowserModule, 
         FormsModule, 
         ReactiveFormsModule, NgbModule],
-    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent],
-    entryComponents: [RequestAddAnimalDialogComponent]
+    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent],
+    entryComponents: [RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent]
 })
 export class AnimalSpecificationRequestModule {
 
