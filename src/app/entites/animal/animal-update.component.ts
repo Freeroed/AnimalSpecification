@@ -88,7 +88,7 @@ export class AnimalUpdateComponent implements OnInit {
             id: this.editForm.get(['id'])!.value,
             nickname: this.editForm.get(['nickname'])!.value,
             sex: this.editForm.get(['sex'])!.value,
-            birthday: this.editForm.get(['birthday'])!.value != null && this.editForm.get(['birthday'])!.value != null
+            birthday: this.editForm.get(['birthday'])!.value != null 
             ? moment(
                 this.editForm.get(['birthday'])!.value,
                 DATE_TIME_FORMAT

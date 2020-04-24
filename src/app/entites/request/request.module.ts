@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { requestRoute } from './request.route';
 import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.component';
 import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
+import { RequestUpdateComponent } from './request-update.component';
 
 @NgModule({
     imports: [RouterModule.forChild(requestRoute),
@@ -17,7 +18,7 @@ import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-anima
         BrowserModule, 
         FormsModule, 
         ReactiveFormsModule, NgbModule],
-    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent],
+    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestUpdateComponent],
     entryComponents: [RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent]
 })
 export class AnimalSpecificationRequestModule {

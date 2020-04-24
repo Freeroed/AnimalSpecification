@@ -7,6 +7,7 @@ import { flatMap } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
 import { RequestDetailComponent } from './request-detal.component';
 import { UserRouteAccessService } from 'src/app/core/auth/user-route-access-service';
+import { RequestUpdateComponent } from './request-update.component';
 
 @Injectable({providedIn: 'root'})
 export class RequestResolve implements Resolve<IRequest> {
@@ -33,6 +34,17 @@ export const requestRoute: Routes = [
     {
         path: 'requests/:id/view',
         component: RequestDetailComponent,
+        data: {
+            autorities: ['ROLE_USER', 'ROLE_ADMIN']
+        },
+        canActivate: [UserRouteAccessService],
+        resolve: {
+            request: RequestResolve
+        }
+    }, 
+    {
+        path: 'requests/:id/edit',
+        component: RequestUpdateComponent,
         data: {
             autorities: ['ROLE_USER', 'ROLE_ADMIN']
         },

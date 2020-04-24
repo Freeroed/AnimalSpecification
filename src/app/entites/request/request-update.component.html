@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div>
+        <div class="card-body" >
+            <form name="editForm" role="form" [formGroup]="editForm">
+                <h2 >
+                    Редактирование заявки
+                </h2>
+                <div class="alert alert-danger" *ngIf="isError">
+                    Произошла ошибка при изменении животного
+                </div>
+                <div class="form-group">
+                    <label>
+                        Дата отправления
+                    </label>
+                    <div class="input-group" style="width: 40%;">
+                        <input class="form-control" placeholder="ДД.ММ.ГГГГ" 
+                            name="dateOfDeparture" ngbDatepicker #s="ngbDatepicker" readonly 
+                            formControlName="dateOfDeparture" id="dateOfDeparture" required >
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary buttoncalendar" (click)="s.toggle()"  type="button">
+                            </button>
+                        </div>
+                        <div  *ngIf="editForm.get('dateOfDeparture')!.invalid && (editForm.get('dateOfDeparture')!.dirty || editForm.get('birthday')!.touched)">
+                            <small class="form-text text-danger">
+                                Это поле обязательно к заполнению
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Страна назначения
+                    </label>
+                    <select class="form-control" name="destinationCountry" [(ngModel)]="selectedCountry.id" formControlName="destinationCountry" required (click)="check()">
+                        <option selected>{{selectedCountry.countryName}}</option>
+                        <option *ngFor="let country of countries" [ngValue]="country.id">{{country.countryName}}</option>
+                    </select>
+                </div>
+               <!--<div class="form-group">
+                    <label>
+                        Пункт пересечения границы
+                    </label>
+                    <select class="form-control" name="destinationCountry"  formControlName="destinationCountry" required (click)="check()">
+                        <option *ngFor="let point of borderCrossingsPoints" [ngValue]="point.id"
+                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{point.location}}</option>
+                    </select>
+                </div>-->   
+                <div class="form-group">
+                    <label>
+                        Город назначения
+                    </label>
+                    <input type="text" class="form-control" id="destinationCity" formControlName="destinationCity" >
+                </div>
+            </form>
+            <button type="button" id="cancel-save" class="btn btn-secondary" (click)=previousState()>
+                &nbsp;<span>Отменить</span>
+            </button>
+            &nbsp;
+            <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
+                <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="save()" placement="top" >
+                    &nbsp;<span>Сохранить</span>
+                </button>
+              </span>
+            </div>
+        </div>
+</div>

@@ -3,6 +3,7 @@ package ru.vlsu.animalSpecification.web.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +25,10 @@ public class BorderCrossingPointResouce {
       this.bcpService = bcpService;
     }
 
-  @GetMapping("/borderCrossingPoints")
-    public List<BorderCrossingPoint> getAllBorderCrossingPoints(){
+    @GetMapping("/border-crossing-points")
+    public ResponseEntity getAllBorderCrossingPoints(){
         log.debug("REST request to get all border crossing points");
-        List<BorderCrossingPoint> list = bcpService.listAll();
-        return list;
+        List<BorderCrossingPoint> result = bcpService.listAll();
+        return ResponseEntity.ok(result);
     }
 }
