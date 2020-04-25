@@ -11,6 +11,7 @@ import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.com
 import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
 import { RequestUpdateComponent } from './request-update.component';
 import { RequestAddBorderPointComponent } from './request-add-border-point-dialog.component';
+import { RequestComponent } from './request.component';
 
 @NgModule({
     imports: [RouterModule.forChild(requestRoute),
@@ -19,7 +20,7 @@ import { RequestAddBorderPointComponent } from './request-add-border-point-dialo
         BrowserModule, 
         FormsModule, 
         ReactiveFormsModule, NgbModule],
-    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestUpdateComponent, RequestAddBorderPointComponent],
+    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestUpdateComponent, RequestAddBorderPointComponent, RequestComponent],
     entryComponents: [RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestAddBorderPointComponent]
 })
 export class AnimalSpecificationRequestModule {

@@ -5,6 +5,7 @@ import { SERVER_API_URL, DATE_FORMAT } from 'src/app/app.constants';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
+import { createRequestOption } from 'src/app/shared/util/request-util';
 
 type EntityResponseType = HttpResponse<IRequest>;
 type EntityArrayResponseType = HttpResponse<IRequest[]>;
@@ -25,6 +26,13 @@ export class RequestService {
         return this.http
             .get<IRequest[]>(this.resourceUrl + '/my', { observe: 'response'})
             .pipe(map((res:EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+    }
+    
+    findAll(req?: any): Observable<EntityArrayResponseType> {
+        const optional = createRequestOption(req);
+        return this.http
+            .get<IRequest[]>(this.resourceUrl, {params: optional, observe: 'response'})
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     save(request: IRequest): Observable<EntityResponseType> {

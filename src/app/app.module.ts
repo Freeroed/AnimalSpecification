@@ -4,10 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AnimalSpecificationAnimalModule } from './entites/animal/animal.module'
-import { AnimalService } from './entites/animal/animal.service';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { AnimalSpecificationHomeModule } from './home/home.module';
-import { RegionService } from './entites/region/region.service';
 import { RouterModule } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { authInterceptorProviders } from './blocks/interceptor/auth.intercoptor';
@@ -24,10 +22,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DateParserFormatter } from './core/dateParseFormatter';
 import { NgbDateMomentAdapter } from './shared/util/datepicker-adapter';
-import { HasAnyAuthorityDirective } from './shared/auth/has-any-authority.directive';
 import { AnimasSpecificationVaccineModule } from './entites/vaccine/vaccine.module';
 import { AnimalSpecificationLaboratoryResearchModule } from './entites/laboratoryResearch/laboratoryResearch.module';
 import { AnimalSpecificationRequestModule } from './entites/request/request.module';
+
+import { AnimalSpecificationSharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -48,14 +47,14 @@ import { AnimalSpecificationRequestModule } from './entites/request/request.modu
     BsDatepickerModule.forRoot(),
     AnimasSpecificationVaccineModule,
     AnimalSpecificationLaboratoryResearchModule,
-    AnimalSpecificationRequestModule
+    AnimalSpecificationRequestModule,
+    AnimalSpecificationSharedModule
   ],
   declarations: [
     AppComponent,
     NavbarComponent,
     DocsComponent,
-    FooterComponent,
-    HasAnyAuthorityDirective
+    FooterComponent
   ],
   providers: [FormBuilder,
     SessionStorageService, 

@@ -48,6 +48,9 @@ export class RequestAddAnimalDialogComponent implements OnInit{
     }
 
     save(): void {
+        const animal = this.editForm.get(['animal'])!.value;
+        animal.status = 'IN_REQUEST';
+        this.animalService.update(animal).subscribe();
         const request = this.addAnimalToRequest(this.request);
         this.subscribeToSaveResponse(this.requestService.update(request));
     }

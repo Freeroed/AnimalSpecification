@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="card-body">
+            <h2 class="page-heaging">
+                <span>Список заявок</span>
+            </h2>
+            <div *ngIf="requests?.length == 0"  class="alert alert-warning">
+                <span>Заявки не найдёны</span>
+            </div>
+            <div class="table-responsive" *ngIf="requests && requests.length > 0">
+                <table class="table table-striped" aria-describedby="page-heading" style="table-layout: fixed;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">Номер заявки</th>
+                            <th scope="col">Заявитель</th>
+                            <th scope="col">Страна назначения</th>
+                            <th scope="col">Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let request of requests">
+                            <td>{{request.id}}</td>
+                            <td>{{request.recipient.surname}} {{request.recipient.name}} {{request.recipient.patronymic}}</td>
+                            <td>{{request.destinationCountry.countryName}}</td>
+                            <td>{{request.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

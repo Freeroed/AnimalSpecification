@@ -24,15 +24,14 @@
       </option>
     </select>
     <div *ngIf="selectedCountry">
-    <p >
+    <p>
       Для поедки в {{selectedCountry.countryName}} вам нужно будет сделать то-то, и то-то, привить свою псину от того-то, и вообще, проще было бы дома сидеть
     </p>
-    <button type="button" class="btn btn-primary" (click)="createRequest()">Создать заявку</button>
+    <div *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN']">
+      <button type="button" class="btn btn-primary" (click)="createRequest()" >Создать заявку</button>
+   </div>
   </div>
   </div>
 </div>
-<p>
- <a routerLink="animals"> Тестовая ссылка для проверки запроса животных</a>
-</p>
 </div>
   </div></div>
