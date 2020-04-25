@@ -8,6 +8,7 @@ import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.com
 import { Animal } from 'src/app/shared/model/animal.model';
 import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
 import { Subscription } from 'rxjs';
+import { RequestStatus } from 'src/app/shared/model/enum/requestStatus.model';
 
 @Component({
     selector: 'app-request-detail',
@@ -16,6 +17,7 @@ import { Subscription } from 'rxjs';
 export class RequestDetailComponent implements OnInit {
     request: IRequest;
     eventSubscriber?: Subscription;
+    RequestStatus = RequestStatus;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -26,6 +28,7 @@ export class RequestDetailComponent implements OnInit {
     ngOnInit(): void {
         this.loadPage();
         this.registerChangesInRequest();
+        console.log(RequestStatus);
     }
     loadPage(): void {
         this.activatedRoute.data.subscribe(({ request }) => {

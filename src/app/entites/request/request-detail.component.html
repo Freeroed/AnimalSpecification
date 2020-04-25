@@ -3,7 +3,7 @@
         <div class="card-body">
             <h2>
                 <span>Информация о заявке</span>
-                <span class="float-right "><a [routerLink]="['/requests', request.id, 'edit']">Редактированть</a></span>
+                <span class="float-right "><a [routerLink]="['/requests', request.id, 'edit']">Редактировать</a></span>
             </h2>
         </div>
         <dl class="row-md jh-entity-details">
@@ -11,14 +11,61 @@
             <dd>
                 <span>{{request.destinationCountry.countryName}}</span>
             </dd>
+            <div *ngIf="request.destinationCity">
+                <dt><span>Город названичеия</span></dt>
+                <dd>
+                    <span>{{request.destinationCity}}</span>
+                </dd>
+            </div>
+            <div *ngIf="request.postalCode">
+                <dt><span>Почтовый индекс</span></dt>
+                <dd>
+                    <span>{{request.postalCode}}</span>
+                </dd>
+            </div>    
             <dt><span>Дата отправления</span></dt>
             <dd>
                 <span>{{request.dateOfDeparture | date: 'yyyy-MM-dd'}}</span>
             </dd>
+            <div *ngIf="request.transport">
+                <dt><span>Транспортное средство</span></dt>
+                <dd>
+                    <span>{{request.transport}}</span>
+                </dd>
+            </div> 
+            <div *ngIf="request.vehicleNumber">
+                <dt><span>Номер транспортного средства</span></dt>
+                <dd>
+                    <span>{{request.vehicleNumber}}</span>
+                </dd>
+            </div> 
+            <div *ngIf="request.transactionType">
+                <dt><span>Цель поездки</span></dt>
+                <dd>
+                    <span>{{request.transactionType}}</span>
+                </dd>
+            </div>
             <dt><span>Статус</span></dt>
             <dd>
-                <span>{{request.status}}</span>
+                <span *ngIf="request.status == RequestStatus['0']">Создана</span>
+                <span *ngIf="request.status == RequestStatus['1']">Подготовлена</span>
+                <span *ngIf="request.status == RequestStatus['2']">Подтверждена</span>
+                <span *ngIf="request.status == RequestStatus['3']">Выдан Сертификат формы 1</span>
+                <span *ngIf="request.status == RequestStatus['4']">Выданы экспотрные документы</span>
+                <span *ngIf="request.status == RequestStatus['5']">Закрыта</span>
             </dd>
+            <dt><span>Пункт пересечения границы</span></dt>
+            <dd class="text-overflow">
+               <span >{{request.borderCrossingPoint.location}}</span>
+            </dd>
+            <div *ngIf="request.veterinarian">
+                <dt>Ветеринарный врач, выдавший сертификат формы 1</dt>
+                <dd>{{request.veterinarian.surname}} {{request.veterinarian.name}} {{request.veterinarian.patronymic}}</dd>
+            </div>
+            <div *ngIf="request.inspectorOfRosselkhoznadzor">
+                <dt>Инспектор Россельхознадзора, выдавший документы </dt>
+                <dd>{{request.inspectorOfRosselkhoznadzor.surname}} {{request.inspectorOfRosselkhoznadzor.name}} {{request.inspectorOfRosselkhoznadzor.patronymic}}</dd>
+            </div>
         </dl>
         <h3>
             <span>Животные в заявке</span>

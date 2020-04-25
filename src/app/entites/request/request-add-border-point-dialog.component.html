@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4 class="modal-title">Добавление инфромации о пункте пересечения границы</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+<div class="modal-body">
+    <form name="editForm" role="form" [formGroup]="editForm">
+        <select class="form-control" name="borderCrossingPoint" [(ngModel)]="request.borderCrossingPoint" formControlName="borderCrossingPoint" required>
+            <option *ngFor="let point of borderCrossingPoints" [ngValue]="point">{{point.location}}</option>
+        </select>
+    </form>
+    <div *ngIf="request.borderCrossingPoint">
+        <dl class="row-md jh-entity-details">
+            <dt><span>Местонахождение</span></dt>
+            <dd>
+                <span>{{request.borderCrossingPoint.location}}</span>
+            </dd>
+            <dt><span>Сопределённый пункт пропуска</span></dt>
+            <dd>
+                <span>{{request.borderCrossingPoint.adjacentPoint}}</span>
+            </dd>
+            <dt><span>Классификация</span></dt>
+            <dd>
+                <span>{{request.borderCrossingPoint.classification}}</span>
+            </dd>
+            <dt><span>График работы</span></dt>
+            <dd>
+                <span>{{request.borderCrossingPoint.schedule}}</span>
+            </dd>
+            <dt><span>График работы должностных лиц управления</span></dt>
+            <dd>
+                <span>{{request.borderCrossingPoint.scheduleOfManagementOfficials}}</span>
+            </dd>
+        </dl>
+    </div>
+    <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
+        <button type="submit" id="save-entity" class="btn btn-primary" [disabled]="editForm.invalid" (click)="confirmAdd()" placement="top" >
+            &nbsp;<span>Сохранить</span>
+        </button>
+      </span>
+</div>

@@ -57,6 +57,8 @@ public class RequestMapper {
         request.setDateOfDeparture(requestDTO.getDateOfDeparture());
         request.setCertificate1FormNumber(requestDTO.getCertificate1FormNumber());
         request.setAnimals(animalsDTOToAnimals(requestDTO.getAnimals()));
+        request.setStatus(requestDTO.getStatus());
+        request.setTransport(requestDTO.getTransport());
         return request;
       }
 

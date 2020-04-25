@@ -3,18 +3,20 @@ import { FormBuilder } from '@angular/forms';
 import { RequestService } from './request.service';
 import { Animal } from 'src/app/shared/model/animal.model';
 import { IRequest, Request } from 'src/app/shared/model/request.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import { DATE_FORMAT } from 'src/app/app.constants';
 import * as moment from 'moment';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateParserFormatter } from 'src/app/core/dateParseFormatter';
 import { IDestinationCounry } from 'src/app/shared/model/destinationCountry.model';
 import { DestinationCounryService } from '../destinationCountry/destinationCountry.service';
 import { BorderCrossingPointService } from '../borderCrosingPoint/borderCrossingPoint.service';
-import { IBorderCrossingPoint } from 'src/app/shared/model/borderCrossingPoint.model';
+import { IBorderCrossingPoint, BorderCrossingPoint } from 'src/app/shared/model/borderCrossingPoint.model';
+import { JhiEventManager } from 'ng-jhipster';
+import { RequestAddBorderPointComponent } from './request-add-border-point-dialog.component';
 
 @Component({
     selector: 'app-request-update',
@@ -26,15 +28,19 @@ export class RequestUpdateComponent implements OnInit {
     isError = false;
     countries : IDestinationCounry[];
     selectedCountry: IDestinationCounry;
-    selectedBorderCrossingPoint: IBorderCrossingPoint;
+    selectedBorderCrossingPoint = new  BorderCrossingPoint();
     borderCrossingsPoints: IBorderCrossingPoint[];
+    eventSubscriber?: Subscription;
+    request: IRequest;
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private fb: FormBuilder,
         private requestService: RequestService,
         private countryServive: DestinationCounryService,
-        private borderServive: BorderCrossingPointService) {}
+        private borderServive: BorderCrossingPointService,
+        protected modalService: NgbModal,
+        protected eventManager: JhiEventManager) {}
 
     editForm = this.fb.group({
         id: [],
@@ -58,16 +64,16 @@ export class RequestUpdateComponent implements OnInit {
     })
     ngOnInit(): void {
         this.loadPage();
-        console.log(this.selectedCountry);
+        console.log(this.request);
         
     }
 
     loadPage(): void {
         this.activatedRoute.data.subscribe(( { request }) => {
             this.updateForm(request);
+            this.request = request;
             this.animals = request.animals;
             this.selectedCountry = request.destinationCountry;
-            this.selectedBorderCrossingPoint = request.borderCrossingPoint
         });
         this.countryServive.findAll().subscribe((res: HttpResponse<IDestinationCounry[]>) => {
             this.countries = res.body;
@@ -91,7 +97,8 @@ export class RequestUpdateComponent implements OnInit {
             status: request.status,
             dateOfDeparture: request.dateOfDeparture != null ? moment(request.dateOfDeparture.format(DATE_FORMAT)) : undefined,
             inspectorOfRosselkhoznadzor: request.inspectorOfRosselkhoznadzor,
-            certificate1FormNumber: request.certificate1FormNumber
+            certificate1FormNumber: request.certificate1FormNumber,
+            postalCode: request.postalCode
         })
     }
 
@@ -102,7 +109,6 @@ export class RequestUpdateComponent implements OnInit {
             recipient: this.editForm.get(['recipient'])!.value,
             destinationCountry: this.selectedCountry,
             destinationCity: this.editForm.get(['destinationCity'])!.value,
-            borderCrossingPoint: this.editForm.get(['borderCrossingPoint'])!.value,
             transport: this.editForm.get(['transport'])!.value,
             vehicleNumber: this.editForm.get(['vehicleNumber'])!.value,
             veterinarian: this.editForm.get(['veterinarian'])!.value,
@@ -115,13 +121,19 @@ export class RequestUpdateComponent implements OnInit {
                     DATE_FORMAT
                 ) : undefined,
             transactionType: this.editForm.get(['transactionType'])!.value,
-            animals: this.animals
+            animals: this.animals,
+            postalCode: this.editForm.get(['postalCode'])!.value
         }
     }
 
     save(): void {
         const request = this.createFormFrom();
+        request.borderCrossingPoint = this.request.borderCrossingPoint;
         this.subscribeToSaveResponse(this.requestService.update(request));
+    }
+
+    registerChangesInRequest(): void {
+        this.eventSubscriber = this.eventManager.subscribe('requestModification', () => this.loadPage())
     }
 
     previousState(): void {
@@ -144,6 +156,12 @@ export class RequestUpdateComponent implements OnInit {
     }
 
     check():void {
-        console.log(this.selectedCountry)
+        console.log(this.request)
+    }
+
+    addBorderCrossingPoint(): void {
+        //this.request = this.createFormFrom();
+        const modalRef = this.modalService.open(RequestAddBorderPointComponent,  { size: 'lg', backdrop: 'static' })
+        modalRef.componentInstance.request = this.request;
     }
 }

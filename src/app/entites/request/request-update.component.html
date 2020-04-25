@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div>
-        <div class="card-body" >
+        <div class="card-body" style="width: 40rem;">
             <form name="editForm" role="form" [formGroup]="editForm">
                 <h2 >
                     Редактирование заявки
@@ -36,20 +36,63 @@
                         <option *ngFor="let country of countries" [ngValue]="country.id">{{country.countryName}}</option>
                     </select>
                 </div>
-               <!--<div class="form-group">
+               <div class="form-group">
                     <label>
                         Пункт пересечения границы
                     </label>
-                    <select class="form-control" name="destinationCountry"  formControlName="destinationCountry" required (click)="check()">
-                        <option *ngFor="let point of borderCrossingsPoints" [ngValue]="point.id"
-                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{point.location}}</option>
-                    </select>
-                </div>-->   
+                    <div *ngIf="request.borderCrossingPoint" >
+                        <dl class="row-md jh-entity-details">
+                            <dt><span>Местонахождение</span></dt>
+                            <dd class="text-overflow">
+                                <span >{{request.borderCrossingPoint.location}}</span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div *ngIf="!request.borderCrossingPoint">
+                        <dl>
+                            <dt>Не выбрано</dt>
+                        </dl>
+                    </div>
+                    <button type="submit" id="add-point" class="btn btn-primary" 
+                    (click)="addBorderCrossingPoint()">Изменить</button>
+                </div>  
+                
                 <div class="form-group">
                     <label>
                         Город назначения
                     </label>
                     <input type="text" class="form-control" id="destinationCity" formControlName="destinationCity" >
+                </div>
+                <div class="form-group">
+                    <label>
+                        Почтовый индекс
+                    </label>
+                    <input type="text" class="form-control" id="postalCode" formControlName="postalCode">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Транспортное средство
+                    </label>
+                    <select class="form-control" name="transport" id="transport" formControlName="transport">
+                        <option value="CAR">Автомобиль</option>
+                        <option value="TRAIN">Поезд</option>
+                        <option value="AIR_TRANSPORT">Воздушный Транспорт</option>
+                        <option value="WATER_TRANSPORT">Водный транспорт</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Номер транспортного средства
+                    </label>
+                    <input type="text" class="form-control" id="vehicleNumber" formControlName="vehicleNumber">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Цель поездки
+                    </label>
+                    <select class="form-control" name="transactionType" id="transactionType" formControlName="transactionType">
+                        <option value="TRAVEL">Путешествие</option>
+                    </select>
                 </div>
             </form>
             <button type="button" id="cancel-save" class="btn btn-secondary" (click)=previousState()>
