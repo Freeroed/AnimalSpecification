@@ -36,7 +36,7 @@ export const requestRoute: Routes = [
         path: 'requests/:id/view',
         component: RequestDetailComponent,
         data: {
-            autorities: ['ROLE_USER', 'ROLE_ADMIN']
+            autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService],
         resolve: {
@@ -47,7 +47,7 @@ export const requestRoute: Routes = [
         path: 'requests/:id/edit',
         component: RequestUpdateComponent,
         data: {
-            autorities: ['ROLE_USER', 'ROLE_ADMIN']
+            autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService],
         resolve: {
@@ -58,7 +58,7 @@ export const requestRoute: Routes = [
         path: 'requests',
         component: RequestComponent,
         data: {
-            autorities: ['ROLE_USER', 'ROLE_ADMIN']
+            autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService],
     }

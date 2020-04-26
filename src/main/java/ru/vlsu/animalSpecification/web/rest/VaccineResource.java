@@ -43,7 +43,7 @@ public class VaccineResource {
 
     // Добавить запись о вакцинации
     @PostMapping("/vaccines")
-    public ResponseEntity createVaccine(@RequestBody Vaccine vaccine) throws URISyntaxException {
+    public ResponseEntity createVaccine(@RequestBody VaccineDTO vaccine) throws URISyntaxException {
 
       log.debug("REST request to save vaccine : {}", vaccine);
 
@@ -58,7 +58,7 @@ public class VaccineResource {
 
     // Обновить запись о вакцинации
     @PutMapping("/vaccines")
-    public ResponseEntity updateVaccine(@RequestBody Vaccine vaccine) {
+    public ResponseEntity updateVaccine(@RequestBody VaccineDTO vaccine) {
 
       log.debug("REST request to update vaccine with id : {} ", vaccine.getId());
 

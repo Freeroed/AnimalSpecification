@@ -43,7 +43,7 @@ export const accountRoute: Routes = [
         path: 'account',
         component: AccountComponent,
         data : {
-          autorities: ["ROLE_USER", "ROLE_ADMIN"]
+          autorities: ["ROLE_USER", "ROLE_ADMIN", 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },resolve: {
           user: AccountResolve
         },

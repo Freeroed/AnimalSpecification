@@ -31,9 +31,9 @@ public class LaboratoryResearchService {
       this.laboratoryResearchMapper = laboratoryResearchMapper;
     }
 
-  public void save(LaboratoryResearch lr) {
+  public void save(LaboratoryResearchDTO lr) {
         log.debug("Save laboratory research : {}", lr);
-        repo.save(lr);
+        repo.save(laboratoryResearchMapper.toEntity(lr));
     }
 
     public List<LaboratoryResearchDTO> listAll() {

@@ -130,10 +130,10 @@ export class VaccineUpdateComponent implements OnInit{
         : undefined;
 
         if(vaccineDate && vaccineDate.isAfter(this.date)) {
-            this.isDateValid = true;
+            this.isDateValid = false;
         }
         else {
-            this.isDateValid = false;
+            this.isDateValid = true;
         }
         if(vaccineDate && validUtil && validUtil.isBefore(vaccineDate)) {
             this.isValidUtilValid = false

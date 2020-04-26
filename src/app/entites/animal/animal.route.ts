@@ -38,7 +38,7 @@ export const animalRoute: Routes = [
         path: 'animals',
         component: AnimalComponent,
         data : {
-          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+          autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService]
       }, 
@@ -46,7 +46,7 @@ export const animalRoute: Routes = [
         path: 'animals/new',
         component: AnimalUpdateComponent,
         data : {
-          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+          autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService]
       },
@@ -54,7 +54,7 @@ export const animalRoute: Routes = [
         path: 'animals/:id/view',
         component: AnimalDetailComponent,
         data: {
-          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+          autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService],
         resolve: {
@@ -64,7 +64,7 @@ export const animalRoute: Routes = [
         path: 'animals/:id/edit',
         component: AnimalUpdateComponent,
         data: {
-          autorities: ['ROLE_USER', 'ROLE_ADMIN']
+          autorities: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']
         },
         canActivate: [UserRouteAccessService],
         resolve: {

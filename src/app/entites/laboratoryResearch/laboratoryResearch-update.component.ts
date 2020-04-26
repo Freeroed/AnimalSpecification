@@ -109,17 +109,17 @@ export class LaboratoryResearchUpdateComponent implements OnInit {
         }
     }
 
-    checkDate(): boolean {
+    checkDate(): void {
         const dateOfReceiptOfResult = this.editForm.get(['dateOfReceiptOfResult'])!.value != null && this.editForm.get(['dateOfReceiptOfResult'])!.value != null
         ? moment(
             this.editForm.get(['dateOfReceiptOfResult'])!.value,
             'YYYY-MM-DD'
           )
         : undefined;
-        if (dateOfReceiptOfResult && this.date.isBefore(dateOfReceiptOfResult)) {
-            return this.isDateValid = true;
+        if (dateOfReceiptOfResult && this.date.isAfter(dateOfReceiptOfResult)) {
+            this.isDateValid = true;
         } else {
-            return this.isDateValid = false;
+            this.isDateValid = false;
         }
     }
 }

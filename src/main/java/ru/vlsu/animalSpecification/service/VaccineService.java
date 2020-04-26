@@ -30,9 +30,9 @@ public class VaccineService {
       this.vaccineMapper = vaccineMapper;
     }
 
-  public void save(Vaccine vac) {
+  public void save(VaccineDTO  vac) {
         log.debug("Save vaccine: {}", vac);
-        repo.save(vac);
+        repo.save(vaccineMapper.toEntity(vac));
     }
 
     public List<Vaccine> listAll() {

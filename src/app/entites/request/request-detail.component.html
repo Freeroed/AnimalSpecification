@@ -67,9 +67,16 @@
                 <dd>{{request.inspectorOfRosselkhoznadzor.surname}} {{request.inspectorOfRosselkhoznadzor.name}} {{request.inspectorOfRosselkhoznadzor.patronymic}}</dd>
             </div>
         </dl>
+        <div *ngIf="errors.length > 0">
+            <div *ngFor="let animalError of errors">
+                <div class="alert alert-danger" role="alert" *ngFor="let error of animalError">
+                    Ошибка у животного : {{request.animals[errors.indexOf(animalError)].nickname}} : {{error}}
+                </div>
+            </div>
+        </div>
         <h3>
             <span>Животные в заявке</span>
-            <button type="submit" class="btn btn-primary float-right btn-sm btn-pad" (click)="addAnimal()">
+            <button type="submit" class="btn btn-primary float-right btn-sm btn-pad" (click)="addAnimal()" [disabled]="request.animals.length>=5">
                 Добавить
             </button>
         </h3>

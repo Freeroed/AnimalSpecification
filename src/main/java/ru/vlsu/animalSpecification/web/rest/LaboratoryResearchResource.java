@@ -42,7 +42,7 @@ public class LaboratoryResearchResource {
 
     // Создать результат лабораторного исследования
     @PostMapping("/laboratoryResearches")
-    public ResponseEntity createLabResearch(@RequestBody LaboratoryResearch lr) throws URISyntaxException {
+    public ResponseEntity createLabResearch(@RequestBody LaboratoryResearchDTO lr) throws URISyntaxException {
 
       log.debug("REST request to save laboratory research : {}", lr);
 
@@ -57,7 +57,7 @@ public class LaboratoryResearchResource {
 
     // Обновить результат лабораторного иссладованич
     @PutMapping("/laboratoryResearches")
-    public ResponseEntity updateLabResearch(@RequestBody LaboratoryResearch lr) {
+    public ResponseEntity updateLabResearch(@RequestBody LaboratoryResearchDTO lr) {
 
       log.debug("REST request to update laboratory research with id : {} ", lr.getId());
 
