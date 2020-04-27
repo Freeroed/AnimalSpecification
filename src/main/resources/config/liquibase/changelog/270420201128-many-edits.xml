@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="270420201128-1">
+
+    <comment>Many different changes to different tables</comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      ALTER TABLE Animal MODIFY COLUMN human BIGINT NOT NULL;
+
+      ALTER TABLE breeds_of_animal MODIFY COLUMN id BIGINT NOT NULL;
+
+      ALTER TABLE destination_country MODIFY COLUMN country_name_ENG varchar(100) NOT NULL;
+
+      ALTER TABLE laboratory_research MODIFY COLUMN animal BIGINT NOT NULL;
+      ALTER TABLE laboratory_research MODIFY COLUMN result varchar(60) NOT NULL;
+
+      ALTER TABLE Request MODIFY COLUMN date_of_departure timestamp NOT NULL;
+      ALTER TABLE Request ADD certificate_5a_form_number varchar(50) NULL ;
+      ALTER TABLE Request ADD certificate_euro_number varchar(50) NULL ;
+
+      ALTER TABLE user ADD rosselkhoznadzor_division BIGINT NULL ;
+      ALTER TABLE user ADD position varchar(100) NULL ;
+      ALTER TABLE user ADD position_ENG varchar(100) NULL ;
+      ALTER TABLE user ADD organization varchar(150) NULL ;
+
+      ALTER TABLE vaccine MODIFY COLUMN title  varchar(150) NOT NULL;
+      ALTER TABLE vaccine MODIFY COLUMN date   timestamp NOT NULL;
+
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

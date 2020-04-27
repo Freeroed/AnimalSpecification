@@ -1,10 +1,5 @@
 package ru.vlsu.animalSpecification.domain;
 
-import org.hibernate.annotations.Cascade;
-import ru.vlsu.animalSpecification.domain.Animal;
-import ru.vlsu.animalSpecification.domain.BorderCrossingPoint;
-import ru.vlsu.animalSpecification.domain.DestinationCountry;
-import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.domain.emun.TransactionType;
 import ru.vlsu.animalSpecification.domain.emun.TransportType;
@@ -14,8 +9,6 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 @Entity
 @Table(name = "Request")
@@ -90,6 +83,12 @@ public class Request implements Serializable {
 
   @Column(name="dateOfCreationa")
   private Instant createdAt;
+
+  @Column (name = "certificate_5a_form_number")
+  private String certificate5aFormNumber;  // Номер вет. сертификата 5а
+
+  @Column (name = "certificate_euro_number")
+  private String  certificateEuroNumber;  // Номер евросправки
 
   public Long getId() {
     return id;
@@ -241,5 +240,21 @@ public class Request implements Serializable {
 
   public void setCreatedAt(Instant createdAt) {
     this.createdAt = createdAt;
+  }
+
+  public String getCertificate5aFormNumber() {
+    return certificate5aFormNumber;
+  }
+
+  public void setCertificate5aFormNumber(String certificate5aFormNumber) {
+    this.certificate5aFormNumber = certificate5aFormNumber;
+  }
+
+  public String getCertificateEuroNumber() {
+    return certificateEuroNumber;
+  }
+
+  public void setCertificateEuroNumber(String certificateEuroNumber) {
+    this.certificateEuroNumber = certificateEuroNumber;
   }
 }

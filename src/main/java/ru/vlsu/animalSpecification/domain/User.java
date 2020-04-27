@@ -57,6 +57,18 @@ public class User implements Serializable {
     @Column(name = "created_at")
     private Instant createdAd;
 
+    @Column(name = " rosselkhoznadzor_division")
+    private Long  rosselkhoznadzorDivision;
+
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "position_ENG")
+    private String positionENG;
+
+    @Column(name = "organization")
+    private String organization;
+
     public Long getId() {
         return id;
     }
@@ -169,7 +181,39 @@ public class User implements Serializable {
         this.createdAd = createdAd;
     }
 
-    @Override
+    public Long getRosselkhoznadzorDivision() {
+      return rosselkhoznadzorDivision;
+    }
+
+    public void setRosselkhoznadzorDivision(Long rosselkhoznadzorDivision) {
+      this.rosselkhoznadzorDivision = rosselkhoznadzorDivision;
+    }
+
+    public String getPosition() {
+      return position;
+    }
+
+    public void setPosition(String position) {
+      this.position = position;
+    }
+
+    public String getPositionENG() {
+      return positionENG;
+    }
+
+    public void setPositionENG(String positionENG) {
+      this.positionENG = positionENG;
+    }
+
+    public String getOrganization() {
+      return organization;
+    }
+
+    public void setOrganization(String organization) {
+      this.organization = organization;
+    }
+
+  @Override
   public String toString() {
     return "User{" +
       "id=" + id +
