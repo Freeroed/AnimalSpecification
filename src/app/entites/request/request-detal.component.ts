@@ -14,6 +14,7 @@ import { VaccineService } from '../vaccine/vaccine.service';
 import { HttpResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { flatMap } from 'rxjs/operators';
+import { RequestConfirmDialogComponent } from './request-confirm-dialog.component';
 
 
 @Component({
@@ -97,6 +98,11 @@ export class RequestDetailComponent implements OnInit {
         let vaccines: IVaccine[];
         this.vaccineService.findAlByAnimal(animal).subscribe((res: HttpResponse<IVaccine[]>) => {
             vaccines = res.body;});
+    }
+
+    confirmRequest():void {
+        const modalRef = this.modalService.open(RequestConfirmDialogComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.request = this.request;
     }
 
     

@@ -1,0 +1,18 @@
+<form *ngIf="request" name="deleteForm" (ngSubmit)="confirm()">
+    <div class="modal-header">
+        <h4 class="modal-title">Удаление животного из заявки</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div  class="modal-body">
+        <h3>Вы подтверждаете корректность всей введённой информации в заявке?</h3>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+                <span >Отвенить</span>
+            </button>
+            <button id="jhi-confirm-delete-todo" type="submit" class="btn btn-primary">
+                <span >Подтвершить</span>
+            </button>
+        </div>
+    </div>
+</form>

@@ -4,6 +4,7 @@
             <h2>
                 <span>Информация о заявке</span>
                 <span class="float-right "><a [routerLink]="['/requests', request.id, 'edit']">Редактировать</a></span>
+                <button class="btn btn-primary float-right" (click)="confirmRequest()" [disabled]="errors.length > 1" *ngIf="request.status == RequestStatus['0']">Подтвердить</button>
             </h2>
         </div>
         <dl class="row-md jh-entity-details">
