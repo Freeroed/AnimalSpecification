@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4 class="modal-title">Дабавление сертификата формы 1 </h4>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;</button>
+</div>
+<div  class="modal-body">
+    <h3>К сожалению, данная функция пока недоступна, приносим свои извинения :(</h3>
+    <form name="editForm" role="form" [formGroup]="editForm">
+        <div class="form-group">
+            <label>
+                Номер сертификата формы 1
+            </label>
+            <input type="text" class="form-control" required formControlName="certificate"/>
+        </div>
+
+    </form>
+    <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
+        <button type="submit" id="save-entity" class="btn btn-primary"  (click)="save()" placement="top" [disabled]="editForm.invalid">
+            &nbsp;<span>Сохранить</span>
+        </button>
+      </span>
+      &nbsp;
+      <button type="submit" id="save-entity" class="btn btn-danger"  (click)="clear()" placement="top" >
+        &nbsp;<span>Отмена</span>
+    </button>
+</div>

@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RequestDetailComponent } from './request-detal.component';
+import { RequestDetailComponent } from './request-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +13,9 @@ import { RequestUpdateComponent } from './request-update.component';
 import { RequestAddBorderPointComponent } from './request-add-border-point-dialog.component';
 import { RequestComponent } from './request.component';
 import { RequestConfirmDialogComponent } from './request-confirm-dialog.component';
+import { AnimalSpecificationSharedModule } from 'src/app/shared/shared.module';
+import { RequestGiveOutSertificateComponent } from './request-give-out-sertificate-dialog.component';
+import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-dialog.component';
 
 @NgModule({
     imports: [RouterModule.forChild(requestRoute),
@@ -20,9 +23,26 @@ import { RequestConfirmDialogComponent } from './request-confirm-dialog.componen
         CommonModule, 
         BrowserModule, 
         FormsModule, 
-        ReactiveFormsModule, NgbModule],
-    declarations: [RequestDetailComponent, RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestUpdateComponent, RequestAddBorderPointComponent, RequestComponent, RequestConfirmDialogComponent],
-    entryComponents: [RequestAddAnimalDialogComponent, RequestDeleteAnimalDeleteDialogComponent, RequestAddBorderPointComponent, RequestConfirmDialogComponent]
+        ReactiveFormsModule, 
+        NgbModule, 
+        AnimalSpecificationSharedModule],
+
+    declarations: [RequestDetailComponent, 
+        RequestAddAnimalDialogComponent, 
+        RequestDeleteAnimalDeleteDialogComponent, 
+        RequestUpdateComponent, 
+        RequestAddBorderPointComponent, 
+        RequestComponent, 
+        RequestConfirmDialogComponent, 
+        RequestGiveOutSertificateComponent, 
+        RequestGiveOutDocumentsComponent],
+        
+    entryComponents: [RequestAddAnimalDialogComponent, 
+        RequestDeleteAnimalDeleteDialogComponent, 
+        RequestAddBorderPointComponent, 
+        RequestConfirmDialogComponent, 
+        RequestGiveOutSertificateComponent, 
+        RequestGiveOutDocumentsComponent]
 })
 export class AnimalSpecificationRequestModule {
 

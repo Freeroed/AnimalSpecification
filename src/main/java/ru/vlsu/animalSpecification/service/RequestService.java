@@ -40,13 +40,34 @@ public class RequestService {
         log.debug("Request save request : {} by user with userName : {}", req, userName);
         User master = userService.findByUsername(userName);
         Request request = requestMapper.toEntity(req);
+        //Check creating new request
         if (request.getId() == null) {
           request.setRecipient(master);
           request.setStatus(RequestStatus.CREATED);
           request.setCreatedAt(Instant.now());
+        } else {
+          if (request.getStatus() == RequestStatus.FROM_ONE_SERTIFICATED) {
+            RequestDTO oldRequest = findOne(request.getId()).get();
+            if (oldRequest.getStatus() == RequestStatus.CONFIRM && oldRequest.getVeterinarian() == null && oldRequest.getCertificate1FormNumber() == null) {
+              //TODO check user role
+              request.setVeterinarian(master);
+            }
+          }
+          if (request.getStatus() == RequestStatus.EXPORT_DOCS_ISSUED) {
+            RequestDTO oldRequest = findOne(request.getId()).get();
+            if (oldRequest.getStatus() == RequestStatus.FROM_ONE_SERTIFICATED &&
+              oldRequest.getInspectorOfRosselkhoznadzor() == null &&
+              oldRequest.getCertificate5aFormNumber() == null  &&
+              oldRequest.getCertificateEuroNumber() == null) {
+                request.setInspectorOfRosselkhoznadzor(master);
+                request.setCertificate5aFormNumber("145514");
+              request.setCertificateEuroNumber("145514");
+            }
+          }
+
         }
-        Request result = repo.save(request);
-        return requestMapper.requestToRequestDTO(result);
+      Request result = repo.save(request);
+      return requestMapper.requestToRequestDTO(result);
     }
 
     public List<RequestDTO> listAll()

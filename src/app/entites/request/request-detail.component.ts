@@ -15,6 +15,8 @@ import { HttpResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { flatMap } from 'rxjs/operators';
 import { RequestConfirmDialogComponent } from './request-confirm-dialog.component';
+import { RequestGiveOutSertificateComponent } from './request-give-out-sertificate-dialog.component';
+import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-dialog.component';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class RequestDetailComponent implements OnInit {
     eventSubscriber?: Subscription;
     RequestStatus = RequestStatus;
     errors : string[][] = [];
+    fillingErrors : string[];
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -42,6 +45,7 @@ export class RequestDetailComponent implements OnInit {
     loadPage(): void {
         this.activatedRoute.data.subscribe(({ request }) => {
             this.request = request;
+            this.fillingErrors = this.chechFillngsErrors(request);
         });
     }
 
@@ -103,6 +107,41 @@ export class RequestDetailComponent implements OnInit {
     confirmRequest():void {
         const modalRef = this.modalService.open(RequestConfirmDialogComponent, { size: 'lg', backdrop: 'static' });
         modalRef.componentInstance.request = this.request;
+    }
+
+    giveFormOneSertificate(): void {
+        const modalRef = this.modalService.open(RequestGiveOutSertificateComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.request = this.request;
+    }
+
+    giveExportDocuments(): void {
+        const modalRef = this.modalService.open(RequestGiveOutDocumentsComponent, { size: 'lg', backdrop: 'static' });
+        modalRef.componentInstance.request = this.request;
+    }
+
+    chechFillngsErrors(request: IRequest): string[] {
+        const fillingErrors: string[] = []
+        if (request.transport == null || request.transport == undefined) {
+            fillingErrors.push('Не указан тип транспортного стредства');
+        }
+
+        if (request.transport && request.vehicleNumber == null || request.vehicleNumber == undefined || request.vehicleNumber == '') {
+            fillingErrors.push('Не указан номер транспортного средства')
+        }
+
+        if (request.postalCode == null || request.postalCode == undefined || request.postalCode == '') {
+            fillingErrors.push('Не указан почтовый индекс')
+        }
+
+        if (request.borderCrossingPoint == null || request.borderCrossingPoint == undefined) {
+            fillingErrors.push('Не указан пункт пересеченя границы')
+        }
+
+        if (request.destinationCity == null || request.destinationCity == undefined || request.destinationCity == '') {
+            fillingErrors.push('Не указан город назначения')
+        }
+
+        return fillingErrors;
     }
 
     

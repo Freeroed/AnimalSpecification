@@ -15,6 +15,7 @@
                             <th scope="col">Заявитель</th>
                             <th scope="col">Страна назначения</th>
                             <th scope="col">Статус</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,6 +24,16 @@
                             <td>{{request.recipient.surname}} {{request.recipient.name}} {{request.recipient.patronymic}}</td>
                             <td>{{request.destinationCountry.countryName}}</td>
                             <td>{{request.status}}</td>
+                            <td class="text-right">
+                                <div class="dtn-group">
+                                    <button type="submit" [routerLink]="['/requests', request.id, 'view']"
+                                        class="btn btn-primary btn-sm" placement="top"
+                                        ngbTooltip="Изменить">
+                                        Просмотреть
+                              <span class="d-none d-md-inline"></span>
+                          </button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

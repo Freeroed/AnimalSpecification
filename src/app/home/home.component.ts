@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     }
 
     protected onSaveSuccess(request: IRequest): void {
-        this.router.navigate(['/requesrs', request.id, 'view'])
+        this.router.navigate(['requesrs', request.id, 'view'])
     }
 
     protected onSaveError(): void {

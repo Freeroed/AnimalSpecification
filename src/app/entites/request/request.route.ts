@@ -5,7 +5,7 @@ import { RequestService } from './request.service';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { HttpResponse } from '@angular/common/http';
-import { RequestDetailComponent } from './request-detal.component';
+import { RequestDetailComponent } from './request-detail.component';
 import { UserRouteAccessService } from 'src/app/core/auth/user-route-access-service';
 import { RequestUpdateComponent } from './request-update.component';
 import { RequestComponent } from './request.component';
