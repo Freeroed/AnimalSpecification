@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RequestStatus } from 'src/app/shared/model/enum/requestStatus.model';
+import { IDocument, Document } from 'src/app/shared/model/document.model';
+import { DocumentService } from '../document/document.service';
 
 @Component({
     templateUrl: './request-give-out-sertificate-dialog.component.html'
@@ -19,9 +21,10 @@ export class RequestGiveOutSertificateComponent {
         protected requestService: RequestService,
         public activeModal: NgbActiveModal,
         protected eventManager: JhiEventManager,
-        protected fb: FormBuilder){}
+        protected fb: FormBuilder,
+        protected documentService: DocumentService){}
 
-    editForm = this.fb.group({
+    certificateForm = this.fb.group({
         certificate: []
     })
 
@@ -30,10 +33,11 @@ export class RequestGiveOutSertificateComponent {
     }
 
     save(): void {
-        const request = this.request;
-        this.request.certificate1FormNumber = this.editForm.get(['certificate'])!.value;
-        this.request.status = RequestStatus['3'];
-        this.subscibeToSaveResponse(this.requestService.update(request))
+        let document =  new Document;
+        document.documentNumber = this.certificateForm.get(['certificate'])!.value;
+        //const document = this.createFormFrom();
+        //console.log(document);
+        this.subscribeToCreateDocument(this.documentService.create(document));
     }
 
     subscibeToSaveResponse(result: Observable<HttpResponse<IRequest>>): void {
@@ -43,6 +47,20 @@ export class RequestGiveOutSertificateComponent {
         );
     }
 
+    subscribeToCreateDocument(result: Observable<HttpResponse<IDocument>>): void {
+        result.subscribe(
+            (res: HttpResponse<IDocument>) => this.onCreatingDocumentSuccess(res.body),
+            () => this.onCreateDocumentError()
+        );
+    }
+
+    onCreatingDocumentSuccess(document: IDocument): void {
+        const request = this.request;
+        request.certificate1FormNumber = document;
+        request.status = RequestStatus['3'];
+        this.subscibeToSaveResponse(this.requestService.update(request));
+    }
+
     onSaveSuccess(): void {
         this.eventManager.broadcast('requestModification');
         this.activeModal.close();
@@ -50,5 +68,20 @@ export class RequestGiveOutSertificateComponent {
 
     onSaveError(): void {
         console.log('SAVING ERROR')
+    }
+
+    onCreateDocumentError(): void {
+        console.log('SAVING DOCUMENT ERROR')
+    }
+
+    createFormFrom(): IDocument {
+        return {
+            ...new Document(),
+            documentNumber: this.certificateForm.get(['certificate'])!.value,
+            dateOfIssue: undefined,
+            id: undefined,
+            link: undefined
+        }
+        
     }
 }

@@ -47,29 +47,29 @@ public class RequestDTO implements Serializable {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant dateOfDeparture; // дата отправления
 
-  private Document certificate1FormNumber;  // Уникальный идентификатор ВСД
+  private DocumentDTO certificate1FormNumber;  // Уникальный идентификатор ВСД
 
   private Set<AnimalDTO> animals = new HashSet<>();
 
   private RequestStatus status; // статус заявки
 
-  private Document certificateEuroNumber;
+  private DocumentDTO certificateEuroNumber;
 
-  public Document getCertificate5aFormNumber() {
+  public DocumentDTO getCertificate5aFormNumber() {
     return certificate5aFormNumber;
   }
 
-  public void setCertificate5aFormNumber(Document certificate5aFormNumber) {
+  public void setCertificate5aFormNumber(DocumentDTO certificate5aFormNumber) {
     this.certificate5aFormNumber = certificate5aFormNumber;
   }
 
-  private Document certificate5aFormNumber;  // Номер вет. сертификата 5а
+  private DocumentDTO certificate5aFormNumber;  // Номер вет. сертификата 5а
 
-  public Document getCertificateEuroNumber() {
+  public DocumentDTO getCertificateEuroNumber() {
     return certificateEuroNumber;
   }
 
-  public void setCertificateEuroNumber(Document certificateEuroNumber) {
+  public void setCertificateEuroNumber(DocumentDTO certificateEuroNumber) {
     this.certificateEuroNumber = certificateEuroNumber;
   }
 
@@ -196,11 +196,11 @@ public class RequestDTO implements Serializable {
     this.dateOfDeparture = dateOfDeparture;
   }
 
-  public Document getCertificate1FormNumber() {
+  public DocumentDTO getCertificate1FormNumber() {
     return certificate1FormNumber;
   }
 
-  public void setCertificate1FormNumber(Document certificate1FormNumber) {
+  public void setCertificate1FormNumber(DocumentDTO certificate1FormNumber) {
     this.certificate1FormNumber = certificate1FormNumber;
   }
 
@@ -244,12 +244,8 @@ public class RequestDTO implements Serializable {
     this.inspectorOfRosselkhoznadzor = request.getInspectorOfRosselkhoznadzor() != null ? new UserDTO(request.getInspectorOfRosselkhoznadzor()) : null;
     this.postalCode = request.getPostalCode() != null ? request.getPostalCode() : null;
     this.dateOfDeparture = request.getDateOfDeparture() != null ? request.getDateOfDeparture() : null;
-    this.certificate1FormNumber = request.getCertificate1FormNumber() != null ? request.getCertificate1FormNumber() : null;
     this.status = request.getStatus() != null ? request.getStatus() : null;
     this.createdAt = request.getCreatedAt() != null ? request.getCreatedAt() : null;
-    this.certificate1FormNumber = request.getCertificate1FormNumber() != null ? request.getCertificate1FormNumber() : null;
-    this.certificateEuroNumber = request.getCertificateEuroNumber()  != null ? request.getCertificateEuroNumber() : null;
-    this.certificate5aFormNumber = request.getCertificate5aFormNumber() != null ? request.getCertificate5aFormNumber() : null;
   }
 
   @Override

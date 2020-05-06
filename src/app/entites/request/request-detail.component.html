@@ -92,7 +92,7 @@
         </div>
         <h2>
             <span>Животные в заявке</span>
-                <button type="submit" class="btn btn-primary float-right">
+                <button type="submit" class="btn btn-primary float-right" (click)="addAnimal()" *ngIf="isViewerRecipient && request.status == RequestStatus['0']"> 
                     Добавить
                 </button>
         </h2>

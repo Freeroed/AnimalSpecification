@@ -9,16 +9,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.vlsu.animalSpecification.domain.Document;
 import ru.vlsu.animalSpecification.service.DocumentService;
+import ru.vlsu.animalSpecification.service.dto.DocumentDTO;
 import ru.vlsu.animalSpecification.service.impl.DocumentServiceImpl;
 
 
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -34,7 +33,7 @@ public class DocumentResource {
     this.documentService = documentService;
   }
 
-  @GetMapping("/document/new")
+  @GetMapping("/documents/new")
   public ResponseEntity createDocument() {
     log.debug("Rest request to create document");
     boolean result = documentService.createDocument();
@@ -45,7 +44,7 @@ public class DocumentResource {
     }
   }
 
-  @GetMapping("/document/download")
+  @GetMapping("/documents/download")
   public ResponseEntity<InputStreamResource> downloadDocument() throws IOException {
     log.debug("Rest request to download document");
     FileSystemResource document = new FileSystemResource("D:\\Documents\\testDocument.pdf");
@@ -58,15 +57,25 @@ public class DocumentResource {
   }
 
   // Получить документ по id
-  @GetMapping("/document/{id}")
+  @GetMapping("/documents/{id}")
   public ResponseEntity getDocument(@PathVariable Long id) {
     log.debug("REST request to get doc with id : {}", id);
-    Document doc = documentService.get(id);
+    Optional<DocumentDTO> doc = documentService.get(id);
     if (doc != null) {
       return ResponseEntity.ok()
         .body(doc);
     } else {
       return ResponseEntity.notFound().build();
     }
+  }
+
+  @PostMapping("/documents")
+  public ResponseEntity createDocument(@RequestBody DocumentDTO document) {
+    log.debug("REST request to create document : {}", document);
+    if (document.getId() != null) {
+      return ResponseEntity.badRequest().build();
+    }
+    DocumentDTO result = documentService.createFormOneCertificate(document);
+    return ResponseEntity.ok(result);
   }
 }

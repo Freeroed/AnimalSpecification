@@ -5,7 +5,7 @@
 </div>
 <div  class="modal-body">
     <h3>К сожалению, данная функция пока недоступна, приносим свои извинения :(</h3>
-    <form name="editForm" role="form" [formGroup]="editForm">
+    <form name="certificateForm" role="form" [formGroup]="certificateForm">
         <div class="form-group">
             <label>
                 Номер сертификата формы 1
@@ -14,8 +14,8 @@
         </div>
 
     </form>
-    <span placement="top" [ngbTooltip]="editForm.invalid ? 'Не все поля заполнены' : ''">
-        <button type="submit" id="save-entity" class="btn btn-primary"  (click)="save()" placement="top" [disabled]="editForm.invalid">
+    <span placement="top" [ngbTooltip]="certificateForm.invalid ? 'Не все поля заполнены' : ''">
+        <button type="submit" id="save-entity" class="btn btn-primary"  (click)="save()" placement="top" [disabled]="certificateForm.invalid">
             &nbsp;<span>Сохранить</span>
         </button>
       </span>

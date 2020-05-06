@@ -6,6 +6,7 @@ import { RequestStatus } from './enum/requestStatus.model';
 import { TransportType } from './enum/transportType.model';
 import { User } from './user.model';
 import { TransactionType } from './enum/transactionType.model';
+import { IDocument } from './document.model';
 
 export interface IRequest {
     id?: number,
@@ -23,9 +24,13 @@ export interface IRequest {
     inspectorOfRosselkhoznadzor?: User,
     postalCode?: string,
     dateOfDeparture?: Moment,
-    certificate1FormNumber?: string,
+    certificate1FormNumber?: IDocument,
     status?: RequestStatus,
-    animals?: Animal[]
+    animals?: Animal[],
+    certificate5aFormNumber?: IDocument,
+    certificateEuroNumber?: IDocument,
+
+
 }
 
 export class Request implements IRequest {
@@ -45,8 +50,10 @@ export class Request implements IRequest {
         public inspectorOfRosselkhoznadzor?: User,
         public postalCode?: string,
         public dateOfDeparture?: Moment,
-        public certificate1FormNumber?: string,
+        public certificate1FormNumber?: IDocument,
         public status?: RequestStatus,
-        public animals?: Animal[]
+        public animals?: Animal[],
+        public certificate5aFormNumber?: IDocument,
+        public certificateEuroNumber?: IDocument,
     ){}
 }

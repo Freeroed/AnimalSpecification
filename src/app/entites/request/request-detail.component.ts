@@ -19,6 +19,7 @@ import { RequestGiveOutSertificateComponent } from './request-give-out-sertifica
 import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-dialog.component';
 import * as fileSaver from 'file-saver';
 import { DocumentService } from '../document/document.service';
+import { TokenStorageService } from 'src/app/core/auth/token-storage.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class RequestDetailComponent implements OnInit {
     RequestStatus = RequestStatus;
     errors : string[][] = [];
     fillingErrors : string[];
+    isViewerRecipient: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -38,18 +40,21 @@ export class RequestDetailComponent implements OnInit {
         protected requestService: RequestService,
         protected eventManager: JhiEventManager,
         protected vaccineService: VaccineService,
-        protected documentService: DocumentService){}
+        protected documentService: DocumentService,
+        protected tokenStorageService: TokenStorageService){}
 
     ngOnInit(): void {
         this.loadPage();
         this.registerChangesInRequest();
-        this.checkAnimals();
+        
     }
     loadPage(): void {
         this.activatedRoute.data.subscribe(({ request }) => {
             this.request = request;
             this.fillingErrors = this.chechFillngsErrors(request);
         });
+        this.checkAnimals();
+        this.isViewerRecipient = this.checkUser();
     }
 
     registerChangesInRequest(): void {
@@ -69,7 +74,6 @@ export class RequestDetailComponent implements OnInit {
 
     checkAnimals(): void {
         this.request.animals.forEach((animal) =>{
-            //let animalError: string[];
             this.checkOneAnimal(animal).subscribe((errors: string[]) => {
                  this.errors.push(errors);
             })
@@ -159,6 +163,15 @@ export class RequestDetailComponent implements OnInit {
     saveDocument(data: any): void {
         const blob = new Blob([data, {type: 'pdf'}]);
         fileSaver.saveAs(blob, 'testDocument.pdf')
+    }
+
+    checkUser(): boolean {
+        const user = this.tokenStorageService.getUser();
+        if (user.username == this.request.recipient.userName) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     

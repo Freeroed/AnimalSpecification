@@ -2,9 +2,11 @@ package ru.vlsu.animalSpecification.service.mapper;
 
 import org.springframework.stereotype.Service;
 import ru.vlsu.animalSpecification.domain.Animal;
+import ru.vlsu.animalSpecification.domain.Document;
 import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.service.dto.AnimalDTO;
+import ru.vlsu.animalSpecification.service.dto.DocumentDTO;
 import ru.vlsu.animalSpecification.service.dto.RequestDTO;
 import ru.vlsu.animalSpecification.service.dto.UserDTO;
 
@@ -18,8 +20,11 @@ import java.util.stream.Collectors;
 public class RequestMapper {
   private final AnimalMapper animalMapper;
 
-  public RequestMapper(AnimalMapper animalMapper) {
+  private final DocumentMapper documentMapper;
+
+  public RequestMapper(AnimalMapper animalMapper, DocumentMapper documentMapper) {
     this.animalMapper = animalMapper;
+    this.documentMapper = documentMapper;
   }
 
   public List<RequestDTO> requestsToRequestsDTO(List<Request> requests){
@@ -32,6 +37,9 @@ public class RequestMapper {
   public RequestDTO requestToRequestDTO(Request request) {
     RequestDTO requestDTO = new RequestDTO(request);
     requestDTO.setAnimals(animalsToAnimalsDTO(request.getAnimals()));
+    requestDTO.setCertificate1FormNumber(documentMapper.toDTO(request.getCertificate1FormNumber()));
+    requestDTO.setCertificate5aFormNumber(documentMapper.toDTO(request.getCertificate5aFormNumber()));
+    requestDTO.setCertificateEuroNumber(documentMapper.toDTO(request.getCertificateEuroNumber()));
     return requestDTO;
   }
 
@@ -55,12 +63,12 @@ public class RequestMapper {
         request.setInspectorOfRosselkhoznadzor(userFromUserDTO(requestDTO.getInspectorOfRosselkhoznadzor()));
         request.setPostalCode(requestDTO.getPostalCode());
         request.setDateOfDeparture(requestDTO.getDateOfDeparture());
-        request.setCertificate1FormNumber(requestDTO.getCertificate1FormNumber());
+        request.setCertificate1FormNumber(documentDTOtoDocument(requestDTO.getCertificate1FormNumber()));
         request.setAnimals(animalsDTOToAnimals(requestDTO.getAnimals()));
         request.setStatus(requestDTO.getStatus());
         request.setTransport(requestDTO.getTransport());
-        request.setCertificateEuroNumber(requestDTO.getCertificateEuroNumber());
-        request.setCertificate5aFormNumber(requestDTO.getCertificate5aFormNumber());
+        request.setCertificateEuroNumber(documentDTOtoDocument(requestDTO.getCertificateEuroNumber()));
+        request.setCertificate5aFormNumber(documentDTOtoDocument(requestDTO.getCertificate5aFormNumber()));
         return request;
       }
 
@@ -98,6 +106,16 @@ public class RequestMapper {
       }).collect(Collectors.toSet());
     }
     return animalsDTO;
+  }
+
+  private Document documentDTOtoDocument(DocumentDTO documentDTO) {
+    if (documentDTO == null) {
+      return  null;
+    } else {
+      Document document = new Document();
+      document.setId(documentDTO.getId());
+      return document;
+    }
   }
 
 
