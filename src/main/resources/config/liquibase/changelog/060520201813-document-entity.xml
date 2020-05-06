@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+  <changeSet author="elena" id="060520201813-1">
+
+    <comment>Create Document table and Document Type table</comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      CREATE TABLE `Document` (
+      `id` BIGINT NOT NULL AUTO_INCREMENT,
+      `type` BIGINT NOT NULL,
+      `date_of_issue` TIMESTAMP NOT NULL,
+      `link` VARCHAR(500) NOT NULL,
+      `document_number` VARCHAR(100) NOT NULL,
+      PRIMARY KEY (`id`)
+      );
+      CREATE TABLE `document_type` (
+      `id` BIGINT NOT NULL AUTO_INCREMENT,
+      `name` VARCHAR(100) NOT NULL,
+      PRIMARY KEY (`id`)
+      );
+      INSERT INTO `document_type` (`name`) VALUES ('Евросправка');
+      INSERT INTO `document_type` (`name`) VALUES ('Ветеринарный сертификат формы 1');
+      INSERT INTO `document_type` (`name`) VALUES ('Ветеринарный сертификат формы 5а');
+
+      INSERT INTO `Document` (`type`,`date_of_issue`, `link`,`document_number`)
+                        VALUES (1,'2020-06-05','link.pdf','6430');
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>
