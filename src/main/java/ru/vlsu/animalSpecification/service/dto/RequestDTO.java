@@ -47,29 +47,29 @@ public class RequestDTO implements Serializable {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX" ,timezone = "UTC")
   private Instant dateOfDeparture; // дата отправления
 
-  private String certificate1FormNumber;  // Уникальный идентификатор ВСД
+  private Document certificate1FormNumber;  // Уникальный идентификатор ВСД
 
   private Set<AnimalDTO> animals = new HashSet<>();
 
   private RequestStatus status; // статус заявки
 
-  private String certificateEuroNumber;
+  private Document certificateEuroNumber;
 
-  public String getCertificate5aFormNumber() {
+  public Document getCertificate5aFormNumber() {
     return certificate5aFormNumber;
   }
 
-  public void setCertificate5aFormNumber(String certificate5aFormNumber) {
+  public void setCertificate5aFormNumber(Document certificate5aFormNumber) {
     this.certificate5aFormNumber = certificate5aFormNumber;
   }
 
-  private String certificate5aFormNumber;  // Номер вет. сертификата 5а
+  private Document certificate5aFormNumber;  // Номер вет. сертификата 5а
 
-  public String getCertificateEuroNumber() {
+  public Document getCertificateEuroNumber() {
     return certificateEuroNumber;
   }
 
-  public void setCertificateEuroNumber(String certificateEuroNumber) {
+  public void setCertificateEuroNumber(Document certificateEuroNumber) {
     this.certificateEuroNumber = certificateEuroNumber;
   }
 
@@ -196,11 +196,11 @@ public class RequestDTO implements Serializable {
     this.dateOfDeparture = dateOfDeparture;
   }
 
-  public String getCertificate1FormNumber() {
+  public Document getCertificate1FormNumber() {
     return certificate1FormNumber;
   }
 
-  public void setCertificate1FormNumber(String certificate1FormNumber) {
+  public void setCertificate1FormNumber(Document certificate1FormNumber) {
     this.certificate1FormNumber = certificate1FormNumber;
   }
 

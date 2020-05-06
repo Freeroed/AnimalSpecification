@@ -60,8 +60,8 @@ public class RequestService {
               oldRequest.getCertificate5aFormNumber() == null  &&
               oldRequest.getCertificateEuroNumber() == null) {
                 request.setInspectorOfRosselkhoznadzor(master);
-                request.setCertificate5aFormNumber("145514");
-              request.setCertificateEuroNumber("145514");
+                //request.setCertificate5aFormNumber("145514");
+              //request.setCertificateEuroNumber("145514");
             }
           }
 

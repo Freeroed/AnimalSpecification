@@ -69,8 +69,9 @@ public class Request implements Serializable {
   @Column (name = "date_of_departure")
   private Instant dateOfDeparture; // дата отправления
 
-  @Column (name = "certificate_1_form_number")
-  private String certificate1FormNumber;  // Уникальный идентификатор ВСД
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "certificate_1_form_number", nullable = true)
+  private Document certificate1FormNumber;  // Уникальный идентификатор ВСД
 
   @ManyToMany(fetch=FetchType.EAGER)
   @JoinTable(name = "AnimalsInRequest", joinColumns = @JoinColumn(name = "request_id"),
@@ -84,11 +85,14 @@ public class Request implements Serializable {
   @Column(name="dateOfCreationa")
   private Instant createdAt;
 
-  @Column (name = "certificate_5a_form_number")
-  private String certificate5aFormNumber;  // Номер вет. сертификата 5а
 
-  @Column (name = "certificate_euro_number")
-  private String  certificateEuroNumber;  // Номер евросправки
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "certificate_5a_form_number", nullable = true)
+  private Document certificate5aFormNumber;  // Номер вет. сертификата 5а
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "certificate_euro_number", nullable = true)
+  private Document  certificateEuroNumber;  // Номер евросправки
 
   public Long getId() {
     return id;
@@ -210,11 +214,11 @@ public class Request implements Serializable {
     this.dateOfDeparture = dateOfDeparture;
   }
 
-  public String getCertificate1FormNumber() {
+  public Document getCertificate1FormNumber() {
     return certificate1FormNumber;
   }
 
-  public void setCertificate1FormNumber(String certificate1FormNumber) {
+  public void setCertificate1FormNumber(Document certificate1FormNumber) {
     this.certificate1FormNumber = certificate1FormNumber;
   }
 
@@ -242,19 +246,19 @@ public class Request implements Serializable {
     this.createdAt = createdAt;
   }
 
-  public String getCertificate5aFormNumber() {
+  public Document getCertificate5aFormNumber() {
     return certificate5aFormNumber;
   }
 
-  public void setCertificate5aFormNumber(String certificate5aFormNumber) {
+  public void setCertificate5aFormNumber(Document certificate5aFormNumber) {
     this.certificate5aFormNumber = certificate5aFormNumber;
   }
 
-  public String getCertificateEuroNumber() {
+  public Document getCertificateEuroNumber() {
     return certificateEuroNumber;
   }
 
-  public void setCertificateEuroNumber(String certificateEuroNumber) {
+  public void setCertificateEuroNumber(Document certificateEuroNumber) {
     this.certificateEuroNumber = certificateEuroNumber;
   }
 }

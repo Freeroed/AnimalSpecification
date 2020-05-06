@@ -27,6 +27,10 @@
 
       INSERT INTO `Document` (`type`,`date_of_issue`, `link`,`document_number`)
                         VALUES (1,'2020-06-05','link.pdf','6430');
+
+      ALTER TABLE request MODIFY COLUMN certificate_1_form_number bigint NULL;
+      ALTER TABLE request MODIFY COLUMN certificate_5a_form_number bigint NULL;
+      ALTER TABLE request MODIFY COLUMN certificate_euro_number bigint NULL;
     </sql>
 
   </changeSet>
