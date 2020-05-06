@@ -20,6 +20,8 @@
         <class>ru.vlsu.animalSpecification.domain.Vaccine</class>
         <class>ru.vlsu.animalSpecification.domain.LaboratoryResearch</class>
         <class>ru.vlsu.animalSpecification.domain.RosselkhoznadzorDivision</class>
+        <class>ru.vlsu.animalSpecification.domain.DocumentType</class>
+        <class>ru.vlsu.animalSpecification.domain.Document</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/animal_specification?useUnicode=true&amp;serverTimezone=UTC" />
