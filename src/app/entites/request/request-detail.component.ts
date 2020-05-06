@@ -17,6 +17,8 @@ import { flatMap } from 'rxjs/operators';
 import { RequestConfirmDialogComponent } from './request-confirm-dialog.component';
 import { RequestGiveOutSertificateComponent } from './request-give-out-sertificate-dialog.component';
 import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-dialog.component';
+import * as fileSaver from 'file-saver';
+import { DocumentService } from '../document/document.service';
 
 
 @Component({
@@ -35,7 +37,8 @@ export class RequestDetailComponent implements OnInit {
         protected modalService: NgbModal,
         protected requestService: RequestService,
         protected eventManager: JhiEventManager,
-        protected vaccineService: VaccineService){}
+        protected vaccineService: VaccineService,
+        protected documentService: DocumentService){}
 
     ngOnInit(): void {
         this.loadPage();
@@ -142,6 +145,20 @@ export class RequestDetailComponent implements OnInit {
         }
 
         return fillingErrors;
+    }
+
+    downloadDocument(): void {
+        this.documentService.downloadFile().subscribe(
+            res => {
+                const fileName = 'testDocument';
+                this.saveDocument(res.body)
+            }
+        )
+    }
+
+    saveDocument(data: any): void {
+        const blob = new Blob([data, {type: 'pdf'}]);
+        fileSaver.saveAs(blob, 'testDocument.pdf')
     }
 
     

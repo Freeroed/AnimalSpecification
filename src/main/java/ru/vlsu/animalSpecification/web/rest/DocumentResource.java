@@ -3,6 +3,7 @@ package ru.vlsu.animalSpecification.web.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,12 +42,12 @@ public class DocumentResource {
   @GetMapping("/document/download")
   public ResponseEntity<InputStreamResource> downloadDocument() throws IOException {
     log.debug("Rest request to download document");
-    ClassPathResource document = new ClassPathResource("D:\\Documents\\testDocument.pdf");
+    FileSystemResource document = new FileSystemResource("D:\\Documents\\testDocument.pdf");
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.parseMediaType("application/pdf"));
     //TODO Вынести это всё в сервис
     headers.setContentLength(document.contentLength());
-    ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(new InputStreamResource(document.getInputStream()), headers, HttpStatus.OK);
+    ResponseEntity<InputStreamResource> response = new ResponseEntity<>(new InputStreamResource(document.getInputStream()), headers, HttpStatus.OK);
     return response;
   }
 }
