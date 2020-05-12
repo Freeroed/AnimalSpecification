@@ -17,6 +17,8 @@ import ru.vlsu.animalSpecification.service.impl.DocumentServiceImpl;
 
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -73,12 +75,12 @@ public class DocumentResource {
   }
 
   @PostMapping("/documents")
-  public ResponseEntity createDocument(@RequestBody DocumentDTO document) {
+  public ResponseEntity createDocument(@RequestBody DocumentDTO document) throws URISyntaxException {
     log.debug("REST request to create document : {}", document);
     if (document.getId() != null) {
       return ResponseEntity.badRequest().build();
     }
     DocumentDTO result = documentService.createFormOneCertificate(document);
-    return ResponseEntity.ok(result);
+    return ResponseEntity.created(new URI("/documents" + result.getId() + "/download")).body(result);
   }
 }

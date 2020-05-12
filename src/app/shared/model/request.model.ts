@@ -6,7 +6,7 @@ import { RequestStatus } from './enum/requestStatus.model';
 import { TransportType } from './enum/transportType.model';
 import { User } from './user.model';
 import { TransactionType } from './enum/transactionType.model';
-import { IDocument } from './document.model';
+import { IDocument} from './document.model';
 
 export interface IRequest {
     id?: number,

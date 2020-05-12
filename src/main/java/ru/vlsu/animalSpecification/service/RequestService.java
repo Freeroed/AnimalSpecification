@@ -61,14 +61,14 @@ public class RequestService {
             if (oldRequest.getStatus() == RequestStatus.CONFIRM && oldRequest.getVeterinarian() == null && oldRequest.getCertificate1FormNumber() == null) {
               //TODO check user role
               request.setVeterinarian(master);
-              try {
+             /* try {
                 //RequestDTO requestDTO = requestMapper.requestToRequestDTO(request);
                 DocumentDTO doc = documentService.createDocumentFromRequest(request, "Ветеринарный сертификат формы 1");
                 Document document = documentMapper.toEntity(doc);
                 request.setCertificate1FormNumber(document);
               } catch (IOException e) {
                 log.debug("EROORR CREATING FILE");
-              }
+              }*/
             }
           }
           if (request.getStatus() == RequestStatus.EXPORT_DOCS_ISSUED) {

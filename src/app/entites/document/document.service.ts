@@ -5,7 +5,9 @@ import { SERVER_API_URL } from 'src/app/app.constants';
 import { IDocument } from 'src/app/shared/model/document.model';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
+
 type EntityResponseType = HttpResponse<IDocument>;
+
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +27,7 @@ export class DocumentService {
     create(document: IDocument): Observable<EntityResponseType> {
         const copy = this.convertDateFromClient(document);
         return this.http
-                    .post(this.resourceUrl, copy)
+                    .post<IDocument>(this.resourceUrl, copy, {observe: 'response'})
                     .pipe(map((res: EntityResponseType) => this.createDateFromServer(res)));
     }
 

@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit {
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IRequest>>): void {
         result.subscribe(
             (request) =>  {
-                console.log(request);
                 this.onSaveSuccess(request)
             },
             () => this.onSaveError()

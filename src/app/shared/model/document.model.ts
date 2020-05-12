@@ -1,4 +1,4 @@
-import { IDocumentType } from './documentType.model';
+import { IDocumentType} from './documentType.model';
 import { Moment } from 'moment';
 
 export interface IDocument {
