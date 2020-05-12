@@ -16,7 +16,30 @@
     <include file="config/liquibase/changelog/230220200017-created-Test-entity.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/280220201557-created-table-region.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/290220201057-insert-test-data-in-region.xml" relativeToChangelogFile="false"/>
-
+    <include file="config/liquibase/changelog/02032001220-change-id-region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/020320201240-add-request-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/040320201233-created-user-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/030320201334-add-transport-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/030320201340-insert-test-data-in-transport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/110320202028-create-animal-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320200931-edit-animal-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320201014-create-bcp-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320201056-edit-insert-bcp-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320201127-create-breed-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120320201539-create-type-table.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/160320200951-create-all-tables.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/160320201249-create-rsn-division.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/300320201344-alter-breeds.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/300320201422-alter-breeds-2.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/010420201142-add-animal-request.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/010420201200-alter-somebody.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/020420201501-add-status.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/180420201134-drop-tables.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/190420202003-delete_type-from-animal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/250420202054-add-roles.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/270420201128-many-edits.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/060520201813-document-entity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120520201213-add-roles.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

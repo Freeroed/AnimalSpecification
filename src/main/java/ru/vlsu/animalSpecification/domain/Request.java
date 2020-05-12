@@ -85,6 +85,8 @@ public class Request implements Serializable {
   @Column(name="dateOfCreationa")
   private Instant createdAt;
 
+  @Column(name="request_number")
+  private String requestNumber;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "certificate_5a_form_number", nullable = true)
@@ -260,5 +262,13 @@ public class Request implements Serializable {
 
   public void setCertificateEuroNumber(Document certificateEuroNumber) {
     this.certificateEuroNumber = certificateEuroNumber;
+  }
+
+  public String getRequestNumber() {
+    return requestNumber;
+  }
+
+  public void setRequestNumber(String requestNumber) {
+    this.requestNumber = requestNumber;
   }
 }

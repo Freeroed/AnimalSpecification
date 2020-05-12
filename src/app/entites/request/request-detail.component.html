@@ -2,8 +2,10 @@
     <div class="col-8">
         <div class="card-body">
             <h2>
-                <span>Информация о заявке</span>
-                <span class="float-right " *ngIf="request.status == RequestStatus['0']"><a [routerLink]="['/requests', request.id, 'edit']" >Редактировать</a></span>
+                <p>
+                <span>Информация о заявке № {{request.requestNumber}}</span>
+                </p>
+                <span class="float-right " *ngIf="request.status == RequestStatus['0']"><a [routerLink]="['/requests', request.id, 'edit']" >Редактировать </a></span> 
                 <span class="float-right " *appHasAnyAuthority="['ROLE_VETERINARIAN']"><a [routerLink]="['/requests', request.id, 'edit']" >Редактировать</a></span>
                 <button class="btn btn-primary float-right" (click)="confirmRequest()" [disabled]="errors.length > 1 || fillingErrors.length > 0" *ngIf="request.status == RequestStatus['0']">Подтвердить</button>
                 <div *ngIf="request.status == RequestStatus['2']"><button class="btn btn-primary float-right"  *appHasAnyAuthority="['ROLE_VETERINARIAN']" (click)="giveFormOneSertificate()  ">Выдать сертификат формы 1</button></div>

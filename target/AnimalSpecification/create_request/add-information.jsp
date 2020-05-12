@@ -5,18 +5,19 @@
   Time: 15:31
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Создание заявки</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body link="#008080" vlink="#008080" alink="#008080">
 <header class="site-header">
     <table border="0" width="100%">
         <tr>
-            <td><img src="../img/logo.jpg" alt="логотип" width="60" height="60"></td>
+            <td><img src="<c:url value='/img/logo.jpg'/>" alt="логотип" width="60" height="60"></td>
             <td><font size="8" color="#000000" face="garamond">
                 SystemName
             </font>

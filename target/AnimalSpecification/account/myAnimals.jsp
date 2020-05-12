@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Freeroed
@@ -10,13 +11,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Личный кабинет</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body link="#008080" vlink="#008080" alink="#008080">
 <header class="site-header">
     <table border="0" width="100%">
         <tr>
-            <td><img src="../img/logo.jpg" alt="логотип" width="60" height="60"></td>
+            <td><img src="<c:url value='/img/logo.jpg'/>" alt="логотип" width="60" height="60"></td>
             <td><font size="8" color="#000000" face="garamond">
                 SystemName
             </font>

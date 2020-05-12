@@ -45,6 +45,7 @@ public class RequestService {
           request.setRecipient(master);
           request.setStatus(RequestStatus.CREATED);
           request.setCreatedAt(Instant.now());
+          request.setRequestNumber(IdentificatorGenerationService.generateRequestNumber(master.getId()));
         } else {
           if (request.getStatus() == RequestStatus.FROM_ONE_SERTIFICATED) {
             RequestDTO oldRequest = findOne(request.getId()).get();
