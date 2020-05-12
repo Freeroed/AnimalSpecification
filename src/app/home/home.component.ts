@@ -65,13 +65,17 @@ export class HomeComponent implements OnInit {
 
     protected subscribeToSaveResponse(result: Observable<HttpResponse<IRequest>>): void {
         result.subscribe(
-            (request) => this.onSaveSuccess(request),
+            (request) =>  {
+                console.log(request);
+                this.onSaveSuccess(request)
+            },
             () => this.onSaveError()
         );
     }
 
     protected onSaveSuccess(request: IRequest): void {
-        this.router.navigate(['requesrs', request.id, 'view'])
+        console.log(request);
+        this.router.navigate(['requests', request.id, 'view'])
     }
 
     protected onSaveError(): void {

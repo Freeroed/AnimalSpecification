@@ -62,9 +62,9 @@ public class RequestResource {
       if (request.getId() != null) {
         return ResponseEntity.badRequest().build();
       } else {
-        requestService.save(request, userName);
+        RequestDTO result = requestService.save(request, userName);
         return ResponseEntity.created(new URI("/request" ))
-          .body(request);
+          .body(result);
       }
     }
 
