@@ -228,6 +228,16 @@ public class RequestDTO implements Serializable {
     this.createdAt = createdAt;
   }
 
+  private String requestNumber;
+
+  public String getRequestNumber() {
+    return requestNumber;
+  }
+
+  public void setRequestNumber(String requestNumber) {
+    this.requestNumber = requestNumber;
+  }
+
   public RequestDTO(Request request) {
     this.id = request.getId();
     this.recipient = new UserDTO(request.getRecipient());
@@ -246,6 +256,7 @@ public class RequestDTO implements Serializable {
     this.dateOfDeparture = request.getDateOfDeparture() != null ? request.getDateOfDeparture() : null;
     this.status = request.getStatus() != null ? request.getStatus() : null;
     this.createdAt = request.getCreatedAt() != null ? request.getCreatedAt() : null;
+    this.requestNumber = request.getRequestNumber() != null ? request.getRequestNumber() : null;
   }
 
   @Override
