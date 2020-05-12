@@ -27,6 +27,7 @@ import { AnimalSpecificationLaboratoryResearchModule } from './entites/laborator
 import { AnimalSpecificationRequestModule } from './entites/request/request.module';
 
 import { AnimalSpecificationSharedModule } from './shared/shared.module';
+import { AnimalSpecificationInfoModule } from './info/info.module';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { AnimalSpecificationSharedModule } from './shared/shared.module';
     AnimasSpecificationVaccineModule,
     AnimalSpecificationLaboratoryResearchModule,
     AnimalSpecificationRequestModule,
-    AnimalSpecificationSharedModule
+    AnimalSpecificationSharedModule,
+    AnimalSpecificationInfoModule
   ],
   declarations: [
     AppComponent,

@@ -27,7 +27,7 @@
     <p *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN']">
       После создания заявки, Вам нужно будет ввести в нее всю необходимую информацию
     </p>
-    <p>
+    <p *appHasNoAuthority>
       Для создания заявки, Вам нужно войти в <a routerLink="account">личный кабинет</a>
     </p>
     <div *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN']">

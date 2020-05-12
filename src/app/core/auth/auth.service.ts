@@ -59,6 +59,19 @@ export class AuthService {
             return false;
         }
     }
+
+    hasNoRole(): boolean {
+        const user = this.tokenStorage.getUser();
+        if(user) {
+            if (user.roles.length == 0)
+                return true;
+            else 
+                return false;
+        } else { 
+            return true;
+        }
+    }
+
     getAuthenticationState(): Observable<User | null> {
         return this.authenticationState.asObservable();
       }
