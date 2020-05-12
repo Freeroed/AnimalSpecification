@@ -16,13 +16,15 @@
         <table class="table table-striped" aria-describedby="page-heading" style="table-layout: fixed;">
           <thead class="thead">
             <tr>
+              <th scope="col" width="30%">Номер заявки</th>
               <th scope="col" width="30%">Страна назначения</th>
               <th scope="col" width="30%">Статус</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let request of requests">
-              <td><a [routerLink]="['/requests', request.id, 'view']" class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{request.destinationCountry.countryName}}</a></td>
+              <td><a [routerLink]="['/requests', request.id, 'view']" class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{request.requestNumber}}</a></td>
+              <td><a class="text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: auto;">{{request.destinationCountry.countryName}}</a></td>
               <td><span *ngIf="request.status == 'CREATED'">Создана</span>
                 <span *ngIf="request.status == 'PREPARED'">Подготовлена</span>
                 <span *ngIf="request.status == 'CONFIRM'">Подтверждена</span>
