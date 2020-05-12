@@ -35,8 +35,6 @@ export class RequestGiveOutSertificateComponent {
     save(): void {
         let document =  new Document;
         document.documentNumber = this.certificateForm.get(['certificate'])!.value;
-        //const document = this.createFormFrom();
-        //console.log(document);
         this.subscribeToCreateDocument(this.documentService.create(document));
     }
 

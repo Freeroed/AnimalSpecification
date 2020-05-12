@@ -151,18 +151,19 @@ export class RequestDetailComponent implements OnInit {
         return fillingErrors;
     }
 
-    downloadDocument(): void {
-        this.documentService.downloadFile().subscribe(
+    downloadDocument(id: number): void {
+        this.documentService.downloadFile(id).subscribe(
             res => {
-                const fileName = 'testDocument';
-                this.saveDocument(res.body)
+                const fileName = res.headers.get('filename');
+                console.log(res.headers)
+                this.saveDocument(res.body, fileName)
             }
         )
     }
 
-    saveDocument(data: any): void {
+    saveDocument(data: any, filename: string): void {
         const blob = new Blob([data, {type: 'pdf'}]);
-        fileSaver.saveAs(blob, 'testDocument.pdf')
+        fileSaver.saveAs(blob, filename)
     }
 
     checkUser(): boolean {

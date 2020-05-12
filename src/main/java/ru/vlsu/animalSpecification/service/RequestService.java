@@ -62,8 +62,8 @@ public class RequestService {
               //TODO check user role
               request.setVeterinarian(master);
               try {
-                RequestDTO requestDTO = requestMapper.requestToRequestDTO(request);
-                DocumentDTO doc = documentService.createDocumentFromRequest(requestDTO, "Ветеринарный сертификат формы 1");
+                //RequestDTO requestDTO = requestMapper.requestToRequestDTO(request);
+                DocumentDTO doc = documentService.createDocumentFromRequest(request, "Ветеринарный сертификат формы 1");
                 Document document = documentMapper.toEntity(doc);
                 request.setCertificate1FormNumber(document);
               } catch (IOException e) {
@@ -78,13 +78,13 @@ public class RequestService {
               oldRequest.getCertificate5aFormNumber() == null  &&
               oldRequest.getCertificateEuroNumber() == null) {
                 request.setInspectorOfRosselkhoznadzor(master);
-                RequestDTO requestDTO = requestMapper.requestToRequestDTO(request);
                 try {
-                  DocumentDTO euroCertificate = documentService.createDocumentFromRequest(requestDTO, "Евросправка");
-                  requestDTO.setCertificateEuroNumber(euroCertificate);
-                  DocumentDTO formFiveCertificate = documentService.createDocumentFromRequest(requestDTO, "Ветеринарный сертификат формы 5а");
-                  requestDTO.setCertificate5aFormNumber(formFiveCertificate);
-                  request = requestMapper.toEntity(requestDTO);
+                  DocumentDTO euroCertificate = documentService.createDocumentFromRequest(request, "Евросправка");
+                  Document document = documentMapper.toEntity(euroCertificate);
+                  request.setCertificateEuroNumber(document);
+                  DocumentDTO formFiveCertificate = documentService.createDocumentFromRequest(request, "Ветеринарный сертификат формы 5а");
+                  document = documentMapper.toEntity(formFiveCertificate);
+                  request.setCertificate5aFormNumber(document);
                 }
                 catch (IOException e) {
                   log.error("CREATING FILE ERROR");

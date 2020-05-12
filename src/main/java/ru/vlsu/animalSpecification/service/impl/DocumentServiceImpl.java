@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vlsu.animalSpecification.domain.DocumentType;
+import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.repository.DocumentRepository;
 import ru.vlsu.animalSpecification.repository.DocumentTypeRepository;
 import ru.vlsu.animalSpecification.service.DocumentService;
@@ -80,7 +81,7 @@ public class DocumentServiceImpl implements DocumentService {
   }
 
   @Override
-  public DocumentDTO createDocumentFromRequest(RequestDTO requestDTO, String documentType) throws IOException {
+  public DocumentDTO createDocumentFromRequest(Request request, String documentType) throws IOException {
     ru.vlsu.animalSpecification.domain.Document document = new ru.vlsu.animalSpecification.domain.Document();
     document.setType(documentTypeRepository.findByName(documentType));
     document.setDateOfIssue(Instant.now());

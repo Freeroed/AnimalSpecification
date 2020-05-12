@@ -2,6 +2,7 @@ package ru.vlsu.animalSpecification.service;
 
 
 import ru.vlsu.animalSpecification.domain.Document;
+import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.service.dto.DocumentDTO;
 import ru.vlsu.animalSpecification.service.dto.RequestDTO;
 
@@ -16,6 +17,6 @@ public interface DocumentService {
 
   DocumentDTO createFormOneCertificate(DocumentDTO documentDTO);
 
-  DocumentDTO createDocumentFromRequest(RequestDTO requestDTO, String documentType) throws IOException;
+  DocumentDTO createDocumentFromRequest(Request request, String documentType) throws IOException;
 
 }

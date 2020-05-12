@@ -17,9 +17,9 @@ export class DocumentService {
         private http: HttpClient
     ) {}
 
-    downloadFile():Observable<HttpResponse<Blob>> {
+    downloadFile(id: number):Observable<HttpResponse<Blob>> {
         const headers = new HttpHeaders().set('Accept', 'application/pdf');
-        return this.http.get(this.resourceUrl + '/download', {headers: headers, observe: 'response', responseType: 'blob'});
+        return this.http.get(`${this.resourceUrl}/${id}/download`, {headers: headers, observe: 'response', responseType: 'blob'});
     }
 
     create(document: IDocument): Observable<EntityResponseType> {
