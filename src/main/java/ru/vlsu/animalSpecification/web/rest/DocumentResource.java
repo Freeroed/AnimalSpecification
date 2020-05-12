@@ -17,6 +17,8 @@ import ru.vlsu.animalSpecification.service.impl.DocumentServiceImpl;
 
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Optional;
 
 @RestController
@@ -44,12 +46,15 @@ public class DocumentResource {
     }
   }
 
-  @GetMapping("/documents/download")
-  public ResponseEntity<InputStreamResource> downloadDocument() throws IOException {
+  @GetMapping("/documents/{id}/download")
+  public ResponseEntity<InputStreamResource> downloadDocument(@PathVariable Long id) throws IOException {
     log.debug("Rest request to download document");
-    FileSystemResource document = new FileSystemResource("D:\\Documents\\testDocument.pdf");
+    FileSystemResource document = new FileSystemResource("D:\\Documents\\" + id + ".pdf");
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.parseMediaType("application/pdf"));
+    headers.add("Content-Disposition", "attachment; filename=" + document.getFilename());
+    headers.add("filename", document.getFilename());
+    headers.add("Access-Control-Expose-Headers", "filename");
     //TODO Вынести это всё в сервис
     headers.setContentLength(document.contentLength());
     ResponseEntity<InputStreamResource> response = new ResponseEntity<>(new InputStreamResource(document.getInputStream()), headers, HttpStatus.OK);
@@ -70,12 +75,12 @@ public class DocumentResource {
   }
 
   @PostMapping("/documents")
-  public ResponseEntity createDocument(@RequestBody DocumentDTO document) {
+  public ResponseEntity createDocument(@RequestBody DocumentDTO document) throws URISyntaxException {
     log.debug("REST request to create document : {}", document);
     if (document.getId() != null) {
       return ResponseEntity.badRequest().build();
     }
     DocumentDTO result = documentService.createFormOneCertificate(document);
-    return ResponseEntity.ok(result);
+    return ResponseEntity.created(new URI("/documents" + result.getId() + "/download")).body(result);
   }
 }

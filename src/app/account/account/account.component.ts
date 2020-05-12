@@ -35,8 +35,10 @@ export class AccountComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ user }) => {
             this.user = user;
         });
-        this.animalService.findMy().subscribe( (res: HttpResponse<Animal[]>) => 
-        this.animals = res.body
+        this.animalService.findMy().subscribe( (res: HttpResponse<Animal[]>) => {
+            console.log(res);
+            this.animals = res.body
+        }
         );
         this.requestService.findMy().subscribe((res: HttpResponse<IRequest[]>) =>
         {this.requests = res.body;  }

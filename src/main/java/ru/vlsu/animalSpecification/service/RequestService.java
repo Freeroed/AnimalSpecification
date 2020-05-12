@@ -5,13 +5,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vlsu.animalSpecification.domain.Document;
 import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.domain.User;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
+import ru.vlsu.animalSpecification.service.dto.DocumentDTO;
 import ru.vlsu.animalSpecification.service.dto.RequestDTO;
+import ru.vlsu.animalSpecification.service.mapper.DocumentMapper;
 import ru.vlsu.animalSpecification.service.mapper.RequestMapper;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -29,11 +33,17 @@ public class RequestService {
 
     private final RequestMapper requestMapper;
 
+    private final DocumentService documentService;
+
+    private final DocumentMapper documentMapper;
+
     @Autowired
-    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper) {
+    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper, DocumentService documentService, DocumentMapper documentMapper) {
       this.repo = repo;
       this.userService = userService;
       this.requestMapper = requestMapper;
+      this.documentService = documentService;
+      this.documentMapper = documentMapper;
     }
 
     public RequestDTO save(RequestDTO req, String userName) {
@@ -52,6 +62,14 @@ public class RequestService {
             if (oldRequest.getStatus() == RequestStatus.CONFIRM && oldRequest.getVeterinarian() == null && oldRequest.getCertificate1FormNumber() == null) {
               //TODO check user role
               request.setVeterinarian(master);
+             /* try {
+                //RequestDTO requestDTO = requestMapper.requestToRequestDTO(request);
+                DocumentDTO doc = documentService.createDocumentFromRequest(request, "Ветеринарный сертификат формы 1");
+                Document document = documentMapper.toEntity(doc);
+                request.setCertificate1FormNumber(document);
+              } catch (IOException e) {
+                log.debug("EROORR CREATING FILE");
+              }*/
             }
           }
           if (request.getStatus() == RequestStatus.EXPORT_DOCS_ISSUED) {
@@ -61,8 +79,18 @@ public class RequestService {
               oldRequest.getCertificate5aFormNumber() == null  &&
               oldRequest.getCertificateEuroNumber() == null) {
                 request.setInspectorOfRosselkhoznadzor(master);
-                //request.setCertificate5aFormNumber("145514");
-              //request.setCertificateEuroNumber("145514");
+                try {
+                  DocumentDTO euroCertificate = documentService.createDocumentFromRequest(request, "Евросправка");
+                  Document document = documentMapper.toEntity(euroCertificate);
+                  request.setCertificateEuroNumber(document);
+                  DocumentDTO formFiveCertificate = documentService.createDocumentFromRequest(request, "Ветеринарный сертификат формы 5а");
+                  document = documentMapper.toEntity(formFiveCertificate);
+                  request.setCertificate5aFormNumber(document);
+                }
+                catch (IOException e) {
+                  log.error("CREATING FILE ERROR");
+                }
+
             }
           }
 

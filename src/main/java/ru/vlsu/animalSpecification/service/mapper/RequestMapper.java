@@ -36,7 +36,8 @@ public class RequestMapper {
 
   public RequestDTO requestToRequestDTO(Request request) {
     RequestDTO requestDTO = new RequestDTO(request);
-    requestDTO.setAnimals(animalsToAnimalsDTO(request.getAnimals()));
+    Set<Animal> animals = request.getAnimals();
+    requestDTO.setAnimals(animalsToAnimalsDTO(animals));
     requestDTO.setCertificate1FormNumber(documentMapper.toDTO(request.getCertificate1FormNumber()));
     requestDTO.setCertificate5aFormNumber(documentMapper.toDTO(request.getCertificate5aFormNumber()));
     requestDTO.setCertificateEuroNumber(documentMapper.toDTO(request.getCertificateEuroNumber()));
@@ -69,6 +70,7 @@ public class RequestMapper {
         request.setTransport(requestDTO.getTransport());
         request.setCertificateEuroNumber(documentDTOtoDocument(requestDTO.getCertificateEuroNumber()));
         request.setCertificate5aFormNumber(documentDTOtoDocument(requestDTO.getCertificate5aFormNumber()));
+        request.setCreatedAt(requestDTO.getCreatedAt());
         return request;
       }
 

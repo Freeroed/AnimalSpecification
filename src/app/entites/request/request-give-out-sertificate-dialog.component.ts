@@ -35,8 +35,6 @@ export class RequestGiveOutSertificateComponent {
     save(): void {
         let document =  new Document;
         document.documentNumber = this.certificateForm.get(['certificate'])!.value;
-        //const document = this.createFormFrom();
-        //console.log(document);
         this.subscribeToCreateDocument(this.documentService.create(document));
     }
 
@@ -47,17 +45,21 @@ export class RequestGiveOutSertificateComponent {
         );
     }
 
-    subscribeToCreateDocument(result: Observable<HttpResponse<IDocument>>): void {
+    protected subscribeToCreateDocument(result: Observable<HttpResponse<Document>>): void {
         result.subscribe(
-            (res: HttpResponse<IDocument>) => this.onCreatingDocumentSuccess(res.body),
+            (document) => {
+                this.onCreatingDocumentSuccess(document.body);
+            },
             () => this.onCreateDocumentError()
         );
     }
+    
 
-    onCreatingDocumentSuccess(document: IDocument): void {
+    protected onCreatingDocumentSuccess(document: IDocument): void {
         const request = this.request;
         request.certificate1FormNumber = document;
         request.status = RequestStatus['3'];
+        console.log(request);
         this.subscibeToSaveResponse(this.requestService.update(request));
     }
 

@@ -77,14 +77,19 @@
                 <dt>Ветеринарный врач, выдавший сертификат формы 1</dt>
                 <dd>{{request.veterinarian.surname}} {{request.veterinarian.name}} {{request.veterinarian.patronymic}}</dd>
             </div>
-            <div *ngIf="request.inspectorOfRosselkhoznadzor">
+            <div *ngIf="request.inspectorOfRosselkhoznadzor && request.status == RequestStatus['4']">
                 <dt>Инспектор Россельхознадзора, выдавший документы </dt>
                 <dd>{{request.inspectorOfRosselkhoznadzor.surname}} {{request.inspectorOfRosselkhoznadzor.name}} {{request.inspectorOfRosselkhoznadzor.patronymic}}</dd>
+                <dd>
+                    <button class="btn btn-primary" (click)="downloadDocument(this.request.certificateEuroNumber.id)">
+                        Скачать экспортные документы
+                    </button>
+                    <button class="btn btn-primary" (click)="downloadDocument(this.request.certificate5aFormNumber.id)">
+                        Скачать сертификт формы 5а документы
+                    </button>
+                </dd>
             </div>
         </dl>
-        <div *ngIf="request.status == RequestStatus['4']">
-            <button class="btn btn-primary" (click)="downloadDocument()">Скачать документы</button>
-        </div>
         <div *ngIf="errors.length > 0">
             <div *ngFor="let animalError of errors">
                 <div class="alert alert-danger" role="alert" *ngFor="let error of animalError">
