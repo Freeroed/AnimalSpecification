@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns="http://www.liquibase.org/xml/ns/dbchangelog">
+
+
+  <changeSet author="elena" id="120320201127-1">
+
+    <comment>Create veterinarian and RSH inspector users with roles</comment>
+
+    <sql stripComments="true" splitStatements="true"
+         dbms="mysql">
+      INSERT INTO `User` (`login`,`password`, `surname`,`name`,`patronymic`,`phone`,`position`,`position_ENG`,`organization`,     `address`, `surname_ENG`, `name_ENG`, `email`, `created_at`)
+      VALUES ('veterinar', '$2a$10$O4Pk96sDmPLFql3reZNqKeufogAkd44.SWDkmRp7pone5zSn79eHW', 'Ветеринаров', 'Ветеринар', 'Ветеринарович', '89967785252', 'Должность', 'Position', 'ORG', 'г. Владимир, ул. Такая то, д. 5', 'Vetrinarov', 'Vetrinar', 'Vetrinar@mail.ru', '2020-06-05');
+
+      INSERT INTO `rosselkhoznadzor_division` (`name`,`name_ENG`)
+      VALUES ('Управление Россельхознадзора по г.Москва, Московской и Тульской областям','Rosselkhoznadzor Directorate for Moscow, Moscow and Tula Regions');
+
+      INSERT INTO `User` (`login`,`password`, `surname`,`name`,`patronymic`,`phone`,`position`,`position_ENG`, `rosselkhoznadzor_division`,  `address`, `surname_ENG`, `name_ENG`, `email`, `created_at`)
+      VALUES ('rsh', '$2a$10$fg8nqUEWstm/rjMERFf7w.jrEcu7oulLPJIgIf7/OaLY7nhI45g/S', 'Инспекторов', 'Инспектор', 'Инспекторович', '89969525252', 'Должность', 'Position', 1, 'г. Владимир, ул. Другая, д. 34', 'Inspectorov', 'Inspector', 'Inspector@mail.ru', '2020-01-01');
+
+      INSERT INTO `user_role` (`user_id`,`role_id`)
+      VALUES (2,3);
+      INSERT INTO `user_role` (`user_id`,`role_id`)
+      VALUES (3,4);
+
+    </sql>
+
+  </changeSet>
+
+</databaseChangeLog>

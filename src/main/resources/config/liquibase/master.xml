@@ -39,6 +39,7 @@
     <include file="config/liquibase/changelog/250420202054-add-roles.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/270420201128-many-edits.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/060520201813-document-entity.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/120520201213-add-roles.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
