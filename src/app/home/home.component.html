@@ -1,31 +1,34 @@
 
 <div class="card my-5">
   <div class="card-body">
-    <h2>
-    Добрый вечор, куда полетим со своей псиной?
-    </h2>
+    <h4>
+    Для создания заявки на оформление комплекта необходимых документов, выберите регион и страну назначения 
+    </h4>
+    <br/>
 <div class="dropdown">
   <select id="reg" name="region" class="btn btn-info dropdown-toggle" [(ngModel)]="selected" (click)="check()">
-    <option [ngValue]=null>Выберите регион названичения</option>
+    <option [ngValue]=null>Выберите регион назначения</option>
     <option *ngFor="let region of regions" [ngValue]="region">
       {{ region.name }}
     </option>
 
   </select>
   <div *ngIf="selected">
-    <h2>
-    Вы выбрали {{selected.name}}
-  </h2>
+
   <div class="dropdown">
+    <br/>
     <select id="country" name="country" class="btn btn-info dropdown-toggle"  [(ngModel)]="selectedCountry">
-      <option [ngValue]=null>Выберите страну названичения</option>
+      <option [ngValue]=null>Выберите страну назначения</option>
       <option *ngFor="let country of countries" [ngValue]="country">
         {{ country.countryName }}
       </option>
     </select>
     <div *ngIf="selectedCountry">
+    <p *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN']">
+      После создания заявки, Вам нужно будет ввести в нее всю необходимую информацию
+    </p>
     <p>
-      Для поедки в {{selectedCountry.countryName}} вам нужно будет сделать то-то, и то-то, привить свою псину от того-то, и вообще, проще было бы дома сидеть
+      Для создания заявки, Вам нужно войти в <a routerLink="account">личный кабинет</a>
     </p>
     <div *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN']">
       <button type="button" class="btn btn-primary" (click)="createRequest()" >Создать заявку</button>

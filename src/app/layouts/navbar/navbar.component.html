@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light" style="background-color: #ffffff;">
 <table border="0" width="100%" >
     <tr>
-        <td><img class="rounded-circle" src="../../../assets/img/logo.jpg" alt="логотип" width="80" height="80"></td>
+        <td [routerLink]="['']"><img class="rounded-circle" src="../../../assets/img/logo.jpg" alt="логотип" width="80" height="80"></td>
         <td [routerLink]="['']"><font size="5" color="#000000" face="garamond">
                 Система оформления экспортных ветеринарно-спороводительных документов
             </font>
@@ -13,9 +13,14 @@
     </tr>
     <tr>
         <td></td><td><button type="submit" class="btn btn-outline-primary float-right" routerLink="requests" *appHasAnyAuthority="['ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']">Список заявок</button></td>
-        <td><p align="right"><font size="5" color="#008080" face="garamond">
-            <u><a routerLink="account">Личный кабинет</a></u><a *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN','ROLE_VETERINARIAN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']" (click)="logout()">(Выйти)</a>
-            </font></p>
+        <td>
+            <p align="right">
+                <font size="5" color="#008080" face="garamond">
+                <u><a routerLink="account">Личный кабинет</a></u>
+                <br/>
+                <a *appHasAnyAuthority="['ROLE_USER', 'ROLE_ADMIN','ROLE_VETERINARIAN', 'ROLE_VETERINARIAN', 'ROLE_ROSSELHOZNADZOR']" (click)="logout()">(Выйти)</a>
+                </font>
+            </p>
         </td>
     </tr>
 </table>
