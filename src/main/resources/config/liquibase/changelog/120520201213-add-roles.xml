@@ -23,6 +23,7 @@
       INSERT INTO `user_role` (`user_id`,`role_id`)
       VALUES (3,4);
 
+      ALTER TABLE request ADD `request_number` BIGINT NOT NULL;
     </sql>
 
   </changeSet>
