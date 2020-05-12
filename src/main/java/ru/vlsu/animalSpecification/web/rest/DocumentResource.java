@@ -44,8 +44,8 @@ public class DocumentResource {
     }
   }
 
-  @GetMapping("/documents/download")
-  public ResponseEntity<InputStreamResource> downloadDocument() throws IOException {
+  @GetMapping("/documents/{id}/download")
+  public ResponseEntity<InputStreamResource> downloadDocument(@PathVariable Long id) throws IOException {
     log.debug("Rest request to download document");
     FileSystemResource document = new FileSystemResource("D:\\Documents\\testDocument.pdf");
     HttpHeaders headers = new HttpHeaders();
