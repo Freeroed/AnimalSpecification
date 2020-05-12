@@ -1,10 +1,11 @@
 package ru.vlsu.animalSpecification.service;
 
-import ru.vlsu.animalSpecification.service.dto.UserDTO;
+import java.time.Instant;
 
 public class IdentificatorGenerationService {
   // генерация номера заявки
   public static String generateRequestNumber(Long userId){
-    return "12344";
+    String result = Instant.now().toEpochMilli() + "" + userId;
+    return result;
   }
 }
