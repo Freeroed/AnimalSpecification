@@ -37,13 +37,16 @@ public class RequestService {
 
     private final DocumentMapper documentMapper;
 
+    private final IdentificatorGenerationService identificatorGenerationService;
+
     @Autowired
-    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper, DocumentService documentService, DocumentMapper documentMapper) {
+    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper, DocumentService documentService, DocumentMapper documentMapper, IdentificatorGenerationService identificatorGenerationService) {
       this.repo = repo;
       this.userService = userService;
       this.requestMapper = requestMapper;
       this.documentService = documentService;
       this.documentMapper = documentMapper;
+      this.identificatorGenerationService = identificatorGenerationService;
     }
 
     public RequestDTO save(RequestDTO req, String userName) {
@@ -55,7 +58,7 @@ public class RequestService {
           request.setRecipient(master);
           request.setStatus(RequestStatus.CREATED);
           request.setCreatedAt(Instant.now());
-          request.setRequestNumber(IdentificatorGenerationService.generateRequestNumber(master.getId()));
+          request.setRequestNumber(identificatorGenerationService.generateRequestNumber(master.getId()));
         } else {
           if (request.getStatus() == RequestStatus.FROM_ONE_SERTIFICATED) {
             RequestDTO oldRequest = findOne(request.getId()).get();

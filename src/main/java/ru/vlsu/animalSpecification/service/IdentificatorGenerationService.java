@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public class IdentificatorGenerationService {
   // генерация номера заявки
-  public static String generateRequestNumber(Long userId){
+  public String generateRequestNumber(Long userId){
     String result = Instant.now().toEpochMilli() + "" + userId;
     return result;
   }
