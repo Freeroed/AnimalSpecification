@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 @Component({
     templateUrl: './request-delete-animal-dialog.component.html'
 })
-export class RequestDeleteAnimalDeleteDialogComponent implements OnInit{
+export class RequestDeleteAnimalDeleteDialogComponent{
 
     request: IRequest;
     animal: Animal;
@@ -23,10 +23,7 @@ export class RequestDeleteAnimalDeleteDialogComponent implements OnInit{
 
 
 
-    ngOnInit(): void {
-        console.log(this.request);
-        console.log(this.animal);
-    }
+
     clear(): void {
         this.activeModal.dismiss();
     }

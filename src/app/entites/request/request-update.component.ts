@@ -59,7 +59,8 @@ export class RequestUpdateComponent implements OnInit {
         dateOfDeparture: [],
         certificate1FormNumber: [],
         status: [],
-        transactionType: []
+        transactionType: [],
+        requestNumber: []
 
     })
     ngOnInit(): void {
@@ -98,7 +99,8 @@ export class RequestUpdateComponent implements OnInit {
             dateOfDeparture: request.dateOfDeparture != null ? moment(request.dateOfDeparture.format(DATE_FORMAT)) : undefined,
             inspectorOfRosselkhoznadzor: request.inspectorOfRosselkhoznadzor,
             certificate1FormNumber: request.certificate1FormNumber,
-            postalCode: request.postalCode
+            postalCode: request.postalCode,
+            requestNumber: request.requestNumber
         })
     }
 
@@ -122,7 +124,9 @@ export class RequestUpdateComponent implements OnInit {
                 ) : undefined,
             transactionType: this.editForm.get(['transactionType'])!.value,
             animals: this.animals,
-            postalCode: this.editForm.get(['postalCode'])!.value
+            postalCode: this.editForm.get(['postalCode'])!.value,
+            requestNumber: this.editForm.get(['requestNumber'])!.value
+
         }
     }
 

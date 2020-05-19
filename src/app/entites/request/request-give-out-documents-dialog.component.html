@@ -4,8 +4,12 @@
             (click)="clear()">&times;</button>
 </div>
 <div  class="modal-body">
-    <h3>К сожалению, данная функция пока недоступна, приносим свои извинения :(</h3>
+    <h3>Вы подтверждаете правильность введённых данных и даёте согласие на выдачу сопроводительных документов?</h3>
         <button type="submit" id="save-entity" class="btn btn-primary"  (click)="save()" placement="top" >
-            &nbsp;<span>Сохранить</span>
+            &nbsp;<span>Да</span>
+        </button>
+        &nbsp;
+        <button type="submit" id="save-entity" class="btn btn-danger"  (click)="clear()" placement="top" >
+            &nbsp;<span>Нет</span>
         </button>
 </div>

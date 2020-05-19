@@ -44,7 +44,10 @@ export class AnimalService {
                 .put<Animal>(this.resourceUrl, copy, { observe: 'response' })
                 .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
-
+    delete(id: number): Observable<HttpResponse<{}>> {
+        return this.http
+                .delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+    }
     /*
     Корневрт даты
     */

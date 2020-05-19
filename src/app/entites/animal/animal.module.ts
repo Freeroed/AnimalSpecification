@@ -18,7 +18,11 @@ import { AnimalDeleteDialogComponent } from './animal-delete-dialog.component';
         BrowserModule, 
         FormsModule, 
         ReactiveFormsModule, NgbModule],
-    declarations: [AnimalComponent, AnimalUpdateComponent, AnimalDetailComponent],
+    declarations: [AnimalComponent,
+         AnimalUpdateComponent, 
+         AnimalDetailComponent,
+         AnimalDeleteDialogComponent
+        ],
     entryComponents: [AnimalDeleteDialogComponent]
     
     

@@ -1,21 +1,21 @@
 import { Component } from "@angular/core";
-import { AnimalService } from './animal.service';
+import { IRequest } from 'src/app/shared/model/request.model';
+import { RequestService } from './request.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
-import { HttpResponse } from '@angular/common/http';
-import { Animal } from 'src/app/shared/model/animal.model';
 import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
-    templateUrl: './animal-delete-dialog.component.html'
+    templateUrl: './request-delete-dialog.component.html'
 })
-export class AnimalDeleteDialogComponent {
-    animal: Animal;
+export class RequestDeleteDialogComponent {
+    request: IRequest;
 
     constructor(
-        protected animalService: AnimalService,
+        protected requestService: RequestService,
         public activeModal: NgbActiveModal,
-        protected eventManager: JhiEventManager
+        protected eventManager: JhiEventManager,
     ){}
 
     clear(): void {
@@ -23,10 +23,10 @@ export class AnimalDeleteDialogComponent {
     }
 
     confirmDelete(): void {
-        this.subscribeToDeteleResponse(this.animalService.delete(this.animal.id))
+        this.subscribeToDeteleResponse(this.requestService.delete(this.request.id));
     }
 
-    subscribeToDeteleResponse(result: Observable<HttpResponse<Animal>>): void {
+    subscribeToDeteleResponse(result: Observable<HttpResponse<IRequest>>): void {
         result.subscribe( 
             () => this.onSuccess(),
             () => this.onError()

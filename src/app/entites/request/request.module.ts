@@ -16,6 +16,7 @@ import { RequestConfirmDialogComponent } from './request-confirm-dialog.componen
 import { AnimalSpecificationSharedModule } from 'src/app/shared/shared.module';
 import { RequestGiveOutSertificateComponent } from './request-give-out-sertificate-dialog.component';
 import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-dialog.component';
+import { RequestDeleteDialogComponent } from './request-delete-dialog.component';
 
 @NgModule({
     imports: [RouterModule.forChild(requestRoute),
@@ -35,14 +36,17 @@ import { RequestGiveOutDocumentsComponent } from './request-give-out-documents-d
         RequestComponent, 
         RequestConfirmDialogComponent, 
         RequestGiveOutSertificateComponent, 
-        RequestGiveOutDocumentsComponent],
+        RequestGiveOutDocumentsComponent,
+        RequestDeleteDialogComponent
+    ],
         
     entryComponents: [RequestAddAnimalDialogComponent, 
         RequestDeleteAnimalDeleteDialogComponent, 
         RequestAddBorderPointComponent, 
         RequestConfirmDialogComponent, 
         RequestGiveOutSertificateComponent, 
-        RequestGiveOutDocumentsComponent]
+        RequestGiveOutDocumentsComponent,
+        RequestDeleteDialogComponent]
 })
 export class AnimalSpecificationRequestModule {
 

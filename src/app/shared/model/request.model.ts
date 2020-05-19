@@ -29,7 +29,7 @@ export interface IRequest {
     animals?: Animal[],
     certificate5aFormNumber?: IDocument,
     certificateEuroNumber?: IDocument,
-
+    requestNumber?: string
 
 }
 
@@ -55,5 +55,6 @@ export class Request implements IRequest {
         public animals?: Animal[],
         public certificate5aFormNumber?: IDocument,
         public certificateEuroNumber?: IDocument,
+        public requestNumber?: string
     ){}
 }

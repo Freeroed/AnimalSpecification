@@ -71,6 +71,7 @@ public class RequestMapper {
         request.setCertificateEuroNumber(documentDTOtoDocument(requestDTO.getCertificateEuroNumber()));
         request.setCertificate5aFormNumber(documentDTOtoDocument(requestDTO.getCertificate5aFormNumber()));
         request.setCreatedAt(requestDTO.getCreatedAt());
+        request.setRequestNumber(requestDTO.getRequestNumber());
         return request;
       }
 

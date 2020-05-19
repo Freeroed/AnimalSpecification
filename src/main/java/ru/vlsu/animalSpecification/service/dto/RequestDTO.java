@@ -55,6 +55,8 @@ public class RequestDTO implements Serializable {
 
   private DocumentDTO certificateEuroNumber;
 
+  private String requestNumber;
+
   public DocumentDTO getCertificate5aFormNumber() {
     return certificate5aFormNumber;
   }
@@ -227,8 +229,6 @@ public class RequestDTO implements Serializable {
   public void setCreatedAt(Instant createdAt) {
     this.createdAt = createdAt;
   }
-
-  private String requestNumber;
 
   public String getRequestNumber() {
     return requestNumber;

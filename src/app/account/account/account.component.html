@@ -32,7 +32,13 @@
                 <span *ngIf="request.status == 'EXPORT_DOCS_ISSUED'">Выданы экспотрные документы</span>
                 <span *ngIf="request.status == 'CLOSED'">Закрыта</span>
               </td>
-              <td></td>
+              <td class="text-right">
+                <div class="btn-group">
+                  <button type="submit" class="btn btn-danger btn-sm" (click)="deleteRequest(request)" *ngIf="request.status == 'CREATED'"> 
+                    Удалить
+                  </button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -71,7 +77,7 @@
                           </button>
                           &nbsp;
                           <button type="submit"  class="btn btn-danger btn-sm"
-                              placement="top" ngbTooltip="Удалить" (click)="delete(animal.id)">
+                              placement="top" ngbTooltip="Удалить" (click)="deleteAnimal(animal)">
                               Удалить
                               <span class="d-none d-md-inline "></span>
                           </button>

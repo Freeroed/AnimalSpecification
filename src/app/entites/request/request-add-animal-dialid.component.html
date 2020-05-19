@@ -4,7 +4,7 @@
             (click)="clear()">&times;</button>
 </div>
 <div  class="modal-body">
-    <h3>К содалению, данная функция пока недоступна, приносим свои извинения :(</h3>
+    <h3>Выберите животное, из тех, которые у вас есть или добавьте новое</h3>
     <form name="editForm" role="form" [formGroup]="editForm">
         <select class="form-control" name="animal" formControlName="animal" required>
             <option *ngFor="let animal of animals" [ngValue]="animal">{{animal.nickname}}</option>

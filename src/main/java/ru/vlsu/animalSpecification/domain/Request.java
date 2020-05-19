@@ -86,7 +86,7 @@ public class Request implements Serializable {
   private Instant createdAt;
 
   @Column(name="request_number")
-  private String requestNumber;
+    private String requestNumber;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "certificate_5a_form_number", nullable = true)
