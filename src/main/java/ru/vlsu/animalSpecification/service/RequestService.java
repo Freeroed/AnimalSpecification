@@ -5,13 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.domain.Document;
 import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.domain.User;
+import ru.vlsu.animalSpecification.domain.emun.AnimalStatus;
 import ru.vlsu.animalSpecification.domain.emun.RequestStatus;
 import ru.vlsu.animalSpecification.repository.RequestRepository;
 import ru.vlsu.animalSpecification.service.dto.DocumentDTO;
 import ru.vlsu.animalSpecification.service.dto.RequestDTO;
+import ru.vlsu.animalSpecification.service.mapper.AnimalMapper;
 import ru.vlsu.animalSpecification.service.mapper.DocumentMapper;
 import ru.vlsu.animalSpecification.service.mapper.RequestMapper;
 
@@ -38,15 +41,19 @@ public class RequestService {
     private final DocumentMapper documentMapper;
 
     private final IdentificatorGenerationService identificatorGenerationService;
+    private final AnimalService animalService;
+    private final AnimalMapper animalMapper;
 
     @Autowired
-    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper, DocumentService documentService, DocumentMapper documentMapper, IdentificatorGenerationService identificatorGenerationService) {
+    public RequestService(RequestRepository repo, UserService userService, RequestMapper requestMapper, DocumentService documentService, DocumentMapper documentMapper, IdentificatorGenerationService identificatorGenerationService, AnimalService animalService, AnimalMapper animalMapper) {
       this.repo = repo;
       this.userService = userService;
       this.requestMapper = requestMapper;
       this.documentService = documentService;
       this.documentMapper = documentMapper;
       this.identificatorGenerationService = identificatorGenerationService;
+      this.animalService = animalService;
+      this.animalMapper = animalMapper;
     }
 
     public RequestDTO save(RequestDTO req, String userName) {
@@ -60,6 +67,20 @@ public class RequestService {
           request.setCreatedAt(Instant.now());
           request.setRequestNumber(identificatorGenerationService.generateRequestNumber(master.getId()));
         } else {
+          if(request.getStatus() == RequestStatus.CREATED) {
+            for(Animal animal: request.getAnimals()) {
+              Animal updatedAnimal = animalMapper.toEntity(animalService.findOne(animal.getId()).get());
+              updatedAnimal.setStatus(AnimalStatus.IN_REQUEST);
+              animalService.save(updatedAnimal,userName);
+            }
+          }
+          if (request.getStatus() == RequestStatus.CONFIRM) {
+            for(Animal animal: request.getAnimals()) {
+              Animal updatedAnimal = animalMapper.toEntity(animalService.findOne(animal.getId()).get());
+              updatedAnimal.setStatus(AnimalStatus.IN_CONFIRM_REQUEST);
+              animalService.save(updatedAnimal,userName);
+            }
+          }
           if (request.getStatus() == RequestStatus.FROM_ONE_SERTIFICATED) {
             RequestDTO oldRequest = findOne(request.getId()).get();
             if (oldRequest.getStatus() == RequestStatus.CONFIRM && oldRequest.getVeterinarian() == null && oldRequest.getCertificate1FormNumber() == null) {
@@ -83,6 +104,11 @@ public class RequestService {
               oldRequest.getCertificateEuroNumber() == null) {
                 request.setInspectorOfRosselkhoznadzor(master);
                 request = repo.save(request);
+                for(Animal animal: request.getAnimals()) {
+                  Animal updatedAnimal = animalMapper.toEntity(animalService.findOne(animal.getId()).get());
+                  updatedAnimal.setStatus(AnimalStatus.READY_TO_REQUEST);
+                  animalService.save(updatedAnimal,userName);
+                }
                 try {
                   DocumentDTO euroCertificate = documentService.createDocumentFromRequest(request, "Евросправка");
                   Document document = documentMapper.toEntity(euroCertificate);
