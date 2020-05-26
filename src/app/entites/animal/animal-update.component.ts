@@ -49,7 +49,7 @@ export class AnimalUpdateComponent implements OnInit {
         type: [],
         color: [],
         placeOfBirth: [],
-        tnvedCode: [],
+        //tnvedCode: [],
         colorENG: []
     })
 
@@ -73,7 +73,7 @@ export class AnimalUpdateComponent implements OnInit {
             type: animal.breed.typeOfAnimal,
             color: animal.color,
             placeOfBirth: animal.placeOfBirth,
-            tnvedCode: animal.tnvedCode,
+            tnvedCode: "145874541",
             colorENG: animal.colorENG
             });
             this.selectedType = animal.breed.typeOfAnimal;

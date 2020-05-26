@@ -82,6 +82,7 @@ public class RequestService {
               oldRequest.getCertificate5aFormNumber() == null  &&
               oldRequest.getCertificateEuroNumber() == null) {
                 request.setInspectorOfRosselkhoznadzor(master);
+                request = repo.save(request);
                 try {
                   DocumentDTO euroCertificate = documentService.createDocumentFromRequest(request, "Евросправка");
                   Document document = documentMapper.toEntity(euroCertificate);

@@ -40,7 +40,7 @@ export class RequestGiveOutDocumentsComponent {
 
     onSaveSuccess(): void {
         this.eventManager.broadcast('requestModification');
-        this.activeModal.dismiss();
+        this.activeModal.close();
     }
 
     onSaveError(): void{

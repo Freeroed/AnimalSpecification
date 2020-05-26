@@ -28,6 +28,19 @@
       <artifactId>itextpdf</artifactId>
       <version>5.5.13.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.itextpdf/kernel -->
+    <dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>kernel</artifactId>
+      <version>7.1.11</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.itextpdf/layout -->
+    <dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>layout</artifactId>
+      <version>7.1.11</version>
+    </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16 -->
     <dependency>

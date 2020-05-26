@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestAddAnimalDialogComponent } from './request-add-animal-dialid.component';
 import { Animal } from 'src/app/shared/model/animal.model';
 import { RequestDeleteAnimalDeleteDialogComponent } from './request-delete-animal-dialog.component';
-import { Subscription, Observable, of } from 'rxjs';
+import { Subscription, Observable, of, EMPTY } from 'rxjs';
 import { RequestStatus } from 'src/app/shared/model/enum/requestStatus.model';
 import { IVaccine, Vaccine } from 'src/app/shared/model/vaccine.model';
 import { VaccineService } from '../vaccine/vaccine.service';
@@ -33,6 +33,7 @@ export class RequestDetailComponent implements OnInit {
     errors : string[][] = [];
     fillingErrors : string[];
     isViewerRecipient: boolean;
+    isPageLoaded: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -47,14 +48,24 @@ export class RequestDetailComponent implements OnInit {
         this.loadPage();
         this.registerChangesInRequest();
         
+        
     }
     loadPage(): void {
-        this.activatedRoute.data.subscribe(({ request }) => {
+        console.log("called")
+        if (this.isPageLoaded) {
+            this.requestService.find(this.request.id).subscribe((res: HttpResponse<IRequest>) =>
+            this.request = res.body)
+        } else {
+            this.activatedRoute.data.subscribe(({ request }) => {
             this.request = request;
             this.fillingErrors = this.chechFillngsErrors(request);
         });
+        }
+        
+
         this.checkAnimals();
         this.isViewerRecipient = this.checkUser();
+        this.isPageLoaded = true;
     }
 
     registerChangesInRequest(): void {
@@ -86,7 +97,12 @@ export class RequestDetailComponent implements OnInit {
         return this.checkVaccines(animal).pipe(
             flatMap((errors: string[]) => {
                 animalError = animalError.concat(errors);
-                return of(errors);
+                if (animalError[0]!.length > 0){
+                    return of(errors);
+                } else {
+                    return EMPTY;
+                }
+                
             })
         )
     }
@@ -100,7 +116,12 @@ export class RequestDetailComponent implements OnInit {
                         vaccineError.push('Прошло менее 20-ти дней с момента вакцинации: ' + vaccine.title);
                     }
                 });
-                return of(vaccineError);
+                if (vaccineError[0] && vaccineError[0].length > 0) {
+                   return of(vaccineError); 
+                }
+                else {
+                    return EMPTY;
+                }
             })
         )
     }

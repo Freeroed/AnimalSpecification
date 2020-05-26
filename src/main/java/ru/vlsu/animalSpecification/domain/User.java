@@ -57,8 +57,9 @@ public class User implements Serializable {
     @Column(name = "created_at")
     private Instant createdAd;
 
-    @Column(name = " rosselkhoznadzor_division")
-    private Long  rosselkhoznadzorDivision;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "rosselkhoznadzor_division", nullable = true)
+    private RosselkhoznadzorDivision  rosselkhoznadzorDivision;
 
     @Column(name = "position")
     private String position;
@@ -181,11 +182,11 @@ public class User implements Serializable {
         this.createdAd = createdAd;
     }
 
-    public Long getRosselkhoznadzorDivision() {
+    public RosselkhoznadzorDivision getRosselkhoznadzorDivision() {
       return rosselkhoznadzorDivision;
     }
 
-    public void setRosselkhoznadzorDivision(Long rosselkhoznadzorDivision) {
+    public void setRosselkhoznadzorDivision(RosselkhoznadzorDivision rosselkhoznadzorDivision) {
       this.rosselkhoznadzorDivision = rosselkhoznadzorDivision;
     }
 

@@ -1,12 +1,18 @@
 package ru.vlsu.animalSpecification.service.impl;
 
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.text.pdf.PdfGState;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.vlsu.animalSpecification.domain.Animal;
 import ru.vlsu.animalSpecification.domain.DocumentType;
 import ru.vlsu.animalSpecification.domain.Request;
 import ru.vlsu.animalSpecification.repository.DocumentRepository;
@@ -22,6 +28,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -35,6 +43,7 @@ public class DocumentServiceImpl implements DocumentService {
   private final DocumentTypeRepository documentTypeRepository;
 
   private final DocumentRepository documentRepository;
+  private final String FORM_FIVE_CERTIFICATE_TEMPLATE = "D:\\Documents\\templates\\FORM_FIVE_CERTIFICATE_TEMPLATE.jpg";
 
   @Autowired
   public DocumentServiceImpl(DocumentRepository repo, DocumentMapper documentMapper, DocumentTypeRepository documentTypeRepository, DocumentRepository documentRepository) {
@@ -90,14 +99,64 @@ public class DocumentServiceImpl implements DocumentService {
     document = documentRepository.save(document);
     document.setDocumentNumber(document.getId()+"");
     document.setLink("api/documents/" + document.getId() + "/download");
-    Document doc = new Document();
+    Document doc = new Document(PageSize.A4);
     File file = new File("D:\\Documents\\" + document.getId() + ".pdf");
     if (file.createNewFile())
      {
        try {
-          PdfWriter.getInstance(doc, new FileOutputStream("D:\\Documents\\" + document.getId() + ".pdf"));
+          PdfWriter writer = PdfWriter.getInstance(doc, new FileOutputStream("D:\\Documents\\" + document.getId() + ".pdf"));
           doc.open();
-          Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
+         Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 13, BaseColor.BLACK);
+          if (documentType == "Ветеринарный сертификат формы 5а") {
+            PdfContentByte canvas = writer.getDirectContentUnder();
+            Image image = Image.getInstance(FORM_FIVE_CERTIFICATE_TEMPLATE);
+            image.scaleAbsolute(PageSize.A4);
+            image.setAbsolutePosition(0, 0);
+            canvas.saveState();
+            PdfGState state = new PdfGState();
+            state.setFillOpacity(0.6f);
+            canvas.setGState(state);
+            canvas.addImage(image);
+            canvas.restoreState();
+            ColumnText ct = new ColumnText(canvas);
+            ct.setSimpleColumn(300f, 150f, 200f,485f);
+            Paragraph ph = new Paragraph(request.getAnimals().size() + " animals", font);
+            ct.addElement(ph);
+            ct.go();
+            int countAnimals = 0;
+            for (Animal animal: request.getAnimals()) {
+              DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                .withZone(ZoneId.systemDefault());
+              ct.setSimpleColumn(100f, 150f, 150f,400f - 35*countAnimals);
+              ph = new Paragraph(animal.getBreed().getAnimalType().getTypeNameENG(), font);
+              ct.addElement(ph);
+              ct.go();
+              ct.setSimpleColumn(240f, 150f, 350f,400f - 35*countAnimals);
+              ph = new Paragraph("w".equals(animal.getSex()) ? "w" : "f", font);
+              ct.addElement(ph);
+              ct.go();
+              ct.setSimpleColumn(270f, 150f, 400f,400f - 35*countAnimals);
+              ph = new Paragraph(animal.getBreed().getBreedNameENG(), font);
+              ct.addElement(ph);
+              ct.go();ct.setSimpleColumn(320f, 150f, 370f,400f - 35*countAnimals);
+              ph = new Paragraph(formater.format(animal.getBirthday()), font);
+              ct.addElement(ph);
+              ct.go();
+              ct.setSimpleColumn(370f, 150f, 500f,400f - 35*countAnimals);
+              ph = new Paragraph("Chip - " +animal.getChip(), font);
+              ct.addElement(ph);
+              ct.go();
+              countAnimals++;
+            }
+            ct.setSimpleColumn(260f, 150f, 560f,540f);
+            ph = new Paragraph(request.getInspectorOfRosselkhoznadzor().getRosselkhoznadzorDivision().getNameENG(), font);
+            ct.addElement(ph);
+            ct.go();
+            ct.setSimpleColumn(260f, 95f, 560f,60f);
+            ph = new Paragraph(request.getRecipient().getSurnameEng() + " " + request.getRecipient().getNameEng(), font);
+            ct.addElement(ph);
+            ct.go();
+          }
           Chunk chunk = new Chunk(document.getDocumentNumber(), font);
           doc.add(chunk);
           doc.close();

@@ -17,6 +17,7 @@ export class RequestService {
     constructor(private http: HttpClient) {}
 
     find(id: number) : Observable<EntityResponseType> {
+        console.log("123")
         return this.http
             .get<IRequest>(`${this.resourceUrl}/${id}`, {observe: 'response'})
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)))
