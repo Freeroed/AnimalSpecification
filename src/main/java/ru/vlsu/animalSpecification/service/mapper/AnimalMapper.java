@@ -43,6 +43,7 @@ public class AnimalMapper {
         animal.setMaster(userFromUserDTO(animalDTO.getMaster()));
         animal.setTnvedCode(animalDTO.getTnvedCode());
         animal.setStatus(animalDTO.getStatus());
+        animal.setColorENG(animalDTO.getColorENG());
         return animal;
       }
   }

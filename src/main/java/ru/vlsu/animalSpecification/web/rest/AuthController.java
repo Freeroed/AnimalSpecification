@@ -84,13 +84,13 @@ public class AuthController {
   public ResponseEntity registerUser(@RequestBody User user) {
     log.debug("REST request to register user : {}", user);
     //TODO log
-   /* if(userRepository.existsByUserName(user.getUserName())) {
+    if(userRepository.existsByUserName(user.getUserName())) {
       return ResponseEntity.badRequest().body(new MessageResponse("ERROR: username is already exist"));
     }
 
     if(userRepository.existsByEmail(user.getEmail())) {
       return ResponseEntity.badRequest().body(new MessageResponse("ERROR: email is already in use!"));
-    }*/
+    }
 
     Set<Role> roles = new HashSet<>();
     user.setPassword(passwordEncoder.encode(user.getPassword()));

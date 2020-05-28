@@ -97,7 +97,7 @@ export class AnimalUpdateComponent implements OnInit {
             breed: this.editForm.get(['breed'])!.value,
             color: this.editForm.get(['color'])!.value,
             placeOfBirth: this.editForm.get(['placeOfBirth'])!.value,
-            tnvedCode: this.editForm.get(['tnvedCode'])!.value,
+            tnvedCode: "1452448",
             colorENG: this.editForm.get(['colorENG'])!.value,
             chip: this.editForm.get(['chip'])!.value,
         }

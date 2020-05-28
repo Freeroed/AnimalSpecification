@@ -109,7 +109,7 @@ export class RequestUpdateComponent implements OnInit {
             ...new Request(),
             id: this.editForm.get(['id'])!.value,
             recipient: this.editForm.get(['recipient'])!.value,
-            destinationCountry:this.editForm.get(['recipient'])!.value,
+            destinationCountry: this.selectedCountry,
             destinationCity: this.editForm.get(['destinationCity'])!.value,
             transport: this.editForm.get(['transport'])!.value,
             vehicleNumber: this.editForm.get(['vehicleNumber'])!.value,

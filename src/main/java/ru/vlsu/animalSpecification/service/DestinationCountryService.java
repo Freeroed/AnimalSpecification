@@ -46,7 +46,7 @@ public class DestinationCountryService {
       try {
         res = repo.findAllByRegion(region);
       } catch (Exception e){
-        log.debug("Error finding countrys by region with id. Exc: " + e.getMessage());
+        log.debug("Error finding countries by region with id. Exc: " + e.getMessage());
       }
       return res;
     }

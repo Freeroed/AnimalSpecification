@@ -5,7 +5,7 @@
                 <p>
                 <span>Информация о заявке № {{request.requestNumber}}</span>
                 </p>
-                <div *appHasAnyAuthority="['ROLE_ADMIN']">
+                <div *appHasAnyAuthority="['ROLE_USER']">
                     <span class="float-right " *ngIf="request.status == RequestStatus['0']"><a [routerLink]="['/requests', request.id, 'edit']" >Редактировать </a>
                     </span> 
                 </div>

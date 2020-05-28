@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let request of requests">
-                            <td>{{request.id}}</td>
+                            <td>{{request.requestNumber}}</td>
                             <td>{{request.recipient.surname}} {{request.recipient.name}} {{request.recipient.patronymic}}</td>
                             <td>{{request.destinationCountry.countryName}}</td>
                             <td>{{request.status}}</td>
