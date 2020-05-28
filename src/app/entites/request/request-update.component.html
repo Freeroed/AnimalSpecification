@@ -32,7 +32,7 @@
                         Страна назначения
                     </label>
                     <select class="form-control" name="destinationCountry" [(ngModel)]="selectedCountry.id" formControlName="destinationCountry" required (click)="check()">
-                        <option selected>{{selectedCountry.countryName}}</option>
+
                         <option *ngFor="let country of countries" [ngValue]="country.id">{{country.countryName}}</option>
                     </select>
                 </div>

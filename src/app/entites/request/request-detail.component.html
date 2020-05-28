@@ -10,7 +10,7 @@
                     </span> 
                 </div>
                 <span class="float-right " *appHasAnyAuthority="['ROLE_VETERINARIAN']"><a [routerLink]="['/requests', request.id, 'edit']" >Редактировать</a></span>
-                <button class="btn btn-primary float-right" (click)="confirmRequest()" [disabled]="errors.length > 1 || fillingErrors.length > 1 || request.animals.length ==0" *ngIf="request.status == RequestStatus['0']">Подтвердить</button>
+                <button class="btn btn-primary float-right" (click)="confirmRequest()" [disabled]="errors.length >= 1 || fillingErrors.length >= 1 || request.animals.length ==0" *ngIf="request.status == RequestStatus['0']">Подтвердить</button>
                 <div *ngIf="request.status == RequestStatus['2']"><button class="btn btn-primary float-right"  *appHasAnyAuthority="['ROLE_VETERINARIAN']" (click)="giveFormOneSertificate()  ">Выдать сертификат формы 1</button></div>
                 <div *ngIf="request.status == RequestStatus['3']"> <button class="btn btn-primary float-right" *appHasAnyAuthority="['ROLE_ROSSELHOZNADZOR']" (click)="giveExportDocuments()" >Выдать сопроводитльные документы</button></div>
             </h2>
